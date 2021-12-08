@@ -1,0 +1,14 @@
+.custom-tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+}
+
+/* Tooltip text */
+.custom-tooltip .tooltiptext {
+  background-color: black;
+  color: #fff;
+  border-radius: 6px;
+
+}
+

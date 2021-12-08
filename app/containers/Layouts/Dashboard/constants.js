@@ -1,0 +1,2 @@
+export const GET_VENDOR_SCRIPTS_SUCCESS =
+  'app/Dashboard/GET_VENDOR_SCRIPTS_SUCCESS';
