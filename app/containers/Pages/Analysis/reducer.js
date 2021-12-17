@@ -1,10 +1,8 @@
 import produce from 'immer';
 import {
   GET_LOCATIONS,
-  GET_LOCATIONS_ERROR,
   GET_LOCATIONS_SUCCESS,
   GET_TYPOLOGIES,
-  GET_TYPOLOGIES_ERROR,
   GET_TYPOLOGIES_SUCCESS,
   SET_LOCATION,
   SET_TYPOLOGY,
@@ -43,10 +41,6 @@ const analysisReducer = (state = initialState, action) =>
         draft.locations = action.payload;
         draft.isGettingLocations = false;
         break;
-      case GET_LOCATIONS_ERROR:
-        draft.errorLocations = action.payload;
-        draft.isGettingLocations = false;
-        break;
       case SET_LOCATION:
         draft.location = action.payload;
         break;
@@ -55,10 +49,6 @@ const analysisReducer = (state = initialState, action) =>
         break;
       case GET_TYPOLOGIES_SUCCESS:
         draft.typologies = action.payload;
-        draft.isGettingTypologies = false;
-        break;
-      case GET_TYPOLOGIES_ERROR:
-        draft.errorTypologies = action.payload;
         draft.isGettingTypologies = false;
         break;
       case SET_TYPOLOGY:
