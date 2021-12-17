@@ -30,6 +30,7 @@ import Button from '@material-ui/core/Button';
 // import Paper from '@material-ui/core/Paper';
 // import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
+import { injectIntl } from 'react-intl';
 import {
   makeSelectAnalysis,
   makeSelectLocations,
@@ -152,7 +153,7 @@ export function Analysis(props) {
               id="demo-simple-select-standard"
               value={props.location}
               onChange={event => {
-                setLocation(event.target.value);
+                props.setLocation(event.target.value);
               }}
             >
               <MenuItem value="Apartment">Apartment</MenuItem>
@@ -802,6 +803,7 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
+    setLocation: location => dispatch(setLocation(location)),
     dispatch,
   };
 }
@@ -814,4 +816,5 @@ const withConnect = connect(
 export default compose(
   withConnect,
   memo,
+  injectIntl,
 )(Analysis);
