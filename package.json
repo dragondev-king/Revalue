@@ -91,7 +91,6 @@
     "react-async-script-loader": "^0.3.0",
     "react-dom": "16.8.6",
     "react-helmet": "6.0.0-beta",
-    "react-hook-form": "^7.22.1",
     "react-intl": "2.8.0",
     "react-material-ui-form-validator": "^2.0.10",
     "react-perfect-scrollbar": "^1.5.8",
