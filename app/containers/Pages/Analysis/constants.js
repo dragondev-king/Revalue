@@ -15,6 +15,8 @@ export const GET_CONDITIONS = 'app/Analysis/GET_CONDITIONS';
 export const GET_CONDITIONS_SUCCESS = 'app/Analysis/GET_CONDITIONS_SUCCESS';
 export const SET_CONDITION = 'app/Analysis/SET_CONDITION';
 
+export const SET_VALUE = 'app/Analysis/SET_VALUE';
+
 export const SET_MINPRICE = 'app/Analysis/SET_MINPRICE';
 export const SET_MAXPRICE = 'app/Analysis/SET_MAXPRICE';
 export const SET_MINAREA = 'app/Analysis/SET_MINAREA';

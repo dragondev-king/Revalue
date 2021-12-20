@@ -76,6 +76,7 @@ import {
   makeSelectExitBrokerFee,
   makeSelectLoanEarlyRepaymentFee,
   makeSelectCapitalgainsTaxBase,
+  makeSelectInputs,
 } from './selectors';
 import reducer from './reducer';
 import {
@@ -119,6 +120,7 @@ import {
   setExitBrokerFee,
   setLoanEarlyRepaymentFee,
   setCapitalgainsTaxBase,
+  setValue,
 } from './actions';
 // import messages from './messages';
 
@@ -216,6 +218,7 @@ const rows = [
 ];
 
 export function Analysis(props) {
+  console.log(props);
   useInjectReducer({ key: 'analysis', reducer });
 
   useEffect(() => {
@@ -229,6 +232,10 @@ export function Analysis(props) {
 
   const classes = useStyles();
 
+  function handleChange(event) {
+    props.setValue(event.target);
+  }
+
   function renderPropertyForm() {
     return (
       <>
@@ -240,10 +247,9 @@ export function Analysis(props) {
             <Select
               labelId="demo-simple-select-standard-label"
               id="demo-simple-select-standard"
-              value={props.location}
-              onChange={event => {
-                props.setLocation(event.target.value);
-              }}
+              value={props.inputs.location}
+              name="location"
+              onChange={event => handleChange(event)}
               endAdornment={
                 <InputAdornment position="end">
                   <Tooltip title="Location">
@@ -1023,6 +1029,7 @@ Analysis.propTypes = {
 const mapStateToProps = createStructuredSelector({
   analysis: makeSelectAnalysis(),
   locations: makeSelectLocations(),
+  inputs: makeSelectInputs(),
   location: makeSelectLocation(),
   types: makeSelectTypes(),
   type: makeSelectType(),
@@ -1066,6 +1073,7 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
+    setValue: value => dispatch(setValue(value)),
     getLocations: () => dispatch(getLocations()),
     setLocation: location => dispatch(setLocation(location)),
     getTypes: () => dispatch(getTypes()),

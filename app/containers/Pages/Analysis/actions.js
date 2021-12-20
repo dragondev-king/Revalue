@@ -46,6 +46,7 @@ import {
   SET_EXITBROKERFEE,
   SET_LOANEARLYREPAYMENTFEE,
   SET_CAPITALGAINSTAXBASE,
+  SET_VALUE,
 } from './constants';
 // Property Information
 export const getLocations = () => async dispatch => {
@@ -57,6 +58,15 @@ export const getLocations = () => async dispatch => {
     payload: ['Apartment', 'Dwelling', 'All'],
   });
 };
+
+export const setValue = target => {
+  console.log(target);
+  return {
+    type: SET_VALUE,
+    payload: target,
+  };
+};
+
 export const setLocation = location => {
   localStorage.setItem('location', JSON.stringify(location));
   return {

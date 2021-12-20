@@ -3,6 +3,12 @@ import { initialState } from './reducer';
 
 const selectAnalysisDomain = state => state.analysis || initialState;
 
+const makeSelectInputs = () =>
+  createSelector(
+    selectAnalysisDomain,
+    substate => substate.inputs,
+  );
+
 const makeSelectAnalysis = () =>
   createSelector(
     selectAnalysisDomain,
@@ -274,4 +280,5 @@ export {
   makeSelectExitBrokerFee,
   makeSelectLoanEarlyRepaymentFee,
   makeSelectCapitalgainsTaxBase,
+  makeSelectInputs,
 };

@@ -46,6 +46,7 @@ import {
   SET_EXITBROKERFEE,
   SET_LOANEARLYREPAYMENTFEE,
   SET_CAPITALGAINSTAXBASE,
+  SET_VALUE,
 } from './constants';
 
 export function setValueOrEmptyArray(value) {
@@ -208,6 +209,12 @@ export const initialState = {
       ? '5%'
       : JSON.parse(localStorage.getItem('cip')),
   isGettingCips: false,
+  inputs: {
+    location:
+      JSON.parse(localStorage.getItem('location')) === null
+        ? 'All'
+        : JSON.parse(localStorage.getItem('location')),
+  },
   mop: localStorage.getItem('mop') === null ? 100 : localStorage.getItem('mop'),
 };
 
@@ -216,6 +223,10 @@ const analysisReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
       // Property Information
+      case SET_VALUE:
+        console.log(action.payload);
+        draft.inputs[action.payload.name] = action.payload.value;
+        break;
       case GET_LOCATIONS:
         draft.isGettingLocations = true;
         break;
