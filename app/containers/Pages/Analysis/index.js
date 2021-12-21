@@ -1,6 +1,7 @@
 import React, { memo, useEffect } from 'react';
 // import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { useForm } from 'react-hook-form';
 import { Helmet } from 'react-helmet';
 import { injectIntl } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
@@ -188,7 +189,7 @@ const useStyles = makeStyles(theme => ({
     padding: '0px',
   },
   labelWidth: {
-    minWidth: '140px',
+    minWidth: '170px',
   },
 }));
 
@@ -269,12 +270,14 @@ export function Analysis(props) {
     props.getCIPs();
     props.getAcquisitionTypes();
   }, []);
+  const { register, handleSubmit } = useForm();
+  const onSubmit = data => props.setValue(data);
 
   const classes = useStyles();
 
-  function handleChange(event) {
-    props.setValue(event.target);
-  }
+  // function handleChange(event) {
+  //   props.setValue(event.target);
+  // }
   function renderPropertyForm() {
     return (
       <>
@@ -297,8 +300,7 @@ export function Analysis(props) {
               labelId="demo-simple-select-standard-label"
               id="demo-simple-select-standard"
               value={props.inputs.location}
-              name="location"
-              onChange={event => handleChange(event)}
+              {...register('location')}
             >
               {props.locations.map(index => (
                 <MenuItem value={index}>{index}</MenuItem>
@@ -322,10 +324,8 @@ export function Analysis(props) {
             <Select
               labelId="demo-simple-select-standard-label"
               id="demo-simple-select-standard"
-              value={props.type}
-              onChange={event => {
-                props.setType(event.target.value);
-              }}
+              value={props.inputs.type}
+              {...register('type')}
             >
               {props.types.map(index => (
                 <MenuItem value={index}>{index}</MenuItem>
@@ -349,10 +349,8 @@ export function Analysis(props) {
             <Select
               labelId="demo-simple-select-standard-label"
               id="demo-simple-select-standard"
-              value={props.typology}
-              onChange={event => {
-                props.setTypology(event.target.value);
-              }}
+              value={props.inputs.typology}
+              {...register('typology')}
             >
               {props.typologies.map(index => (
                 <MenuItem value={index}>{index}</MenuItem>
@@ -376,10 +374,8 @@ export function Analysis(props) {
             <Select
               labelId="demo-simple-select-standard-label"
               id="demo-simple-select-standard"
-              value={props.condition}
-              onChange={event => {
-                props.setCondition(event.target.value);
-              }}
+              value={props.inputs.condition}
+              {...register('condition')}
             >
               {props.conditions.map(index => (
                 <MenuItem value={index}>{index}</MenuItem>
@@ -405,10 +401,8 @@ export function Analysis(props) {
             <Input
               id="standard-adornment-amount"
               type="number"
-              defaultValue={props.minprice}
-              onChange={event => {
-                props.setMinPrice(event.target.value);
-              }}
+              defaultValue={props.inputs.minprice}
+              {...register('minprice')}
               startAdornment={
                 <InputAdornment position="start">$</InputAdornment>
               }
@@ -431,10 +425,8 @@ export function Analysis(props) {
             <Input
               id="standard-adornment-amount"
               type="number"
-              defaultValue={props.maxprice}
-              onChange={event => {
-                props.setMaxPrice(event.target.value);
-              }}
+              defaultValue={props.inputs.maxprice}
+              {...register('maxprice')}
               startAdornment={
                 <InputAdornment position="start">$</InputAdornment>
               }
@@ -457,10 +449,8 @@ export function Analysis(props) {
             <Input
               id="standard-adornment-amount"
               type="number"
-              defaultValue={props.minarea}
-              onChange={event => {
-                props.setMinArea(event.target.value);
-              }}
+              defaultValue={props.inputs.minarea}
+              {...register('minarea')}
               startAdornment={
                 <InputAdornment position="start">m2</InputAdornment>
               }
@@ -483,10 +473,8 @@ export function Analysis(props) {
             <Input
               id="standard-adornment-amount"
               type="number"
-              defaultValue={props.maxarea}
-              onChange={event => {
-                props.setMaxArea(event.target.value);
-              }}
+              defaultValue={props.inputs.maxarea}
+              {...register('maxarea')}
               startAdornment={
                 <InputAdornment position="start">m2</InputAdornment>
               }
@@ -560,10 +548,8 @@ export function Analysis(props) {
           <Input
             id="standard-adornment-amount"
             type="number"
-            defaultValue={props.mincapital}
-            onChange={event => {
-              props.setMinCapital(event.target.value);
-            }}
+            defaultValue={props.inputs.mincapital}
+            {...register('mincapital')}
             startAdornment={
               <InputAdornment position="start">&#8364;</InputAdornment>
             }
@@ -586,10 +572,8 @@ export function Analysis(props) {
           <Input
             id="standard-adornment-amount"
             type="number"
-            defaultValue={props.maxcapital}
-            onChange={event => {
-              props.setMaxCapital(event.target.value);
-            }}
+            defaultValue={props.inputs.maxcapital}
+            {...register('maxcapital')}
             startAdornment={
               <InputAdornment position="start">&#8364;</InputAdornment>
             }
@@ -612,10 +596,8 @@ export function Analysis(props) {
           <Input
             id="standard-adornment-amount"
             type="number"
-            defaultValue={props.bidask}
-            onChange={event => {
-              props.setBidAsk(event.target.value);
-            }}
+            defaultValue={props.inputs.bidask}
+            {...register('bidask')}
             startAdornment={<InputAdornment position="start">%</InputAdornment>}
           />
         </FormControl>
@@ -636,10 +618,8 @@ export function Analysis(props) {
           <Input
             id="standard-adornment-amount"
             type="number"
-            defaultValue={props.financingrate}
-            onChange={event => {
-              props.setFinancingRate(event.target.value);
-            }}
+            defaultValue={props.inputs.financingrate}
+            {...register('financingrate')}
             startAdornment={<InputAdornment position="start">%</InputAdornment>}
           />
         </FormControl>
@@ -682,10 +662,8 @@ export function Analysis(props) {
             <Select
               labelId="demo-simple-select-standard-label"
               id="demo-simple-select-standard"
-              value={props.acquisitiontype}
-              onChange={event => {
-                props.setAcquisitionType(event.target.value);
-              }}
+              value={props.inputs.acquisitiontype}
+              {...register('acquisitiontype')}
             >
               {props.acquisitiontypes.map(index => (
                 <MenuItem value={index}>{index}</MenuItem>
@@ -709,10 +687,8 @@ export function Analysis(props) {
             <Input
               id="standard-adornment-amount"
               type="number"
-              defaultValue={props.entryfee}
-              onChange={event => {
-                props.setEntryFee(event.target.value);
-              }}
+              defaultValue={props.inputs.entryfee}
+              {...register('entryfee')}
               startAdornment={
                 <InputAdornment position="start">%</InputAdornment>
               }
@@ -735,10 +711,8 @@ export function Analysis(props) {
             <Input
               id="standard-adornment-amount"
               type="number"
-              defaultValue={props.stampduty}
-              onChange={event => {
-                props.setStampDuty(event.target.value);
-              }}
+              defaultValue={props.inputs.stampduty}
+              {...register('stampduty')}
               startAdornment={
                 <InputAdornment position="start">%</InputAdornment>
               }
@@ -763,10 +737,8 @@ export function Analysis(props) {
             <Input
               id="standard-adornment-amount"
               type="number"
-              defaultValue={props.lrwithm}
-              onChange={event => {
-                props.setLRwithM(event.target.value);
-              }}
+              defaultValue={props.inputs.lrwithm}
+              {...register('lrwithm')}
               startAdornment={
                 <InputAdornment position="start">&#8364;</InputAdornment>
               }
@@ -789,10 +761,8 @@ export function Analysis(props) {
             <Input
               id="standard-adornment-amount"
               type="number"
-              defaultValue={props.lrwithoutm}
-              onChange={event => {
-                props.setLRwithoutM(event.target.value);
-              }}
+              defaultValue={props.inputs.lrwithoutm}
+              {...register('lrwithoutm')}
               startAdornment={
                 <InputAdornment position="start">&#8364;</InputAdornment>
               }
@@ -827,10 +797,8 @@ export function Analysis(props) {
             <Input
               id="standard-adornment-amount"
               type="number"
-              defaultValue={props.interestrate}
-              onChange={event => {
-                props.setInterestRate(event.target.value);
-              }}
+              defaultValue={props.inputs.interestrate}
+              {...register('interestrate')}
               startAdornment={
                 <InputAdornment position="start">%</InputAdornment>
               }
@@ -853,10 +821,8 @@ export function Analysis(props) {
             <Input
               id="standard-adornment-amount"
               type="number"
-              defaultValue={props.bankcommission}
-              onChange={event => {
-                props.setBankCommission(event.target.value);
-              }}
+              defaultValue={props.inputs.bankcommission}
+              {...register('bankcommission')}
               startAdornment={
                 <InputAdornment position="start">&#8364;</InputAdornment>
               }
@@ -879,10 +845,8 @@ export function Analysis(props) {
             <Input
               id="standard-adornment-amount"
               type="number"
-              defaultValue={props.amortization}
-              onChange={event => {
-                props.setAmortization(event.target.value);
-              }}
+              defaultValue={props.inputs.amortization}
+              {...register('amortization')}
               startAdornment={
                 <InputAdornment position="start">Years</InputAdornment>
               }
@@ -907,10 +871,8 @@ export function Analysis(props) {
             <Input
               id="standard-adornment-amount"
               type="number"
-              defaultValue={props.stampdutymortgage}
-              onChange={event => {
-                props.setStampDutyMortgage(event.target.value);
-              }}
+              defaultValue={props.inputs.stampdutymortgage}
+              {...register('stampdutymortgage')}
               startAdornment={
                 <InputAdornment position="start">%</InputAdornment>
               }
@@ -933,10 +895,8 @@ export function Analysis(props) {
             <Input
               id="standard-adornment-amount"
               type="number"
-              defaultValue={props.stampdutyinterests}
-              onChange={event => {
-                props.setStampDutyInterests(event.target.value);
-              }}
+              defaultValue={props.inputs.stampdutyinterests}
+              {...register('stampdutyinterests')}
               startAdornment={
                 <InputAdornment position="start">%</InputAdornment>
               }
@@ -971,10 +931,8 @@ export function Analysis(props) {
             <Input
               id="standard-adornment-amount"
               type="number"
-              defaultValue={props.condominiumcosts}
-              onChange={event => {
-                props.setCondominiumCosts(event.target.value);
-              }}
+              defaultValue={props.inputs.condominiumcosts}
+              {...register('condominiumcosts')}
               startAdornment={
                 <InputAdornment position="start">&#8364;</InputAdornment>
               }
@@ -997,10 +955,8 @@ export function Analysis(props) {
             <Input
               id="standard-adornment-amount"
               type="number"
-              defaultValue={props.propertytaxrate}
-              onChange={event => {
-                props.setPropertyTaxRate(event.target.value);
-              }}
+              defaultValue={props.inputs.propertytaxrate}
+              {...register('propertytaxrate')}
               startAdornment={
                 <InputAdornment position="start">%</InputAdornment>
               }
@@ -1035,10 +991,8 @@ export function Analysis(props) {
             <Input
               id="standard-adornment-amount"
               type="number"
-              defaultValue={props.timetosale}
-              onChange={event => {
-                props.setTimetoSale(event.target.value);
-              }}
+              defaultValue={props.inputs.timetosale}
+              {...register('timetosale')}
               startAdornment={
                 <InputAdornment position="start">Month</InputAdornment>
               }
@@ -1061,10 +1015,8 @@ export function Analysis(props) {
             <Input
               id="standard-adornment-amount"
               type="number"
-              defaultValue={props.irsrate}
-              onChange={event => {
-                props.setIRSRate(event.target.value);
-              }}
+              defaultValue={props.inputs.irsrate}
+              {...register('irsrate')}
               startAdornment={
                 <InputAdornment position="start">%</InputAdornment>
               }
@@ -1087,10 +1039,8 @@ export function Analysis(props) {
             <Input
               id="standard-adornment-amount"
               type="number"
-              defaultValue={props.exitbrokerfee}
-              onChange={event => {
-                props.setExitBrokerFee(event.target.value);
-              }}
+              defaultValue={props.inputs.exitbrokerfee}
+              {...register('exitbrokerfee')}
               startAdornment={
                 <InputAdornment position="start">%</InputAdornment>
               }
@@ -1115,10 +1065,8 @@ export function Analysis(props) {
             <Input
               id="standard-adornment-amount"
               type="number"
-              defaultValue={props.loanearlyrepaymentfee}
-              onChange={event => {
-                props.setLoanEarlyRepaymentFee(event.target.value);
-              }}
+              defaultValue={props.inputs.loanearlyrepaymentfee}
+              {...register('loanearlyrepaymentfee')}
               startAdornment={
                 <InputAdornment position="start">%</InputAdornment>
               }
@@ -1141,10 +1089,8 @@ export function Analysis(props) {
             <Input
               id="standard-adornment-amount"
               type="number"
-              defaultValue={props.capitalgainstaxbase}
-              onChange={event => {
-                props.setCapitalgainsTaxBase(event.target.value);
-              }}
+              defaultValue={props.inputs.capitalgainstaxbase}
+              {...register('capitalgainstaxbase')}
               startAdornment={
                 <InputAdornment position="start">%</InputAdornment>
               }
@@ -1176,10 +1122,8 @@ export function Analysis(props) {
             <Input
               id="standard-adornment-amount"
               type="number"
-              defaultValue={props.gcpa}
-              onChange={event => {
-                props.setGCPA(event.target.value);
-              }}
+              defaultValue={props.inputs.gcpa}
+              {...register('gcpa')}
               startAdornment={
                 <InputAdornment position="start">%</InputAdornment>
               }
@@ -1202,10 +1146,8 @@ export function Analysis(props) {
             <Input
               id="standard-adornment-amount"
               type="number"
-              defaultValue={props.floor}
-              onChange={event => {
-                props.setFloor(event.target.value);
-              }}
+              defaultValue={props.inputs.floor}
+              {...register('floor')}
               startAdornment={
                 <InputAdornment position="start">%</InputAdornment>
               }
@@ -1228,10 +1170,8 @@ export function Analysis(props) {
             <Input
               id="standard-adornment-amount"
               type="number"
-              defaultValue={props.cap}
-              onChange={event => {
-                props.setCap(event.target.value);
-              }}
+              defaultValue={props.inputs.cap}
+              {...register('cap')}
               startAdornment={
                 <InputAdornment position="start">%</InputAdornment>
               }
@@ -1256,10 +1196,8 @@ export function Analysis(props) {
             <Select
               labelId="demo-simple-select-standard-label"
               id="demo-simple-select-standard"
-              value={props.cip}
-              onChange={event => {
-                props.setCIP(event.target.value);
-              }}
+              value={props.inputs.cip}
+              {...register('cip')}
             >
               {props.cips.map(index => (
                 <MenuItem value={index}>{index}</MenuItem>
@@ -1283,10 +1221,8 @@ export function Analysis(props) {
             <Input
               id="standard-adornment-amount"
               type="number"
-              defaultValue={props.mop}
-              onChange={event => {
-                props.setMOP(event.target.value);
-              }}
+              defaultValue={props.inputs.mop}
+              {...register('mop')}
               startAdornment={
                 <InputAdornment position="start">#</InputAdornment>
               }
@@ -1322,31 +1258,33 @@ export function Analysis(props) {
       </Helmet>
       {/* <FormattedMessage {...messages.header} /> */}
       <Grid item container>
-        <Grid key="property-info" item container direction="row">
-          <Grid key="form-control" item container xs={8}>
-            <h5>Property Information</h5>
-            {renderPropertyForm()}
-            {renderAccordion()}
+        <form onSubmit={handleSubmit(onSubmit)} className={classes.w100}>
+          <Grid key="property-info" item container direction="row">
+            <Grid key="form-control" item container xs={8}>
+              <h5>Property Information</h5>
+              {renderPropertyForm()}
+              {renderAccordion()}
+            </Grid>
+            <Grid
+              key="google-map"
+              item
+              container
+              xs={4}
+              className={classes.fixHeight}
+            >
+              <PaperMap />
+            </Grid>
           </Grid>
-          <Grid
-            key="google-map"
-            item
-            container
-            xs={4}
-            className={classes.fixHeight}
-          >
-            <PaperMap />
+          <Grid key="button" item container direction="row">
+            <Button
+              type="submit"
+              variant="contained"
+              className={classes.customizeBtn}
+            >
+              Analyze
+            </Button>
           </Grid>
-        </Grid>
-        <Grid key="button" item container direction="row">
-          <Button
-            type="submit"
-            variant="contained"
-            className={classes.customizeBtn}
-          >
-            Analyze
-          </Button>
-        </Grid>
+        </form>
         <Grid key="table" item container direction="row">
           <Grid className={classes.w100}>
             <h5>Investments</h5>
