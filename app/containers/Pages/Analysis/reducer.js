@@ -226,6 +226,8 @@ const analysisReducer = (state = initialState, action) =>
       case SET_VALUE:
         console.log(action.payload);
         draft.inputs[action.payload.name] = action.payload.value;
+        console.log('draft', draft.inputs);
+        localStorage.setItem('inputs', draft.inputs);
         break;
       case GET_LOCATIONS:
         draft.isGettingLocations = true;

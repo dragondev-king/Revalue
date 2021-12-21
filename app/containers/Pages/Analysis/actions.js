@@ -60,7 +60,7 @@ export const getLocations = () => async dispatch => {
 };
 
 export const setValue = target => {
-  console.log(target);
+  console.log('target', target);
   return {
     type: SET_VALUE,
     payload: target,
@@ -150,6 +150,7 @@ export const setMaxArea = maxarea => {
     payload: maxarea,
   };
 };
+// Investment Information
 export const setMinCapital = mincapital => {
   localStorage.setItem('mincapital', mincapital);
   return {

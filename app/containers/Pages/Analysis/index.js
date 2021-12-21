@@ -2,7 +2,7 @@ import React, { memo, useEffect } from 'react';
 // import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
-// import { FormattedMessage } from 'react-intl';
+import { injectIntl } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
@@ -20,19 +20,13 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
 import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import InfoIcon from '@material-ui/icons/Info';
+import { DataGrid } from '@material-ui/data-grid';
 
-import { injectIntl } from 'react-intl';
+import messages from './messages';
 import PaperMap from '../../../components/PaperMap';
 import {
   makeSelectAnalysis,
@@ -122,7 +116,6 @@ import {
   setCapitalgainsTaxBase,
   setValue,
 } from './actions';
-// import messages from './messages';
 
 const useStyles = makeStyles(theme => ({
   appBarSpacer: theme.mixins.toolbar,
@@ -190,35 +183,82 @@ const useStyles = makeStyles(theme => ({
     maxHeight: '325px',
   },
   iconmr: {
-    marginRight: '10px',
+    marginLeft: '10px',
+    marginBottom: '5px',
+    padding: '0px',
+  },
+  labelWidth: {
+    minWidth: '140px',
   },
 }));
 
-function createData(
-  location,
-  asking,
-  capital,
-  costs,
-  price,
-  irr,
-  profit,
-  report,
-) {
-  return { location, asking, capital, costs, price, irr, profit, report };
-}
+const columns = [
+  { field: 'id', headerName: 'ID', width: 90 },
+  {
+    field: 'location',
+    headerName: 'Location',
+    width: 140,
+    editable: true,
+  },
+  {
+    field: 'asking',
+    headerName: 'Asking',
+    width: 130,
+    editable: true,
+  },
+  {
+    field: 'capital',
+    headerName: 'Capital',
+    width: 130,
+    editable: true,
+  },
+  {
+    field: 'costs',
+    headerName: 'Costs',
+    width: 130,
+    editable: true,
+  },
+  {
+    field: 'price',
+    headerName: 'Price',
+    width: 130,
+    editable: true,
+  },
+  {
+    field: 'irr',
+    headerName: 'IRR',
+    width: 130,
+    editable: true,
+  },
+  {
+    field: 'profit',
+    headerName: 'Profit',
+    width: 130,
+    editable: true,
+  },
+  {
+    field: 'report',
+    headerName: 'Report',
+    width: 130,
+    editable: true,
+  },
+];
 
 const rows = [
-  createData('', '', '', '', '', '', '', ''),
-  createData('', '', '', '', '', '', '', ''),
-  createData('', '', '', '', '', '', '', ''),
-  createData('', '', '', '', '', '', '', ''),
-  createData('', '', '', '', '', '', '', ''),
-  createData('', '', '', '', '', '', '', ''),
-  createData('', '', '', '', '', '', '', ''),
+  {
+    id: 1,
+    location: '',
+    asking: '',
+    capital: '',
+    costs: '',
+    price: '',
+    irr: '',
+    profit: '',
+    report: '',
+  },
 ];
 
 export function Analysis(props) {
-  console.log(props);
   useInjectReducer({ key: 'analysis', reducer });
 
   useEffect(() => {
@@ -235,14 +275,23 @@ export function Analysis(props) {
   function handleChange(event) {
     props.setValue(event.target);
   }
-
   function renderPropertyForm() {
     return (
       <>
         <Grid>
           <FormControl variant="standard" className={classes.doubleWidth}>
-            <InputLabel id="demo-simple-select-standard-label">
-              Location
+            <InputLabel
+              id="demo-simple-select-standard-label"
+              className={classes.labelWidth}
+            >
+              {props.intl.formatMessage({
+                ...messages.location,
+              })}
+              <Tooltip title="info">
+                <IconButton className={classes.iconmr}>
+                  <InfoIcon />
+                </IconButton>
+              </Tooltip>
             </InputLabel>
             <Select
               labelId="demo-simple-select-standard-label"
@@ -250,15 +299,6 @@ export function Analysis(props) {
               value={props.inputs.location}
               name="location"
               onChange={event => handleChange(event)}
-              endAdornment={
-                <InputAdornment position="end">
-                  <Tooltip title="Location">
-                    <IconButton className={classes.iconmr}>
-                      <InfoIcon />
-                    </IconButton>
-                  </Tooltip>
-                </InputAdornment>
-              }
             >
               {props.locations.map(index => (
                 <MenuItem value={index}>{index}</MenuItem>
@@ -266,7 +306,19 @@ export function Analysis(props) {
             </Select>
           </FormControl>
           <FormControl variant="standard" className={classes.ctrlWidth}>
-            <InputLabel id="demo-simple-select-standard-label">Type</InputLabel>
+            <InputLabel
+              id="demo-simple-select-standard-label"
+              className={classes.labelWidth}
+            >
+              {props.intl.formatMessage({
+                ...messages.type,
+              })}
+              <Tooltip title="info">
+                <IconButton className={classes.iconmr}>
+                  <InfoIcon />
+                </IconButton>
+              </Tooltip>
+            </InputLabel>
             <Select
               labelId="demo-simple-select-standard-label"
               id="demo-simple-select-standard"
@@ -281,8 +333,18 @@ export function Analysis(props) {
             </Select>
           </FormControl>
           <FormControl variant="standard" className={classes.ctrlWidth}>
-            <InputLabel id="demo-simple-select-standard-label">
-              Typology
+            <InputLabel
+              id="demo-simple-select-standard-label"
+              className={classes.labelWidth}
+            >
+              {props.intl.formatMessage({
+                ...messages.typology,
+              })}
+              <Tooltip title="info">
+                <IconButton className={classes.iconmr}>
+                  <InfoIcon />
+                </IconButton>
+              </Tooltip>
             </InputLabel>
             <Select
               labelId="demo-simple-select-standard-label"
@@ -298,8 +360,18 @@ export function Analysis(props) {
             </Select>
           </FormControl>
           <FormControl variant="standard" className={classes.ctrlEndWidth}>
-            <InputLabel id="demo-simple-select-standard-label">
-              Condition
+            <InputLabel
+              id="demo-simple-select-standard-label"
+              className={classes.labelWidth}
+            >
+              {props.intl.formatMessage({
+                ...messages.condition,
+              })}
+              <Tooltip title="info">
+                <IconButton className={classes.iconmr}>
+                  <InfoIcon />
+                </IconButton>
+              </Tooltip>
             </InputLabel>
             <Select
               labelId="demo-simple-select-standard-label"
@@ -317,8 +389,18 @@ export function Analysis(props) {
         </Grid>
         <Grid className={classes.rowSpacing}>
           <FormControl variant="standard" className={classes.inputWidth}>
-            <InputLabel htmlFor="standard-adornment-amount">
-              Min Price
+            <InputLabel
+              id="demo-simple-select-standard-label"
+              className={classes.labelWidth}
+            >
+              {props.intl.formatMessage({
+                ...messages.minPrice,
+              })}
+              <Tooltip title="info">
+                <IconButton className={classes.iconmr}>
+                  <InfoIcon />
+                </IconButton>
+              </Tooltip>
             </InputLabel>
             <Input
               id="standard-adornment-amount"
@@ -333,8 +415,18 @@ export function Analysis(props) {
             />
           </FormControl>
           <FormControl variant="standard" className={classes.inputWidth}>
-            <InputLabel htmlFor="standard-adornment-amount">
-              Max Price
+            <InputLabel
+              id="demo-simple-select-standard-label"
+              className={classes.labelWidth}
+            >
+              {props.intl.formatMessage({
+                ...messages.maxPrice,
+              })}
+              <Tooltip title="info">
+                <IconButton className={classes.iconmr}>
+                  <InfoIcon />
+                </IconButton>
+              </Tooltip>
             </InputLabel>
             <Input
               id="standard-adornment-amount"
@@ -349,8 +441,18 @@ export function Analysis(props) {
             />
           </FormControl>
           <FormControl variant="standard" className={classes.inputWidth}>
-            <InputLabel htmlFor="standard-adornment-amount">
-              Min Area
+            <InputLabel
+              id="demo-simple-select-standard-label"
+              className={classes.labelWidth}
+            >
+              {props.intl.formatMessage({
+                ...messages.minArea,
+              })}
+              <Tooltip title="info">
+                <IconButton className={classes.iconmr}>
+                  <InfoIcon />
+                </IconButton>
+              </Tooltip>
             </InputLabel>
             <Input
               id="standard-adornment-amount"
@@ -365,8 +467,18 @@ export function Analysis(props) {
             />
           </FormControl>
           <FormControl variant="standard" className={classes.inputEndWidth}>
-            <InputLabel htmlFor="standard-adornment-amount">
-              Max Area
+            <InputLabel
+              id="demo-simple-select-standard-label"
+              className={classes.labelWidth}
+            >
+              {props.intl.formatMessage({
+                ...messages.maxArea,
+              })}
+              <Tooltip title="info">
+                <IconButton className={classes.iconmr}>
+                  <InfoIcon />
+                </IconButton>
+              </Tooltip>
             </InputLabel>
             <Input
               id="standard-adornment-amount"
@@ -432,8 +544,18 @@ export function Analysis(props) {
     return (
       <Grid>
         <FormControl variant="standard" className={classes.inputWidth}>
-          <InputLabel htmlFor="standard-adornment-amount">
-            Min Capital
+          <InputLabel
+            id="demo-simple-select-standard-label"
+            className={classes.labelWidth}
+          >
+            {props.intl.formatMessage({
+              ...messages.minCapital,
+            })}
+            <Tooltip title="info">
+              <IconButton className={classes.iconmr}>
+                <InfoIcon />
+              </IconButton>
+            </Tooltip>
           </InputLabel>
           <Input
             id="standard-adornment-amount"
@@ -448,8 +570,18 @@ export function Analysis(props) {
           />
         </FormControl>
         <FormControl variant="standard" className={classes.inputWidth}>
-          <InputLabel htmlFor="standard-adornment-amount">
-            Max Capital
+          <InputLabel
+            htmlFor="standard-adornment-amount"
+            className={classes.labelWidth}
+          >
+            {props.intl.formatMessage({
+              ...messages.maxCapital,
+            })}
+            <Tooltip title="info">
+              <IconButton className={classes.iconmr}>
+                <InfoIcon />
+              </IconButton>
+            </Tooltip>
           </InputLabel>
           <Input
             id="standard-adornment-amount"
@@ -464,7 +596,19 @@ export function Analysis(props) {
           />
         </FormControl>
         <FormControl variant="standard" className={classes.inputWidth}>
-          <InputLabel htmlFor="standard-adornment-amount">Bid Ask</InputLabel>
+          <InputLabel
+            id="demo-simple-select-standard-label"
+            className={classes.labelWidth}
+          >
+            {props.intl.formatMessage({
+              ...messages.bidAsk,
+            })}
+            <Tooltip title="info">
+              <IconButton className={classes.iconmr}>
+                <InfoIcon />
+              </IconButton>
+            </Tooltip>
+          </InputLabel>
           <Input
             id="standard-adornment-amount"
             type="number"
@@ -476,8 +620,18 @@ export function Analysis(props) {
           />
         </FormControl>
         <FormControl variant="standard" className={classes.inputEndWidth}>
-          <InputLabel htmlFor="standard-adornment-amount">
-            Financing Rate
+          <InputLabel
+            htmlFor="standard-adornment-amount"
+            className={classes.labelWidth}
+          >
+            {props.intl.formatMessage({
+              ...messages.financingRate,
+            })}
+            <Tooltip title="info">
+              <IconButton className={classes.iconmr}>
+                <InfoIcon />
+              </IconButton>
+            </Tooltip>
           </InputLabel>
           <Input
             id="standard-adornment-amount"
@@ -512,8 +666,18 @@ export function Analysis(props) {
         </Grid>
         <Grid>
           <FormControl variant="standard" className={classes.doubleWidth}>
-            <InputLabel id="demo-simple-select-standard-label">
-              Acquisition Type
+            <InputLabel
+              id="demo-simple-select-standard-label"
+              className={classes.labelWidth}
+            >
+              {props.intl.formatMessage({
+                ...messages.acquisitionType,
+              })}
+              <Tooltip title="info">
+                <IconButton className={classes.iconmr}>
+                  <InfoIcon />
+                </IconButton>
+              </Tooltip>
             </InputLabel>
             <Select
               labelId="demo-simple-select-standard-label"
@@ -529,8 +693,18 @@ export function Analysis(props) {
             </Select>
           </FormControl>
           <FormControl variant="standard" className={classes.inputWidth}>
-            <InputLabel htmlFor="standard-adornment-amount">
-              Entry Fee
+            <InputLabel
+              id="demo-simple-select-standard-label"
+              className={classes.labelWidth}
+            >
+              {props.intl.formatMessage({
+                ...messages.entryFee,
+              })}
+              <Tooltip title="info">
+                <IconButton className={classes.iconmr}>
+                  <InfoIcon />
+                </IconButton>
+              </Tooltip>
             </InputLabel>
             <Input
               id="standard-adornment-amount"
@@ -545,8 +719,18 @@ export function Analysis(props) {
             />
           </FormControl>
           <FormControl variant="standard" className={classes.inputWidth}>
-            <InputLabel htmlFor="standard-adornment-amount">
-              Stamp Duty
+            <InputLabel
+              id="demo-simple-select-standard-label"
+              className={classes.labelWidth}
+            >
+              {props.intl.formatMessage({
+                ...messages.stampDuty,
+              })}
+              <Tooltip title="info">
+                <IconButton className={classes.iconmr}>
+                  <InfoIcon />
+                </IconButton>
+              </Tooltip>
             </InputLabel>
             <Input
               id="standard-adornment-amount"
@@ -563,8 +747,18 @@ export function Analysis(props) {
         </Grid>
         <Grid className={classes.rowSpacing}>
           <FormControl variant="standard" className={classes.inputLgWidth}>
-            <InputLabel htmlFor="standard-adornment-amount">
-              Land Registry with Mortgage
+            <InputLabel
+              id="demo-simple-select-standard-label"
+              className={classes.labelWidth}
+            >
+              {props.intl.formatMessage({
+                ...messages.landRegistryWthMortgage,
+              })}
+              <Tooltip title="info">
+                <IconButton className={classes.iconmr}>
+                  <InfoIcon />
+                </IconButton>
+              </Tooltip>
             </InputLabel>
             <Input
               id="standard-adornment-amount"
@@ -579,8 +773,18 @@ export function Analysis(props) {
             />
           </FormControl>
           <FormControl variant="standard" className={classes.inputEndLgWidth}>
-            <InputLabel htmlFor="standard-adornment-amount">
-              Land Registry without Mortgage
+            <InputLabel
+              id="demo-simple-select-standard-label"
+              className={classes.labelWidth}
+            >
+              {props.intl.formatMessage({
+                ...messages.landRegistryWithoutMortgage,
+              })}
+              <Tooltip title="info">
+                <IconButton className={classes.iconmr}>
+                  <InfoIcon />
+                </IconButton>
+              </Tooltip>
             </InputLabel>
             <Input
               id="standard-adornment-amount"
@@ -607,8 +811,18 @@ export function Analysis(props) {
         </Grid>
         <Grid>
           <FormControl variant="standard" className={classes.inputWidth}>
-            <InputLabel htmlFor="standard-adornment-amount">
-              Interest Rate
+            <InputLabel
+              id="demo-simple-select-standard-label"
+              className={classes.labelWidth}
+            >
+              {props.intl.formatMessage({
+                ...messages.interestRate,
+              })}
+              <Tooltip title="info">
+                <IconButton className={classes.iconmr}>
+                  <InfoIcon />
+                </IconButton>
+              </Tooltip>
             </InputLabel>
             <Input
               id="standard-adornment-amount"
@@ -623,8 +837,18 @@ export function Analysis(props) {
             />
           </FormControl>
           <FormControl variant="standard" className={classes.inputWidth}>
-            <InputLabel htmlFor="standard-adornment-amount">
-              Bank Commission
+            <InputLabel
+              id="demo-simple-select-standard-label"
+              className={classes.labelWidth}
+            >
+              {props.intl.formatMessage({
+                ...messages.bankCommission,
+              })}
+              <Tooltip title="info">
+                <IconButton className={classes.iconmr}>
+                  <InfoIcon />
+                </IconButton>
+              </Tooltip>
             </InputLabel>
             <Input
               id="standard-adornment-amount"
@@ -639,8 +863,18 @@ export function Analysis(props) {
             />
           </FormControl>
           <FormControl variant="standard" className={classes.inputWidth}>
-            <InputLabel htmlFor="standard-adornment-amount">
-              Amortization
+            <InputLabel
+              id="demo-simple-select-standard-label"
+              className={classes.labelWidth}
+            >
+              {props.intl.formatMessage({
+                ...messages.amortization,
+              })}
+              <Tooltip title="info">
+                <IconButton className={classes.iconmr}>
+                  <InfoIcon />
+                </IconButton>
+              </Tooltip>
             </InputLabel>
             <Input
               id="standard-adornment-amount"
@@ -657,8 +891,18 @@ export function Analysis(props) {
         </Grid>
         <Grid className={classes.rowSpacing}>
           <FormControl variant="standard" className={classes.inputLgWidth}>
-            <InputLabel htmlFor="standard-adornment-amount">
-              Stamp Duty Mortgage
+            <InputLabel
+              id="demo-simple-select-standard-label"
+              className={classes.labelWidth}
+            >
+              {props.intl.formatMessage({
+                ...messages.stampDutyMortgage,
+              })}
+              <Tooltip title="info">
+                <IconButton className={classes.iconmr}>
+                  <InfoIcon />
+                </IconButton>
+              </Tooltip>
             </InputLabel>
             <Input
               id="standard-adornment-amount"
@@ -673,8 +917,18 @@ export function Analysis(props) {
             />
           </FormControl>
           <FormControl variant="standard" className={classes.inputEndLgWidth}>
-            <InputLabel htmlFor="standard-adornment-amount">
-              Stamp Duty Interests
+            <InputLabel
+              id="demo-simple-select-standard-label"
+              className={classes.labelWidth}
+            >
+              {props.intl.formatMessage({
+                ...messages.stampDutyInterests,
+              })}
+              <Tooltip title="info">
+                <IconButton className={classes.iconmr}>
+                  <InfoIcon />
+                </IconButton>
+              </Tooltip>
             </InputLabel>
             <Input
               id="standard-adornment-amount"
@@ -701,8 +955,18 @@ export function Analysis(props) {
         </Grid>
         <Grid>
           <FormControl variant="standard" className={classes.inputWidth}>
-            <InputLabel htmlFor="standard-adornment-amount">
-              Condominium Costs
+            <InputLabel
+              id="demo-simple-select-standard-label"
+              className={classes.labelWidth}
+            >
+              {props.intl.formatMessage({
+                ...messages.condominiumCosts,
+              })}
+              <Tooltip title="info">
+                <IconButton className={classes.iconmr}>
+                  <InfoIcon />
+                </IconButton>
+              </Tooltip>
             </InputLabel>
             <Input
               id="standard-adornment-amount"
@@ -717,8 +981,18 @@ export function Analysis(props) {
             />
           </FormControl>
           <FormControl variant="standard" className={classes.inputWidth}>
-            <InputLabel htmlFor="standard-adornment-amount">
-              Property Tax Rate
+            <InputLabel
+              id="demo-simple-select-standard-label"
+              className={classes.labelWidth}
+            >
+              {props.intl.formatMessage({
+                ...messages.propertyTaxRate,
+              })}
+              <Tooltip title="info">
+                <IconButton className={classes.iconmr}>
+                  <InfoIcon />
+                </IconButton>
+              </Tooltip>
             </InputLabel>
             <Input
               id="standard-adornment-amount"
@@ -745,8 +1019,18 @@ export function Analysis(props) {
         </Grid>
         <Grid>
           <FormControl variant="standard" className={classes.inputWidth}>
-            <InputLabel htmlFor="standard-adornment-amount">
-              Time to Sale
+            <InputLabel
+              id="demo-simple-select-standard-label"
+              className={classes.labelWidth}
+            >
+              {props.intl.formatMessage({
+                ...messages.timeToSale,
+              })}
+              <Tooltip title="info">
+                <IconButton className={classes.iconmr}>
+                  <InfoIcon />
+                </IconButton>
+              </Tooltip>
             </InputLabel>
             <Input
               id="standard-adornment-amount"
@@ -761,8 +1045,18 @@ export function Analysis(props) {
             />
           </FormControl>
           <FormControl variant="standard" className={classes.inputWidth}>
-            <InputLabel htmlFor="standard-adornment-amount">
-              IRS Rate
+            <InputLabel
+              id="demo-simple-select-standard-label"
+              className={classes.labelWidth}
+            >
+              {props.intl.formatMessage({
+                ...messages.irsRate,
+              })}
+              <Tooltip title="info">
+                <IconButton className={classes.iconmr}>
+                  <InfoIcon />
+                </IconButton>
+              </Tooltip>
             </InputLabel>
             <Input
               id="standard-adornment-amount"
@@ -777,8 +1071,18 @@ export function Analysis(props) {
             />
           </FormControl>
           <FormControl variant="standard" className={classes.inputEndWidth}>
-            <InputLabel htmlFor="standard-adornment-amount">
-              Exit Broker Fee
+            <InputLabel
+              id="demo-simple-select-standard-label"
+              className={classes.labelWidth}
+            >
+              {props.intl.formatMessage({
+                ...messages.exitBrokerFee,
+              })}
+              <Tooltip title="info">
+                <IconButton className={classes.iconmr}>
+                  <InfoIcon />
+                </IconButton>
+              </Tooltip>
             </InputLabel>
             <Input
               id="standard-adornment-amount"
@@ -795,8 +1099,18 @@ export function Analysis(props) {
         </Grid>
         <Grid className={classes.rowSpacing}>
           <FormControl variant="standard" className={classes.inputLgWidth}>
-            <InputLabel htmlFor="standard-adornment-amount">
-              Loan Early Repayment Fee
+            <InputLabel
+              id="demo-simple-select-standard-label"
+              className={classes.labelWidth}
+            >
+              {props.intl.formatMessage({
+                ...messages.loanEarlyRepaymentFee,
+              })}
+              <Tooltip title="info">
+                <IconButton className={classes.iconmr}>
+                  <InfoIcon />
+                </IconButton>
+              </Tooltip>
             </InputLabel>
             <Input
               id="standard-adornment-amount"
@@ -811,8 +1125,18 @@ export function Analysis(props) {
             />
           </FormControl>
           <FormControl variant="standard" className={classes.inputEndLgWidth}>
-            <InputLabel htmlFor="standard-adornment-amount">
-              Capital gains Tax Base
+            <InputLabel
+              id="demo-simple-select-standard-label"
+              className={classes.labelWidth}
+            >
+              {props.intl.formatMessage({
+                ...messages.capitalGainsTaxBase,
+              })}
+              <Tooltip title="info">
+                <IconButton className={classes.iconmr}>
+                  <InfoIcon />
+                </IconButton>
+              </Tooltip>
             </InputLabel>
             <Input
               id="standard-adornment-amount"
@@ -836,8 +1160,18 @@ export function Analysis(props) {
       <Grid>
         <Grid>
           <FormControl variant="standard" className={classes.inputLgWidth}>
-            <InputLabel htmlFor="standard-adornment-amount">
-              Gross Construction to Private Area
+            <InputLabel
+              id="demo-simple-select-standard-label"
+              className={classes.labelWidth}
+            >
+              {props.intl.formatMessage({
+                ...messages.grossConstructionToPrivateAre,
+              })}
+              <Tooltip title="info">
+                <IconButton className={classes.iconmr}>
+                  <InfoIcon />
+                </IconButton>
+              </Tooltip>
             </InputLabel>
             <Input
               id="standard-adornment-amount"
@@ -852,7 +1186,19 @@ export function Analysis(props) {
             />
           </FormControl>
           <FormControl variant="standard" className={classes.inputWidth}>
-            <InputLabel htmlFor="standard-adornment-amount">Floor</InputLabel>
+            <InputLabel
+              id="demo-simple-select-standard-label"
+              className={classes.labelWidth}
+            >
+              {props.intl.formatMessage({
+                ...messages.floor,
+              })}
+              <Tooltip title="info">
+                <IconButton className={classes.iconmr}>
+                  <InfoIcon />
+                </IconButton>
+              </Tooltip>
+            </InputLabel>
             <Input
               id="standard-adornment-amount"
               type="number"
@@ -866,7 +1212,19 @@ export function Analysis(props) {
             />
           </FormControl>
           <FormControl variant="standard" className={classes.inputWidth}>
-            <InputLabel htmlFor="standard-adornment-amount">Cap</InputLabel>
+            <InputLabel
+              id="demo-simple-select-standard-label"
+              className={classes.labelWidth}
+            >
+              {props.intl.formatMessage({
+                ...messages.cap,
+              })}
+              <Tooltip title="info">
+                <IconButton className={classes.iconmr}>
+                  <InfoIcon />
+                </IconButton>
+              </Tooltip>
+            </InputLabel>
             <Input
               id="standard-adornment-amount"
               type="number"
@@ -882,8 +1240,18 @@ export function Analysis(props) {
         </Grid>
         <Grid className={classes.rowSpacing}>
           <FormControl variant="standard" className={classes.doubleWidth}>
-            <InputLabel id="demo-simple-select-standard-label">
-              Confidencial Imobiliario Percentile
+            <InputLabel
+              id="demo-simple-select-standard-label"
+              className={classes.labelWidth}
+            >
+              {props.intl.formatMessage({
+                ...messages.confidencialImobiliarioPercentile,
+              })}
+              <Tooltip title="info">
+                <IconButton className={classes.iconmr}>
+                  <InfoIcon />
+                </IconButton>
+              </Tooltip>
             </InputLabel>
             <Select
               labelId="demo-simple-select-standard-label"
@@ -899,8 +1267,18 @@ export function Analysis(props) {
             </Select>
           </FormControl>
           <FormControl variant="standard" className={classes.inputEndLgWidth}>
-            <InputLabel htmlFor="standard-adornment-amount">
-              Min Observations for Percentile
+            <InputLabel
+              id="demo-simple-select-standard-label"
+              className={classes.labelWidth}
+            >
+              {props.intl.formatMessage({
+                ...messages.minObservationsForPercentile,
+              })}
+              <Tooltip title="info">
+                <IconButton className={classes.iconmr}>
+                  <InfoIcon />
+                </IconButton>
+              </Tooltip>
             </InputLabel>
             <Input
               id="standard-adornment-amount"
@@ -922,58 +1300,16 @@ export function Analysis(props) {
   function renderTable() {
     return (
       <>
-        <TableContainer component={Paper}>
-          <Table aria-label="customized table">
-            <TableHead>
-              <TableRow>
-                <TableCell className={classes.tableHead} align="center">
-                  Location
-                </TableCell>
-                <TableCell className={classes.tableHead} align="center">
-                  Asking
-                </TableCell>
-                <TableCell className={classes.tableHead} align="center">
-                  Entry Capital
-                </TableCell>
-                <TableCell className={classes.tableHead} align="center">
-                  Operating Costs
-                </TableCell>
-                <TableCell className={classes.tableHead} align="center">
-                  Exit Price
-                </TableCell>
-                <TableCell className={classes.tableHead} align="center">
-                  IRR
-                </TableCell>
-                <TableCell className={classes.tableHead} align="center">
-                  Profit
-                </TableCell>
-                <TableCell className={classes.tableHead} align="center">
-                  Report
-                </TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {rows.map(row => (
-                <TableRow
-                  key={row.name}
-                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                  className={classes.tableBody}
-                >
-                  <TableCell component="th" scope="row" align="center">
-                    {row.location}
-                  </TableCell>
-                  <TableCell align="center">{row.asking}</TableCell>
-                  <TableCell align="center">{row.capital}</TableCell>
-                  <TableCell align="center">{row.costs}</TableCell>
-                  <TableCell align="center">{row.price}</TableCell>
-                  <TableCell align="center">{row.irr}</TableCell>
-                  <TableCell align="center">{row.profit}</TableCell>
-                  <TableCell align="center">{row.report}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+        <div style={{ height: 300, width: '100%' }}>
+          <DataGrid
+            rows={rows}
+            columns={columns}
+            pageSize={5}
+            rowsPerPageOptions={[5]}
+            checkboxSelection
+            disableSelectionOnClick
+          />
+        </div>
       </>
     );
   }
