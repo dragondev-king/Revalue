@@ -50,142 +50,149 @@ export const initialState = {
   inputs: {
     // Property Information
     location:
-      JSON.parse(localStorage.getItem('location')) === null
+      JSON.parse(localStorage.getItem('inputs')).location === null
         ? 'All'
-        : JSON.parse(localStorage.getItem('location')),
+        : JSON.parse(localStorage.getItem('inputs')).location,
     type:
-      JSON.parse(localStorage.getItem('type')) === null
+      JSON.parse(localStorage.getItem('inputs')).type === null
         ? 'All'
-        : JSON.parse(localStorage.getItem('type')),
+        : JSON.parse(localStorage.getItem('inputs')).type,
     typology:
-      JSON.parse(localStorage.getItem('typology')) === null
+      JSON.parse(localStorage.getItem('inputs')).typology === null
         ? 'All'
-        : JSON.parse(localStorage.getItem('typology')),
+        : JSON.parse(localStorage.getItem('inputs')).typology,
     condition:
-      JSON.parse(localStorage.getItem('condition')) === null
+      JSON.parse(localStorage.getItem('inputs')).condition === null
         ? 'All'
-        : JSON.parse(localStorage.getItem('condition')),
+        : JSON.parse(localStorage.getItem('inputs')).condition,
     minprice:
-      localStorage.getItem('minprice') === null
+      JSON.parse(localStorage.getItem('inputs')).minprice === null
         ? 500
-        : localStorage.getItem('minprice'),
+        : JSON.parse(localStorage.getItem('inputs')).minprice,
     maxprice:
-      localStorage.getItem('maxprice') === null
+      JSON.parse(localStorage.getItem('inputs')).maxprice === null
         ? 1000
-        : localStorage.getItem('maxprice'),
+        : JSON.parse(localStorage.getItem('inputs')).maxprice,
+
     minarea:
-      localStorage.getItem('minarea') === null
+      JSON.parse(localStorage.getItem('inputs')).minarea === null
         ? 100
-        : localStorage.getItem('minarea'),
+        : JSON.parse(localStorage.getItem('inputs')).minarea,
     maxarea:
-      localStorage.getItem('maxarea') === null
+      JSON.parse(localStorage.getItem('inputs')).maxarea === null
         ? 300
-        : localStorage.getItem('maxarea'),
+        : JSON.parse(localStorage.getItem('inputs')).maxarea,
     // Investment Information
     mincapital:
-      localStorage.getItem('mincapital') === null
+      JSON.parse(localStorage.getItem('inputs')).mincapital === null
         ? 300
-        : localStorage.getItem('mincapital'),
+        : JSON.parse(localStorage.getItem('inputs')).mincapital,
     maxcapital:
-      localStorage.getItem('maxcapital') === null
+      JSON.parse(localStorage.getItem('inputs')).maxcapital === null
         ? 1000
-        : localStorage.getItem('maxcapital'),
+        : JSON.parse(localStorage.getItem('inputs')).maxcapital,
     bidask:
-      localStorage.getItem('bidask') === null
+      JSON.parse(localStorage.getItem('inputs')).bidask === null
         ? 5
-        : localStorage.getItem('bidask'),
+        : JSON.parse(localStorage.getItem('inputs')).bidask,
     financingrate:
-      localStorage.getItem('financingrate') === null
+      JSON.parse(localStorage.getItem('inputs')).financingrate === null
         ? 80
-        : localStorage.getItem('financingrate'),
+        : JSON.parse(localStorage.getItem('inputs')).financingrate,
     // Other Investment Information
     // Acquisition Assumptions
     acquisitiontype:
-      JSON.parse(localStorage.getItem('acquisitiontype')) === null
+      JSON.parse(localStorage.getItem('inputs')).acquisitiontype === null
         ? 'Investment'
-        : JSON.parse(localStorage.getItem('acquisitiontype')),
+        : JSON.parse(localStorage.getItem('inputs')).acquisitiontype,
     entryfee:
-      localStorage.getItem('entryfee') === null
+      JSON.parse(localStorage.getItem('inputs')).entryfee === null
         ? 0
-        : localStorage.getItem('entryfee'),
+        : JSON.parse(localStorage.getItem('inputs')).entryfee,
     stampduty:
-      localStorage.getItem('stampduty') === null
+      JSON.parse(localStorage.getItem('inputs')).stampduty === null
         ? 0.8
-        : localStorage.getItem('stampduty'),
+        : JSON.parse(localStorage.getItem('inputs')).stampduty,
     lrwithm:
-      localStorage.getItem('lrwithm') === null
+      JSON.parse(localStorage.getItem('inputs')).lrwithm === null
         ? 350
-        : localStorage.getItem('lrwithm'),
+        : JSON.parse(localStorage.getItem('inputs')).lrwithm,
     lrwithoutm:
-      localStorage.getItem('lrwithoutm') === null
+      JSON.parse(localStorage.getItem('inputs')).lrwithoutm === null
         ? 700
-        : localStorage.getItem('lrwithoutm'),
+        : JSON.parse(localStorage.getItem('inputs')).lrwithoutm,
     // Finance Assumptions
     interestrate:
-      localStorage.getItem('interestrate') === null
+      JSON.parse(localStorage.getItem('inputs')).interestrate === null
         ? 1
-        : localStorage.getItem('interestrate'),
+        : JSON.parse(localStorage.getItem('inputs')).interestrate,
     bankcommission:
-      localStorage.getItem('bankcommission') === null
+      JSON.parse(localStorage.getItem('inputs')).bankcommission === null
         ? 1000
-        : localStorage.getItem('bankcommission'),
+        : JSON.parse(localStorage.getItem('inputs')).bankcommission,
     amortization:
-      localStorage.getItem('amortization') === null
+      JSON.parse(localStorage.getItem('inputs')).amortization === null
         ? 30
-        : localStorage.getItem('amortization'),
+        : JSON.parse(localStorage.getItem('inputs')).amortization,
     stampdutymortgage:
-      localStorage.getItem('stampdutymortgage') === null
+      JSON.parse(localStorage.getItem('inputs')).stampdutymortgage === null
         ? 0.6
-        : localStorage.getItem('stampdutymortgage'),
+        : JSON.parse(localStorage.getItem('inputs')).stampdutymortgage,
     stampdutyinterests:
-      localStorage.getItem('stampdutyinterests') === null
+      JSON.parse(localStorage.getItem('inputs')).stampdutyinterests === null
         ? 0.04
-        : localStorage.getItem('stampdutyinterests'),
+        : JSON.parse(localStorage.getItem('inputs')).stampdutyinterests,
     // Operating Assumptions
     condominiumcosts:
-      localStorage.getItem('condominiumcosts') === null
+      JSON.parse(localStorage.getItem('inputs')).condominiumcosts === null
         ? 30
-        : localStorage.getItem('condominiumcosts'),
+        : JSON.parse(localStorage.getItem('inputs')).condominiumcosts,
     propertytaxrate:
-      localStorage.getItem('propertytaxrate') === null
+      JSON.parse(localStorage.getItem('inputs')).propertytaxrate === null
         ? 0.3
-        : localStorage.getItem('propertytaxrate'),
+        : JSON.parse(localStorage.getItem('inputs')).propertytaxrate,
     // Exit Assumptions
     timetosale:
-      localStorage.getItem('timetosale') === null
+      JSON.parse(localStorage.getItem('inputs')).timetosale === null
         ? 12
-        : localStorage.getItem('timetosale'),
+        : JSON.parse(localStorage.getItem('inputs')).timetosale,
     irsrate:
-      localStorage.getItem('irsrate') === null
+      JSON.parse(localStorage.getItem('inputs')).irsrate === null
         ? 30
-        : localStorage.getItem('irsrate'),
+        : JSON.parse(localStorage.getItem('inputs')).irsrate,
     exitbrokerfee:
-      localStorage.getItem('exitbrokerfee') === null
+      JSON.parse(localStorage.getItem('inputs')).exitbrokerfee === null
         ? 5
-        : localStorage.getItem('exitbrokerfee'),
+        : JSON.parse(localStorage.getItem('inputs')).exitbrokerfee,
     loanearlyrepaymentfee:
-      localStorage.getItem('loanearlyrepaymentfee') === null
+      JSON.parse(localStorage.getItem('inputs')).loanearlyrepaymentfee === null
         ? 0.5
-        : localStorage.getItem('loanearlyrepaymentfee'),
+        : JSON.parse(localStorage.getItem('inputs')).loanearlyrepaymentfee,
     capitalgainstaxbase:
-      localStorage.getItem('capitalgainstaxbase') === null
+      JSON.parse(localStorage.getItem('inputs')).capitalgainstaxbase === null
         ? 50
-        : localStorage.getItem('capitalgainstaxbase'),
+        : JSON.parse(localStorage.getItem('inputs')).capitalgainstaxbase,
     // Valuation Model Configuration
     gcpa:
-      localStorage.getItem('gcpa') === null ? 80 : localStorage.getItem('gcpa'),
+      JSON.parse(localStorage.getItem('inputs')).gcpa === null
+        ? 80
+        : JSON.parse(localStorage.getItem('inputs')).gcpa,
     floor:
-      localStorage.getItem('floor') === null
+      JSON.parse(localStorage.getItem('inputs')).floor === null
         ? 10
-        : localStorage.getItem('floor'),
+        : JSON.parse(localStorage.getItem('inputs')).floor,
     cap:
-      localStorage.getItem('cap') === null ? 10 : localStorage.getItem('cap'),
+      JSON.parse(localStorage.getItem('inputs')).cap === null
+        ? 10
+        : JSON.parse(localStorage.getItem('inputs')).cap,
     cip:
-      JSON.parse(localStorage.getItem('cip')) === null
+      JSON.parse(localStorage.getItem('inputs')).cip === null
         ? '5%'
-        : JSON.parse(localStorage.getItem('cip')),
+        : JSON.parse(localStorage.getItem('inputs')).cip,
     mop:
-      localStorage.getItem('mop') === null ? 100 : localStorage.getItem('mop'),
+      JSON.parse(localStorage.getItem('inputs')).mop === null
+        ? 100
+        : JSON.parse(localStorage.getItem('inputs')).mop,
   },
 };
 

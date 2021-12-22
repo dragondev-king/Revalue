@@ -1,4 +1,4 @@
-import React, { memo, useEffect } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 // import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { useForm } from 'react-hook-form';
@@ -23,6 +23,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import InfoIcon from '@material-ui/icons/Info';
 import { DataGrid } from '@material-ui/data-grid';
@@ -76,47 +77,14 @@ import {
 import reducer from './reducer';
 import {
   getLocations,
-  setLocation,
   getTypes,
-  setType,
   getTypologyies,
-  setTypology,
   getConditions,
-  setCondition,
-  setMinPrice,
-  setMaxPrice,
-  setMinArea,
-  setMaxArea,
-  setMinCapital,
-  setMaxCapital,
-  setBidAsk,
-  setFinancingRate,
-  setGCPA,
-  setFloor,
-  setCap,
   getCIPs,
-  setCIP,
-  setMOP,
   getAcquisitionTypes,
-  setAcquisitionType,
-  setEntryFee,
-  setStampDuty,
-  setLRwithM,
-  setLRwithoutM,
-  setInterestRate,
-  setBankCommission,
-  setAmortization,
-  setStampDutyMortgage,
-  setStampDutyInterests,
-  setCondominiumCosts,
-  setPropertyTaxRate,
-  setTimetoSale,
-  setIRSRate,
-  setExitBrokerFee,
-  setLoanEarlyRepaymentFee,
-  setCapitalgainsTaxBase,
   setValue,
 } from './actions';
+import tableData from './data.json';
 
 const useStyles = makeStyles(theme => ({
   appBarSpacer: theme.mixins.toolbar,
@@ -191,8 +159,13 @@ const useStyles = makeStyles(theme => ({
   labelWidth: {
     minWidth: '170px',
   },
+  loading: {
+    marginTop: '2px',
+    marginBottom: '2px',
+    marginLeft: '20px',
+    marginRight: '20px',
+  },
 }));
-
 const columns = [
   { field: 'id', headerName: 'ID', width: 90 },
   {
@@ -244,20 +217,8 @@ const columns = [
     editable: true,
   },
 ];
-
-const rows = [
-  {
-    id: 1,
-    location: '',
-    asking: '',
-    capital: '',
-    costs: '',
-    price: '',
-    irr: '',
-    profit: '',
-    report: '',
-  },
-];
+// eslint-disable-next-line prefer-const
+let rows = [];
 
 export function Analysis(props) {
   useInjectReducer({ key: 'analysis', reducer });
@@ -271,13 +232,21 @@ export function Analysis(props) {
     props.getAcquisitionTypes();
   }, []);
   const { register, handleSubmit } = useForm();
-  const onSubmit = data => props.setValue(data);
-
+  const [btnState, setBtnState] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const onSubmit = data => {
+    props.setValue(data);
+    setBtnState(true);
+    setLoading(true);
+    rows = [...tableData];
+    setTimeout(() => setLoading(false), 2000);
+  };
   const classes = useStyles();
+  const handleChange = () => {
+    console.log('Hello');
+    setBtnState(false);
+  };
 
-  // function handleChange(event) {
-  //   props.setValue(event.target);
-  // }
   function renderPropertyForm() {
     return (
       <>
@@ -299,11 +268,13 @@ export function Analysis(props) {
             <Select
               labelId="demo-simple-select-standard-label"
               id="demo-simple-select-standard"
-              value={props.inputs.location}
+              defaultValue={props.inputs.location}
               {...register('location')}
             >
               {props.locations.map(index => (
-                <MenuItem value={index}>{index}</MenuItem>
+                <MenuItem key={index} value={index}>
+                  {index}
+                </MenuItem>
               ))}
             </Select>
           </FormControl>
@@ -324,11 +295,13 @@ export function Analysis(props) {
             <Select
               labelId="demo-simple-select-standard-label"
               id="demo-simple-select-standard"
-              value={props.inputs.type}
+              defaultValue={props.inputs.type}
               {...register('type')}
             >
               {props.types.map(index => (
-                <MenuItem value={index}>{index}</MenuItem>
+                <MenuItem key={index} value={index}>
+                  {index}
+                </MenuItem>
               ))}
             </Select>
           </FormControl>
@@ -349,11 +322,13 @@ export function Analysis(props) {
             <Select
               labelId="demo-simple-select-standard-label"
               id="demo-simple-select-standard"
-              value={props.inputs.typology}
+              defaultValue={props.inputs.typology}
               {...register('typology')}
             >
               {props.typologies.map(index => (
-                <MenuItem value={index}>{index}</MenuItem>
+                <MenuItem key={index} value={index}>
+                  {index}
+                </MenuItem>
               ))}
             </Select>
           </FormControl>
@@ -374,11 +349,13 @@ export function Analysis(props) {
             <Select
               labelId="demo-simple-select-standard-label"
               id="demo-simple-select-standard"
-              value={props.inputs.condition}
+              defaultValue={props.inputs.condition}
               {...register('condition')}
             >
               {props.conditions.map(index => (
-                <MenuItem value={index}>{index}</MenuItem>
+                <MenuItem key={index} value={index}>
+                  {index}
+                </MenuItem>
               ))}
             </Select>
           </FormControl>
@@ -662,11 +639,13 @@ export function Analysis(props) {
             <Select
               labelId="demo-simple-select-standard-label"
               id="demo-simple-select-standard"
-              value={props.inputs.acquisitiontype}
+              defaultValue={props.inputs.acquisitiontype}
               {...register('acquisitiontype')}
             >
               {props.acquisitiontypes.map(index => (
-                <MenuItem value={index}>{index}</MenuItem>
+                <MenuItem key={index} value={index}>
+                  {index}
+                </MenuItem>
               ))}
             </Select>
           </FormControl>
@@ -1196,11 +1175,13 @@ export function Analysis(props) {
             <Select
               labelId="demo-simple-select-standard-label"
               id="demo-simple-select-standard"
-              value={props.inputs.cip}
+              defaultValue={props.inputs.cip}
               {...register('cip')}
             >
               {props.cips.map(index => (
-                <MenuItem value={index}>{index}</MenuItem>
+                <MenuItem key={index} value={index}>
+                  {index}
+                </MenuItem>
               ))}
             </Select>
           </FormControl>
@@ -1258,7 +1239,11 @@ export function Analysis(props) {
       </Helmet>
       {/* <FormattedMessage {...messages.header} /> */}
       <Grid item container>
-        <form onSubmit={handleSubmit(onSubmit)} className={classes.w100}>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          onChange={handleChange}
+          className={classes.w100}
+        >
           <Grid key="property-info" item container direction="row">
             <Grid key="form-control" item container xs={8}>
               <h5>Property Information</h5>
@@ -1280,8 +1265,12 @@ export function Analysis(props) {
               type="submit"
               variant="contained"
               className={classes.customizeBtn}
+              disabled={btnState}
             >
-              Analyze
+              {loading && (
+                <CircularProgress size={20} className={classes.loading} />
+              )}
+              {!loading && 'Analyze'}
             </Button>
           </Grid>
         </form>
@@ -1302,8 +1291,8 @@ Analysis.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   analysis: makeSelectAnalysis(),
-  locations: makeSelectLocations(),
   inputs: makeSelectInputs(),
+  locations: makeSelectLocations(),
   location: makeSelectLocation(),
   types: makeSelectTypes(),
   type: makeSelectType(),
@@ -1347,57 +1336,13 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    setValue: value => dispatch(setValue(value)),
     getLocations: () => dispatch(getLocations()),
-    setLocation: location => dispatch(setLocation(location)),
     getTypes: () => dispatch(getTypes()),
-    setType: type => dispatch(setType(type)),
     getTypologyies: () => dispatch(getTypologyies()),
-    setTypology: typology => dispatch(setTypology(typology)),
     getConditions: () => dispatch(getConditions()),
-    setCondition: condition => dispatch(setCondition(condition)),
-    setMinPrice: minprice => dispatch(setMinPrice(minprice)),
-    setMaxPrice: maxprice => dispatch(setMaxPrice(maxprice)),
-    setMinArea: minarea => dispatch(setMinArea(minarea)),
-    setMaxArea: maxarea => dispatch(setMaxArea(maxarea)),
-    setMinCapital: mincapital => dispatch(setMinCapital(mincapital)),
-    setMaxCapital: maxcapital => dispatch(setMaxCapital(maxcapital)),
-    setBidAsk: bidask => dispatch(setBidAsk(bidask)),
-    setFinancingRate: financingrate =>
-      dispatch(setFinancingRate(financingrate)),
-    setGCPA: gcpa => dispatch(setGCPA(gcpa)),
-    setFloor: floor => dispatch(setFloor(floor)),
-    setCap: cap => dispatch(setCap(cap)),
     getCIPs: () => dispatch(getCIPs()),
-    setCIP: cip => dispatch(setCIP(cip)),
-    setMOP: mop => dispatch(setMOP(mop)),
     getAcquisitionTypes: () => dispatch(getAcquisitionTypes()),
-    setAcquisitionType: acquisitiontype =>
-      dispatch(setAcquisitionType(acquisitiontype)),
-    setEntryFee: entryfee => dispatch(setEntryFee(entryfee)),
-    setStampDuty: stampduty => dispatch(setStampDuty(stampduty)),
-    setLRwithM: lrwithm => dispatch(setLRwithM(lrwithm)),
-    setLRwithoutM: lrwithoutm => dispatch(setLRwithoutM(lrwithoutm)),
-    setInterestRate: interestrate => dispatch(setInterestRate(interestrate)),
-    setBankCommission: bankcommission =>
-      dispatch(setBankCommission(bankcommission)),
-    setAmortization: amortization => dispatch(setAmortization(amortization)),
-    setStampDutyMortgage: stampdutymortgage =>
-      dispatch(setStampDutyMortgage(stampdutymortgage)),
-    setStampDutyInterests: stampdutyinterests =>
-      dispatch(setStampDutyInterests(stampdutyinterests)),
-    setCondominiumCosts: condominiumcosts =>
-      dispatch(setCondominiumCosts(condominiumcosts)),
-    setPropertyTaxRate: propertytaxrate =>
-      dispatch(setPropertyTaxRate(propertytaxrate)),
-    setTimetoSale: timetosale => dispatch(setTimetoSale(timetosale)),
-    setIRSRate: irsrate => dispatch(setIRSRate(irsrate)),
-    setExitBrokerFee: exitbrokerfee =>
-      dispatch(setExitBrokerFee(exitbrokerfee)),
-    setLoanEarlyRepaymentFee: loanearlyrepaymentfee =>
-      dispatch(setLoanEarlyRepaymentFee(loanearlyrepaymentfee)),
-    setCapitalgainsTaxBase: capitalgainstaxbase =>
-      dispatch(setCapitalgainsTaxBase(capitalgainstaxbase)),
+    setValue: value => dispatch(setValue(value)),
     dispatch,
   };
 }

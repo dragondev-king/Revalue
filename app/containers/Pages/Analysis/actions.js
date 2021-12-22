@@ -76,7 +76,7 @@ export const getCIPs = () => async dispatch => {
 };
 
 export const setValue = data => {
-  localStorage.setItem('inputs', data);
+  localStorage.setItem('inputs', JSON.stringify(data));
   return {
     type: SET_VALUE,
     payload: data,
