@@ -13,9 +13,8 @@ import {
   GET_ACQUISITIONTYPES,
   GET_ACQUISITIONTYPES_SUCCESS,
   SET_VALUE,
-  GET_TABLEDATA,
-  GET_TABLEDATA_SUCCESS,
-  GET_LOADING,
+  GET_ANALYSIS_DATA,
+  GET_ANALYSIS_DATA_SUCCESS,
 } from './constants';
 import tableData from './data.json';
 // Property Information
@@ -87,19 +86,16 @@ export const setValue = data => {
   };
 };
 
-export const getTableData = () => async dispatch => {
+export const getAnalysisData = data => async dispatch => {
   dispatch({
-    type: GET_TABLEDATA,
+    type: GET_ANALYSIS_DATA,
   });
-  await setTimeout(() => getLoading(true), 2000);
+  console.log(data);
+  await delay(2000);
   dispatch({
-    type: GET_TABLEDATA_SUCCESS,
+    type: GET_ANALYSIS_DATA_SUCCESS,
     payload: tableData,
   });
-  getLoading(false);
 };
 
-export const getLoading = state => ({
-  type: GET_LOADING,
-  payload: state,
-});
+const delay = ms => new Promise(res => setTimeout(res, ms));

@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo, useEffect } from 'react';
 // import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { useForm } from 'react-hook-form';
@@ -40,41 +40,9 @@ import {
   makeSelectTypology,
   makeSelectConditions,
   makeSelectCondition,
-  makeSelectMinPrice,
-  makeSelectMaxPrice,
-  makeSelectMinArea,
-  makeSelectMaxArea,
-  makeSelectMinCapital,
-  makeSelectMaxCapital,
-  makeSelectBidAsk,
-  makeSelectFinancingRate,
-  makeSelectGCPA,
-  makeSelectFloor,
-  makeSelectCap,
-  makeSelectCIPs,
-  makeSelectCIP,
-  makeSelectMOP,
-  makeSelectAcquisitionTypes,
-  makeSelectAcquisitionType,
-  makeSelectEntryFee,
-  makeSelectStampDuty,
-  makeSelectLRwithM,
-  makeSelectLRwithoutM,
-  makeSelectInterestRate,
-  makeSelectBankCommission,
-  makeSelectAmortization,
-  makeSelectStampDutyMortgage,
-  makeSelectStampDutyInterests,
-  makeSelectCondominiumCosts,
-  makeSelectPropertyTaxRate,
-  makeSelectTimetoSale,
-  makeSelectIRSRate,
-  makeSelectExitBrokerFee,
-  makeSelectLoanEarlyRepaymentFee,
-  makeSelectCapitalgainsTaxBase,
   makeSelectInputs,
-  makeSelectTableData,
-  makeSelectLoading,
+  makeSelectAnalysisData,
+  makeSelectIsGettingAnalysisData,
 } from './selectors';
 import reducer from './reducer';
 import {
@@ -84,9 +52,8 @@ import {
   getConditions,
   getCIPs,
   getAcquisitionTypes,
+  getAnalysisData,
   setValue,
-  getTableData,
-  getLoading,
 } from './actions';
 
 const useStyles = makeStyles(theme => ({
@@ -220,24 +187,9 @@ const columns = [
     editable: true,
   },
 ];
-// eslint-disable-next-line prefer-const
-let rows = [];
 
 export function Analysis(props) {
   useInjectReducer({ key: 'analysis', reducer });
-  const { register, handleSubmit } = useForm();
-  const [btnState, setBtnState] = useState(false);
-  const onSubmit = data => {
-    props.setValue(data);
-    props.getTableData(false);
-    rows = [...props.tableData];
-    setBtnState(true);
-  };
-  const classes = useStyles();
-  const handleChange = () => {
-    console.log('Hello');
-    setBtnState(false);
-  };
 
   useEffect(() => {
     props.getLocations();
@@ -246,8 +198,15 @@ export function Analysis(props) {
     props.getConditions();
     props.getCIPs();
     props.getAcquisitionTypes();
-    props.getLoading(false);
   }, []);
+  const { register, handleSubmit } = useForm();
+
+  const onSubmit = data => {
+    props.setValue(data);
+    props.getAnalysisData(data);
+  };
+
+  const classes = useStyles();
 
   function renderPropertyForm() {
     return (
@@ -644,11 +603,12 @@ export function Analysis(props) {
               defaultValue={props.inputs.acquisitiontype}
               {...register('acquisitiontype')}
             >
-              {props.acquisitiontypes.map(index => (
-                <MenuItem key={index} value={index}>
-                  {index}
-                </MenuItem>
-              ))}
+              {props.acquisitiontypes &&
+                props.acquisitiontypes.map(index => (
+                  <MenuItem key={index} value={index}>
+                    {index}
+                  </MenuItem>
+                ))}
             </Select>
           </FormControl>
           <FormControl variant="standard" className={classes.inputWidth}>
@@ -1180,11 +1140,12 @@ export function Analysis(props) {
               defaultValue={props.inputs.cip}
               {...register('cip')}
             >
-              {props.cips.map(index => (
-                <MenuItem key={index} value={index}>
-                  {index}
-                </MenuItem>
-              ))}
+              {props.cips &&
+                props.cips.map(index => (
+                  <MenuItem key={index} value={index}>
+                    {index}
+                  </MenuItem>
+                ))}
             </Select>
           </FormControl>
           <FormControl variant="standard" className={classes.inputEndLgWidth}>
@@ -1221,7 +1182,7 @@ export function Analysis(props) {
       <>
         <div style={{ height: 300, width: '100%' }}>
           <DataGrid
-            rows={rows}
+            rows={props.analysisData}
             columns={columns}
             pageSize={5}
             rowsPerPageOptions={[5]}
@@ -1241,11 +1202,7 @@ export function Analysis(props) {
       </Helmet>
       {/* <FormattedMessage {...messages.header} /> */}
       <Grid item container>
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          onChange={handleChange}
-          className={classes.w100}
-        >
+        <form onSubmit={handleSubmit(onSubmit)} className={classes.w100}>
           <Grid key="property-info" item container direction="row">
             <Grid key="form-control" item container xs={8}>
               <h5>Property Information</h5>
@@ -1267,12 +1224,11 @@ export function Analysis(props) {
               type="submit"
               variant="contained"
               className={classes.customizeBtn}
-              disabled={btnState}
             >
-              {props.loading && (
+              {props.isGettingAnalysisData && (
                 <CircularProgress size={20} className={classes.loading} />
               )}
-              {!props.loading && 'Analyze'}
+              {!props.isGettingAnalysisData && 'Analyze'}
             </Button>
           </Grid>
         </form>
@@ -1302,40 +1258,8 @@ const mapStateToProps = createStructuredSelector({
   typology: makeSelectTypology(),
   conditions: makeSelectConditions(),
   condition: makeSelectCondition(),
-  minprice: makeSelectMinPrice(),
-  maxprice: makeSelectMaxPrice(),
-  minarea: makeSelectMinArea(),
-  maxarea: makeSelectMaxArea(),
-  mincapital: makeSelectMinCapital(),
-  maxcapital: makeSelectMaxCapital(),
-  bidask: makeSelectBidAsk(),
-  financingrate: makeSelectFinancingRate(),
-  gcpa: makeSelectGCPA(),
-  floor: makeSelectFloor(),
-  cap: makeSelectCap(),
-  cips: makeSelectCIPs(),
-  cip: makeSelectCIP(),
-  mop: makeSelectMOP(),
-  acquisitiontypes: makeSelectAcquisitionTypes(),
-  acquisitiontype: makeSelectAcquisitionType(),
-  entryfee: makeSelectEntryFee(),
-  stampduty: makeSelectStampDuty(),
-  lrwithm: makeSelectLRwithM(),
-  lrwithoutm: makeSelectLRwithoutM(),
-  interestrate: makeSelectInterestRate(),
-  bankcommission: makeSelectBankCommission(),
-  amortization: makeSelectAmortization(),
-  stampdutymortgage: makeSelectStampDutyMortgage(),
-  stampdutyinterests: makeSelectStampDutyInterests(),
-  condominiumcosts: makeSelectCondominiumCosts(),
-  propertytaxrate: makeSelectPropertyTaxRate(),
-  timetosale: makeSelectTimetoSale(),
-  irsrate: makeSelectIRSRate(),
-  exitbrokerfee: makeSelectExitBrokerFee(),
-  loanearlyrepaymentfee: makeSelectLoanEarlyRepaymentFee(),
-  capitalgainstaxbase: makeSelectCapitalgainsTaxBase(),
-  tableData: makeSelectTableData(),
-  loading: makeSelectLoading(),
+  analysisData: makeSelectAnalysisData(),
+  isGettingAnalysisData: makeSelectIsGettingAnalysisData(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -1346,9 +1270,8 @@ function mapDispatchToProps(dispatch) {
     getConditions: () => dispatch(getConditions()),
     getCIPs: () => dispatch(getCIPs()),
     getAcquisitionTypes: () => dispatch(getAcquisitionTypes()),
-    getTableData: () => dispatch(getTableData()),
+    getAnalysisData: inputs => dispatch(getAnalysisData(inputs)),
     setValue: value => dispatch(setValue(value)),
-    getLoading: () => dispatch(getLoading()),
     dispatch,
   };
 }

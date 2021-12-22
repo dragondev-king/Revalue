@@ -22,6 +22,6 @@ export const GET_CIPS_SUCCESS = 'app/Analysis/GET_CIPS_SUCCESS';
 
 export const SET_VALUE = 'app/Analysis/SET_VALUE';
 
-export const GET_TABLEDATA = 'app/Analysis/GET_TABLEDATA';
-export const GET_TABLEDATA_SUCCESS = 'app/Analysis/GET_TABLEDATA_SUCCESS';
-export const GET_LOADING = 'app/Analysis/GET_LOADING';
+export const GET_ANALYSIS_DATA = 'app/Analysis/GET_ANALYSIS_DATA';
+export const GET_ANALYSIS_DATA_SUCCESS =
+  'app/Analysis/GET_ANALYSIS_DATA_SUCCESS';

@@ -1,5 +1,3 @@
-/* eslint-disable prettier/prettier */
-/* eslint-disable indent */
 import produce from 'immer';
 import {
   GET_LOCATIONS,
@@ -15,9 +13,8 @@ import {
   GET_ACQUISITIONTYPES,
   GET_ACQUISITIONTYPES_SUCCESS,
   SET_VALUE,
-  GET_TABLEDATA,
-  GET_TABLEDATA_SUCCESS,
-  GET_LOADING,
+  GET_ANALYSIS_DATA,
+  GET_ANALYSIS_DATA_SUCCESS,
 } from './constants';
 
 export function setValueOrEmptyArray(value) {
@@ -27,6 +24,13 @@ export function setValueOrEmptyArray(value) {
   return [];
 }
 
+export function extractInputValueFromLocalStorage(value, defaultValue) {
+  return JSON.parse(localStorage.getItem('inputs')) &&
+    localStorage.getItem('inputs')[value] &&
+    localStorage.getItem('inputs')[value] !== null
+    ? JSON.parse(localStorage.getItem('inputs'))[value]
+    : defaultValue;
+}
 export const initialState = {
   // Property Information
   locations: setValueOrEmptyArray(
@@ -52,197 +56,67 @@ export const initialState = {
   // Valuation Model Configuration
   cips: setValueOrEmptyArray(JSON.parse(localStorage.getItem('cips'))),
   isGettingCips: false,
-  isGettingTabledata: false,
-  loading: false,
-  inputs:
-    localStorage.getItem('inputs') === null
-      ? {
-        location: 'All',
-        type: 'All',
-        typology: 'All',
-        condition: 'All',
-        minprice: 500,
-        maxprice: 1000,
-        minarea: 100,
-        maxarea: 300,
-        mincapital: 300,
-        maxcapital: 1000,
-        bidask: 5,
-        financingrate: 80,
-        acquisitiontype: 'Investment',
-        entryfee: 0,
-        stampduty: 0.8,
-        lrwithm: 350,
-        lrwithoutm: 700,
-        interestrate: 1,
-        bankcommission: 1000,
-        amortization: 30,
-        stampdutymortgage: 0.6,
-        stampdutyinterests: 0.04,
-        condominiumcosts: 30,
-        propertytaxrate: 0.3,
-        timetosale: 12,
-        irsrate: 30,
-        exitbrokerfee: 5,
-        loanearlyrepaymentfee: 0.5,
-        capitalgainstaxbase: 50,
-        gcpa: 80,
-        floor: 10,
-        cap: 10,
-        cip: '5%',
-        mop: 100,
-      }
-      : {
-        // Property Information
-        location:
-          JSON.parse(localStorage.getItem('inputs')).location === null
-            ? 'All'
-            : JSON.parse(localStorage.getItem('inputs')).location,
-        type:
-          JSON.parse(localStorage.getItem('inputs')).type === null
-            ? 'All'
-            : JSON.parse(localStorage.getItem('inputs')).type,
-        typology:
-          JSON.parse(localStorage.getItem('inputs')).typology === null
-            ? 'All'
-            : JSON.parse(localStorage.getItem('inputs')).typology,
-        condition:
-          JSON.parse(localStorage.getItem('inputs')).condition === null
-            ? 'All'
-            : JSON.parse(localStorage.getItem('inputs')).condition,
-        minprice:
-          JSON.parse(localStorage.getItem('inputs')).minprice === null
-            ? 500
-            : JSON.parse(localStorage.getItem('inputs')).minprice,
-        maxprice:
-          JSON.parse(localStorage.getItem('inputs')).maxprice === null
-            ? 1000
-            : JSON.parse(localStorage.getItem('inputs')).maxprice,
-        minarea:
-          JSON.parse(localStorage.getItem('inputs')).minarea === null
-            ? 100
-            : JSON.parse(localStorage.getItem('inputs')).minarea,
-        maxarea:
-          JSON.parse(localStorage.getItem('inputs')).maxarea === null
-            ? 300
-            : JSON.parse(localStorage.getItem('inputs')).maxarea,
-        // Investment Information
-        mincapital:
-          JSON.parse(localStorage.getItem('inputs')).mincapital === null
-            ? 300
-            : JSON.parse(localStorage.getItem('inputs')).mincapital,
-        maxcapital:
-          JSON.parse(localStorage.getItem('inputs')).maxcapital === null
-            ? 1000
-            : JSON.parse(localStorage.getItem('inputs')).maxcapital,
-        bidask:
-          JSON.parse(localStorage.getItem('inputs')).bidask === null
-            ? 5
-            : JSON.parse(localStorage.getItem('inputs')).bidask,
-        financingrate:
-          JSON.parse(localStorage.getItem('inputs')).financingrate === null
-            ? 80
-            : JSON.parse(localStorage.getItem('inputs')).financingrate,
-        // Other Investment Information
-        // Acquisition Assumptions
-        acquisitiontype:
-          JSON.parse(localStorage.getItem('inputs')).acquisitiontype === null
-            ? 'Investment'
-            : JSON.parse(localStorage.getItem('inputs')).acquisitiontype,
-        entryfee:
-          JSON.parse(localStorage.getItem('inputs')).entryfee === null
-            ? 0
-            : JSON.parse(localStorage.getItem('inputs')).entryfee,
-        stampduty:
-          JSON.parse(localStorage.getItem('inputs')).stampduty === null
-            ? 0.8
-            : JSON.parse(localStorage.getItem('inputs')).stampduty,
-        lrwithm:
-          JSON.parse(localStorage.getItem('inputs')).lrwithm === null
-            ? 350
-            : JSON.parse(localStorage.getItem('inputs')).lrwithm,
-        lrwithoutm:
-          JSON.parse(localStorage.getItem('inputs')).lrwithoutm === null
-            ? 700
-            : JSON.parse(localStorage.getItem('inputs')).lrwithoutm,
-        // Finance Assumptions
-        interestrate:
-          JSON.parse(localStorage.getItem('inputs')).interestrate === null
-            ? 1
-            : JSON.parse(localStorage.getItem('inputs')).interestrate,
-        bankcommission:
-          JSON.parse(localStorage.getItem('inputs')).bankcommission === null
-            ? 1000
-            : JSON.parse(localStorage.getItem('inputs')).bankcommission,
-        amortization:
-          JSON.parse(localStorage.getItem('inputs')).amortization === null
-            ? 30
-            : JSON.parse(localStorage.getItem('inputs')).amortization,
-        stampdutymortgage:
-          JSON.parse(localStorage.getItem('inputs')).stampdutymortgage ===
-            null
-            ? 0.6
-            : JSON.parse(localStorage.getItem('inputs')).stampdutymortgage,
-        stampdutyinterests:
-          JSON.parse(localStorage.getItem('inputs')).stampdutyinterests ===
-            null
-            ? 0.04
-            : JSON.parse(localStorage.getItem('inputs')).stampdutyinterests,
-        // Operating Assumptions
-        condominiumcosts:
-          JSON.parse(localStorage.getItem('inputs')).condominiumcosts === null
-            ? 30
-            : JSON.parse(localStorage.getItem('inputs')).condominiumcosts,
-        propertytaxrate:
-          JSON.parse(localStorage.getItem('inputs')).propertytaxrate === null
-            ? 0.3
-            : JSON.parse(localStorage.getItem('inputs')).propertytaxrate,
-        // Exit Assumptions
-        timetosale:
-          JSON.parse(localStorage.getItem('inputs')).timetosale === null
-            ? 12
-            : JSON.parse(localStorage.getItem('inputs')).timetosale,
-        irsrate:
-          JSON.parse(localStorage.getItem('inputs')).irsrate === null
-            ? 30
-            : JSON.parse(localStorage.getItem('inputs')).irsrate,
-        exitbrokerfee:
-          JSON.parse(localStorage.getItem('inputs')).exitbrokerfee === null
-            ? 5
-            : JSON.parse(localStorage.getItem('inputs')).exitbrokerfee,
-        loanearlyrepaymentfee:
-          JSON.parse(localStorage.getItem('inputs')).loanearlyrepaymentfee ===
-            null
-            ? 0.5
-            : JSON.parse(localStorage.getItem('inputs'))
-              .loanearlyrepaymentfee,
-        capitalgainstaxbase:
-          JSON.parse(localStorage.getItem('inputs')).capitalgainstaxbase ===
-            null
-            ? 50
-            : JSON.parse(localStorage.getItem('inputs')).capitalgainstaxbase,
-        // Valuation Model Configuration
-        gcpa:
-          JSON.parse(localStorage.getItem('inputs')).gcpa === null
-            ? 80
-            : JSON.parse(localStorage.getItem('inputs')).gcpa,
-        floor:
-          JSON.parse(localStorage.getItem('inputs')).floor === null
-            ? 10
-            : JSON.parse(localStorage.getItem('inputs')).floor,
-        cap:
-          JSON.parse(localStorage.getItem('inputs')).cap === null
-            ? 10
-            : JSON.parse(localStorage.getItem('inputs')).cap,
-        cip:
-          JSON.parse(localStorage.getItem('inputs')).cip === null
-            ? '5%'
-            : JSON.parse(localStorage.getItem('inputs')).cip,
-        mop:
-          JSON.parse(localStorage.getItem('inputs')).mop === null
-            ? 100
-            : JSON.parse(localStorage.getItem('inputs')).mop,
-      },
+  analysisData: [],
+  isGettingAnalysisData: false,
+  inputs: {
+    // Property Information
+    location: extractInputValueFromLocalStorage('location', 'All'),
+    type: extractInputValueFromLocalStorage('type', 'All'),
+    typology: extractInputValueFromLocalStorage('typology', 'All'),
+    condition: extractInputValueFromLocalStorage('condition', 'All'),
+    minprice: extractInputValueFromLocalStorage('minprice', 500),
+    maxprice: extractInputValueFromLocalStorage('maxprice', 1000),
+    minarea: extractInputValueFromLocalStorage('minarea', 100),
+    maxarea: extractInputValueFromLocalStorage('maxarea', 300),
+    // Investment Information
+    mincapital: extractInputValueFromLocalStorage('mincapital', 300),
+    maxcapital: extractInputValueFromLocalStorage('maxcapital', 1000),
+    bidask: extractInputValueFromLocalStorage('bidask', 5),
+    financingrate: extractInputValueFromLocalStorage('financingrate', 80),
+    // Other Investment Information
+    // Acquisition Assumptions
+    acquisitiontype: extractInputValueFromLocalStorage(
+      'acquisitiontype',
+      'Investment',
+    ),
+    entryfee: extractInputValueFromLocalStorage('entryfee', 0),
+    stampduty: extractInputValueFromLocalStorage('stampduty', 0.8),
+    lrwithm: extractInputValueFromLocalStorage('lrwithm', 1000),
+    lrwithoutm: extractInputValueFromLocalStorage('lrwithoutm', 700),
+    // Finance Assumptions
+    interestrate: extractInputValueFromLocalStorage('interestrate', 1),
+    bankcommission: extractInputValueFromLocalStorage('bankcommission', 1000),
+    amortization: extractInputValueFromLocalStorage('amortization', 30),
+    stampdutymortgage: extractInputValueFromLocalStorage(
+      'stampdutymortgage',
+      0.6,
+    ),
+    stampdutyinterests: extractInputValueFromLocalStorage(
+      'stampdutyinterests',
+      0.04,
+    ),
+    // Operating Assumptions
+    condominiumcosts: extractInputValueFromLocalStorage('condominiumcosts', 30),
+    propertytaxrate: extractInputValueFromLocalStorage('propertytaxrate', 0.3),
+    // Exit Assumptions
+    timetosale: extractInputValueFromLocalStorage('timetosale', 12),
+    irsrate: extractInputValueFromLocalStorage('irsrate', 30),
+    exitbrokerfee: extractInputValueFromLocalStorage('exitbrokerfee', 5),
+    loanearlyrepaymentfee: extractInputValueFromLocalStorage(
+      'loanearlyrepaymentfee',
+      0.5,
+    ),
+    capitalgainstaxbase: extractInputValueFromLocalStorage(
+      'capitalgainstaxbase',
+      50,
+    ),
+    // Valuation Model Configuration
+    gcpa: extractInputValueFromLocalStorage('gcpa', 80),
+    floor: extractInputValueFromLocalStorage('floor', 10),
+    cap: extractInputValueFromLocalStorage('cap', 10),
+    cip: extractInputValueFromLocalStorage('cip', '5%'),
+    mop: extractInputValueFromLocalStorage('mop', 100),
+  },
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -298,15 +172,12 @@ const analysisReducer = (state = initialState, action) =>
       case SET_VALUE:
         draft.inputs = action.payload;
         break;
-      case GET_TABLEDATA:
-        draft.isGettingTableData = true;
+      case GET_ANALYSIS_DATA:
+        draft.isGettingAnalysisData = true;
         break;
-      case GET_TABLEDATA_SUCCESS:
-        draft.tabledata = action.payload;
-        draft.isGettingTableData = false;
-        break;
-      case GET_LOADING:
-        draft.loading = action.payload;
+      case GET_ANALYSIS_DATA_SUCCESS:
+        draft.analysisData = action.payload;
+        draft.isGettingAnalysisData = false;
         break;
     }
   });
