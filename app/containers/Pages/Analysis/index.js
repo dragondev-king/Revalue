@@ -1,4 +1,4 @@
-import React, { memo, useEffect } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 // import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { useForm } from 'react-hook-form';
@@ -40,6 +40,10 @@ import {
   makeSelectTypology,
   makeSelectConditions,
   makeSelectCondition,
+  makeSelectAcquisitionTypes,
+  makeSelectAcquisitionType,
+  makeSelectCIPs,
+  makeSelectCIP,
   makeSelectInputs,
   makeSelectAnalysisData,
   makeSelectIsGettingAnalysisData,
@@ -50,9 +54,9 @@ import {
   getTypes,
   getTypologyies,
   getConditions,
-  getCIPs,
   getAcquisitionTypes,
   getAnalysisData,
+  getCIPs,
   setValue,
 } from './actions';
 
@@ -198,20 +202,27 @@ export function Analysis(props) {
     props.getConditions();
     props.getCIPs();
     props.getAcquisitionTypes();
+    props.getCIPs();
   }, []);
   const { register, handleSubmit } = useForm();
 
   const onSubmit = data => {
     props.setValue(data);
     props.getAnalysisData(data);
+    setBtnState(true);
   };
 
-  const classes = useStyles();
+  function handleChange() {
+    setBtnState(false);
+  }
 
+  const classes = useStyles();
+  const [btnState, setBtnState] = useState(false);
+  // const locationField = register('location', { required: true });
   function renderPropertyForm() {
     return (
-      <>
-        <Grid>
+      <Grid>
+        <Grid item row>
           <FormControl variant="standard" className={classes.doubleWidth}>
             <InputLabel
               id="demo-simple-select-standard-label"
@@ -231,6 +242,7 @@ export function Analysis(props) {
               id="demo-simple-select-standard"
               defaultValue={props.inputs.location}
               {...register('location')}
+              onChange={handleChange}
             >
               {props.locations.map(index => (
                 <MenuItem key={index} value={index}>
@@ -258,6 +270,7 @@ export function Analysis(props) {
               id="demo-simple-select-standard"
               defaultValue={props.inputs.type}
               {...register('type')}
+              onChange={handleChange}
             >
               {props.types.map(index => (
                 <MenuItem key={index} value={index}>
@@ -285,6 +298,7 @@ export function Analysis(props) {
               id="demo-simple-select-standard"
               defaultValue={props.inputs.typology}
               {...register('typology')}
+              onChange={handleChange}
             >
               {props.typologies.map(index => (
                 <MenuItem key={index} value={index}>
@@ -312,6 +326,7 @@ export function Analysis(props) {
               id="demo-simple-select-standard"
               defaultValue={props.inputs.condition}
               {...register('condition')}
+              onChange={handleChange}
             >
               {props.conditions.map(index => (
                 <MenuItem key={index} value={index}>
@@ -321,7 +336,7 @@ export function Analysis(props) {
             </Select>
           </FormControl>
         </Grid>
-        <Grid className={classes.rowSpacing}>
+        <Grid item className={classes.rowSpacing}>
           <FormControl variant="standard" className={classes.inputWidth}>
             <InputLabel
               id="demo-simple-select-standard-label"
@@ -419,7 +434,7 @@ export function Analysis(props) {
             />
           </FormControl>
         </Grid>
-      </>
+      </Grid>
     );
   }
 
@@ -432,7 +447,11 @@ export function Analysis(props) {
             aria-controls="panel1a-content"
             id="panel1a-header"
           >
-            <Typography>Investment Information</Typography>
+            <Typography>
+              {props.intl.formatMessage({
+                ...messages.investmentInformation,
+              })}
+            </Typography>
           </AccordionSummary>
           <AccordionDetails>
             <Typography>{renderAcod1()}</Typography>
@@ -444,7 +463,11 @@ export function Analysis(props) {
             aria-controls="panel2a-content"
             id="panel2a-header"
           >
-            <Typography>Other Investment Information</Typography>
+            <Typography>
+              {props.intl.formatMessage({
+                ...messages.otherInvestmentInformation,
+              })}
+            </Typography>
           </AccordionSummary>
           <AccordionDetails>
             <Typography>{renderAcod2()}</Typography>
@@ -456,7 +479,11 @@ export function Analysis(props) {
             aria-controls="panel3a-content"
             id="panel3a-header"
           >
-            <Typography>Valuation Model Configuration</Typography>
+            <Typography>
+              {props.intl.formatMessage({
+                ...messages.valuationModelConfiguration,
+              })}
+            </Typography>
           </AccordionSummary>
           <AccordionDetails>
             <Typography>{renderAcod3()}</Typography>
@@ -580,7 +607,11 @@ export function Analysis(props) {
     return (
       <Grid>
         <Grid>
-          <h5 className={classes.title}>Acquisition Assumptions</h5>
+          <h5 className={classes.title}>
+            {props.intl.formatMessage({
+              ...messages.acquisitionAssumptions,
+            })}
+          </h5>
         </Grid>
         <Grid>
           <FormControl variant="standard" className={classes.doubleWidth}>
@@ -602,13 +633,13 @@ export function Analysis(props) {
               id="demo-simple-select-standard"
               defaultValue={props.inputs.acquisitiontype}
               {...register('acquisitiontype')}
+              onChange={handleChange}
             >
-              {props.acquisitiontypes &&
-                props.acquisitiontypes.map(index => (
-                  <MenuItem key={index} value={index}>
-                    {index}
-                  </MenuItem>
-                ))}
+              {props.acquisitiontypes.map(index => (
+                <MenuItem key={index} value={index}>
+                  {index}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
           <FormControl variant="standard" className={classes.inputWidth}>
@@ -718,7 +749,11 @@ export function Analysis(props) {
     return (
       <Grid>
         <Grid>
-          <h5 className={classes.title}>Finance Assumptions</h5>
+          <h5 className={classes.title}>
+            {props.intl.formatMessage({
+              ...messages.financeAssumptions,
+            })}
+          </h5>
         </Grid>
         <Grid>
           <FormControl variant="standard" className={classes.inputWidth}>
@@ -852,7 +887,11 @@ export function Analysis(props) {
     return (
       <Grid>
         <Grid>
-          <h5 className={classes.title}>Operating Assumptions</h5>
+          <h5 className={classes.title}>
+            {props.intl.formatMessage({
+              ...messages.operatingAssumptions,
+            })}
+          </h5>
         </Grid>
         <Grid>
           <FormControl variant="standard" className={classes.inputWidth}>
@@ -912,7 +951,11 @@ export function Analysis(props) {
     return (
       <Grid>
         <Grid>
-          <h5 className={classes.title}>Exit Assumptions</h5>
+          <h5 className={classes.title}>
+            {props.intl.formatMessage({
+              ...messages.exitAssumptions,
+            })}
+          </h5>
         </Grid>
         <Grid>
           <FormControl variant="standard" className={classes.inputWidth}>
@@ -1139,13 +1182,13 @@ export function Analysis(props) {
               id="demo-simple-select-standard"
               defaultValue={props.inputs.cip}
               {...register('cip')}
+              onChange={handleChange}
             >
-              {props.cips &&
-                props.cips.map(index => (
-                  <MenuItem key={index} value={index}>
-                    {index}
-                  </MenuItem>
-                ))}
+              {props.cips.map(index => (
+                <MenuItem key={index} value={index}>
+                  {index}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
           <FormControl variant="standard" className={classes.inputEndLgWidth}>
@@ -1197,15 +1240,29 @@ export function Analysis(props) {
   return (
     <Grid>
       <Helmet>
-        <title>Analysis</title>
+        <title>
+          {props.intl.formatMessage({
+            ...messages.title,
+          })}
+        </title>
         <meta name="description" content="Description of Analysis" />
       </Helmet>
       {/* <FormattedMessage {...messages.header} /> */}
       <Grid item container>
-        <form onSubmit={handleSubmit(onSubmit)} className={classes.w100}>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          onChange={handleChange}
+          className={classes.w100}
+        >
           <Grid key="property-info" item container direction="row">
             <Grid key="form-control" item container xs={8}>
-              <h5>Property Information</h5>
+              <Grid item row>
+                <h5>
+                  {props.intl.formatMessage({
+                    ...messages.propertyInformation,
+                  })}
+                </h5>
+              </Grid>
               {renderPropertyForm()}
               {renderAccordion()}
             </Grid>
@@ -1224,6 +1281,7 @@ export function Analysis(props) {
               type="submit"
               variant="contained"
               className={classes.customizeBtn}
+              disabled={btnState}
             >
               {props.isGettingAnalysisData && (
                 <CircularProgress size={20} className={classes.loading} />
@@ -1234,7 +1292,11 @@ export function Analysis(props) {
         </form>
         <Grid key="table" item container direction="row">
           <Grid className={classes.w100}>
-            <h5>Investments</h5>
+            <h5>
+              {props.intl.formatMessage({
+                ...messages.tableTitle,
+              })}
+            </h5>
             {renderTable()}
           </Grid>
         </Grid>
@@ -1258,6 +1320,10 @@ const mapStateToProps = createStructuredSelector({
   typology: makeSelectTypology(),
   conditions: makeSelectConditions(),
   condition: makeSelectCondition(),
+  acquisitiontypes: makeSelectAcquisitionTypes(),
+  acquisitiontype: makeSelectAcquisitionType(),
+  cips: makeSelectCIPs(),
+  cip: makeSelectCIP(),
   analysisData: makeSelectAnalysisData(),
   isGettingAnalysisData: makeSelectIsGettingAnalysisData(),
 });
@@ -1268,8 +1334,8 @@ function mapDispatchToProps(dispatch) {
     getTypes: () => dispatch(getTypes()),
     getTypologyies: () => dispatch(getTypologyies()),
     getConditions: () => dispatch(getConditions()),
-    getCIPs: () => dispatch(getCIPs()),
     getAcquisitionTypes: () => dispatch(getAcquisitionTypes()),
+    getCIPs: () => dispatch(getCIPs()),
     getAnalysisData: inputs => dispatch(getAnalysisData(inputs)),
     setValue: value => dispatch(setValue(value)),
     dispatch,

@@ -57,6 +57,30 @@ const makeSelectCondition = () =>
     substate => substate.condition,
   );
 
+const makeSelectAcquisitionTypes = () =>
+  createSelector(
+    selectAnalysisDomain,
+    substate => substate.acquisitiontypes,
+  );
+
+const makeSelectAcquisitionType = () =>
+  createSelector(
+    selectAnalysisDomain,
+    substate => substate.acquisitiontype,
+  );
+
+const makeSelectCIPs = () =>
+  createSelector(
+    selectAnalysisDomain,
+    substate => substate.cips,
+  );
+
+const makeSelectCIP = () =>
+  createSelector(
+    selectAnalysisDomain,
+    substate => substate.cip,
+  );
+
 const makeSelectInputs = () =>
   createSelector(
     selectAnalysisDomain,
@@ -85,7 +109,11 @@ export {
   makeSelectTypology,
   makeSelectConditions,
   makeSelectCondition,
+  makeSelectAcquisitionTypes,
+  makeSelectAcquisitionType,
   makeSelectInputs,
   makeSelectAnalysisData,
+  makeSelectCIPs,
+  makeSelectCIP,
   makeSelectIsGettingAnalysisData,
 };

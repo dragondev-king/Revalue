@@ -8,10 +8,10 @@ import {
   GET_TYPOLOGIES_SUCCESS,
   GET_CONDITIONS,
   GET_CONDITIONS_SUCCESS,
-  GET_CIPS,
-  GET_CIPS_SUCCESS,
   GET_ACQUISITIONTYPES,
   GET_ACQUISITIONTYPES_SUCCESS,
+  GET_CIPS,
+  GET_CIPS_SUCCESS,
   SET_VALUE,
   GET_ANALYSIS_DATA,
   GET_ANALYSIS_DATA_SUCCESS,
@@ -26,8 +26,8 @@ export function setValueOrEmptyArray(value) {
 
 export function extractInputValueFromLocalStorage(value, defaultValue) {
   return JSON.parse(localStorage.getItem('inputs')) &&
-    localStorage.getItem('inputs')[value] &&
-    localStorage.getItem('inputs')[value] !== null
+    JSON.parse(localStorage.getItem('inputs'))[value] &&
+    JSON.parse(localStorage.getItem('inputs'))[value] !== null
     ? JSON.parse(localStorage.getItem('inputs'))[value]
     : defaultValue;
 }

@@ -7,7 +7,15 @@ export default defineMessages({
     id: `${scope}.header`,
     defaultMessage: 'This is the Analysis container!',
   },
+  title: {
+    id: `${scope}.title`,
+    defaultMessage: 'Analysis',
+  },
   // Property Information
+  propertyInformation: {
+    id: `${scope}.propertyInformation`,
+    defaultMessage: 'Property Information',
+  },
   location: {
     id: `${scope}.location`,
     defaultMessage: 'Location',
@@ -41,6 +49,10 @@ export default defineMessages({
     defaultMessage: 'Max Area',
   },
   // Investment Information
+  investmentInformation: {
+    id: `${scope}.investmentInformation`,
+    defaultMessage: 'Investment Information',
+  },
   minCapital: {
     id: `${scope}.minCapital`,
     defaultMessage: 'Min Capital',
@@ -58,7 +70,15 @@ export default defineMessages({
     defaultMessage: 'Financing Rate',
   },
   // Other Investment Information
+  otherInvestmentInformation: {
+    id: `${scope}.otherInvestmentInformation`,
+    defaultMessage: 'Other Investment Information',
+  },
   // Acquisition Assumptions
+  acquisitionAssumptions: {
+    id: `${scope}.acquisitionAssumptions`,
+    defaultMessage: 'Acquisition Assumptions',
+  },
   acquisitionType: {
     id: `${scope}.acquisitionType`,
     defaultMessage: 'Acquisition Type',
@@ -80,6 +100,10 @@ export default defineMessages({
     defaultMessage: 'Land Registry without Mortgage',
   },
   // Finance Assumptions
+  financeAssumptions: {
+    id: `${scope}.financeAssumptions`,
+    defaultMessage: 'Finance Assumptions',
+  },
   interestRate: {
     id: `${scope}.interestRate`,
     defaultMessage: 'Interest Rate',
@@ -101,6 +125,10 @@ export default defineMessages({
     defaultMessage: 'Stamp Duty Interests',
   },
   // Operating Assumptions
+  operatingAssumptions: {
+    id: `${scope}.operatingAssumptions`,
+    defaultMessage: 'Operating Assumptions',
+  },
   condominiumCosts: {
     id: `${scope}.condominiumCosts`,
     defaultMessage: 'Condominium Costs',
@@ -110,6 +138,10 @@ export default defineMessages({
     defaultMessage: 'Property Tax Rate',
   },
   // Exit Assumptions
+  exitAssumptions: {
+    id: `${scope}.exitAssumptions`,
+    defaultMessage: 'Exit Assumptions',
+  },
   timeToSale: {
     id: `${scope}.timeToSale`,
     defaultMessage: 'Time to Sale',
@@ -131,6 +163,10 @@ export default defineMessages({
     defaultMessage: 'Capital gains Tax Base',
   },
   // Valuation Model Configuration
+  valuationModelConfiguration: {
+    id: `${scope}.valuationModelConfiguration`,
+    defaultMessage: 'Valuation Model Configuration',
+  },
   grossConstructionToPrivateAre: {
     id: `${scope}.grossConstructionToPrivateAre`,
     defaultMessage: 'Gross Construction to Private Area',
@@ -150,5 +186,14 @@ export default defineMessages({
   minObservationsForPercentile: {
     id: `${scope}.minObservationsForPercentile`,
     defaultMessage: 'Min Observations for Percentile',
+  },
+  btnLabel: {
+    id: `${scope}.btnLabel`,
+    defaultMessage: 'Analyze',
+  },
+  // Table
+  tableTitle: {
+    id: `${scope}.tableTitle`,
+    defaultMessage: 'Investments',
   },
 });

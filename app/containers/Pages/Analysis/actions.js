@@ -8,10 +8,10 @@ import {
   GET_TYPOLOGIES_SUCCESS,
   GET_CONDITIONS,
   GET_CONDITIONS_SUCCESS,
-  GET_CIPS,
-  GET_CIPS_SUCCESS,
   GET_ACQUISITIONTYPES,
   GET_ACQUISITIONTYPES_SUCCESS,
+  GET_CIPS,
+  GET_CIPS_SUCCESS,
   SET_VALUE,
   GET_ANALYSIS_DATA,
   GET_ANALYSIS_DATA_SUCCESS,
@@ -86,11 +86,10 @@ export const setValue = data => {
   };
 };
 
-export const getAnalysisData = data => async dispatch => {
+export const getAnalysisData = () => async dispatch => {
   dispatch({
     type: GET_ANALYSIS_DATA,
   });
-  console.log(data);
   await delay(2000);
   dispatch({
     type: GET_ANALYSIS_DATA_SUCCESS,
