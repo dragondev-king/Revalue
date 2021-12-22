@@ -225,16 +225,6 @@ let rows = [];
 
 export function Analysis(props) {
   useInjectReducer({ key: 'analysis', reducer });
-
-  useEffect(() => {
-    props.getLocations();
-    props.getTypes();
-    props.getTypologyies();
-    props.getConditions();
-    props.getCIPs();
-    props.getAcquisitionTypes();
-    props.getLoading(false);
-  }, []);
   const { register, handleSubmit } = useForm();
   const [btnState, setBtnState] = useState(false);
   const onSubmit = data => {
@@ -248,6 +238,16 @@ export function Analysis(props) {
     console.log('Hello');
     setBtnState(false);
   };
+
+  useEffect(() => {
+    props.getLocations();
+    props.getTypes();
+    props.getTypologyies();
+    props.getConditions();
+    props.getCIPs();
+    props.getAcquisitionTypes();
+    props.getLoading(false);
+  }, []);
 
   function renderPropertyForm() {
     return (
