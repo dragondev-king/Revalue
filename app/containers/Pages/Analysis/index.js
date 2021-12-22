@@ -73,6 +73,8 @@ import {
   makeSelectLoanEarlyRepaymentFee,
   makeSelectCapitalgainsTaxBase,
   makeSelectInputs,
+  makeSelectTableData,
+  makeSelectLoading,
 } from './selectors';
 import reducer from './reducer';
 import {
@@ -83,8 +85,9 @@ import {
   getCIPs,
   getAcquisitionTypes,
   setValue,
+  getTableData,
+  getLoading,
 } from './actions';
-import tableData from './data.json';
 
 const useStyles = makeStyles(theme => ({
   appBarSpacer: theme.mixins.toolbar,
@@ -230,16 +233,15 @@ export function Analysis(props) {
     props.getConditions();
     props.getCIPs();
     props.getAcquisitionTypes();
+    props.getLoading(false);
   }, []);
   const { register, handleSubmit } = useForm();
   const [btnState, setBtnState] = useState(false);
-  const [loading, setLoading] = useState(false);
   const onSubmit = data => {
     props.setValue(data);
+    props.getTableData(false);
+    rows = [...props.tableData];
     setBtnState(true);
-    setLoading(true);
-    rows = [...tableData];
-    setTimeout(() => setLoading(false), 2000);
   };
   const classes = useStyles();
   const handleChange = () => {
@@ -1267,10 +1269,10 @@ export function Analysis(props) {
               className={classes.customizeBtn}
               disabled={btnState}
             >
-              {loading && (
+              {props.loading && (
                 <CircularProgress size={20} className={classes.loading} />
               )}
-              {!loading && 'Analyze'}
+              {!props.loading && 'Analyze'}
             </Button>
           </Grid>
         </form>
@@ -1332,6 +1334,8 @@ const mapStateToProps = createStructuredSelector({
   exitbrokerfee: makeSelectExitBrokerFee(),
   loanearlyrepaymentfee: makeSelectLoanEarlyRepaymentFee(),
   capitalgainstaxbase: makeSelectCapitalgainsTaxBase(),
+  tableData: makeSelectTableData(),
+  loading: makeSelectLoading(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -1342,7 +1346,9 @@ function mapDispatchToProps(dispatch) {
     getConditions: () => dispatch(getConditions()),
     getCIPs: () => dispatch(getCIPs()),
     getAcquisitionTypes: () => dispatch(getAcquisitionTypes()),
+    getTableData: () => dispatch(getTableData()),
     setValue: value => dispatch(setValue(value)),
+    getLoading: () => dispatch(getLoading()),
     dispatch,
   };
 }

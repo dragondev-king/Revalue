@@ -13,6 +13,9 @@ import {
   GET_ACQUISITIONTYPES,
   GET_ACQUISITIONTYPES_SUCCESS,
   SET_VALUE,
+  GET_TABLEDATA,
+  GET_TABLEDATA_SUCCESS,
+  GET_LOADING,
 } from './constants';
 
 export function setValueOrEmptyArray(value) {
@@ -47,6 +50,8 @@ export const initialState = {
   // Valuation Model Configuration
   cips: setValueOrEmptyArray(JSON.parse(localStorage.getItem('cips'))),
   isGettingCips: false,
+  isGettingTabledata: false,
+  loading: false,
   inputs: {
     // Property Information
     location:
@@ -248,6 +253,16 @@ const analysisReducer = (state = initialState, action) =>
         break;
       case SET_VALUE:
         draft.inputs = action.payload;
+        break;
+      case GET_TABLEDATA:
+        draft.isGettingTableData = true;
+        break;
+      case GET_TABLEDATA_SUCCESS:
+        draft.tabledata = action.payload;
+        draft.isGettingTableData = false;
+        break;
+      case GET_LOADING:
+        draft.loading = action.payload;
         break;
     }
   });

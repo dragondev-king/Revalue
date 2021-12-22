@@ -9,12 +9,6 @@ const makeSelectAnalysis = () =>
     substate => substate.analysis,
   );
 
-const makeSelectInputs = () =>
-  createSelector(
-    selectAnalysisDomain,
-    substate => substate.inputs,
-  );
-
 const makeSelectLocations = () =>
   createSelector(
     selectAnalysisDomain,
@@ -238,6 +232,24 @@ const makeSelectMOP = () =>
     substate => substate.mop,
   );
 
+const makeSelectInputs = () =>
+  createSelector(
+    selectAnalysisDomain,
+    substate => substate.inputs,
+  );
+
+const makeSelectTableData = () =>
+  createSelector(
+    selectAnalysisDomain,
+    substate => substate.tabledata,
+  );
+
+const makeSelectLoading = () =>
+  createSelector(
+    selectAnalysisDomain,
+    substate => substate.loading,
+  );
+
 export {
   makeSelectAnalysis,
   makeSelectLocations,
@@ -281,4 +293,6 @@ export {
   makeSelectLoanEarlyRepaymentFee,
   makeSelectCapitalgainsTaxBase,
   makeSelectInputs,
+  makeSelectTableData,
+  makeSelectLoading,
 };

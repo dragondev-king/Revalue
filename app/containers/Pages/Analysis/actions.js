@@ -13,7 +13,11 @@ import {
   GET_ACQUISITIONTYPES,
   GET_ACQUISITIONTYPES_SUCCESS,
   SET_VALUE,
+  GET_TABLEDATA,
+  GET_TABLEDATA_SUCCESS,
+  GET_LOADING,
 } from './constants';
+import tableData from './data.json';
 // Property Information
 export const getLocations = () => async dispatch => {
   dispatch({
@@ -82,3 +86,20 @@ export const setValue = data => {
     payload: data,
   };
 };
+
+export const getTableData = () => async dispatch => {
+  dispatch({
+    type: GET_TABLEDATA,
+  });
+  await setTimeout(() => getLoading(true), 2000);
+  dispatch({
+    type: GET_TABLEDATA_SUCCESS,
+    payload: tableData,
+  });
+  getLoading(false);
+};
+
+export const getLoading = state => ({
+  type: GET_LOADING,
+  payload: state,
+});
