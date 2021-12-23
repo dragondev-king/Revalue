@@ -139,6 +139,11 @@ const useStyles = makeStyles(theme => ({
     marginLeft: '20px',
     marginRight: '20px',
   },
+  accordion: {
+    width: '100%',
+    marginTop: '32px',
+    marginRight: '35px',
+  },
 }));
 const columns = [
   { field: 'id', headerName: 'ID', width: 90 },
@@ -221,8 +226,8 @@ export function Analysis(props) {
   // const locationField = register('location', { required: true });
   function renderPropertyForm() {
     return (
-      <Grid>
-        <Grid item row>
+      <Grid item container>
+        <Grid item>
           <FormControl variant="standard" className={classes.doubleWidth}>
             <InputLabel
               id="demo-simple-select-standard-label"
@@ -472,7 +477,7 @@ export function Analysis(props) {
 
   function renderAccordion() {
     return (
-      <Grid className={classes.rowSpacing}>
+      <Grid className={classes.accordion}>
         <Accordion>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
@@ -1391,8 +1396,8 @@ export function Analysis(props) {
           className={classes.w100}
         >
           <Grid key="property-info" item container direction="row">
-            <Grid key="form-control" item container xs={8}>
-              <Grid item row>
+            <Grid key="form-control" item container xs={8} xl={6}>
+              <Grid item direction="row">
                 <h5>
                   {props.intl.formatMessage({
                     ...messages.propertyInformation,
@@ -1407,6 +1412,7 @@ export function Analysis(props) {
               item
               container
               xs={4}
+              xl={6}
               className={classes.fixHeight}
             >
               <PaperMap />
