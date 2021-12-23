@@ -11,6 +11,10 @@ export default defineMessages({
     id: `${scope}.title`,
     defaultMessage: 'Analysis',
   },
+  tooltip: {
+    id: `${scope}.tooltip`,
+    defaultMessage: 'Info',
+  },
   // Property Information
   propertyInformation: {
     id: `${scope}.propertyInformation`,
