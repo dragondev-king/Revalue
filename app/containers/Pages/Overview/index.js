@@ -24,7 +24,7 @@ import {
   makeSelectIsGettingCharts,
 } from './selectors';
 import PaperChartLineSimple from '../../../components/PaperChartLineSimple';
-import { makeSelectLocation, makeSelectTypology } from '../Analysis/selectors';
+import { makeSelectLocation } from '../Analysis/selectors';
 import messages from './messages';
 
 const useStyles = makeStyles(theme => ({
@@ -373,7 +373,6 @@ export function Overview(props) {
 }
 
 const mapStateToProps = createStructuredSelector({
-  typology: makeSelectTypology(),
   location: makeSelectLocation(),
   charts: makeSelectCharts(),
   isGettingCharts: makeSelectIsGettingCharts(),

@@ -24,13 +24,7 @@ function AutoComplete({
       getOptionLabel={getOptionLabel}
       renderOption={renderOption}
       renderInput={params => (
-        <TextField
-          key={id + label}
-          {...params}
-          label={label}
-          margin="normal"
-          variant="outlined"
-        />
+        <TextField key={id + label} {...params} label={label} margin="normal" />
       )}
     />
   );

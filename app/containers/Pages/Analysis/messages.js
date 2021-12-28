@@ -24,9 +24,13 @@ export default defineMessages({
     id: `${scope}.location`,
     defaultMessage: 'Location',
   },
+  status: {
+    id: `${scope}.status`,
+    defaultMessage: 'Status',
+  },
   type: {
     id: `${scope}.type`,
-    defaultMessage: 'type',
+    defaultMessage: 'Type',
   },
   typology: {
     id: `${scope}.typology`,
@@ -95,8 +99,8 @@ export default defineMessages({
     id: `${scope}.stampDuty`,
     defaultMessage: 'Stamp Duty',
   },
-  landRegistryWthMortgage: {
-    id: `${scope}.landRegistryWthMortgage`,
+  landRegistryWithMortgage: {
+    id: `${scope}.landRegistryWithMortgage`,
     defaultMessage: 'Land Registry with Mortgage',
   },
   landRegistryWithoutMortgage: {
@@ -171,9 +175,9 @@ export default defineMessages({
     id: `${scope}.valuationModelConfiguration`,
     defaultMessage: 'Valuation Model Configuration',
   },
-  grossConstructionToPrivateAre: {
-    id: `${scope}.grossConstructionToPrivateAre`,
-    defaultMessage: 'Gross Construction to Private Area',
+  grossAreaToUsefulArea: {
+    id: `${scope}.grossAreaToUsefulArea`,
+    defaultMessage: 'Gross Area To Useful Area',
   },
   floor: {
     id: `${scope}.floor`,
