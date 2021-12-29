@@ -1,4 +1,4 @@
-/* eslint-disable react/no-array-index-key */
+/* eslint-disable react/no-array-index-key,no-unused-vars */
 import React, { memo } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { compose } from 'redux';
@@ -70,7 +70,7 @@ export function TopBar(props) {
           [classes.fixed]: true,
         })}
       >
-        <Grid container alignContent="space-between" alignItems="center">
+        {/*   <Grid container alignContent="space-between" alignItems="center">
           <Grid item>
             <IconButton onClick={handleSidebarToggle} className="hide-on-lg">
               <Icon>menu</Icon>
@@ -126,7 +126,7 @@ export function TopBar(props) {
               </Menu>
             </Grid>
           </Grid>
-        </Grid>
+        </Grid> */}
       </div>
     </div>
   );

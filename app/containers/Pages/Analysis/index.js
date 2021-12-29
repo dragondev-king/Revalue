@@ -265,15 +265,6 @@ export function Analysis(props) {
                   {props.intl.formatMessage({
                     ...messages.type,
                   })}
-                  <Tooltip
-                    title={props.intl.formatMessage({
-                      ...messages.tooltip,
-                    })}
-                  >
-                    <IconButton className={classes.iconMr}>
-                      <InfoIcon className={classes.iconSize} color="primary" />
-                    </IconButton>
-                  </Tooltip>
                 </InputLabel>
                 <Select
                   defaultValue={props.inputs.type}
@@ -294,15 +285,6 @@ export function Analysis(props) {
                   {props.intl.formatMessage({
                     ...messages.typology,
                   })}
-                  <Tooltip
-                    title={props.intl.formatMessage({
-                      ...messages.tooltip,
-                    })}
-                  >
-                    <IconButton className={classes.iconMr}>
-                      <InfoIcon className={classes.iconSize} color="primary" />
-                    </IconButton>
-                  </Tooltip>
                 </InputLabel>
                 <Select
                   defaultValue={props.inputs.typology}
@@ -323,15 +305,6 @@ export function Analysis(props) {
                   {props.intl.formatMessage({
                     ...messages.status,
                   })}
-                  <Tooltip
-                    title={props.intl.formatMessage({
-                      ...messages.tooltip,
-                    })}
-                  >
-                    <IconButton className={classes.iconMr}>
-                      <InfoIcon className={classes.iconSize} color="primary" />
-                    </IconButton>
-                  </Tooltip>
                 </InputLabel>
                 <Select
                   defaultValue={props.inputs.status}
@@ -352,15 +325,6 @@ export function Analysis(props) {
                   {props.intl.formatMessage({
                     ...messages.condition,
                   })}
-                  <Tooltip
-                    title={props.intl.formatMessage({
-                      ...messages.tooltip,
-                    })}
-                  >
-                    <IconButton className={classes.iconMr}>
-                      <InfoIcon className={classes.iconSize} color="primary" />
-                    </IconButton>
-                  </Tooltip>
                 </InputLabel>
                 <Select
                   defaultValue={props.inputs.condition}
@@ -381,22 +345,13 @@ export function Analysis(props) {
               <FormControl variant="standard" className="w-100">
                 <InputLabel>
                   {props.intl.formatMessage({
-                    ...messages.minPrice,
+                    ...messages.minAskingPrice,
                   })}
-                  <Tooltip
-                    title={props.intl.formatMessage({
-                      ...messages.tooltip,
-                    })}
-                  >
-                    <IconButton className={classes.iconMr}>
-                      <InfoIcon className={classes.iconSize} color="primary" />
-                    </IconButton>
-                  </Tooltip>
                 </InputLabel>
                 <Input
                   type="number"
-                  defaultValue={props.inputs.minPrice}
-                  {...register('minPrice')}
+                  defaultValue={props.inputs.minAskingPrice}
+                  {...register('minAskingPrice')}
                   startAdornment={
                     <InputAdornment position="start">€</InputAdornment>
                   }
@@ -407,22 +362,13 @@ export function Analysis(props) {
               <FormControl variant="standard" className="w-100">
                 <InputLabel>
                   {props.intl.formatMessage({
-                    ...messages.maxPrice,
+                    ...messages.maxAskingPrice,
                   })}
-                  <Tooltip
-                    title={props.intl.formatMessage({
-                      ...messages.tooltip,
-                    })}
-                  >
-                    <IconButton className={classes.iconMr}>
-                      <InfoIcon className={classes.iconSize} color="primary" />
-                    </IconButton>
-                  </Tooltip>
                 </InputLabel>
                 <Input
                   type="number"
-                  defaultValue={props.inputs.maxPrice}
-                  {...register('maxPrice')}
+                  defaultValue={props.inputs.maxAskingPrice}
+                  {...register('maxAskingPrice')}
                   startAdornment={
                     <InputAdornment position="start">€</InputAdornment>
                   }
@@ -433,22 +379,13 @@ export function Analysis(props) {
               <FormControl variant="standard" className="w-100">
                 <InputLabel>
                   {props.intl.formatMessage({
-                    ...messages.minArea,
+                    ...messages.minUsefulArea,
                   })}
-                  <Tooltip
-                    title={props.intl.formatMessage({
-                      ...messages.tooltip,
-                    })}
-                  >
-                    <IconButton className={classes.iconMr}>
-                      <InfoIcon className={classes.iconSize} color="primary" />
-                    </IconButton>
-                  </Tooltip>
                 </InputLabel>
                 <Input
                   type="number"
-                  defaultValue={props.inputs.minArea}
-                  {...register('minArea')}
+                  defaultValue={props.inputs.minUsefulArea}
+                  {...register('minUsefulArea')}
                   startAdornment={
                     <InputAdornment position="start">m²</InputAdornment>
                   }
@@ -459,22 +396,13 @@ export function Analysis(props) {
               <FormControl variant="standard" className="w-100">
                 <InputLabel>
                   {props.intl.formatMessage({
-                    ...messages.maxArea,
+                    ...messages.maxUsefulArea,
                   })}
-                  <Tooltip
-                    title={props.intl.formatMessage({
-                      ...messages.tooltip,
-                    })}
-                  >
-                    <IconButton className={classes.iconMr}>
-                      <InfoIcon className={classes.iconSize} color="primary" />
-                    </IconButton>
-                  </Tooltip>
                 </InputLabel>
                 <Input
                   type="number"
-                  defaultValue={props.inputs.maxArea}
-                  {...register('maxArea')}
+                  defaultValue={props.inputs.maxUsefulArea}
+                  {...register('maxUsefulArea')}
                   startAdornment={
                     <InputAdornment position="start">m²</InputAdornment>
                   }
@@ -547,7 +475,7 @@ export function Analysis(props) {
               })}
               <Tooltip
                 title={props.intl.formatMessage({
-                  ...messages.tooltip,
+                  ...messages.minCapitalInfo,
                 })}
               >
                 <IconButton className={classes.iconMr}>
@@ -573,7 +501,7 @@ export function Analysis(props) {
               })}
               <Tooltip
                 title={props.intl.formatMessage({
-                  ...messages.tooltip,
+                  ...messages.maxCapitalInfo,
                 })}
               >
                 <IconButton className={classes.iconMr}>
@@ -600,7 +528,7 @@ export function Analysis(props) {
                 })}
                 <Tooltip
                   title={props.intl.formatMessage({
-                    ...messages.tooltip,
+                    ...messages.bidAskInfo,
                   })}
                 >
                   <IconButton className={classes.iconMr}>
@@ -626,7 +554,7 @@ export function Analysis(props) {
                 })}
                 <Tooltip
                   title={props.intl.formatMessage({
-                    ...messages.tooltip,
+                    ...messages.financingRateInfo,
                   })}
                 >
                   <IconButton className={classes.iconMr}>
@@ -679,7 +607,7 @@ export function Analysis(props) {
                 })}
                 <Tooltip
                   title={props.intl.formatMessage({
-                    ...messages.tooltip,
+                    ...messages.acquisitionTypeInfo,
                   })}
                 >
                   <IconButton className={classes.iconMr}>
@@ -710,7 +638,7 @@ export function Analysis(props) {
                 })}
                 <Tooltip
                   title={props.intl.formatMessage({
-                    ...messages.tooltip,
+                    ...messages.entryFeeInfo,
                   })}
                 >
                   <IconButton className={classes.iconMr}>
@@ -736,7 +664,7 @@ export function Analysis(props) {
                 })}
                 <Tooltip
                   title={props.intl.formatMessage({
-                    ...messages.tooltip,
+                    ...messages.stampDutyInfo,
                   })}
                 >
                   <IconButton className={classes.iconMr}>
@@ -764,7 +692,7 @@ export function Analysis(props) {
                 })}
                 <Tooltip
                   title={props.intl.formatMessage({
-                    ...messages.tooltip,
+                    ...messages.landRegistryWithMortgageInfo,
                   })}
                 >
                   <IconButton className={classes.iconMr}>
@@ -790,7 +718,7 @@ export function Analysis(props) {
                 })}
                 <Tooltip
                   title={props.intl.formatMessage({
-                    ...messages.tooltip,
+                    ...messages.landRegistryWithoutMortgageInfo,
                   })}
                 >
                   <IconButton className={classes.iconMr}>
@@ -832,7 +760,7 @@ export function Analysis(props) {
                 })}
                 <Tooltip
                   title={props.intl.formatMessage({
-                    ...messages.tooltip,
+                    ...messages.interestRateInfo,
                   })}
                 >
                   <IconButton className={classes.iconMr}>
@@ -858,7 +786,7 @@ export function Analysis(props) {
                 })}
                 <Tooltip
                   title={props.intl.formatMessage({
-                    ...messages.tooltip,
+                    ...messages.bankCommissionInfo,
                   })}
                 >
                   <IconButton className={classes.iconMr}>
@@ -884,7 +812,7 @@ export function Analysis(props) {
                 })}
                 <Tooltip
                   title={props.intl.formatMessage({
-                    ...messages.tooltip,
+                    ...messages.amortizationInfo,
                   })}
                 >
                   <IconButton className={classes.iconMr}>
@@ -912,7 +840,7 @@ export function Analysis(props) {
                 })}
                 <Tooltip
                   title={props.intl.formatMessage({
-                    ...messages.tooltip,
+                    ...messages.stampDutyMortgageInfo,
                   })}
                 >
                   <IconButton className={classes.iconMr}>
@@ -938,7 +866,7 @@ export function Analysis(props) {
                 })}
                 <Tooltip
                   title={props.intl.formatMessage({
-                    ...messages.tooltip,
+                    ...messages.stampDutyInterestsInfo,
                   })}
                 >
                   <IconButton className={classes.iconMr}>
@@ -980,7 +908,7 @@ export function Analysis(props) {
                 })}
                 <Tooltip
                   title={props.intl.formatMessage({
-                    ...messages.tooltip,
+                    ...messages.condominiumCostsInfo,
                   })}
                 >
                   <IconButton className={classes.iconMr}>
@@ -1006,7 +934,7 @@ export function Analysis(props) {
                 })}
                 <Tooltip
                   title={props.intl.formatMessage({
-                    ...messages.tooltip,
+                    ...messages.propertyTaxRateInfo,
                   })}
                 >
                   <IconButton className={classes.iconMr}>
@@ -1048,7 +976,7 @@ export function Analysis(props) {
                 })}
                 <Tooltip
                   title={props.intl.formatMessage({
-                    ...messages.tooltip,
+                    ...messages.timeToSaleInfo,
                   })}
                 >
                   <IconButton className={classes.iconMr}>
@@ -1074,7 +1002,7 @@ export function Analysis(props) {
                 })}
                 <Tooltip
                   title={props.intl.formatMessage({
-                    ...messages.tooltip,
+                    ...messages.loanEarlyRepaymentFeeInfo,
                   })}
                 >
                   <IconButton className={classes.iconMr}>
@@ -1100,7 +1028,7 @@ export function Analysis(props) {
                 })}
                 <Tooltip
                   title={props.intl.formatMessage({
-                    ...messages.tooltip,
+                    ...messages.exitBrokerFeeInfo,
                   })}
                 >
                   <IconButton className={classes.iconMr}>
@@ -1128,7 +1056,7 @@ export function Analysis(props) {
                 })}
                 <Tooltip
                   title={props.intl.formatMessage({
-                    ...messages.tooltip,
+                    ...messages.irsRateInfo,
                   })}
                 >
                   <IconButton className={classes.iconMr}>
@@ -1154,7 +1082,7 @@ export function Analysis(props) {
                 })}
                 <Tooltip
                   title={props.intl.formatMessage({
-                    ...messages.tooltip,
+                    ...messages.capitalGainsTaxBaseInfo,
                   })}
                 >
                   <IconButton className={classes.iconMr}>
@@ -1188,7 +1116,7 @@ export function Analysis(props) {
               })}
               <Tooltip
                 title={props.intl.formatMessage({
-                  ...messages.tooltip,
+                  ...messages.grossAreaToUsefulAreaInfo,
                 })}
               >
                 <IconButton className={classes.iconMr}>
@@ -1214,7 +1142,7 @@ export function Analysis(props) {
               })}
               <Tooltip
                 title={props.intl.formatMessage({
-                  ...messages.tooltip,
+                  ...messages.floorInfo,
                 })}
               >
                 <IconButton className={classes.iconMr}>
@@ -1240,7 +1168,7 @@ export function Analysis(props) {
               })}
               <Tooltip
                 title={props.intl.formatMessage({
-                  ...messages.tooltip,
+                  ...messages.capInfo,
                 })}
               >
                 <IconButton className={classes.iconMr}>
@@ -1267,7 +1195,7 @@ export function Analysis(props) {
                 })}
                 <Tooltip
                   title={props.intl.formatMessage({
-                    ...messages.tooltip,
+                    ...messages.confidencialImobiliarioPercentileInfo,
                   })}
                 >
                   <IconButton className={classes.iconMr}>
@@ -1296,7 +1224,7 @@ export function Analysis(props) {
                 })}
                 <Tooltip
                   title={props.intl.formatMessage({
-                    ...messages.tooltip,
+                    ...messages.minObservationsForPercentileInfo,
                   })}
                 >
                   <IconButton className={classes.iconMr}>
