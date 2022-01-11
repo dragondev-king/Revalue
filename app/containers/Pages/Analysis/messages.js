@@ -24,9 +24,13 @@ export default defineMessages({
     id: `${scope}.location`,
     defaultMessage: 'Location',
   },
+  status: {
+    id: `${scope}.status`,
+    defaultMessage: 'Status',
+  },
   type: {
     id: `${scope}.type`,
-    defaultMessage: 'type',
+    defaultMessage: 'Type',
   },
   typology: {
     id: `${scope}.typology`,
@@ -36,21 +40,21 @@ export default defineMessages({
     id: `${scope}.condition`,
     defaultMessage: 'Condition',
   },
-  minPrice: {
-    id: `${scope}.minPrice`,
-    defaultMessage: 'Min Price',
+  minAskingPrice: {
+    id: `${scope}.minAskingPrice`,
+    defaultMessage: 'Min Asking Price',
   },
-  maxPrice: {
-    id: `${scope}.maxPrice`,
-    defaultMessage: 'Max Price',
+  maxAskingPrice: {
+    id: `${scope}.maxAskingPrice`,
+    defaultMessage: 'Max Asking Price',
   },
-  minArea: {
-    id: `${scope}.minArea`,
-    defaultMessage: 'Min Area',
+  minUsefulArea: {
+    id: `${scope}.minUsefulArea`,
+    defaultMessage: 'Min Useful Area',
   },
-  maxArea: {
-    id: `${scope}.maxArea`,
-    defaultMessage: 'Max Area',
+  maxUsefulArea: {
+    id: `${scope}.maxUsefulArea`,
+    defaultMessage: 'Max Useful Area',
   },
   // Investment Information
   investmentInformation: {
@@ -95,8 +99,15 @@ export default defineMessages({
     id: `${scope}.stampDuty`,
     defaultMessage: 'Stamp Duty',
   },
-  landRegistryWthMortgage: {
-    id: `${scope}.landRegistryWthMortgage`,
+  stampDutyInfo: {
+    id: `${scope}.stampDutyInfo`,
+    defaultMessage:
+      'As a buyer, you need to pay stamp duty (Imposto de Selo) on deeds, contracts, bank mortgages and loans, documents, and titles. ' +
+      'The rate changes according to the type and value of the property. The rate depending on the type of deed/operation is between 0.4% and 0.8%.\n' +
+      'When buying a house, you pay stamp duty to the notary while signing the deed of sale. The rate of this stamp duty is 0.8%.',
+  },
+  landRegistryWithMortgage: {
+    id: `${scope}.landRegistryWithMortgage`,
     defaultMessage: 'Land Registry with Mortgage',
   },
   landRegistryWithoutMortgage: {
@@ -116,6 +127,11 @@ export default defineMessages({
     id: `${scope}.bankCommission`,
     defaultMessage: 'Bank Commission',
   },
+  bankCommissionInfo: {
+    id: `${scope}.bankCommissionInfo`,
+    defaultMessage:
+      'Bank fees vary, depending on the lender and loan amount. Details will be provided in the mortgage proposal document',
+  },
   amortization: {
     id: `${scope}.amortization`,
     defaultMessage: 'Amortization',
@@ -123,6 +139,10 @@ export default defineMessages({
   stampDutyMortgage: {
     id: `${scope}.stampDutyMortgage`,
     defaultMessage: 'Stamp Duty Mortgage',
+  },
+  stampDutyMortgageInfo: {
+    id: `${scope}.stampDutyMortgageInfo`,
+    defaultMessage: 'The mortgage stamp duty is 0.60% of the final loan amount',
   },
   stampDutyInterests: {
     id: `${scope}.stampDutyInterests`,
@@ -137,6 +157,10 @@ export default defineMessages({
     id: `${scope}.condominiumCosts`,
     defaultMessage: 'Condominium Costs',
   },
+  condominiumCostsInfo: {
+    id: `${scope}.condominiumCostsInfo`,
+    defaultMessage: 'Estimated Condominium Costs Per Month',
+  },
   propertyTaxRate: {
     id: `${scope}.propertyTaxRate`,
     defaultMessage: 'Property Tax Rate',
@@ -150,6 +174,11 @@ export default defineMessages({
     id: `${scope}.timeToSale`,
     defaultMessage: 'Time to Sale',
   },
+  timeToSaleInfo: {
+    id: `${scope}.timeToSaleInfo`,
+    defaultMessage:
+      'Holding Period in months between Entry and Exit of Investment',
+  },
   irsRate: {
     id: `${scope}.irsRate`,
     defaultMessage: 'IRS Rate',
@@ -158,9 +187,19 @@ export default defineMessages({
     id: `${scope}.exitBrokerFee`,
     defaultMessage: 'Exit Broker Fee',
   },
+  exitBrokerFeeInfo: {
+    id: `${scope}.exitBrokerFeeInfo`,
+    defaultMessage:
+      'Commission paid to the broker by the buyer. % of the selling price',
+  },
   loanEarlyRepaymentFee: {
     id: `${scope}.loanEarlyRepaymentFee`,
     defaultMessage: 'Loan Early Repayment Fee',
+  },
+  loanEarlyRepaymentFeeInfo: {
+    id: `${scope}.loanEarlyRepaymentFeeInfo`,
+    defaultMessage:
+      'The early redemption penalty for a variable acquisition mortgage is 0.50% (as per the rule of the Bank of Portugal) and 2% for a fixed rate mortgage.',
   },
   capitalGainsTaxBase: {
     id: `${scope}.capitalGainsTaxBase`,
@@ -171,24 +210,131 @@ export default defineMessages({
     id: `${scope}.valuationModelConfiguration`,
     defaultMessage: 'Valuation Model Configuration',
   },
-  grossConstructionToPrivateAre: {
-    id: `${scope}.grossConstructionToPrivateAre`,
-    defaultMessage: 'Gross Construction to Private Area',
+  grossAreaToUsefulArea: {
+    id: `${scope}.grossAreaToUsefulArea`,
+    defaultMessage: 'Gross Area To Useful Area',
   },
   floor: {
     id: `${scope}.floor`,
     defaultMessage: 'Floor',
   },
+  floorInfo: {
+    id: `${scope}.floorInfo`,
+    defaultMessage:
+      'Min Delta between Asking Value and Confidencial Imobiliario Data Base',
+  },
   cap: {
     id: `${scope}.cap`,
     defaultMessage: 'Cap',
+  },
+  capInfo: {
+    id: `${scope}.capInfo`,
+    defaultMessage:
+      'Max Delta between Asking Value and Confidencial Imobiliario Data Base',
   },
   confidencialImobiliarioPercentile: {
     id: `${scope}.confidencialImobiliarioPercentile`,
     defaultMessage: 'Confidencial Imobiliario Percentile',
   },
+  confidencialImobiliarioPercentileInfo: {
+    id: `${scope}.confidencialImobiliarioPercentileInfo`,
+    defaultMessage:
+      'Confidencial Imobiliario Percentile for Exit Value Calculation',
+  },
   minObservationsForPercentile: {
     id: `${scope}.minObservationsForPercentile`,
+    defaultMessage: 'Min Observations for Percentile',
+  },
+  minAskingPriceInfo: {
+    id: `${scope}.minAskingPriceInfo`,
+    defaultMessage: 'Min Asking Price',
+  },
+  maxAskingPriceInfo: {
+    id: `${scope}.maxAskingPriceInfo`,
+    defaultMessage: 'Max Asking Price',
+  },
+  minUsefulAreaInfo: {
+    id: `${scope}.minUsefulAreaInfo`,
+    defaultMessage: 'Min Useful Area',
+  },
+  maxUsefulAreaInfo: {
+    id: `${scope}.maxUsefulAreaInfo`,
+    defaultMessage: 'Max Useful Area',
+  },
+  investmentInformationInfo: {
+    id: `${scope}.investmentInformationInfo`,
+    defaultMessage: 'Investment Information',
+  },
+  minCapitalInfo: {
+    id: `${scope}.minCapitalInfo`,
+    defaultMessage: 'Min Capital',
+  },
+  maxCapitalInfo: {
+    id: `${scope}.maxCapitalInfo`,
+    defaultMessage: 'Max Capital',
+  },
+  bidAskInfo: {
+    id: `${scope}.bidAskInfo`,
+    defaultMessage: 'Bid Ask',
+  },
+  financingRateInfo: {
+    id: `${scope}.financingRateInfo`,
+    defaultMessage: 'Financing Rate',
+  },
+  otherInvestmentInformationInfo: {
+    id: `${scope}.otherInvestmentInformationInfo`,
+    defaultMessage: 'Other Investment Information',
+  },
+  acquisitionAssumptionsInfo: {
+    id: `${scope}.acquisitionAssumptionsInfo`,
+    defaultMessage: 'Acquisition Assumptions',
+  },
+  acquisitionTypeInfo: {
+    id: `${scope}.acquisitionTypeInfo`,
+    defaultMessage: 'Acquisition Type',
+  },
+  entryFeeInfo: {
+    id: `${scope}.entryFeeInfo`,
+    defaultMessage: 'Entry Fee',
+  },
+  landRegistryWithMortgageInfo: {
+    id: `${scope}.landRegistryWithMortgageInfo`,
+    defaultMessage: 'Land Registry with Mortgage',
+  },
+  landRegistryWithoutMortgageInfo: {
+    id: `${scope}.landRegistryWithoutMortgageInfo`,
+    defaultMessage: 'Land Registry without Mortgage',
+  },
+  interestRateInfo: {
+    id: `${scope}.interestRateInfo`,
+    defaultMessage: 'Interest Rate',
+  },
+  amortizationInfo: {
+    id: `${scope}.amortizationInfo`,
+    defaultMessage: 'Amortization',
+  },
+  stampDutyInterestsInfo: {
+    id: `${scope}.stampDutyInterestsInfo`,
+    defaultMessage: 'Stamp Duty Interests',
+  },
+  propertyTaxRateInfo: {
+    id: `${scope}.propertyTaxRateInfo`,
+    defaultMessage: 'Property Tax Rate',
+  },
+  irsRateInfo: {
+    id: `${scope}.irsRateInfo`,
+    defaultMessage: 'IRS Rate',
+  },
+  capitalGainsTaxBaseInfo: {
+    id: `${scope}.capitalGainsTaxBaseInfo`,
+    defaultMessage: 'Capital gains Tax Base',
+  },
+  grossAreaToUsefulAreaInfo: {
+    id: `${scope}.grossAreaToUsefulAreaInfo`,
+    defaultMessage: 'Gross Area To Useful Area',
+  },
+  minObservationsForPercentileInfo: {
+    id: `${scope}.minObservationsForPercentileInfo`,
     defaultMessage: 'Min Observations for Percentile',
   },
   btnLabel: {

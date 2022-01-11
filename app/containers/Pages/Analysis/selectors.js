@@ -27,22 +27,10 @@ const makeSelectTypes = () =>
     substate => substate.types,
   );
 
-const makeSelectType = () =>
-  createSelector(
-    selectAnalysisDomain,
-    substate => substate.type,
-  );
-
 const makeSelectTypologies = () =>
   createSelector(
     selectAnalysisDomain,
     substate => substate.typologies,
-  );
-
-const makeSelectTypology = () =>
-  createSelector(
-    selectAnalysisDomain,
-    substate => substate.typology,
   );
 
 const makeSelectConditions = () =>
@@ -51,22 +39,16 @@ const makeSelectConditions = () =>
     substate => substate.conditions,
   );
 
-const makeSelectCondition = () =>
+const makeSelectStatus = () =>
   createSelector(
     selectAnalysisDomain,
-    substate => substate.condition,
+    substate => substate.status,
   );
 
 const makeSelectAcquisitionTypes = () =>
   createSelector(
     selectAnalysisDomain,
-    substate => substate.acquisitiontypes,
-  );
-
-const makeSelectAcquisitionType = () =>
-  createSelector(
-    selectAnalysisDomain,
-    substate => substate.acquisitiontype,
+    substate => substate.acquisitionTypes,
   );
 
 const makeSelectCIPs = () =>
@@ -99,21 +81,25 @@ const makeSelectIsGettingAnalysisData = () =>
     substate => substate.isGettingAnalysisData,
   );
 
+const makeSelectAnalyzeButtonState = () =>
+  createSelector(
+    selectAnalysisDomain,
+    substate => substate.analyzeButtonState,
+  );
+
 export {
   makeSelectAnalysis,
   makeSelectLocations,
   makeSelectLocation,
   makeSelectTypes,
-  makeSelectType,
+  makeSelectStatus,
   makeSelectTypologies,
-  makeSelectTypology,
   makeSelectConditions,
-  makeSelectCondition,
   makeSelectAcquisitionTypes,
-  makeSelectAcquisitionType,
   makeSelectInputs,
   makeSelectAnalysisData,
   makeSelectCIPs,
   makeSelectCIP,
   makeSelectIsGettingAnalysisData,
+  makeSelectAnalyzeButtonState,
 };
