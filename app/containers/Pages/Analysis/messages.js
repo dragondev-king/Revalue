@@ -200,4 +200,12 @@ export default defineMessages({
     id: `${scope}.tableTitle`,
     defaultMessage: 'Investments',
   },
+  id: {
+    id: `${scope}.id`,
+    defaultMessage: 'ID',
+  },
+  asking: {
+    id: `${scope}.asking`,
+    defaultMessage: 'Asking',
+  },
 });

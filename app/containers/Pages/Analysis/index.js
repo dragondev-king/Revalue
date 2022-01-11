@@ -2,6 +2,8 @@ import React, { memo, useEffect, useState } from 'react';
 // import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 import { Helmet } from 'react-helmet';
 import { injectIntl } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
@@ -144,9 +146,16 @@ const useStyles = makeStyles(theme => ({
     marginTop: '32px',
     marginRight: '35px',
   },
+  validation: {
+    color: '#bf1650',
+  },
 }));
 const columns = [
-  { field: 'id', headerName: 'ID', width: 90 },
+  {
+    field: 'id',
+    headerName: 'ID',
+    width: 90,
+  },
   {
     field: 'location',
     headerName: 'Location',
@@ -209,7 +218,54 @@ export function Analysis(props) {
     props.getAcquisitionTypes();
     props.getCIPs();
   }, []);
-  const { register, handleSubmit } = useForm();
+
+  const validationSchema = yup.object().shape({
+    minprice: yup.string().required('⚠ Min Price is empty'),
+    maxprice: yup.string().required('⚠ Max Price is empty'),
+    minarea: yup.string().required('⚠ Min Area is empty'),
+    maxarea: yup.string().required('⚠ Max Area is empty'),
+    mincapital: yup.string().required('⚠ Min Captial is empty'),
+    maxcapital: yup.string().required('⚠ Max Captial is empty'),
+    bidask: yup.string().required('⚠ Bid Ask is empty'),
+    financingrate: yup.string().required('⚠ Financing Rate is empty'),
+    entryfee: yup.string().required('⚠ Entry Fee is empty'),
+    stampduty: yup.string().required('⚠ Stamp Duty is empty'),
+    lrwithm: yup.string().required('⚠ Land Registry with Mortgage is empty'),
+    lrwithoutm: yup
+      .string()
+      .required('⚠ Land Registry without Mortgage is empty'),
+    interestrate: yup.string().required('⚠ Interest Rate is empty'),
+    bankcommission: yup.string().required('⚠ Bank Commission is empty'),
+    amortization: yup.string().required('⚠ Amortization is empty'),
+    stampdutymortgage: yup.string().required('⚠ Stamp Duty Mortgage is empty'),
+    stampdutyinterests: yup
+      .string()
+      .required('⚠ Stamp Duty Interests is empty'),
+    condominiumcosts: yup.string().required('⚠ Condominium Costs is empty'),
+    propertytaxrate: yup.string().required('⚠ Property Tax Rate is empty'),
+    timetosale: yup.string().required('⚠ Time to Sale is empty'),
+    irsrate: yup.string().required('⚠ IRS Rate is empty'),
+    exitbrokerfee: yup.string().required('⚠ Exit Broker Fee is empty'),
+    loanearlyrepaymentfee: yup
+      .string()
+      .required('⚠ Loan Early Repayment Fee is empty'),
+    capitalgainstaxbase: yup
+      .string()
+      .required('⚠ Capital gains Tax Base is empty'),
+    gcpa: yup
+      .string()
+      .required('⚠ Gross Construction to Private Area is empty'),
+    floor: yup.string().required('⚠ Floor is empty'),
+    cap: yup.string().required('⚠ Cap is empty'),
+    mop: yup.string().required('⚠ Min Observations for Percentile is empty'),
+  });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(validationSchema),
+  });
 
   const onSubmit = data => {
     props.setValue(data);
@@ -385,6 +441,9 @@ export function Analysis(props) {
                 <InputAdornment position="start">$</InputAdornment>
               }
             />
+            {errors.minprice && (
+              <p className={classes.validation}>{errors.minprice.message}</p>
+            )}
           </FormControl>
           <FormControl variant="standard" className={classes.inputWidth}>
             <InputLabel
@@ -413,6 +472,9 @@ export function Analysis(props) {
                 <InputAdornment position="start">$</InputAdornment>
               }
             />
+            {errors.maxprice && (
+              <p className={classes.validation}>{errors.maxprice.message}</p>
+            )}
           </FormControl>
           <FormControl variant="standard" className={classes.inputWidth}>
             <InputLabel
@@ -441,6 +503,9 @@ export function Analysis(props) {
                 <InputAdornment position="start">m2</InputAdornment>
               }
             />
+            {errors.minarea && (
+              <p className={classes.validation}>{errors.minarea.message}</p>
+            )}
           </FormControl>
           <FormControl variant="standard" className={classes.inputEndWidth}>
             <InputLabel
@@ -469,6 +534,9 @@ export function Analysis(props) {
                 <InputAdornment position="start">m2</InputAdornment>
               }
             />
+            {errors.maxarea && (
+              <p className={classes.validation}>{errors.maxarea.message}</p>
+            )}
           </FormControl>
         </Grid>
       </Grid>
@@ -560,6 +628,9 @@ export function Analysis(props) {
               <InputAdornment position="start">&#8364;</InputAdornment>
             }
           />
+          {errors.mincapital && (
+            <p className={classes.validation}>{errors.mincapital.message}</p>
+          )}
         </FormControl>
         <FormControl variant="standard" className={classes.inputWidth}>
           <InputLabel
@@ -588,6 +659,9 @@ export function Analysis(props) {
               <InputAdornment position="start">&#8364;</InputAdornment>
             }
           />
+          {errors.maxcapital && (
+            <p className={classes.validation}>{errors.maxcapital.message}</p>
+          )}
         </FormControl>
         <FormControl variant="standard" className={classes.inputWidth}>
           <InputLabel
@@ -614,6 +688,9 @@ export function Analysis(props) {
             {...register('bidask')}
             startAdornment={<InputAdornment position="start">%</InputAdornment>}
           />
+          {errors.bidask && (
+            <p className={classes.validation}>{errors.bidask.message}</p>
+          )}
         </FormControl>
         <FormControl variant="standard" className={classes.inputEndWidth}>
           <InputLabel
@@ -640,6 +717,9 @@ export function Analysis(props) {
             {...register('financingrate')}
             startAdornment={<InputAdornment position="start">%</InputAdornment>}
           />
+          {errors.financingrate && (
+            <p className={classes.validation}>{errors.financingrate.message}</p>
+          )}
         </FormControl>
       </Grid>
     );
@@ -726,6 +806,9 @@ export function Analysis(props) {
                 <InputAdornment position="start">%</InputAdornment>
               }
             />
+            {errors.entryfee && (
+              <p className={classes.validation}>{errors.entryfee.message}</p>
+            )}
           </FormControl>
           <FormControl variant="standard" className={classes.inputWidth}>
             <InputLabel
@@ -754,6 +837,9 @@ export function Analysis(props) {
                 <InputAdornment position="start">%</InputAdornment>
               }
             />
+            {errors.stampduty && (
+              <p className={classes.validation}>{errors.stampduty.message}</p>
+            )}
           </FormControl>
         </Grid>
         <Grid className={classes.rowSpacing}>
@@ -784,6 +870,9 @@ export function Analysis(props) {
                 <InputAdornment position="start">&#8364;</InputAdornment>
               }
             />
+            {errors.lrwithm && (
+              <p className={classes.validation}>{errors.lrwithm.message}</p>
+            )}
           </FormControl>
           <FormControl variant="standard" className={classes.inputEndLgWidth}>
             <InputLabel
@@ -812,6 +901,9 @@ export function Analysis(props) {
                 <InputAdornment position="start">&#8364;</InputAdornment>
               }
             />
+            {errors.lrwithoutm && (
+              <p className={classes.validation}>{errors.lrwithoutm.message}</p>
+            )}
           </FormControl>
         </Grid>
       </Grid>
@@ -856,6 +948,11 @@ export function Analysis(props) {
                 <InputAdornment position="start">%</InputAdornment>
               }
             />
+            {errors.interestrate && (
+              <p className={classes.validation}>
+                {errors.interestrate.message}
+              </p>
+            )}
           </FormControl>
           <FormControl variant="standard" className={classes.inputWidth}>
             <InputLabel
@@ -884,6 +981,11 @@ export function Analysis(props) {
                 <InputAdornment position="start">&#8364;</InputAdornment>
               }
             />
+            {errors.bankcommission && (
+              <p className={classes.validation}>
+                {errors.bankcommission.message}
+              </p>
+            )}
           </FormControl>
           <FormControl variant="standard" className={classes.inputWidth}>
             <InputLabel
@@ -912,6 +1014,11 @@ export function Analysis(props) {
                 <InputAdornment position="start">Years</InputAdornment>
               }
             />
+            {errors.amortization && (
+              <p className={classes.validation}>
+                {errors.amortization.message}
+              </p>
+            )}
           </FormControl>
         </Grid>
         <Grid className={classes.rowSpacing}>
@@ -942,6 +1049,11 @@ export function Analysis(props) {
                 <InputAdornment position="start">%</InputAdornment>
               }
             />
+            {errors.stampdutymortgage && (
+              <p className={classes.validation}>
+                {errors.stampdutymortgage.message}
+              </p>
+            )}
           </FormControl>
           <FormControl variant="standard" className={classes.inputEndLgWidth}>
             <InputLabel
@@ -970,6 +1082,11 @@ export function Analysis(props) {
                 <InputAdornment position="start">%</InputAdornment>
               }
             />
+            {errors.stampdutyinterests && (
+              <p className={classes.validation}>
+                {errors.stampdutyinterests.message}
+              </p>
+            )}
           </FormControl>
         </Grid>
       </Grid>
@@ -1014,6 +1131,11 @@ export function Analysis(props) {
                 <InputAdornment position="start">&#8364;</InputAdornment>
               }
             />
+            {errors.condominiumcosts && (
+              <p className={classes.validation}>
+                {errors.condominiumcosts.message}
+              </p>
+            )}
           </FormControl>
           <FormControl variant="standard" className={classes.inputWidth}>
             <InputLabel
@@ -1042,6 +1164,11 @@ export function Analysis(props) {
                 <InputAdornment position="start">%</InputAdornment>
               }
             />
+            {errors.propertytaxrate && (
+              <p className={classes.validation}>
+                {errors.propertytaxrate.message}
+              </p>
+            )}
           </FormControl>
         </Grid>
       </Grid>
@@ -1086,6 +1213,9 @@ export function Analysis(props) {
                 <InputAdornment position="start">Month</InputAdornment>
               }
             />
+            {errors.timetosale && (
+              <p className={classes.validation}>{errors.timetosale.message}</p>
+            )}
           </FormControl>
           <FormControl variant="standard" className={classes.inputWidth}>
             <InputLabel
@@ -1114,6 +1244,9 @@ export function Analysis(props) {
                 <InputAdornment position="start">%</InputAdornment>
               }
             />
+            {errors.irsrate && (
+              <p className={classes.validation}>{errors.irsrate.message}</p>
+            )}
           </FormControl>
           <FormControl variant="standard" className={classes.inputEndWidth}>
             <InputLabel
@@ -1142,6 +1275,11 @@ export function Analysis(props) {
                 <InputAdornment position="start">%</InputAdornment>
               }
             />
+            {errors.exitbrokerfee && (
+              <p className={classes.validation}>
+                {errors.exitbrokerfee.message}
+              </p>
+            )}
           </FormControl>
         </Grid>
         <Grid className={classes.rowSpacing}>
@@ -1172,6 +1310,11 @@ export function Analysis(props) {
                 <InputAdornment position="start">%</InputAdornment>
               }
             />
+            {errors.loanearlyrepaymentfee && (
+              <p className={classes.validation}>
+                {errors.loanearlyrepaymentfee.message}
+              </p>
+            )}
           </FormControl>
           <FormControl variant="standard" className={classes.inputEndLgWidth}>
             <InputLabel
@@ -1200,6 +1343,11 @@ export function Analysis(props) {
                 <InputAdornment position="start">%</InputAdornment>
               }
             />
+            {errors.capitalgainstaxbase && (
+              <p className={classes.validation}>
+                {errors.capitalgainstaxbase.message}
+              </p>
+            )}
           </FormControl>
         </Grid>
       </Grid>
@@ -1237,6 +1385,9 @@ export function Analysis(props) {
                 <InputAdornment position="start">%</InputAdornment>
               }
             />
+            {errors.gcpa && (
+              <p className={classes.validation}>{errors.gcpa.message}</p>
+            )}
           </FormControl>
           <FormControl variant="standard" className={classes.inputWidth}>
             <InputLabel
@@ -1265,6 +1416,9 @@ export function Analysis(props) {
                 <InputAdornment position="start">%</InputAdornment>
               }
             />
+            {errors.floor && (
+              <p className={classes.validation}>{errors.floor.message}</p>
+            )}
           </FormControl>
           <FormControl variant="standard" className={classes.inputWidth}>
             <InputLabel
@@ -1293,6 +1447,9 @@ export function Analysis(props) {
                 <InputAdornment position="start">%</InputAdornment>
               }
             />
+            {errors.cap && (
+              <p className={classes.validation}>{errors.cap.message}</p>
+            )}
           </FormControl>
         </Grid>
         <Grid className={classes.rowSpacing}>
@@ -1355,6 +1512,9 @@ export function Analysis(props) {
                 <InputAdornment position="start">#</InputAdornment>
               }
             />
+            {errors.mop && (
+              <p className={classes.validation}>{errors.mop.message}</p>
+            )}
           </FormControl>
         </Grid>
       </Grid>
