@@ -14,8 +14,10 @@ import Grid from '@material-ui/core/Grid';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
+import FormHelperText from '@material-ui/core/FormHelperText';
 import Select from '@material-ui/core/Select';
 import Input from '@material-ui/core/Input';
+// import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
@@ -209,44 +211,34 @@ export function Analysis(props) {
   }, []);
 
   const validationSchema = yup.object().shape({
-    minAskingPrice: yup.string().required('⚠ Min Asking Price is empty'),
-    maxAskingPrice: yup.string().required('⚠ Max Asking Price is empty'),
-    minUsefulArea: yup.string().required('⚠ Min Useful Area is empty'),
-    maxUsefulArea: yup.string().required('⚠ Max Useful Area is empty'),
-    minCapital: yup.string().required('⚠ Min Captial is empty'),
-    maxCapital: yup.string().required('⚠ Max Captial is empty'),
-    bidAsk: yup.string().required('⚠ Bid Ask is empty'),
-    financingRate: yup.string().required('⚠ Financing Rate is empty'),
-    entryFee: yup.string().required('⚠ Entry Fee is empty'),
-    stampDuty: yup.string().required('⚠ Stamp Duty is empty'),
-    LRwithM: yup.string().required('⚠ Land Registry with Mortgage is empty'),
-    LRwithoutM: yup
-      .string()
-      .required('⚠ Land Registry without Mortgage is empty'),
-    interestRate: yup.string().required('⚠ Interest Rate is empty'),
-    bankCommission: yup.string().required('⚠ Bank Commission is empty'),
-    amortization: yup.string().required('⚠ Amortization is empty'),
-    stampDutyMortgage: yup.string().required('⚠ Stamp Duty Mortgage is empty'),
-    stampDutyInterests: yup
-      .string()
-      .required('⚠ Stamp Duty Interests is empty'),
-    condominiumCosts: yup.string().required('⚠ Condominium Costs is empty'),
-    propertyTaxRate: yup.string().required('⚠ Property Tax Rate is empty'),
-    timeToSale: yup.string().required('⚠ Time to Sale is empty'),
-    IRSrate: yup.string().required('⚠ IRS Rate is empty'),
-    exitBrokerFee: yup.string().required('⚠ Exit Broker Fee is empty'),
-    loanEarlyRepaymentFee: yup
-      .string()
-      .required('⚠ Loan Early Repayment Fee is empty'),
-    capitalGainsTaxBase: yup
-      .string()
-      .required('⚠ Capital gains Tax Base is empty'),
-    GCPA: yup
-      .string()
-      .required('⚠ Gross Construction to Private Area is empty'),
-    floor: yup.string().required('⚠ Floor is empty'),
-    cap: yup.string().required('⚠ Cap is empty'),
-    MOP: yup.string().required('⚠ Min Observations for Percentile is empty'),
+    minAskingPrice: yup.number().required(),
+    maxAskingPrice: yup.number().required(),
+    minUsefulArea: yup.number().required(),
+    maxUsefulArea: yup.number().required(),
+    minCapital: yup.number().required(),
+    maxCapital: yup.number().required(),
+    bidAsk: yup.number().required(),
+    financingRate: yup.number().required(),
+    entryFee: yup.number().required(),
+    stampDuty: yup.number().required(),
+    landRegistryWithMortgage: yup.number().required(),
+    landRegistryWithoutMortgage: yup.number().required(),
+    interestRate: yup.number().required(),
+    bankCommission: yup.number().required(),
+    amortization: yup.number().required(),
+    stampDutyMortgage: yup.number().required(),
+    stampDutyInterests: yup.number().required(),
+    condominiumCosts: yup.number().required(),
+    propertyTaxRate: yup.number().required(),
+    timeToSale: yup.number().required(),
+    irsRate: yup.number().required(),
+    exitBrokerFee: yup.number().required(),
+    loanEarlyRepaymentFee: yup.number().required(),
+    capitalGainsTaxBase: yup.number().required(),
+    GCPA: yup.number().required(),
+    floor: yup.number().required(),
+    cap: yup.number().required(),
+    mop: yup.number().required(),
   });
   const {
     register,
@@ -266,6 +258,9 @@ export function Analysis(props) {
   }
 
   const classes = useStyles();
+  const errorMsg = props.intl.formatMessage({
+    ...messages.errors,
+  });
 
   function renderPropertyForm() {
     return (
@@ -392,7 +387,11 @@ export function Analysis(props) {
           </Grid>
           <Grid item container spacing={6}>
             <Grid item xs={3}>
-              <FormControl variant="standard" className="w-100">
+              <FormControl
+                variant="standard"
+                className="w-100"
+                error={errors.minAskingPrice}
+              >
                 <InputLabel>
                   {props.intl.formatMessage({
                     ...messages.minAskingPrice,
@@ -406,15 +405,17 @@ export function Analysis(props) {
                     <InputAdornment position="start">€</InputAdornment>
                   }
                 />
-                {errors.minAskingPrice && (
-                  <p className={classes.validation}>
-                    {errors.minAskingPrice.message}
-                  </p>
-                )}
+                <FormHelperText>
+                  {errors.minAskingPrice ? errorMsg : ''}
+                </FormHelperText>
               </FormControl>
             </Grid>
             <Grid item xs={3}>
-              <FormControl variant="standard" className="w-100">
+              <FormControl
+                variant="standard"
+                className="w-100"
+                error={errors.maxAskingPrice}
+              >
                 <InputLabel>
                   {props.intl.formatMessage({
                     ...messages.maxAskingPrice,
@@ -428,15 +429,17 @@ export function Analysis(props) {
                     <InputAdornment position="start">€</InputAdornment>
                   }
                 />
-                {errors.maxAskingPrice && (
-                  <p className={classes.validation}>
-                    {errors.maxAskingPrice.message}
-                  </p>
-                )}
+                <FormHelperText>
+                  {errors.maxAskingPrice ? errorMsg : ''}
+                </FormHelperText>
               </FormControl>
             </Grid>
             <Grid item xs={3}>
-              <FormControl variant="standard" className="w-100">
+              <FormControl
+                variant="standard"
+                className="w-100"
+                error={errors.minUsefulArea}
+              >
                 <InputLabel>
                   {props.intl.formatMessage({
                     ...messages.minUsefulArea,
@@ -450,15 +453,17 @@ export function Analysis(props) {
                     <InputAdornment position="start">m²</InputAdornment>
                   }
                 />
-                {errors.minUsefulArea && (
-                  <p className={classes.validation}>
-                    {errors.minUsefulArea.message}
-                  </p>
-                )}
+                <FormHelperText>
+                  {errors.minUsefulArea ? errorMsg : ''}
+                </FormHelperText>
               </FormControl>
             </Grid>
             <Grid item xs={3}>
-              <FormControl variant="standard" className="w-100">
+              <FormControl
+                variant="standard"
+                className="w-100"
+                error={errors.maxUsefulArea}
+              >
                 <InputLabel>
                   {props.intl.formatMessage({
                     ...messages.maxUsefulArea,
@@ -472,11 +477,9 @@ export function Analysis(props) {
                     <InputAdornment position="start">m²</InputAdornment>
                   }
                 />
-                {errors.maxUsefulArea && (
-                  <p className={classes.validation}>
-                    {errors.maxUsefulArea.message}
-                  </p>
-                )}
+                <FormHelperText>
+                  {errors.maxUsefulArea ? errorMsg : ''}
+                </FormHelperText>
               </FormControl>
             </Grid>
           </Grid>
@@ -538,7 +541,11 @@ export function Analysis(props) {
     return (
       <Grid item container spacing={6} className="mb-10">
         <Grid item xs={3}>
-          <FormControl variant="standard" className="w-100">
+          <FormControl
+            variant="standard"
+            className="w-100"
+            error={errors.minCapital}
+          >
             <InputLabel>
               {props.intl.formatMessage({
                 ...messages.minCapital,
@@ -561,13 +568,15 @@ export function Analysis(props) {
                 <InputAdornment position="start">&#8364;</InputAdornment>
               }
             />
-            {errors.minCapital && (
-              <p className={classes.validation}>{errors.minCapital.message}</p>
-            )}
+            <FormHelperText>{errors.minCapital ? errorMsg : ''}</FormHelperText>
           </FormControl>
         </Grid>
         <Grid item xs={3}>
-          <FormControl variant="standard" className="w-100">
+          <FormControl
+            variant="standard"
+            className="w-100"
+            error={errors.maxCapital}
+          >
             <InputLabel>
               {props.intl.formatMessage({
                 ...messages.maxCapital,
@@ -590,14 +599,16 @@ export function Analysis(props) {
                 <InputAdornment position="start">&#8364;</InputAdornment>
               }
             />
-            {errors.maxCapital && (
-              <p className={classes.validation}>{errors.maxCapital.message}</p>
-            )}
+            <FormHelperText>{errors.maxCapital ? errorMsg : ''}</FormHelperText>
           </FormControl>
         </Grid>
         <Grid item container spacing={6}>
           <Grid item xs={3}>
-            <FormControl variant="standard" className="w-100">
+            <FormControl
+              variant="standard"
+              className="w-100"
+              error={errors.bidAsk}
+            >
               <InputLabel>
                 {props.intl.formatMessage({
                   ...messages.bidAsk,
@@ -620,13 +631,15 @@ export function Analysis(props) {
                   <InputAdornment position="start">%</InputAdornment>
                 }
               />
-              {errors.bidAsk && (
-                <p className={classes.validation}>{errors.bidAsk.message}</p>
-              )}
+              <FormHelperText>{errors.bidAsk ? errorMsg : ''}</FormHelperText>
             </FormControl>
           </Grid>
           <Grid item xs={3}>
-            <FormControl variant="standard" className="w-100">
+            <FormControl
+              variant="standard"
+              className="w-100"
+              error={errors.financingRate}
+            >
               <InputLabel>
                 {props.intl.formatMessage({
                   ...messages.financingRate,
@@ -649,11 +662,9 @@ export function Analysis(props) {
                   <InputAdornment position="start">%</InputAdornment>
                 }
               />
-              {errors.financingRate && (
-                <p className={classes.validation}>
-                  {errors.financingRate.message}
-                </p>
-              )}
+              <FormHelperText>
+                {errors.financingRate ? errorMsg : ''}
+              </FormHelperText>
             </FormControl>
           </Grid>
         </Grid>
@@ -715,7 +726,11 @@ export function Analysis(props) {
             </FormControl>
           </Grid>
           <Grid item xs={3}>
-            <FormControl variant="standard" className="w-100">
+            <FormControl
+              variant="standard"
+              className="w-100"
+              error={errors.entryFee}
+            >
               <InputLabel>
                 {props.intl.formatMessage({
                   ...messages.entryFee,
@@ -738,13 +753,15 @@ export function Analysis(props) {
                   <InputAdornment position="start">%</InputAdornment>
                 }
               />
-              {errors.entryFee && (
-                <p className={classes.validation}>{errors.entryFee.message}</p>
-              )}
+              <FormHelperText>{errors.entryFee ? errorMsg : ''}</FormHelperText>
             </FormControl>
           </Grid>
           <Grid item xs={3}>
-            <FormControl variant="standard" className="w-100">
+            <FormControl
+              variant="standard"
+              className="w-100"
+              error={errors.stampDuty}
+            >
               <InputLabel>
                 {props.intl.formatMessage({
                   ...messages.stampDuty,
@@ -767,15 +784,19 @@ export function Analysis(props) {
                   <InputAdornment position="start">%</InputAdornment>
                 }
               />
-              {errors.stampDuty && (
-                <p className={classes.validation}>{errors.stampDuty.message}</p>
-              )}
+              <FormHelperText>
+                {errors.stampDuty ? errorMsg : ''}
+              </FormHelperText>
             </FormControl>
           </Grid>
         </Grid>
         <Grid item container spacing={6} className="mt-20">
           <Grid item xs={3}>
-            <FormControl variant="standard" className="w-100">
+            <FormControl
+              variant="standard"
+              className="w-100"
+              error={errors.landRegistryWithMortgage}
+            >
               <InputLabel>
                 {props.intl.formatMessage({
                   ...messages.landRegistryWithMortgage,
@@ -798,13 +819,17 @@ export function Analysis(props) {
                   <InputAdornment position="start">&#8364;</InputAdornment>
                 }
               />
-              {errors.LRwithM && (
-                <p className={classes.validation}>{errors.LRwithM.message}</p>
-              )}
+              <FormHelperText>
+                {errors.landRegistryWithMortgage ? errorMsg : ''}
+              </FormHelperText>
             </FormControl>
           </Grid>
           <Grid item xs={3}>
-            <FormControl variant="standard" className="w-100">
+            <FormControl
+              variant="standard"
+              className="w-100"
+              error={errors.landRegistryWithoutMortgage}
+            >
               <InputLabel>
                 {props.intl.formatMessage({
                   ...messages.landRegistryWithoutMortgage,
@@ -827,11 +852,9 @@ export function Analysis(props) {
                   <InputAdornment position="start">&#8364;</InputAdornment>
                 }
               />
-              {errors.LRwithoutM && (
-                <p className={classes.validation}>
-                  {errors.LRwithoutM.message}
-                </p>
-              )}
+              <FormHelperText>
+                {errors.landRegistryWithoutMortgage ? errorMsg : ''}
+              </FormHelperText>
             </FormControl>
           </Grid>
         </Grid>
@@ -851,7 +874,11 @@ export function Analysis(props) {
         </Grid>
         <Grid item container spacing={6}>
           <Grid item xs={3}>
-            <FormControl variant="standard" className="w-100">
+            <FormControl
+              variant="standard"
+              className="w-100"
+              error={errors.interestRate}
+            >
               <InputLabel>
                 {props.intl.formatMessage({
                   ...messages.interestRate,
@@ -874,15 +901,17 @@ export function Analysis(props) {
                   <InputAdornment position="start">%</InputAdornment>
                 }
               />
-              {errors.interestRate && (
-                <p className={classes.validation}>
-                  {errors.interestRate.message}
-                </p>
-              )}
+              <FormHelperText>
+                {errors.interestRate ? errorMsg : ''}
+              </FormHelperText>
             </FormControl>
           </Grid>
           <Grid item xs={3}>
-            <FormControl variant="standard" className="w-100">
+            <FormControl
+              variant="standard"
+              className="w-100"
+              error={errors.bankCommission}
+            >
               <InputLabel>
                 {props.intl.formatMessage({
                   ...messages.bankCommission,
@@ -905,15 +934,17 @@ export function Analysis(props) {
                   <InputAdornment position="start">&#8364;</InputAdornment>
                 }
               />
-              {errors.bankCommission && (
-                <p className={classes.validation}>
-                  {errors.bankCommission.message}
-                </p>
-              )}
+              <FormHelperText>
+                {errors.bankCommission ? errorMsg : ''}
+              </FormHelperText>
             </FormControl>
           </Grid>
           <Grid item xs={3}>
-            <FormControl variant="standard" className="w-100">
+            <FormControl
+              variant="standard"
+              className="w-100"
+              error={errors.amortization}
+            >
               <InputLabel>
                 {props.intl.formatMessage({
                   ...messages.amortization,
@@ -936,17 +967,19 @@ export function Analysis(props) {
                   <InputAdornment position="start">Years</InputAdornment>
                 }
               />
-              {errors.amortization && (
-                <p className={classes.validation}>
-                  {errors.amortization.message}
-                </p>
-              )}
+              <FormHelperText>
+                {errors.amortization ? errorMsg : ''}
+              </FormHelperText>
             </FormControl>
           </Grid>
         </Grid>
         <Grid item container spacing={6} className="mt-20">
           <Grid item xs={3}>
-            <FormControl variant="standard" className="w-100">
+            <FormControl
+              variant="standard"
+              className="w-100"
+              error={errors.stampDutyMortgage}
+            >
               <InputLabel>
                 {props.intl.formatMessage({
                   ...messages.stampDutyMortgage,
@@ -969,15 +1002,17 @@ export function Analysis(props) {
                   <InputAdornment position="start">%</InputAdornment>
                 }
               />
-              {errors.stampDutyMortgage && (
-                <p className={classes.validation}>
-                  {errors.stampDutyMortgage.message}
-                </p>
-              )}
+              <FormHelperText>
+                {errors.stampDutyMortgage ? errorMsg : ''}
+              </FormHelperText>
             </FormControl>
           </Grid>
           <Grid item xs={3}>
-            <FormControl variant="standard" className="w-100">
+            <FormControl
+              variant="standard"
+              className="w-100"
+              error={errors.stampDutyInterests}
+            >
               <InputLabel>
                 {props.intl.formatMessage({
                   ...messages.stampDutyInterests,
@@ -1000,11 +1035,9 @@ export function Analysis(props) {
                   <InputAdornment position="start">%</InputAdornment>
                 }
               />
-              {errors.stampDutyInterests && (
-                <p className={classes.validation}>
-                  {errors.stampDutyInterests.message}
-                </p>
-              )}
+              <FormHelperText>
+                {errors.stampDutyInterests ? errorMsg : ''}
+              </FormHelperText>
             </FormControl>
           </Grid>
         </Grid>
@@ -1024,7 +1057,11 @@ export function Analysis(props) {
         </Grid>
         <Grid item container spacing={6}>
           <Grid item xs={3}>
-            <FormControl variant="standard" className="w-100">
+            <FormControl
+              variant="standard"
+              className="w-100"
+              error={errors.condominiumCosts}
+            >
               <InputLabel>
                 {props.intl.formatMessage({
                   ...messages.condominiumCosts,
@@ -1047,15 +1084,17 @@ export function Analysis(props) {
                   <InputAdornment position="start">&#8364;</InputAdornment>
                 }
               />
-              {errors.condominiumCosts && (
-                <p className={classes.validation}>
-                  {errors.condominiumCosts.message}
-                </p>
-              )}
+              <FormHelperText>
+                {errors.condominiumCosts ? errorMsg : ''}
+              </FormHelperText>
             </FormControl>
           </Grid>
           <Grid item xs={3}>
-            <FormControl variant="standard" className="w-100">
+            <FormControl
+              variant="standard"
+              className="w-100"
+              error={errors.propertyTaxRate}
+            >
               <InputLabel>
                 {props.intl.formatMessage({
                   ...messages.propertyTaxRate,
@@ -1078,11 +1117,9 @@ export function Analysis(props) {
                   <InputAdornment position="start">%</InputAdornment>
                 }
               />
-              {errors.propertyTaxRate && (
-                <p className={classes.validation}>
-                  {errors.propertyTaxRate.message}
-                </p>
-              )}
+              <FormHelperText>
+                {errors.propertyTaxRate ? errorMsg : ''}
+              </FormHelperText>
             </FormControl>
           </Grid>
         </Grid>
@@ -1102,7 +1139,11 @@ export function Analysis(props) {
         </Grid>
         <Grid item container spacing={6}>
           <Grid item xs={3}>
-            <FormControl variant="standard" className="w-100">
+            <FormControl
+              variant="standard"
+              className="w-100"
+              error={errors.timeToSale}
+            >
               <InputLabel>
                 {props.intl.formatMessage({
                   ...messages.timeToSale,
@@ -1125,15 +1166,17 @@ export function Analysis(props) {
                   <InputAdornment position="start">Month</InputAdornment>
                 }
               />
-              {errors.timeToSale && (
-                <p className={classes.validation}>
-                  {errors.timeToSale.message}
-                </p>
-              )}
+              <FormHelperText>
+                {errors.timeToSale ? errorMsg : ''}
+              </FormHelperText>
             </FormControl>
           </Grid>
           <Grid item xs={3}>
-            <FormControl variant="standard" className="w-100">
+            <FormControl
+              variant="standard"
+              className="w-100"
+              error={errors.loanEarlyRepaymentFee}
+            >
               <InputLabel>
                 {props.intl.formatMessage({
                   ...messages.loanEarlyRepaymentFee,
@@ -1156,15 +1199,17 @@ export function Analysis(props) {
                   <InputAdornment position="start">%</InputAdornment>
                 }
               />
-              {errors.loanEarlyRepaymentFee && (
-                <p className={classes.validation}>
-                  {errors.loanEarlyRepaymentFee.message}
-                </p>
-              )}
+              <FormHelperText>
+                {errors.loanEarlyRepaymentFee ? errorMsg : ''}
+              </FormHelperText>
             </FormControl>
           </Grid>
           <Grid item xs={3}>
-            <FormControl variant="standard" className="w-100">
+            <FormControl
+              variant="standard"
+              className="w-100"
+              error={errors.exitBrokerFee}
+            >
               <InputLabel>
                 {props.intl.formatMessage({
                   ...messages.exitBrokerFee,
@@ -1187,17 +1232,19 @@ export function Analysis(props) {
                   <InputAdornment position="start">%</InputAdornment>
                 }
               />
-              {errors.exitBrokerFee && (
-                <p className={classes.validation}>
-                  {errors.exitBrokerFee.message}
-                </p>
-              )}
+              <FormHelperText>
+                {errors.exitBrokerFee ? errorMsg : ''}
+              </FormHelperText>
             </FormControl>
           </Grid>
         </Grid>
         <Grid item container spacing={6} className="mt-20">
           <Grid item xs={3}>
-            <FormControl variant="standard" className="w-100">
+            <FormControl
+              variant="standard"
+              className="w-100"
+              error={errors.irsRate}
+            >
               <InputLabel>
                 {props.intl.formatMessage({
                   ...messages.irsRate,
@@ -1220,13 +1267,15 @@ export function Analysis(props) {
                   <InputAdornment position="start">%</InputAdornment>
                 }
               />
-              {errors.IRSrate && (
-                <p className={classes.validation}>{errors.IRSrate.message}</p>
-              )}
+              <FormHelperText>{errors.irsRate ? errorMsg : ''}</FormHelperText>
             </FormControl>
           </Grid>
           <Grid item xs={3}>
-            <FormControl variant="standard" className="w-100">
+            <FormControl
+              variant="standard"
+              className="w-100"
+              error={errors.capitalGainsTaxBase}
+            >
               <InputLabel>
                 {props.intl.formatMessage({
                   ...messages.capitalGainsTaxBase,
@@ -1249,11 +1298,9 @@ export function Analysis(props) {
                   <InputAdornment position="start">%</InputAdornment>
                 }
               />
-              {errors.capitalGainsTaxBase && (
-                <p className={classes.validation}>
-                  {errors.capitalGainsTaxBase.message}
-                </p>
-              )}
+              <FormHelperText>
+                {errors.capitalGainsTaxBase ? errorMsg : ''}
+              </FormHelperText>
             </FormControl>
           </Grid>
         </Grid>
@@ -1263,7 +1310,7 @@ export function Analysis(props) {
 
   function renderValuationModelConfigurationAccordion() {
     return (
-      <Grid item container spacing={6} className="mb-10">
+      <Grid item container spacing={6} className="mb-10" error={errors.GCPA}>
         <Grid item xs={3}>
           <FormControl variant="standard" className="w-100">
             <InputLabel>
@@ -1288,13 +1335,15 @@ export function Analysis(props) {
                 <InputAdornment position="start">%</InputAdornment>
               }
             />
-            {errors.GCPA && (
-              <p className={classes.validation}>{errors.GCPA.message}</p>
-            )}
+            <FormHelperText>{errors.GCPA ? errorMsg : ''}</FormHelperText>
           </FormControl>
         </Grid>
         <Grid item xs={3}>
-          <FormControl variant="standard" className="w-100">
+          <FormControl
+            variant="standard"
+            className="w-100"
+            error={errors.floor}
+          >
             <InputLabel>
               {props.intl.formatMessage({
                 ...messages.floor,
@@ -1317,13 +1366,11 @@ export function Analysis(props) {
                 <InputAdornment position="start">%</InputAdornment>
               }
             />
-            {errors.floor && (
-              <p className={classes.validation}>{errors.floor.message}</p>
-            )}
+            <FormHelperText>{errors.floor ? errorMsg : ''}</FormHelperText>
           </FormControl>
         </Grid>
         <Grid item xs={3}>
-          <FormControl variant="standard" className="w-100">
+          <FormControl variant="standard" className="w-100" error={errors.cap}>
             <InputLabel>
               {props.intl.formatMessage({
                 ...messages.cap,
@@ -1346,9 +1393,7 @@ export function Analysis(props) {
                 <InputAdornment position="start">%</InputAdornment>
               }
             />
-            {errors.cap && (
-              <p className={classes.validation}>{errors.cap.message}</p>
-            )}
+            <FormHelperText>{errors.cap ? errorMsg : ''}</FormHelperText>
           </FormControl>
         </Grid>
         <Grid item container spacing={6}>
@@ -1382,7 +1427,11 @@ export function Analysis(props) {
             </FormControl>
           </Grid>
           <Grid item xs={3}>
-            <FormControl variant="standard" className="w-100">
+            <FormControl
+              variant="standard"
+              className="w-100"
+              error={errors.mop}
+            >
               <InputLabel>
                 {props.intl.formatMessage({
                   ...messages.minObservationsForPercentile,
@@ -1405,9 +1454,7 @@ export function Analysis(props) {
                   <InputAdornment position="start">#</InputAdornment>
                 }
               />
-              {errors.MOP && (
-                <p className={classes.validation}>{errors.MOP.message}</p>
-              )}
+              <FormHelperText>{errors.mop ? errorMsg : ''}</FormHelperText>
             </FormControl>
           </Grid>
         </Grid>

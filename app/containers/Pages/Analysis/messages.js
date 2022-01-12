@@ -354,4 +354,8 @@ export default defineMessages({
     id: `${scope}.asking`,
     defaultMessage: 'Asking',
   },
+  errors: {
+    id: `${scope}.errors`,
+    defaultMessage: 'Input is required.',
+  },
 });
