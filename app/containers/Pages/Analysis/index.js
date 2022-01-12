@@ -1,5 +1,5 @@
-import React, { memo, useEffect, useState } from 'react';
-// import PropTypes from 'prop-types';
+/* eslint-disable react/no-array-index-key */
+import React, { memo, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -8,7 +8,6 @@ import { Helmet } from 'react-helmet';
 import { injectIntl } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-
 import { useInjectReducer } from 'utils/injectReducer';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -29,37 +28,38 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import InfoIcon from '@material-ui/icons/Info';
 import { DataGrid } from '@material-ui/data-grid';
-
+import parse from 'autosuggest-highlight/parse';
+import match from 'autosuggest-highlight/match';
+import AutoComplete from 'components/AutoComplete';
+import SearchIcon from '@material-ui/icons/Search';
 import messages from './messages';
 import PaperMap from '../../../components/PaperMap';
 import {
   makeSelectAnalysis,
   makeSelectLocations,
-  makeSelectLocation,
   makeSelectTypes,
-  makeSelectType,
   makeSelectTypologies,
-  makeSelectTypology,
   makeSelectConditions,
-  makeSelectCondition,
-  makeSelectAcquisitionTypes,
-  makeSelectAcquisitionType,
   makeSelectCIPs,
-  makeSelectCIP,
   makeSelectInputs,
   makeSelectAnalysisData,
   makeSelectIsGettingAnalysisData,
+  makeSelectAcquisitionTypes,
+  makeSelectAnalyzeButtonState,
+  makeSelectStatus,
 } from './selectors';
 import reducer from './reducer';
 import {
   getLocations,
   getTypes,
-  getTypologyies,
+  getTypologies,
   getConditions,
   getAcquisitionTypes,
   getAnalysisData,
   getCIPs,
   setValue,
+  setAnalyzeButtonState,
+  getStatus,
 } from './actions';
 
 const useStyles = makeStyles(theme => ({
@@ -99,19 +99,10 @@ const useStyles = makeStyles(theme => ({
   },
   customizeBtn: {
     color: 'white',
-    backgroundColor: '#4472C4',
     marginTop: '48px',
     marginBottom: '48px',
-    '&:hover': {
-      color: 'white',
-      backgroundColor: '#4472C4',
-    },
-  },
-  w100: {
-    width: '100%',
   },
   tableHead: {
-    backgroundColor: '#4472C4',
     color: 'white',
     fontSize: '14px',
   },
@@ -125,12 +116,16 @@ const useStyles = makeStyles(theme => ({
     },
   },
   fixHeight: {
-    maxHeight: '325px',
+    minHeight: '300px',
+    maxHeight: '300px',
   },
-  iconmr: {
-    marginLeft: '10px',
-    marginBottom: '5px',
+  iconMr: {
+    marginLeft: '5px',
+    marginBottom: '1px',
     padding: '0px',
+  },
+  iconSize: {
+    width: '16px',
   },
   labelWidth: {
     minWidth: '170px',
@@ -144,18 +139,12 @@ const useStyles = makeStyles(theme => ({
   accordion: {
     width: '100%',
     marginTop: '32px',
-    marginRight: '35px',
   },
   validation: {
     color: '#bf1650',
   },
 }));
 const columns = [
-  {
-    field: 'id',
-    headerName: 'ID',
-    width: 90,
-  },
   {
     field: 'location',
     headerName: 'Location',
@@ -212,52 +201,52 @@ export function Analysis(props) {
   useEffect(() => {
     props.getLocations();
     props.getTypes();
-    props.getTypologyies();
+    props.getTypologies();
+    props.getStatus();
     props.getConditions();
-    props.getCIPs();
     props.getAcquisitionTypes();
     props.getCIPs();
   }, []);
 
   const validationSchema = yup.object().shape({
-    minprice: yup.string().required('⚠ Min Price is empty'),
-    maxprice: yup.string().required('⚠ Max Price is empty'),
-    minarea: yup.string().required('⚠ Min Area is empty'),
-    maxarea: yup.string().required('⚠ Max Area is empty'),
-    mincapital: yup.string().required('⚠ Min Captial is empty'),
-    maxcapital: yup.string().required('⚠ Max Captial is empty'),
-    bidask: yup.string().required('⚠ Bid Ask is empty'),
-    financingrate: yup.string().required('⚠ Financing Rate is empty'),
-    entryfee: yup.string().required('⚠ Entry Fee is empty'),
-    stampduty: yup.string().required('⚠ Stamp Duty is empty'),
-    lrwithm: yup.string().required('⚠ Land Registry with Mortgage is empty'),
-    lrwithoutm: yup
+    minAskingPrice: yup.string().required('⚠ Min Asking Price is empty'),
+    maxAskingPrice: yup.string().required('⚠ Max Asking Price is empty'),
+    minUsefulArea: yup.string().required('⚠ Min Useful Area is empty'),
+    maxUsefulArea: yup.string().required('⚠ Max Useful Area is empty'),
+    minCapital: yup.string().required('⚠ Min Captial is empty'),
+    maxCapital: yup.string().required('⚠ Max Captial is empty'),
+    bidAsk: yup.string().required('⚠ Bid Ask is empty'),
+    financingRate: yup.string().required('⚠ Financing Rate is empty'),
+    entryFee: yup.string().required('⚠ Entry Fee is empty'),
+    stampDuty: yup.string().required('⚠ Stamp Duty is empty'),
+    LRwithM: yup.string().required('⚠ Land Registry with Mortgage is empty'),
+    LRwithoutM: yup
       .string()
       .required('⚠ Land Registry without Mortgage is empty'),
-    interestrate: yup.string().required('⚠ Interest Rate is empty'),
-    bankcommission: yup.string().required('⚠ Bank Commission is empty'),
+    interestRate: yup.string().required('⚠ Interest Rate is empty'),
+    bankCommission: yup.string().required('⚠ Bank Commission is empty'),
     amortization: yup.string().required('⚠ Amortization is empty'),
-    stampdutymortgage: yup.string().required('⚠ Stamp Duty Mortgage is empty'),
-    stampdutyinterests: yup
+    stampDutyMortgage: yup.string().required('⚠ Stamp Duty Mortgage is empty'),
+    stampDutyInterests: yup
       .string()
       .required('⚠ Stamp Duty Interests is empty'),
-    condominiumcosts: yup.string().required('⚠ Condominium Costs is empty'),
-    propertytaxrate: yup.string().required('⚠ Property Tax Rate is empty'),
-    timetosale: yup.string().required('⚠ Time to Sale is empty'),
-    irsrate: yup.string().required('⚠ IRS Rate is empty'),
-    exitbrokerfee: yup.string().required('⚠ Exit Broker Fee is empty'),
-    loanearlyrepaymentfee: yup
+    condominiumCosts: yup.string().required('⚠ Condominium Costs is empty'),
+    propertyTaxRate: yup.string().required('⚠ Property Tax Rate is empty'),
+    timeToSale: yup.string().required('⚠ Time to Sale is empty'),
+    IRSrate: yup.string().required('⚠ IRS Rate is empty'),
+    exitBrokerFee: yup.string().required('⚠ Exit Broker Fee is empty'),
+    loanEarlyRepaymentFee: yup
       .string()
       .required('⚠ Loan Early Repayment Fee is empty'),
-    capitalgainstaxbase: yup
+    capitalGainsTaxBase: yup
       .string()
       .required('⚠ Capital gains Tax Base is empty'),
-    gcpa: yup
+    GCPA: yup
       .string()
       .required('⚠ Gross Construction to Private Area is empty'),
     floor: yup.string().required('⚠ Floor is empty'),
     cap: yup.string().required('⚠ Cap is empty'),
-    mop: yup.string().required('⚠ Min Observations for Percentile is empty'),
+    MOP: yup.string().required('⚠ Min Observations for Percentile is empty'),
   });
   const {
     register,
@@ -266,1149 +255,1061 @@ export function Analysis(props) {
   } = useForm({
     resolver: yupResolver(validationSchema),
   });
-
   const onSubmit = data => {
     props.setValue(data);
     props.getAnalysisData(data);
-    setBtnState(true);
+    props.setAnalyzeButtonState(true);
   };
 
   function handleChange() {
-    setBtnState(false);
+    props.setAnalyzeButtonState(false);
   }
 
   const classes = useStyles();
-  const [btnState, setBtnState] = useState(false);
-  // const locationField = register('location', { required: true });
+
   function renderPropertyForm() {
     return (
-      <Grid item container>
+      <Grid container direction="column" justifyContent="flex-start">
+        <Grid item className="mb-15">
+          <Typography variant="h6">
+            {props.intl.formatMessage({
+              ...messages.propertyInformation,
+            })}
+          </Typography>
+        </Grid>
+        <Grid item container xs>
+          <Grid item container spacing={6}>
+            <Grid item xs={6}>
+              <FormControl variant="standard" className="w-100">
+                <AutoComplete
+                  {...register('location')}
+                  defaultValue={props.inputs.location}
+                  onChange={handleChange}
+                  options={props.locations}
+                  label={props.intl.formatMessage({ ...messages.location })}
+                  popupIcon={<SearchIcon />}
+                  renderOption={(option, value) => {
+                    const matches = match(option, value.inputValue);
+                    const parts = parse(option, matches);
+                    return (
+                      <div>
+                        {parts.map((part, index) => (
+                          <span
+                            key={index}
+                            style={{ fontWeight: part.highlight ? 700 : 400 }}
+                          >
+                            {part.text}
+                          </span>
+                        ))}
+                      </div>
+                    );
+                  }}
+                />
+              </FormControl>
+            </Grid>
+          </Grid>
+          <Grid item container spacing={6}>
+            <Grid item xs={3}>
+              <FormControl variant="standard" className="w-100">
+                <InputLabel>
+                  {props.intl.formatMessage({
+                    ...messages.type,
+                  })}
+                </InputLabel>
+                <Select
+                  defaultValue={props.inputs.type}
+                  {...register('type')}
+                  onChange={handleChange}
+                >
+                  {props.types.map(index => (
+                    <MenuItem key={index} value={index}>
+                      {index}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item xs={3}>
+              <FormControl variant="standard" className="w-100">
+                <InputLabel>
+                  {props.intl.formatMessage({
+                    ...messages.typology,
+                  })}
+                </InputLabel>
+                <Select
+                  defaultValue={props.inputs.typology}
+                  {...register('typology')}
+                  onChange={handleChange}
+                >
+                  {props.typologies.map(index => (
+                    <MenuItem key={index} value={index}>
+                      {index}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item xs={3}>
+              <FormControl variant="standard" className="w-100">
+                <InputLabel>
+                  {props.intl.formatMessage({
+                    ...messages.status,
+                  })}
+                </InputLabel>
+                <Select
+                  defaultValue={props.inputs.status}
+                  {...register('status')}
+                  onChange={handleChange}
+                >
+                  {props.status.map(index => (
+                    <MenuItem key={index} value={index}>
+                      {index}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item xs={3}>
+              <FormControl variant="standard" className="w-100">
+                <InputLabel>
+                  {props.intl.formatMessage({
+                    ...messages.condition,
+                  })}
+                </InputLabel>
+                <Select
+                  defaultValue={props.inputs.condition}
+                  {...register('condition')}
+                  onChange={handleChange}
+                >
+                  {props.conditions.map(index => (
+                    <MenuItem key={index} value={index}>
+                      {index}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Grid>
+          </Grid>
+          <Grid item container spacing={6}>
+            <Grid item xs={3}>
+              <FormControl variant="standard" className="w-100">
+                <InputLabel>
+                  {props.intl.formatMessage({
+                    ...messages.minAskingPrice,
+                  })}
+                </InputLabel>
+                <Input
+                  type="number"
+                  defaultValue={props.inputs.minAskingPrice}
+                  {...register('minAskingPrice')}
+                  startAdornment={
+                    <InputAdornment position="start">€</InputAdornment>
+                  }
+                />
+                {errors.minAskingPrice && (
+                  <p className={classes.validation}>
+                    {errors.minAskingPrice.message}
+                  </p>
+                )}
+              </FormControl>
+            </Grid>
+            <Grid item xs={3}>
+              <FormControl variant="standard" className="w-100">
+                <InputLabel>
+                  {props.intl.formatMessage({
+                    ...messages.maxAskingPrice,
+                  })}
+                </InputLabel>
+                <Input
+                  type="number"
+                  defaultValue={props.inputs.maxAskingPrice}
+                  {...register('maxAskingPrice')}
+                  startAdornment={
+                    <InputAdornment position="start">€</InputAdornment>
+                  }
+                />
+                {errors.maxAskingPrice && (
+                  <p className={classes.validation}>
+                    {errors.maxAskingPrice.message}
+                  </p>
+                )}
+              </FormControl>
+            </Grid>
+            <Grid item xs={3}>
+              <FormControl variant="standard" className="w-100">
+                <InputLabel>
+                  {props.intl.formatMessage({
+                    ...messages.minUsefulArea,
+                  })}
+                </InputLabel>
+                <Input
+                  type="number"
+                  defaultValue={props.inputs.minUsefulArea}
+                  {...register('minUsefulArea')}
+                  startAdornment={
+                    <InputAdornment position="start">m²</InputAdornment>
+                  }
+                />
+                {errors.minUsefulArea && (
+                  <p className={classes.validation}>
+                    {errors.minUsefulArea.message}
+                  </p>
+                )}
+              </FormControl>
+            </Grid>
+            <Grid item xs={3}>
+              <FormControl variant="standard" className="w-100">
+                <InputLabel>
+                  {props.intl.formatMessage({
+                    ...messages.maxUsefulArea,
+                  })}
+                </InputLabel>
+                <Input
+                  type="number"
+                  defaultValue={props.inputs.maxUsefulArea}
+                  {...register('maxUsefulArea')}
+                  startAdornment={
+                    <InputAdornment position="start">m²</InputAdornment>
+                  }
+                />
+                {errors.maxUsefulArea && (
+                  <p className={classes.validation}>
+                    {errors.maxUsefulArea.message}
+                  </p>
+                )}
+              </FormControl>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
+    );
+  }
+
+  function renderAccordionGroup() {
+    return (
+      <Grid container direction="column" className="w-100 pt-30">
+        <Grid item className="pt-30">
+          <Accordion>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+              <Typography>
+                {props.intl.formatMessage({
+                  ...messages.investmentInformation,
+                })}
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              {renderInvestmentInformationAccordion()}
+            </AccordionDetails>
+          </Accordion>
+        </Grid>
+        <Grid item className="pt-30">
+          <Accordion>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+              <Typography>
+                {props.intl.formatMessage({
+                  ...messages.otherInvestmentInformation,
+                })}
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              {renderOtherInvestmentInformationAccordion()}
+            </AccordionDetails>
+          </Accordion>
+        </Grid>
+        <Grid item className="pt-30">
+          <Accordion>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+              <Typography>
+                {props.intl.formatMessage({
+                  ...messages.valuationModelConfiguration,
+                })}
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              {renderValuationModelConfigurationAccordion()}
+            </AccordionDetails>
+          </Accordion>
+        </Grid>
+      </Grid>
+    );
+  }
+
+  function renderInvestmentInformationAccordion() {
+    return (
+      <Grid item container spacing={6} className="mb-10">
+        <Grid item xs={3}>
+          <FormControl variant="standard" className="w-100">
+            <InputLabel>
+              {props.intl.formatMessage({
+                ...messages.minCapital,
+              })}
+              <Tooltip
+                title={props.intl.formatMessage({
+                  ...messages.minCapitalInfo,
+                })}
+              >
+                <IconButton className={classes.iconMr}>
+                  <InfoIcon className={classes.iconSize} color="primary" />
+                </IconButton>
+              </Tooltip>
+            </InputLabel>
+            <Input
+              type="number"
+              defaultValue={props.inputs.minCapital}
+              {...register('minCapital')}
+              startAdornment={
+                <InputAdornment position="start">&#8364;</InputAdornment>
+              }
+            />
+            {errors.minCapital && (
+              <p className={classes.validation}>{errors.minCapital.message}</p>
+            )}
+          </FormControl>
+        </Grid>
+        <Grid item xs={3}>
+          <FormControl variant="standard" className="w-100">
+            <InputLabel>
+              {props.intl.formatMessage({
+                ...messages.maxCapital,
+              })}
+              <Tooltip
+                title={props.intl.formatMessage({
+                  ...messages.maxCapitalInfo,
+                })}
+              >
+                <IconButton className={classes.iconMr}>
+                  <InfoIcon className={classes.iconSize} color="primary" />
+                </IconButton>
+              </Tooltip>
+            </InputLabel>
+            <Input
+              type="number"
+              defaultValue={props.inputs.maxCapital}
+              {...register('maxCapital')}
+              startAdornment={
+                <InputAdornment position="start">&#8364;</InputAdornment>
+              }
+            />
+            {errors.maxCapital && (
+              <p className={classes.validation}>{errors.maxCapital.message}</p>
+            )}
+          </FormControl>
+        </Grid>
+        <Grid item container spacing={6}>
+          <Grid item xs={3}>
+            <FormControl variant="standard" className="w-100">
+              <InputLabel>
+                {props.intl.formatMessage({
+                  ...messages.bidAsk,
+                })}
+                <Tooltip
+                  title={props.intl.formatMessage({
+                    ...messages.bidAskInfo,
+                  })}
+                >
+                  <IconButton className={classes.iconMr}>
+                    <InfoIcon className={classes.iconSize} color="primary" />
+                  </IconButton>
+                </Tooltip>
+              </InputLabel>
+              <Input
+                type="number"
+                defaultValue={props.inputs.bidAsk}
+                {...register('bidAsk')}
+                startAdornment={
+                  <InputAdornment position="start">%</InputAdornment>
+                }
+              />
+              {errors.bidAsk && (
+                <p className={classes.validation}>{errors.bidAsk.message}</p>
+              )}
+            </FormControl>
+          </Grid>
+          <Grid item xs={3}>
+            <FormControl variant="standard" className="w-100">
+              <InputLabel>
+                {props.intl.formatMessage({
+                  ...messages.financingRate,
+                })}
+                <Tooltip
+                  title={props.intl.formatMessage({
+                    ...messages.financingRateInfo,
+                  })}
+                >
+                  <IconButton className={classes.iconMr}>
+                    <InfoIcon className={classes.iconSize} color="primary" />
+                  </IconButton>
+                </Tooltip>
+              </InputLabel>
+              <Input
+                type="number"
+                defaultValue={props.inputs.financingRate}
+                {...register('financingRate')}
+                startAdornment={
+                  <InputAdornment position="start">%</InputAdornment>
+                }
+              />
+              {errors.financingRate && (
+                <p className={classes.validation}>
+                  {errors.financingRate.message}
+                </p>
+              )}
+            </FormControl>
+          </Grid>
+        </Grid>
+      </Grid>
+    );
+  }
+
+  function renderOtherInvestmentInformationAccordion() {
+    return (
+      <Grid direction="column" justifyContent="flex-start" className="mb-10">
+        {renderAcquisitionAssumptions()}
+        {renderFinanceAssumptions()}
+        {renderOperatingAssumptions()}
+        {renderExitAssumptions()}
+      </Grid>
+    );
+  }
+
+  function renderAcquisitionAssumptions() {
+    return (
+      <Grid container>
         <Grid item>
-          <FormControl variant="standard" className={classes.doubleWidth}>
-            <InputLabel
-              id="demo-simple-select-standard-label"
-              className={classes.labelWidth}
-            >
-              {props.intl.formatMessage({
-                ...messages.location,
-              })}
-              <Tooltip
-                title={props.intl.formatMessage({
-                  ...messages.tooltip,
-                })}
-              >
-                <IconButton className={classes.iconmr}>
-                  <InfoIcon />
-                </IconButton>
-              </Tooltip>
-            </InputLabel>
-            <Select
-              labelId="demo-simple-select-standard-label"
-              id="demo-simple-select-standard"
-              defaultValue={props.inputs.location}
-              {...register('location')}
-              onChange={handleChange}
-            >
-              {props.locations.map(index => (
-                <MenuItem key={index} value={index}>
-                  {index}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-          <FormControl variant="standard" className={classes.ctrlWidth}>
-            <InputLabel
-              id="demo-simple-select-standard-label"
-              className={classes.labelWidth}
-            >
-              {props.intl.formatMessage({
-                ...messages.type,
-              })}
-              <Tooltip
-                title={props.intl.formatMessage({
-                  ...messages.tooltip,
-                })}
-              >
-                <IconButton className={classes.iconmr}>
-                  <InfoIcon />
-                </IconButton>
-              </Tooltip>
-            </InputLabel>
-            <Select
-              labelId="demo-simple-select-standard-label"
-              id="demo-simple-select-standard"
-              defaultValue={props.inputs.type}
-              {...register('type')}
-              onChange={handleChange}
-            >
-              {props.types.map(index => (
-                <MenuItem key={index} value={index}>
-                  {index}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-          <FormControl variant="standard" className={classes.ctrlWidth}>
-            <InputLabel
-              id="demo-simple-select-standard-label"
-              className={classes.labelWidth}
-            >
-              {props.intl.formatMessage({
-                ...messages.typology,
-              })}
-              <Tooltip
-                title={props.intl.formatMessage({
-                  ...messages.tooltip,
-                })}
-              >
-                <IconButton className={classes.iconmr}>
-                  <InfoIcon />
-                </IconButton>
-              </Tooltip>
-            </InputLabel>
-            <Select
-              labelId="demo-simple-select-standard-label"
-              id="demo-simple-select-standard"
-              defaultValue={props.inputs.typology}
-              {...register('typology')}
-              onChange={handleChange}
-            >
-              {props.typologies.map(index => (
-                <MenuItem key={index} value={index}>
-                  {index}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-          <FormControl variant="standard" className={classes.ctrlEndWidth}>
-            <InputLabel
-              id="demo-simple-select-standard-label"
-              className={classes.labelWidth}
-            >
-              {props.intl.formatMessage({
-                ...messages.condition,
-              })}
-              <Tooltip
-                title={props.intl.formatMessage({
-                  ...messages.tooltip,
-                })}
-              >
-                <IconButton className={classes.iconmr}>
-                  <InfoIcon />
-                </IconButton>
-              </Tooltip>
-            </InputLabel>
-            <Select
-              labelId="demo-simple-select-standard-label"
-              id="demo-simple-select-standard"
-              defaultValue={props.inputs.condition}
-              {...register('condition')}
-              onChange={handleChange}
-            >
-              {props.conditions.map(index => (
-                <MenuItem key={index} value={index}>
-                  {index}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </Grid>
-        <Grid item className={classes.rowSpacing}>
-          <FormControl variant="standard" className={classes.inputWidth}>
-            <InputLabel
-              id="demo-simple-select-standard-label"
-              className={classes.labelWidth}
-            >
-              {props.intl.formatMessage({
-                ...messages.minPrice,
-              })}
-              <Tooltip
-                title={props.intl.formatMessage({
-                  ...messages.tooltip,
-                })}
-              >
-                <IconButton className={classes.iconmr}>
-                  <InfoIcon />
-                </IconButton>
-              </Tooltip>
-            </InputLabel>
-            <Input
-              id="standard-adornment-amount"
-              type="number"
-              defaultValue={props.inputs.minprice}
-              {...register('minprice')}
-              startAdornment={
-                <InputAdornment position="start">$</InputAdornment>
-              }
-            />
-            {errors.minprice && (
-              <p className={classes.validation}>{errors.minprice.message}</p>
-            )}
-          </FormControl>
-          <FormControl variant="standard" className={classes.inputWidth}>
-            <InputLabel
-              id="demo-simple-select-standard-label"
-              className={classes.labelWidth}
-            >
-              {props.intl.formatMessage({
-                ...messages.maxPrice,
-              })}
-              <Tooltip
-                title={props.intl.formatMessage({
-                  ...messages.tooltip,
-                })}
-              >
-                <IconButton className={classes.iconmr}>
-                  <InfoIcon />
-                </IconButton>
-              </Tooltip>
-            </InputLabel>
-            <Input
-              id="standard-adornment-amount"
-              type="number"
-              defaultValue={props.inputs.maxprice}
-              {...register('maxprice')}
-              startAdornment={
-                <InputAdornment position="start">$</InputAdornment>
-              }
-            />
-            {errors.maxprice && (
-              <p className={classes.validation}>{errors.maxprice.message}</p>
-            )}
-          </FormControl>
-          <FormControl variant="standard" className={classes.inputWidth}>
-            <InputLabel
-              id="demo-simple-select-standard-label"
-              className={classes.labelWidth}
-            >
-              {props.intl.formatMessage({
-                ...messages.minArea,
-              })}
-              <Tooltip
-                title={props.intl.formatMessage({
-                  ...messages.tooltip,
-                })}
-              >
-                <IconButton className={classes.iconmr}>
-                  <InfoIcon />
-                </IconButton>
-              </Tooltip>
-            </InputLabel>
-            <Input
-              id="standard-adornment-amount"
-              type="number"
-              defaultValue={props.inputs.minarea}
-              {...register('minarea')}
-              startAdornment={
-                <InputAdornment position="start">m2</InputAdornment>
-              }
-            />
-            {errors.minarea && (
-              <p className={classes.validation}>{errors.minarea.message}</p>
-            )}
-          </FormControl>
-          <FormControl variant="standard" className={classes.inputEndWidth}>
-            <InputLabel
-              id="demo-simple-select-standard-label"
-              className={classes.labelWidth}
-            >
-              {props.intl.formatMessage({
-                ...messages.maxArea,
-              })}
-              <Tooltip
-                title={props.intl.formatMessage({
-                  ...messages.tooltip,
-                })}
-              >
-                <IconButton className={classes.iconmr}>
-                  <InfoIcon />
-                </IconButton>
-              </Tooltip>
-            </InputLabel>
-            <Input
-              id="standard-adornment-amount"
-              type="number"
-              defaultValue={props.inputs.maxarea}
-              {...register('maxarea')}
-              startAdornment={
-                <InputAdornment position="start">m2</InputAdornment>
-              }
-            />
-            {errors.maxarea && (
-              <p className={classes.validation}>{errors.maxarea.message}</p>
-            )}
-          </FormControl>
-        </Grid>
-      </Grid>
-    );
-  }
-
-  function renderAccordion() {
-    return (
-      <Grid className={classes.accordion}>
-        <Accordion>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Typography>
-              {props.intl.formatMessage({
-                ...messages.investmentInformation,
-              })}
-            </Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Typography>{renderAcod1()}</Typography>
-          </AccordionDetails>
-        </Accordion>
-        <Accordion>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel2a-content"
-            id="panel2a-header"
-          >
-            <Typography>
-              {props.intl.formatMessage({
-                ...messages.otherInvestmentInformation,
-              })}
-            </Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Typography>{renderAcod2()}</Typography>
-          </AccordionDetails>
-        </Accordion>
-        <Accordion>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel3a-content"
-            id="panel3a-header"
-          >
-            <Typography>
-              {props.intl.formatMessage({
-                ...messages.valuationModelConfiguration,
-              })}
-            </Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Typography>{renderAcod3()}</Typography>
-          </AccordionDetails>
-        </Accordion>
-      </Grid>
-    );
-  }
-
-  function renderAcod1() {
-    return (
-      <Grid>
-        <FormControl variant="standard" className={classes.inputWidth}>
-          <InputLabel
-            id="demo-simple-select-standard-label"
-            className={classes.labelWidth}
-          >
-            {props.intl.formatMessage({
-              ...messages.minCapital,
-            })}
-            <Tooltip
-              title={props.intl.formatMessage({
-                ...messages.tooltip,
-              })}
-            >
-              <IconButton className={classes.iconmr}>
-                <InfoIcon />
-              </IconButton>
-            </Tooltip>
-          </InputLabel>
-          <Input
-            id="standard-adornment-amount"
-            type="number"
-            defaultValue={props.inputs.mincapital}
-            {...register('mincapital')}
-            startAdornment={
-              <InputAdornment position="start">&#8364;</InputAdornment>
-            }
-          />
-          {errors.mincapital && (
-            <p className={classes.validation}>{errors.mincapital.message}</p>
-          )}
-        </FormControl>
-        <FormControl variant="standard" className={classes.inputWidth}>
-          <InputLabel
-            htmlFor="standard-adornment-amount"
-            className={classes.labelWidth}
-          >
-            {props.intl.formatMessage({
-              ...messages.maxCapital,
-            })}
-            <Tooltip
-              title={props.intl.formatMessage({
-                ...messages.tooltip,
-              })}
-            >
-              <IconButton className={classes.iconmr}>
-                <InfoIcon />
-              </IconButton>
-            </Tooltip>
-          </InputLabel>
-          <Input
-            id="standard-adornment-amount"
-            type="number"
-            defaultValue={props.inputs.maxcapital}
-            {...register('maxcapital')}
-            startAdornment={
-              <InputAdornment position="start">&#8364;</InputAdornment>
-            }
-          />
-          {errors.maxcapital && (
-            <p className={classes.validation}>{errors.maxcapital.message}</p>
-          )}
-        </FormControl>
-        <FormControl variant="standard" className={classes.inputWidth}>
-          <InputLabel
-            id="demo-simple-select-standard-label"
-            className={classes.labelWidth}
-          >
-            {props.intl.formatMessage({
-              ...messages.bidAsk,
-            })}
-            <Tooltip
-              title={props.intl.formatMessage({
-                ...messages.tooltip,
-              })}
-            >
-              <IconButton className={classes.iconmr}>
-                <InfoIcon />
-              </IconButton>
-            </Tooltip>
-          </InputLabel>
-          <Input
-            id="standard-adornment-amount"
-            type="number"
-            defaultValue={props.inputs.bidask}
-            {...register('bidask')}
-            startAdornment={<InputAdornment position="start">%</InputAdornment>}
-          />
-          {errors.bidask && (
-            <p className={classes.validation}>{errors.bidask.message}</p>
-          )}
-        </FormControl>
-        <FormControl variant="standard" className={classes.inputEndWidth}>
-          <InputLabel
-            htmlFor="standard-adornment-amount"
-            className={classes.labelWidth}
-          >
-            {props.intl.formatMessage({
-              ...messages.financingRate,
-            })}
-            <Tooltip
-              title={props.intl.formatMessage({
-                ...messages.tooltip,
-              })}
-            >
-              <IconButton className={classes.iconmr}>
-                <InfoIcon />
-              </IconButton>
-            </Tooltip>
-          </InputLabel>
-          <Input
-            id="standard-adornment-amount"
-            type="number"
-            defaultValue={props.inputs.financingrate}
-            {...register('financingrate')}
-            startAdornment={<InputAdornment position="start">%</InputAdornment>}
-          />
-          {errors.financingrate && (
-            <p className={classes.validation}>{errors.financingrate.message}</p>
-          )}
-        </FormControl>
-      </Grid>
-    );
-  }
-
-  function renderAcod2() {
-    return (
-      <Grid>
-        {renderAcod21()}
-        {renderAcod22()}
-        {renderAcod23()}
-        {renderAcod24()}
-      </Grid>
-    );
-  }
-
-  function renderAcod21() {
-    return (
-      <Grid>
-        <Grid>
-          <h5 className={classes.title}>
+          <Typography className={classes.title}>
             {props.intl.formatMessage({
               ...messages.acquisitionAssumptions,
             })}
-          </h5>
+          </Typography>
         </Grid>
-        <Grid>
-          <FormControl variant="standard" className={classes.doubleWidth}>
-            <InputLabel
-              id="demo-simple-select-standard-label"
-              className={classes.labelWidth}
-            >
-              {props.intl.formatMessage({
-                ...messages.acquisitionType,
-              })}
-              <Tooltip
-                title={props.intl.formatMessage({
-                  ...messages.tooltip,
+        <Grid item container spacing={6}>
+          <Grid item xs={3}>
+            <FormControl variant="standard" className="w-100">
+              <InputLabel>
+                {props.intl.formatMessage({
+                  ...messages.acquisitionType,
                 })}
+                <Tooltip
+                  title={props.intl.formatMessage({
+                    ...messages.acquisitionTypeInfo,
+                  })}
+                >
+                  <IconButton className={classes.iconMr}>
+                    <InfoIcon className={classes.iconSize} color="primary" />
+                  </IconButton>
+                </Tooltip>
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-standard-label"
+                id="demo-simple-select-standard"
+                defaultValue={props.inputs.acquisitionType}
+                {...register('acquisitionType')}
+                onChange={handleChange}
               >
-                <IconButton className={classes.iconmr}>
-                  <InfoIcon />
-                </IconButton>
-              </Tooltip>
-            </InputLabel>
-            <Select
-              labelId="demo-simple-select-standard-label"
-              id="demo-simple-select-standard"
-              defaultValue={props.inputs.acquisitiontype}
-              {...register('acquisitiontype')}
-              onChange={handleChange}
-            >
-              {props.acquisitiontypes.map(index => (
-                <MenuItem key={index} value={index}>
-                  {index}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-          <FormControl variant="standard" className={classes.inputWidth}>
-            <InputLabel
-              id="demo-simple-select-standard-label"
-              className={classes.labelWidth}
-            >
-              {props.intl.formatMessage({
-                ...messages.entryFee,
-              })}
-              <Tooltip
-                title={props.intl.formatMessage({
-                  ...messages.tooltip,
+                {props.acquisitionTypes.map(index => (
+                  <MenuItem key={index} value={index}>
+                    {index}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid item xs={3}>
+            <FormControl variant="standard" className="w-100">
+              <InputLabel>
+                {props.intl.formatMessage({
+                  ...messages.entryFee,
                 })}
-              >
-                <IconButton className={classes.iconmr}>
-                  <InfoIcon />
-                </IconButton>
-              </Tooltip>
-            </InputLabel>
-            <Input
-              id="standard-adornment-amount"
-              type="number"
-              defaultValue={props.inputs.entryfee}
-              {...register('entryfee')}
-              startAdornment={
-                <InputAdornment position="start">%</InputAdornment>
-              }
-            />
-            {errors.entryfee && (
-              <p className={classes.validation}>{errors.entryfee.message}</p>
-            )}
-          </FormControl>
-          <FormControl variant="standard" className={classes.inputWidth}>
-            <InputLabel
-              id="demo-simple-select-standard-label"
-              className={classes.labelWidth}
-            >
-              {props.intl.formatMessage({
-                ...messages.stampDuty,
-              })}
-              <Tooltip
-                title={props.intl.formatMessage({
-                  ...messages.tooltip,
+                <Tooltip
+                  title={props.intl.formatMessage({
+                    ...messages.entryFeeInfo,
+                  })}
+                >
+                  <IconButton className={classes.iconMr}>
+                    <InfoIcon className={classes.iconSize} color="primary" />
+                  </IconButton>
+                </Tooltip>
+              </InputLabel>
+              <Input
+                type="number"
+                defaultValue={props.inputs.entryFee}
+                {...register('entryFee')}
+                startAdornment={
+                  <InputAdornment position="start">%</InputAdornment>
+                }
+              />
+              {errors.entryFee && (
+                <p className={classes.validation}>{errors.entryFee.message}</p>
+              )}
+            </FormControl>
+          </Grid>
+          <Grid item xs={3}>
+            <FormControl variant="standard" className="w-100">
+              <InputLabel>
+                {props.intl.formatMessage({
+                  ...messages.stampDuty,
                 })}
-              >
-                <IconButton className={classes.iconmr}>
-                  <InfoIcon />
-                </IconButton>
-              </Tooltip>
-            </InputLabel>
-            <Input
-              id="standard-adornment-amount"
-              type="number"
-              defaultValue={props.inputs.stampduty}
-              {...register('stampduty')}
-              startAdornment={
-                <InputAdornment position="start">%</InputAdornment>
-              }
-            />
-            {errors.stampduty && (
-              <p className={classes.validation}>{errors.stampduty.message}</p>
-            )}
-          </FormControl>
+                <Tooltip
+                  title={props.intl.formatMessage({
+                    ...messages.stampDutyInfo,
+                  })}
+                >
+                  <IconButton className={classes.iconMr}>
+                    <InfoIcon className={classes.iconSize} color="primary" />
+                  </IconButton>
+                </Tooltip>
+              </InputLabel>
+              <Input
+                type="number"
+                defaultValue={props.inputs.stampDuty}
+                {...register('stampDuty')}
+                startAdornment={
+                  <InputAdornment position="start">%</InputAdornment>
+                }
+              />
+              {errors.stampDuty && (
+                <p className={classes.validation}>{errors.stampDuty.message}</p>
+              )}
+            </FormControl>
+          </Grid>
         </Grid>
-        <Grid className={classes.rowSpacing}>
-          <FormControl variant="standard" className={classes.inputLgWidth}>
-            <InputLabel
-              id="demo-simple-select-standard-label"
-              className={classes.labelWidth}
-            >
-              {props.intl.formatMessage({
-                ...messages.landRegistryWthMortgage,
-              })}
-              <Tooltip
-                title={props.intl.formatMessage({
-                  ...messages.tooltip,
+        <Grid item container spacing={6} className="mt-20">
+          <Grid item xs={3}>
+            <FormControl variant="standard" className="w-100">
+              <InputLabel>
+                {props.intl.formatMessage({
+                  ...messages.landRegistryWithMortgage,
                 })}
-              >
-                <IconButton className={classes.iconmr}>
-                  <InfoIcon />
-                </IconButton>
-              </Tooltip>
-            </InputLabel>
-            <Input
-              id="standard-adornment-amount"
-              type="number"
-              defaultValue={props.inputs.lrwithm}
-              {...register('lrwithm')}
-              startAdornment={
-                <InputAdornment position="start">&#8364;</InputAdornment>
-              }
-            />
-            {errors.lrwithm && (
-              <p className={classes.validation}>{errors.lrwithm.message}</p>
-            )}
-          </FormControl>
-          <FormControl variant="standard" className={classes.inputEndLgWidth}>
-            <InputLabel
-              id="demo-simple-select-standard-label"
-              className={classes.labelWidth}
-            >
-              {props.intl.formatMessage({
-                ...messages.landRegistryWithoutMortgage,
-              })}
-              <Tooltip
-                title={props.intl.formatMessage({
-                  ...messages.tooltip,
+                <Tooltip
+                  title={props.intl.formatMessage({
+                    ...messages.landRegistryWithMortgageInfo,
+                  })}
+                >
+                  <IconButton className={classes.iconMr}>
+                    <InfoIcon className={classes.iconSize} color="primary" />
+                  </IconButton>
+                </Tooltip>
+              </InputLabel>
+              <Input
+                type="number"
+                defaultValue={props.inputs.landRegistryWithMortgage}
+                {...register('landRegistryWithMortgage')}
+                startAdornment={
+                  <InputAdornment position="start">&#8364;</InputAdornment>
+                }
+              />
+              {errors.LRwithM && (
+                <p className={classes.validation}>{errors.LRwithM.message}</p>
+              )}
+            </FormControl>
+          </Grid>
+          <Grid item xs={3}>
+            <FormControl variant="standard" className="w-100">
+              <InputLabel>
+                {props.intl.formatMessage({
+                  ...messages.landRegistryWithoutMortgage,
                 })}
-              >
-                <IconButton className={classes.iconmr}>
-                  <InfoIcon />
-                </IconButton>
-              </Tooltip>
-            </InputLabel>
-            <Input
-              id="standard-adornment-amount"
-              type="number"
-              defaultValue={props.inputs.lrwithoutm}
-              {...register('lrwithoutm')}
-              startAdornment={
-                <InputAdornment position="start">&#8364;</InputAdornment>
-              }
-            />
-            {errors.lrwithoutm && (
-              <p className={classes.validation}>{errors.lrwithoutm.message}</p>
-            )}
-          </FormControl>
+                <Tooltip
+                  title={props.intl.formatMessage({
+                    ...messages.landRegistryWithoutMortgageInfo,
+                  })}
+                >
+                  <IconButton className={classes.iconMr}>
+                    <InfoIcon className={classes.iconSize} color="primary" />
+                  </IconButton>
+                </Tooltip>
+              </InputLabel>
+              <Input
+                type="number"
+                defaultValue={props.inputs.landRegistryWithoutMortgage}
+                {...register('landRegistryWithoutMortgage')}
+                startAdornment={
+                  <InputAdornment position="start">&#8364;</InputAdornment>
+                }
+              />
+              {errors.LRwithoutM && (
+                <p className={classes.validation}>
+                  {errors.LRwithoutM.message}
+                </p>
+              )}
+            </FormControl>
+          </Grid>
         </Grid>
       </Grid>
     );
   }
 
-  function renderAcod22() {
+  function renderFinanceAssumptions() {
     return (
-      <Grid>
-        <Grid>
-          <h5 className={classes.title}>
+      <Grid container className="mt-20">
+        <Grid item>
+          <Typography className={classes.title}>
             {props.intl.formatMessage({
               ...messages.financeAssumptions,
             })}
-          </h5>
+          </Typography>
         </Grid>
-        <Grid>
-          <FormControl variant="standard" className={classes.inputWidth}>
-            <InputLabel
-              id="demo-simple-select-standard-label"
-              className={classes.labelWidth}
-            >
-              {props.intl.formatMessage({
-                ...messages.interestRate,
-              })}
-              <Tooltip
-                title={props.intl.formatMessage({
-                  ...messages.tooltip,
+        <Grid item container spacing={6}>
+          <Grid item xs={3}>
+            <FormControl variant="standard" className="w-100">
+              <InputLabel>
+                {props.intl.formatMessage({
+                  ...messages.interestRate,
                 })}
-              >
-                <IconButton className={classes.iconmr}>
-                  <InfoIcon />
-                </IconButton>
-              </Tooltip>
-            </InputLabel>
-            <Input
-              id="standard-adornment-amount"
-              type="number"
-              defaultValue={props.inputs.interestrate}
-              {...register('interestrate')}
-              startAdornment={
-                <InputAdornment position="start">%</InputAdornment>
-              }
-            />
-            {errors.interestrate && (
-              <p className={classes.validation}>
-                {errors.interestrate.message}
-              </p>
-            )}
-          </FormControl>
-          <FormControl variant="standard" className={classes.inputWidth}>
-            <InputLabel
-              id="demo-simple-select-standard-label"
-              className={classes.labelWidth}
-            >
-              {props.intl.formatMessage({
-                ...messages.bankCommission,
-              })}
-              <Tooltip
-                title={props.intl.formatMessage({
-                  ...messages.tooltip,
+                <Tooltip
+                  title={props.intl.formatMessage({
+                    ...messages.interestRateInfo,
+                  })}
+                >
+                  <IconButton className={classes.iconMr}>
+                    <InfoIcon className={classes.iconSize} color="primary" />
+                  </IconButton>
+                </Tooltip>
+              </InputLabel>
+              <Input
+                type="number"
+                defaultValue={props.inputs.interestRate}
+                {...register('interestRate')}
+                startAdornment={
+                  <InputAdornment position="start">%</InputAdornment>
+                }
+              />
+              {errors.interestRate && (
+                <p className={classes.validation}>
+                  {errors.interestRate.message}
+                </p>
+              )}
+            </FormControl>
+          </Grid>
+          <Grid item xs={3}>
+            <FormControl variant="standard" className="w-100">
+              <InputLabel>
+                {props.intl.formatMessage({
+                  ...messages.bankCommission,
                 })}
-              >
-                <IconButton className={classes.iconmr}>
-                  <InfoIcon />
-                </IconButton>
-              </Tooltip>
-            </InputLabel>
-            <Input
-              id="standard-adornment-amount"
-              type="number"
-              defaultValue={props.inputs.bankcommission}
-              {...register('bankcommission')}
-              startAdornment={
-                <InputAdornment position="start">&#8364;</InputAdornment>
-              }
-            />
-            {errors.bankcommission && (
-              <p className={classes.validation}>
-                {errors.bankcommission.message}
-              </p>
-            )}
-          </FormControl>
-          <FormControl variant="standard" className={classes.inputWidth}>
-            <InputLabel
-              id="demo-simple-select-standard-label"
-              className={classes.labelWidth}
-            >
-              {props.intl.formatMessage({
-                ...messages.amortization,
-              })}
-              <Tooltip
-                title={props.intl.formatMessage({
-                  ...messages.tooltip,
+                <Tooltip
+                  title={props.intl.formatMessage({
+                    ...messages.bankCommissionInfo,
+                  })}
+                >
+                  <IconButton className={classes.iconMr}>
+                    <InfoIcon className={classes.iconSize} color="primary" />
+                  </IconButton>
+                </Tooltip>
+              </InputLabel>
+              <Input
+                type="number"
+                defaultValue={props.inputs.bankCommission}
+                {...register('bankCommission')}
+                startAdornment={
+                  <InputAdornment position="start">&#8364;</InputAdornment>
+                }
+              />
+              {errors.bankCommission && (
+                <p className={classes.validation}>
+                  {errors.bankCommission.message}
+                </p>
+              )}
+            </FormControl>
+          </Grid>
+          <Grid item xs={3}>
+            <FormControl variant="standard" className="w-100">
+              <InputLabel>
+                {props.intl.formatMessage({
+                  ...messages.amortization,
                 })}
-              >
-                <IconButton className={classes.iconmr}>
-                  <InfoIcon />
-                </IconButton>
-              </Tooltip>
-            </InputLabel>
-            <Input
-              id="standard-adornment-amount"
-              type="number"
-              defaultValue={props.inputs.amortization}
-              {...register('amortization')}
-              startAdornment={
-                <InputAdornment position="start">Years</InputAdornment>
-              }
-            />
-            {errors.amortization && (
-              <p className={classes.validation}>
-                {errors.amortization.message}
-              </p>
-            )}
-          </FormControl>
+                <Tooltip
+                  title={props.intl.formatMessage({
+                    ...messages.amortizationInfo,
+                  })}
+                >
+                  <IconButton className={classes.iconMr}>
+                    <InfoIcon className={classes.iconSize} color="primary" />
+                  </IconButton>
+                </Tooltip>
+              </InputLabel>
+              <Input
+                type="number"
+                defaultValue={props.inputs.amortization}
+                {...register('amortization')}
+                startAdornment={
+                  <InputAdornment position="start">Years</InputAdornment>
+                }
+              />
+              {errors.amortization && (
+                <p className={classes.validation}>
+                  {errors.amortization.message}
+                </p>
+              )}
+            </FormControl>
+          </Grid>
         </Grid>
-        <Grid className={classes.rowSpacing}>
-          <FormControl variant="standard" className={classes.inputLgWidth}>
-            <InputLabel
-              id="demo-simple-select-standard-label"
-              className={classes.labelWidth}
-            >
-              {props.intl.formatMessage({
-                ...messages.stampDutyMortgage,
-              })}
-              <Tooltip
-                title={props.intl.formatMessage({
-                  ...messages.tooltip,
+        <Grid item container spacing={6} className="mt-20">
+          <Grid item xs={3}>
+            <FormControl variant="standard" className="w-100">
+              <InputLabel>
+                {props.intl.formatMessage({
+                  ...messages.stampDutyMortgage,
                 })}
-              >
-                <IconButton className={classes.iconmr}>
-                  <InfoIcon />
-                </IconButton>
-              </Tooltip>
-            </InputLabel>
-            <Input
-              id="standard-adornment-amount"
-              type="number"
-              defaultValue={props.inputs.stampdutymortgage}
-              {...register('stampdutymortgage')}
-              startAdornment={
-                <InputAdornment position="start">%</InputAdornment>
-              }
-            />
-            {errors.stampdutymortgage && (
-              <p className={classes.validation}>
-                {errors.stampdutymortgage.message}
-              </p>
-            )}
-          </FormControl>
-          <FormControl variant="standard" className={classes.inputEndLgWidth}>
-            <InputLabel
-              id="demo-simple-select-standard-label"
-              className={classes.labelWidth}
-            >
-              {props.intl.formatMessage({
-                ...messages.stampDutyInterests,
-              })}
-              <Tooltip
-                title={props.intl.formatMessage({
-                  ...messages.tooltip,
+                <Tooltip
+                  title={props.intl.formatMessage({
+                    ...messages.stampDutyMortgageInfo,
+                  })}
+                >
+                  <IconButton className={classes.iconMr}>
+                    <InfoIcon className={classes.iconSize} color="primary" />
+                  </IconButton>
+                </Tooltip>
+              </InputLabel>
+              <Input
+                type="number"
+                defaultValue={props.inputs.stampDutyMortgage}
+                {...register('stampDutyMortgage')}
+                startAdornment={
+                  <InputAdornment position="start">%</InputAdornment>
+                }
+              />
+              {errors.stampDutyMortgage && (
+                <p className={classes.validation}>
+                  {errors.stampDutyMortgage.message}
+                </p>
+              )}
+            </FormControl>
+          </Grid>
+          <Grid item xs={3}>
+            <FormControl variant="standard" className="w-100">
+              <InputLabel>
+                {props.intl.formatMessage({
+                  ...messages.stampDutyInterests,
                 })}
-              >
-                <IconButton className={classes.iconmr}>
-                  <InfoIcon />
-                </IconButton>
-              </Tooltip>
-            </InputLabel>
-            <Input
-              id="standard-adornment-amount"
-              type="number"
-              defaultValue={props.inputs.stampdutyinterests}
-              {...register('stampdutyinterests')}
-              startAdornment={
-                <InputAdornment position="start">%</InputAdornment>
-              }
-            />
-            {errors.stampdutyinterests && (
-              <p className={classes.validation}>
-                {errors.stampdutyinterests.message}
-              </p>
-            )}
-          </FormControl>
+                <Tooltip
+                  title={props.intl.formatMessage({
+                    ...messages.stampDutyInterestsInfo,
+                  })}
+                >
+                  <IconButton className={classes.iconMr}>
+                    <InfoIcon className={classes.iconSize} color="primary" />
+                  </IconButton>
+                </Tooltip>
+              </InputLabel>
+              <Input
+                type="number"
+                defaultValue={props.inputs.stampDutyInterests}
+                {...register('stampDutyInterests')}
+                startAdornment={
+                  <InputAdornment position="start">%</InputAdornment>
+                }
+              />
+              {errors.stampDutyInterests && (
+                <p className={classes.validation}>
+                  {errors.stampDutyInterests.message}
+                </p>
+              )}
+            </FormControl>
+          </Grid>
         </Grid>
       </Grid>
     );
   }
 
-  function renderAcod23() {
+  function renderOperatingAssumptions() {
     return (
-      <Grid>
-        <Grid>
-          <h5 className={classes.title}>
+      <Grid container className="mt-20">
+        <Grid item>
+          <Typography className={classes.title}>
             {props.intl.formatMessage({
               ...messages.operatingAssumptions,
             })}
-          </h5>
+          </Typography>
         </Grid>
-        <Grid>
-          <FormControl variant="standard" className={classes.inputWidth}>
-            <InputLabel
-              id="demo-simple-select-standard-label"
-              className={classes.labelWidth}
-            >
-              {props.intl.formatMessage({
-                ...messages.condominiumCosts,
-              })}
-              <Tooltip
-                title={props.intl.formatMessage({
-                  ...messages.tooltip,
+        <Grid item container spacing={6}>
+          <Grid item xs={3}>
+            <FormControl variant="standard" className="w-100">
+              <InputLabel>
+                {props.intl.formatMessage({
+                  ...messages.condominiumCosts,
                 })}
-              >
-                <IconButton className={classes.iconmr}>
-                  <InfoIcon />
-                </IconButton>
-              </Tooltip>
-            </InputLabel>
-            <Input
-              id="standard-adornment-amount"
-              type="number"
-              defaultValue={props.inputs.condominiumcosts}
-              {...register('condominiumcosts')}
-              startAdornment={
-                <InputAdornment position="start">&#8364;</InputAdornment>
-              }
-            />
-            {errors.condominiumcosts && (
-              <p className={classes.validation}>
-                {errors.condominiumcosts.message}
-              </p>
-            )}
-          </FormControl>
-          <FormControl variant="standard" className={classes.inputWidth}>
-            <InputLabel
-              id="demo-simple-select-standard-label"
-              className={classes.labelWidth}
-            >
-              {props.intl.formatMessage({
-                ...messages.propertyTaxRate,
-              })}
-              <Tooltip
-                title={props.intl.formatMessage({
-                  ...messages.tooltip,
+                <Tooltip
+                  title={props.intl.formatMessage({
+                    ...messages.condominiumCostsInfo,
+                  })}
+                >
+                  <IconButton className={classes.iconMr}>
+                    <InfoIcon className={classes.iconSize} color="primary" />
+                  </IconButton>
+                </Tooltip>
+              </InputLabel>
+              <Input
+                type="number"
+                defaultValue={props.inputs.condominiumCosts}
+                {...register('condominiumCosts')}
+                startAdornment={
+                  <InputAdornment position="start">&#8364;</InputAdornment>
+                }
+              />
+              {errors.condominiumCosts && (
+                <p className={classes.validation}>
+                  {errors.condominiumCosts.message}
+                </p>
+              )}
+            </FormControl>
+          </Grid>
+          <Grid item xs={3}>
+            <FormControl variant="standard" className="w-100">
+              <InputLabel>
+                {props.intl.formatMessage({
+                  ...messages.propertyTaxRate,
                 })}
-              >
-                <IconButton className={classes.iconmr}>
-                  <InfoIcon />
-                </IconButton>
-              </Tooltip>
-            </InputLabel>
-            <Input
-              id="standard-adornment-amount"
-              type="number"
-              defaultValue={props.inputs.propertytaxrate}
-              {...register('propertytaxrate')}
-              startAdornment={
-                <InputAdornment position="start">%</InputAdornment>
-              }
-            />
-            {errors.propertytaxrate && (
-              <p className={classes.validation}>
-                {errors.propertytaxrate.message}
-              </p>
-            )}
-          </FormControl>
+                <Tooltip
+                  title={props.intl.formatMessage({
+                    ...messages.propertyTaxRateInfo,
+                  })}
+                >
+                  <IconButton className={classes.iconMr}>
+                    <InfoIcon className={classes.iconSize} color="primary" />
+                  </IconButton>
+                </Tooltip>
+              </InputLabel>
+              <Input
+                type="number"
+                defaultValue={props.inputs.propertyTaxRate}
+                {...register('propertyTaxRate')}
+                startAdornment={
+                  <InputAdornment position="start">%</InputAdornment>
+                }
+              />
+              {errors.propertyTaxRate && (
+                <p className={classes.validation}>
+                  {errors.propertyTaxRate.message}
+                </p>
+              )}
+            </FormControl>
+          </Grid>
         </Grid>
       </Grid>
     );
   }
 
-  function renderAcod24() {
+  function renderExitAssumptions() {
     return (
-      <Grid>
-        <Grid>
-          <h5 className={classes.title}>
+      <Grid container className="mt-20">
+        <Grid item>
+          <Typography className={classes.title}>
             {props.intl.formatMessage({
               ...messages.exitAssumptions,
             })}
-          </h5>
+          </Typography>
         </Grid>
-        <Grid>
-          <FormControl variant="standard" className={classes.inputWidth}>
-            <InputLabel
-              id="demo-simple-select-standard-label"
-              className={classes.labelWidth}
-            >
-              {props.intl.formatMessage({
-                ...messages.timeToSale,
-              })}
-              <Tooltip
-                title={props.intl.formatMessage({
-                  ...messages.tooltip,
+        <Grid item container spacing={6}>
+          <Grid item xs={3}>
+            <FormControl variant="standard" className="w-100">
+              <InputLabel>
+                {props.intl.formatMessage({
+                  ...messages.timeToSale,
                 })}
-              >
-                <IconButton className={classes.iconmr}>
-                  <InfoIcon />
-                </IconButton>
-              </Tooltip>
-            </InputLabel>
-            <Input
-              id="standard-adornment-amount"
-              type="number"
-              defaultValue={props.inputs.timetosale}
-              {...register('timetosale')}
-              startAdornment={
-                <InputAdornment position="start">Month</InputAdornment>
-              }
-            />
-            {errors.timetosale && (
-              <p className={classes.validation}>{errors.timetosale.message}</p>
-            )}
-          </FormControl>
-          <FormControl variant="standard" className={classes.inputWidth}>
-            <InputLabel
-              id="demo-simple-select-standard-label"
-              className={classes.labelWidth}
-            >
-              {props.intl.formatMessage({
-                ...messages.irsRate,
-              })}
-              <Tooltip
-                title={props.intl.formatMessage({
-                  ...messages.tooltip,
+                <Tooltip
+                  title={props.intl.formatMessage({
+                    ...messages.timeToSaleInfo,
+                  })}
+                >
+                  <IconButton className={classes.iconMr}>
+                    <InfoIcon className={classes.iconSize} color="primary" />
+                  </IconButton>
+                </Tooltip>
+              </InputLabel>
+              <Input
+                type="number"
+                defaultValue={props.inputs.timeToSale}
+                {...register('timeToSale')}
+                startAdornment={
+                  <InputAdornment position="start">Month</InputAdornment>
+                }
+              />
+              {errors.timeToSale && (
+                <p className={classes.validation}>
+                  {errors.timeToSale.message}
+                </p>
+              )}
+            </FormControl>
+          </Grid>
+          <Grid item xs={3}>
+            <FormControl variant="standard" className="w-100">
+              <InputLabel>
+                {props.intl.formatMessage({
+                  ...messages.loanEarlyRepaymentFee,
                 })}
-              >
-                <IconButton className={classes.iconmr}>
-                  <InfoIcon />
-                </IconButton>
-              </Tooltip>
-            </InputLabel>
-            <Input
-              id="standard-adornment-amount"
-              type="number"
-              defaultValue={props.inputs.irsrate}
-              {...register('irsrate')}
-              startAdornment={
-                <InputAdornment position="start">%</InputAdornment>
-              }
-            />
-            {errors.irsrate && (
-              <p className={classes.validation}>{errors.irsrate.message}</p>
-            )}
-          </FormControl>
-          <FormControl variant="standard" className={classes.inputEndWidth}>
-            <InputLabel
-              id="demo-simple-select-standard-label"
-              className={classes.labelWidth}
-            >
-              {props.intl.formatMessage({
-                ...messages.exitBrokerFee,
-              })}
-              <Tooltip
-                title={props.intl.formatMessage({
-                  ...messages.tooltip,
+                <Tooltip
+                  title={props.intl.formatMessage({
+                    ...messages.loanEarlyRepaymentFeeInfo,
+                  })}
+                >
+                  <IconButton className={classes.iconMr}>
+                    <InfoIcon className={classes.iconSize} color="primary" />
+                  </IconButton>
+                </Tooltip>
+              </InputLabel>
+              <Input
+                type="number"
+                defaultValue={props.inputs.loanEarlyRepaymentFee}
+                {...register('loanEarlyRepaymentFee')}
+                startAdornment={
+                  <InputAdornment position="start">%</InputAdornment>
+                }
+              />
+              {errors.loanEarlyRepaymentFee && (
+                <p className={classes.validation}>
+                  {errors.loanEarlyRepaymentFee.message}
+                </p>
+              )}
+            </FormControl>
+          </Grid>
+          <Grid item xs={3}>
+            <FormControl variant="standard" className="w-100">
+              <InputLabel>
+                {props.intl.formatMessage({
+                  ...messages.exitBrokerFee,
                 })}
-              >
-                <IconButton className={classes.iconmr}>
-                  <InfoIcon />
-                </IconButton>
-              </Tooltip>
-            </InputLabel>
-            <Input
-              id="standard-adornment-amount"
-              type="number"
-              defaultValue={props.inputs.exitbrokerfee}
-              {...register('exitbrokerfee')}
-              startAdornment={
-                <InputAdornment position="start">%</InputAdornment>
-              }
-            />
-            {errors.exitbrokerfee && (
-              <p className={classes.validation}>
-                {errors.exitbrokerfee.message}
-              </p>
-            )}
-          </FormControl>
+                <Tooltip
+                  title={props.intl.formatMessage({
+                    ...messages.exitBrokerFeeInfo,
+                  })}
+                >
+                  <IconButton className={classes.iconMr}>
+                    <InfoIcon className={classes.iconSize} color="primary" />
+                  </IconButton>
+                </Tooltip>
+              </InputLabel>
+              <Input
+                type="number"
+                defaultValue={props.inputs.exitBrokerFee}
+                {...register('exitBrokerFee')}
+                startAdornment={
+                  <InputAdornment position="start">%</InputAdornment>
+                }
+              />
+              {errors.exitBrokerFee && (
+                <p className={classes.validation}>
+                  {errors.exitBrokerFee.message}
+                </p>
+              )}
+            </FormControl>
+          </Grid>
         </Grid>
-        <Grid className={classes.rowSpacing}>
-          <FormControl variant="standard" className={classes.inputLgWidth}>
-            <InputLabel
-              id="demo-simple-select-standard-label"
-              className={classes.labelWidth}
-            >
-              {props.intl.formatMessage({
-                ...messages.loanEarlyRepaymentFee,
-              })}
-              <Tooltip
-                title={props.intl.formatMessage({
-                  ...messages.tooltip,
+        <Grid item container spacing={6} className="mt-20">
+          <Grid item xs={3}>
+            <FormControl variant="standard" className="w-100">
+              <InputLabel>
+                {props.intl.formatMessage({
+                  ...messages.irsRate,
                 })}
-              >
-                <IconButton className={classes.iconmr}>
-                  <InfoIcon />
-                </IconButton>
-              </Tooltip>
-            </InputLabel>
-            <Input
-              id="standard-adornment-amount"
-              type="number"
-              defaultValue={props.inputs.loanearlyrepaymentfee}
-              {...register('loanearlyrepaymentfee')}
-              startAdornment={
-                <InputAdornment position="start">%</InputAdornment>
-              }
-            />
-            {errors.loanearlyrepaymentfee && (
-              <p className={classes.validation}>
-                {errors.loanearlyrepaymentfee.message}
-              </p>
-            )}
-          </FormControl>
-          <FormControl variant="standard" className={classes.inputEndLgWidth}>
-            <InputLabel
-              id="demo-simple-select-standard-label"
-              className={classes.labelWidth}
-            >
-              {props.intl.formatMessage({
-                ...messages.capitalGainsTaxBase,
-              })}
-              <Tooltip
-                title={props.intl.formatMessage({
-                  ...messages.tooltip,
+                <Tooltip
+                  title={props.intl.formatMessage({
+                    ...messages.irsRateInfo,
+                  })}
+                >
+                  <IconButton className={classes.iconMr}>
+                    <InfoIcon className={classes.iconSize} color="primary" />
+                  </IconButton>
+                </Tooltip>
+              </InputLabel>
+              <Input
+                type="number"
+                defaultValue={props.inputs.irsRate}
+                {...register('irsRate')}
+                startAdornment={
+                  <InputAdornment position="start">%</InputAdornment>
+                }
+              />
+              {errors.IRSrate && (
+                <p className={classes.validation}>{errors.IRSrate.message}</p>
+              )}
+            </FormControl>
+          </Grid>
+          <Grid item xs={3}>
+            <FormControl variant="standard" className="w-100">
+              <InputLabel>
+                {props.intl.formatMessage({
+                  ...messages.capitalGainsTaxBase,
                 })}
-              >
-                <IconButton className={classes.iconmr}>
-                  <InfoIcon />
-                </IconButton>
-              </Tooltip>
-            </InputLabel>
-            <Input
-              id="standard-adornment-amount"
-              type="number"
-              defaultValue={props.inputs.capitalgainstaxbase}
-              {...register('capitalgainstaxbase')}
-              startAdornment={
-                <InputAdornment position="start">%</InputAdornment>
-              }
-            />
-            {errors.capitalgainstaxbase && (
-              <p className={classes.validation}>
-                {errors.capitalgainstaxbase.message}
-              </p>
-            )}
-          </FormControl>
+                <Tooltip
+                  title={props.intl.formatMessage({
+                    ...messages.capitalGainsTaxBaseInfo,
+                  })}
+                >
+                  <IconButton className={classes.iconMr}>
+                    <InfoIcon className={classes.iconSize} color="primary" />
+                  </IconButton>
+                </Tooltip>
+              </InputLabel>
+              <Input
+                type="number"
+                defaultValue={props.inputs.capitalGainsTaxBase}
+                {...register('capitalGainsTaxBase')}
+                startAdornment={
+                  <InputAdornment position="start">%</InputAdornment>
+                }
+              />
+              {errors.capitalGainsTaxBase && (
+                <p className={classes.validation}>
+                  {errors.capitalGainsTaxBase.message}
+                </p>
+              )}
+            </FormControl>
+          </Grid>
         </Grid>
       </Grid>
     );
   }
 
-  function renderAcod3() {
+  function renderValuationModelConfigurationAccordion() {
     return (
-      <Grid>
-        <Grid>
-          <FormControl variant="standard" className={classes.inputLgWidth}>
-            <InputLabel
-              id="demo-simple-select-standard-label"
-              className={classes.labelWidth}
-            >
+      <Grid item container spacing={6} className="mb-10">
+        <Grid item xs={3}>
+          <FormControl variant="standard" className="w-100">
+            <InputLabel>
               {props.intl.formatMessage({
-                ...messages.grossConstructionToPrivateAre,
+                ...messages.grossAreaToUsefulArea,
               })}
               <Tooltip
                 title={props.intl.formatMessage({
-                  ...messages.tooltip,
+                  ...messages.grossAreaToUsefulAreaInfo,
                 })}
               >
-                <IconButton className={classes.iconmr}>
-                  <InfoIcon />
+                <IconButton className={classes.iconMr}>
+                  <InfoIcon className={classes.iconSize} color="primary" />
                 </IconButton>
               </Tooltip>
             </InputLabel>
             <Input
-              id="standard-adornment-amount"
               type="number"
-              defaultValue={props.inputs.gcpa}
-              {...register('gcpa')}
+              defaultValue={props.inputs.grossAreaToUsefulArea}
+              {...register('grossAreaToUsefulArea')}
               startAdornment={
                 <InputAdornment position="start">%</InputAdornment>
               }
             />
-            {errors.gcpa && (
-              <p className={classes.validation}>{errors.gcpa.message}</p>
+            {errors.GCPA && (
+              <p className={classes.validation}>{errors.GCPA.message}</p>
             )}
           </FormControl>
-          <FormControl variant="standard" className={classes.inputWidth}>
-            <InputLabel
-              id="demo-simple-select-standard-label"
-              className={classes.labelWidth}
-            >
+        </Grid>
+        <Grid item xs={3}>
+          <FormControl variant="standard" className="w-100">
+            <InputLabel>
               {props.intl.formatMessage({
                 ...messages.floor,
               })}
               <Tooltip
                 title={props.intl.formatMessage({
-                  ...messages.tooltip,
+                  ...messages.floorInfo,
                 })}
               >
-                <IconButton className={classes.iconmr}>
-                  <InfoIcon />
+                <IconButton className={classes.iconMr}>
+                  <InfoIcon className={classes.iconSize} color="primary" />
                 </IconButton>
               </Tooltip>
             </InputLabel>
             <Input
-              id="standard-adornment-amount"
               type="number"
               defaultValue={props.inputs.floor}
               {...register('floor')}
@@ -1420,26 +1321,24 @@ export function Analysis(props) {
               <p className={classes.validation}>{errors.floor.message}</p>
             )}
           </FormControl>
-          <FormControl variant="standard" className={classes.inputWidth}>
-            <InputLabel
-              id="demo-simple-select-standard-label"
-              className={classes.labelWidth}
-            >
+        </Grid>
+        <Grid item xs={3}>
+          <FormControl variant="standard" className="w-100">
+            <InputLabel>
               {props.intl.formatMessage({
                 ...messages.cap,
               })}
               <Tooltip
                 title={props.intl.formatMessage({
-                  ...messages.tooltip,
+                  ...messages.capInfo,
                 })}
               >
-                <IconButton className={classes.iconmr}>
-                  <InfoIcon />
+                <IconButton className={classes.iconMr}>
+                  <InfoIcon className={classes.iconSize} color="primary" />
                 </IconButton>
               </Tooltip>
             </InputLabel>
             <Input
-              id="standard-adornment-amount"
               type="number"
               defaultValue={props.inputs.cap}
               {...register('cap')}
@@ -1452,70 +1351,65 @@ export function Analysis(props) {
             )}
           </FormControl>
         </Grid>
-        <Grid className={classes.rowSpacing}>
-          <FormControl variant="standard" className={classes.doubleWidth}>
-            <InputLabel
-              id="demo-simple-select-standard-label"
-              className={classes.labelWidth}
-            >
-              {props.intl.formatMessage({
-                ...messages.confidencialImobiliarioPercentile,
-              })}
-              <Tooltip
-                title={props.intl.formatMessage({
-                  ...messages.tooltip,
+        <Grid item container spacing={6}>
+          <Grid item xs={3}>
+            <FormControl variant="standard" className="w-100">
+              <InputLabel>
+                {props.intl.formatMessage({
+                  ...messages.confidencialImobiliarioPercentile,
                 })}
+                <Tooltip
+                  title={props.intl.formatMessage({
+                    ...messages.confidencialImobiliarioPercentileInfo,
+                  })}
+                >
+                  <IconButton className={classes.iconMr}>
+                    <InfoIcon className={classes.iconSize} color="primary" />
+                  </IconButton>
+                </Tooltip>
+              </InputLabel>
+              <Select
+                defaultValue={props.inputs.cip}
+                {...register('cip')}
+                onChange={handleChange}
               >
-                <IconButton className={classes.iconmr}>
-                  <InfoIcon />
-                </IconButton>
-              </Tooltip>
-            </InputLabel>
-            <Select
-              labelId="demo-simple-select-standard-label"
-              id="demo-simple-select-standard"
-              defaultValue={props.inputs.cip}
-              {...register('cip')}
-              onChange={handleChange}
-            >
-              {props.cips.map(index => (
-                <MenuItem key={index} value={index}>
-                  {index}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-          <FormControl variant="standard" className={classes.inputEndLgWidth}>
-            <InputLabel
-              id="demo-simple-select-standard-label"
-              className={classes.labelWidth}
-            >
-              {props.intl.formatMessage({
-                ...messages.minObservationsForPercentile,
-              })}
-              <Tooltip
-                title={props.intl.formatMessage({
-                  ...messages.tooltip,
+                {props.cips.map(index => (
+                  <MenuItem key={index} value={index}>
+                    {index}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid item xs={3}>
+            <FormControl variant="standard" className="w-100">
+              <InputLabel>
+                {props.intl.formatMessage({
+                  ...messages.minObservationsForPercentile,
                 })}
-              >
-                <IconButton className={classes.iconmr}>
-                  <InfoIcon />
-                </IconButton>
-              </Tooltip>
-            </InputLabel>
-            <Input
-              id="standard-adornment-amount"
-              type="number"
-              defaultValue={props.inputs.mop}
-              {...register('mop')}
-              startAdornment={
-                <InputAdornment position="start">#</InputAdornment>
-              }
-            />
-            {errors.mop && (
-              <p className={classes.validation}>{errors.mop.message}</p>
-            )}
-          </FormControl>
+                <Tooltip
+                  title={props.intl.formatMessage({
+                    ...messages.minObservationsForPercentileInfo,
+                  })}
+                >
+                  <IconButton className={classes.iconMr}>
+                    <InfoIcon className={classes.iconSize} color="primary" />
+                  </IconButton>
+                </Tooltip>
+              </InputLabel>
+              <Input
+                type="number"
+                defaultValue={props.inputs.mop}
+                {...register('mop')}
+                startAdornment={
+                  <InputAdornment position="start">#</InputAdornment>
+                }
+              />
+              {errors.MOP && (
+                <p className={classes.validation}>{errors.MOP.message}</p>
+              )}
+            </FormControl>
+          </Grid>
         </Grid>
       </Grid>
     );
@@ -1523,8 +1417,15 @@ export function Analysis(props) {
 
   function renderTable() {
     return (
-      <>
-        <div style={{ height: 300, width: '100%' }}>
+      <Grid container direction="column" className="w-100">
+        <Grid item className="pb-20">
+          <Typography variant="h6">
+            {props.intl.formatMessage({
+              ...messages.tableTitle,
+            })}
+          </Typography>
+        </Grid>
+        <Grid item className="w-100 h-500">
           <DataGrid
             rows={props.analysisData}
             columns={columns}
@@ -1533,13 +1434,43 @@ export function Analysis(props) {
             checkboxSelection
             disableSelectionOnClick
           />
-        </div>
-      </>
+        </Grid>
+      </Grid>
+    );
+  }
+
+  function renderButton() {
+    return (
+      <Button
+        type="submit"
+        color="primary"
+        variant="contained"
+        className={classes.customizeBtn}
+        disabled={props.analyzeButtonState}
+      >
+        {props.isGettingAnalysisData && (
+          <CircularProgress size={20} className={classes.loading} />
+        )}
+        {!props.isGettingAnalysisData && 'Analyze'}
+      </Button>
+    );
+  }
+
+  function renderPropertyInformationAndMap() {
+    return (
+      <Grid item container direction="row">
+        <Grid item container xs={8} className="pr-40">
+          {renderPropertyForm()}
+        </Grid>
+        <Grid item xs={4} className={classes.fixHeight}>
+          <PaperMap />
+        </Grid>
+      </Grid>
     );
   }
 
   return (
-    <Grid>
+    <>
       <Helmet>
         <title>
           {props.intl.formatMessage({
@@ -1548,98 +1479,49 @@ export function Analysis(props) {
         </title>
         <meta name="description" content="Description of Analysis" />
       </Helmet>
-      {/* <FormattedMessage {...messages.header} /> */}
-      <Grid item container>
+      <Grid>
         <form
           onSubmit={handleSubmit(onSubmit)}
           onChange={handleChange}
-          className={classes.w100}
+          className="w-100"
         >
-          <Grid key="property-info" item container direction="row">
-            <Grid key="form-control" item container xs={8} xl={6}>
-              <Grid item direction="row">
-                <h5>
-                  {props.intl.formatMessage({
-                    ...messages.propertyInformation,
-                  })}
-                </h5>
-              </Grid>
-              {renderPropertyForm()}
-              {renderAccordion()}
-            </Grid>
-            <Grid
-              key="google-map"
-              item
-              container
-              xs={4}
-              xl={6}
-              className={classes.fixHeight}
-            >
-              <PaperMap />
-            </Grid>
-          </Grid>
-          <Grid key="button" item container direction="row">
-            <Button
-              type="submit"
-              variant="contained"
-              className={classes.customizeBtn}
-              disabled={btnState}
-            >
-              {props.isGettingAnalysisData && (
-                <CircularProgress size={20} className={classes.loading} />
-              )}
-              {!props.isGettingAnalysisData && 'Analyze'}
-            </Button>
-          </Grid>
+          {renderPropertyInformationAndMap()}
+          {renderAccordionGroup()}
+          {renderButton()}
         </form>
-        <Grid key="table" item container direction="row">
-          <Grid className={classes.w100}>
-            <h5>
-              {props.intl.formatMessage({
-                ...messages.tableTitle,
-              })}
-            </h5>
-            {renderTable()}
-          </Grid>
-        </Grid>
+        {renderTable()}
       </Grid>
-    </Grid>
+    </>
   );
 }
-
-Analysis.propTypes = {
-  // dispatch: PropTypes.func.isRequired,
-};
 
 const mapStateToProps = createStructuredSelector({
   analysis: makeSelectAnalysis(),
   inputs: makeSelectInputs(),
   locations: makeSelectLocations(),
-  location: makeSelectLocation(),
   types: makeSelectTypes(),
-  type: makeSelectType(),
   typologies: makeSelectTypologies(),
-  typology: makeSelectTypology(),
   conditions: makeSelectConditions(),
-  condition: makeSelectCondition(),
-  acquisitiontypes: makeSelectAcquisitionTypes(),
-  acquisitiontype: makeSelectAcquisitionType(),
+  acquisitionTypes: makeSelectAcquisitionTypes(),
+  status: makeSelectStatus(),
   cips: makeSelectCIPs(),
-  cip: makeSelectCIP(),
   analysisData: makeSelectAnalysisData(),
   isGettingAnalysisData: makeSelectIsGettingAnalysisData(),
+  analyzeButtonState: makeSelectAnalyzeButtonState(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
     getLocations: () => dispatch(getLocations()),
     getTypes: () => dispatch(getTypes()),
-    getTypologyies: () => dispatch(getTypologyies()),
+    getTypologies: () => dispatch(getTypologies()),
     getConditions: () => dispatch(getConditions()),
+    getStatus: () => dispatch(getStatus()),
     getAcquisitionTypes: () => dispatch(getAcquisitionTypes()),
     getCIPs: () => dispatch(getCIPs()),
     getAnalysisData: inputs => dispatch(getAnalysisData(inputs)),
     setValue: value => dispatch(setValue(value)),
+    setAnalyzeButtonState: value => dispatch(setAnalyzeButtonState(value)),
     dispatch,
   };
 }
