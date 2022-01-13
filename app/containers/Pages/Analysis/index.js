@@ -17,7 +17,6 @@ import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Select from '@material-ui/core/Select';
 import Input from '@material-ui/core/Input';
-// import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
@@ -60,6 +59,7 @@ import {
   getAnalysisData,
   getCIPs,
   setValue,
+  setError,
   setAnalyzeButtonState,
   getStatus,
 } from './actions';
@@ -249,6 +249,7 @@ export function Analysis(props) {
   });
   const onSubmit = data => {
     props.setValue(data);
+    props.setError(errors);
     props.getAnalysisData(data);
     props.setAnalyzeButtonState(true);
   };
@@ -1568,6 +1569,7 @@ function mapDispatchToProps(dispatch) {
     getCIPs: () => dispatch(getCIPs()),
     getAnalysisData: inputs => dispatch(getAnalysisData(inputs)),
     setValue: value => dispatch(setValue(value)),
+    setError: errors => dispatch(setError(errors)),
     setAnalyzeButtonState: value => dispatch(setAnalyzeButtonState(value)),
     dispatch,
   };

@@ -13,6 +13,7 @@ import {
   GET_CIPS,
   GET_CIPS_SUCCESS,
   SET_VALUE,
+  SET_ERROR,
   GET_ANALYSIS_DATA,
   GET_ANALYSIS_DATA_SUCCESS,
   SET_ANALYZE_BUTTON_STATE,
@@ -194,6 +195,9 @@ const analysisReducer = (state = initialState, action) =>
         break;
       case SET_VALUE:
         draft.inputs = action.payload;
+        break;
+      case SET_ERROR:
+        draft.errors = action.payload;
         break;
       case GET_ANALYSIS_DATA:
         draft.isGettingAnalysisData = true;

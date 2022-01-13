@@ -13,6 +13,7 @@ import {
   GET_CIPS,
   GET_CIPS_SUCCESS,
   SET_VALUE,
+  SET_ERROR,
   GET_ANALYSIS_DATA,
   GET_ANALYSIS_DATA_SUCCESS,
   SET_ANALYZE_BUTTON_STATE,
@@ -160,6 +161,11 @@ export const setValue = data => {
     payload: data,
   };
 };
+
+export const setError = errors => ({
+  type: SET_ERROR,
+  payload: errors,
+});
 
 export const setAnalyzeButtonState = state => ({
   type: SET_ANALYZE_BUTTON_STATE,
