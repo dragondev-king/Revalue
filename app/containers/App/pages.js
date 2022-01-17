@@ -46,7 +46,7 @@ export const pages = [
         restricted: false,
       },
       {
-        path: '/analysis',
+        path: '/analysis/*',
         component: Analysis,
         exact: false,
         private: false,

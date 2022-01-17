@@ -1580,11 +1580,11 @@ export function Investments(props) {
                 </Tooltip>
               </InputLabel>
               <Select
-                defaultValue={props.inputs.cip}
-                name="cip"
+                defaultValue={props.inputs.ciPercentile}
+                name="ciPercentile"
                 onChange={handleChange}
               >
-                {props.cips.map(index => (
+                {props.ciPercentiles.map(index => (
                   <MenuItem key={index} value={index}>
                     {index}
                   </MenuItem>
@@ -1723,7 +1723,7 @@ const mapStateToProps = createStructuredSelector({
   conditions: makeSelectConditions(),
   acquisitionTypes: makeSelectAcquisitionTypes(),
   status: makeSelectStatus(),
-  cips: makeSelectCIPs(),
+  ciPercentiles: makeSelectCIPs(),
   analysisData: makeSelectAnalysisData(),
   isGettingAnalysisData: makeSelectIsGettingAnalysisData(),
   analyzeButtonDisabled: makeSelectAnalyzeButtonDisabled(),

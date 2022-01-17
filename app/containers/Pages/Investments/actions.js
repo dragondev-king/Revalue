@@ -10,8 +10,8 @@ import {
   GET_CONDITIONS_SUCCESS,
   GET_ACQUISITION_TYPES,
   GET_ACQUISITION_TYPES_SUCCESS,
-  GET_CIPS,
-  GET_CIPS_SUCCESS,
+  GET_CI_PERCENTILES,
+  GET_CI_PERCENTILES_SUCCESS,
   SET_INPUT_ERROR,
   GET_ANALYSIS_DATA,
   GET_ANALYSIS_DATA_SUCCESS,
@@ -147,10 +147,10 @@ export const getAcquisitionTypes = () => async dispatch => {
 
 export const getCIPs = () => async dispatch => {
   dispatch({
-    type: GET_CIPS,
+    type: GET_CI_PERCENTILES,
   });
   dispatch({
-    type: GET_CIPS_SUCCESS,
+    type: GET_CI_PERCENTILES_SUCCESS,
     payload: ['5%', '25%', '50%', '75%', '95%', 'Case by Case'],
   });
 };

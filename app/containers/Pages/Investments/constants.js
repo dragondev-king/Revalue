@@ -18,8 +18,9 @@ export const GET_ACQUISITION_TYPES = 'app/Investments/GET_ACQUISITION_TYPES';
 export const GET_ACQUISITION_TYPES_SUCCESS =
   'app/Investments/GET_ACQUISITION_TYPES_SUCCESS';
 
-export const GET_CIPS = 'app/Investments/GET_CIPS';
-export const GET_CIPS_SUCCESS = 'app/Investments/GET_CIPS_SUCCESS';
+export const GET_CI_PERCENTILES = 'app/Investments/GET_CI_PERCENTILES';
+export const GET_CI_PERCENTILES_SUCCESS =
+  'app/Investments/GET_CI_PERCENTILES_SUCCESS';
 
 export const SET_INPUT_VALUE = 'app/Investments/SET_INPUT_VALUE';
 export const SET_INPUT_ERROR = 'app/Investments/SET_INPUT_ERROR';

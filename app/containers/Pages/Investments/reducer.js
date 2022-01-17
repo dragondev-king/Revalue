@@ -11,8 +11,8 @@ import {
   GET_CONDITIONS_SUCCESS,
   GET_ACQUISITION_TYPES,
   GET_ACQUISITION_TYPES_SUCCESS,
-  GET_CIPS,
-  GET_CIPS_SUCCESS,
+  GET_CI_PERCENTILES,
+  GET_CI_PERCENTILES_SUCCESS,
   GET_ANALYSIS_DATA,
   GET_ANALYSIS_DATA_SUCCESS,
   SET_ANALYZE_BUTTON_DISABLED,
@@ -62,8 +62,10 @@ export const initialState = {
   ),
   isGettingAcquisitionTypes: false,
   // Valuation Model Configuration
-  cips: setValueOrEmptyArray(JSON.parse(localStorage.getItem('cips'))),
-  isGettingCips: false,
+  ciPercentiles: setValueOrEmptyArray(
+    JSON.parse(localStorage.getItem('ciPercentiles')),
+  ),
+  isGettingCiPercentiles: false,
   analysisData: [],
   isGettingAnalysisData: false,
   errors: {
@@ -162,7 +164,10 @@ export const initialState = {
     ),
     floor: extractInputValueFromLocalStorage('floor', 10),
     cap: extractInputValueFromLocalStorage('cap', 10),
-    cip: extractInputValueFromLocalStorage('cip', '5%'),
+    ciPercentile: extractInputValueFromLocalStorage(
+      'ciPercentile',
+      'Case by Case',
+    ),
     mop: extractInputValueFromLocalStorage('mop', 100),
   },
 };
@@ -220,12 +225,12 @@ const investmentReducer = (state = initialState, action) =>
         draft.isGettingAcquisitionTypes = false;
         break;
       // Valuation Model Configuration
-      case GET_CIPS:
-        draft.isGettingCips = true;
+      case GET_CI_PERCENTILES:
+        draft.isGettingCiPercentiles = true;
         break;
-      case GET_CIPS_SUCCESS:
-        draft.cips = action.payload;
-        draft.isGettingCips = false;
+      case GET_CI_PERCENTILES_SUCCESS:
+        draft.ciPercentiles = action.payload;
+        draft.isGettingCiPercentiles = false;
         break;
       case SET_INPUT_VALUE:
         draft.inputs[action.payload.input] = action.payload.value;

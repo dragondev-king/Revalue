@@ -54,13 +54,13 @@ const makeSelectAcquisitionTypes = () =>
 const makeSelectCIPs = () =>
   createSelector(
     selectInvestmentDomain,
-    substate => substate.cips,
+    substate => substate.ciPercentiles,
   );
 
 const makeSelectCIP = () =>
   createSelector(
     selectInvestmentDomain,
-    substate => substate.cip,
+    substate => substate.ciPercentile,
   );
 
 const makeSelectInputs = () =>
