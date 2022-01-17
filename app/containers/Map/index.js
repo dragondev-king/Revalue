@@ -15,8 +15,8 @@ import { getLocationBoundariesByLocation } from './actions';
 import { makeSelectAuthenticated } from '../Authentication/selectors';
 import reducer from './reducer';
 import { useInjectReducer } from '../../utils/injectReducer';
-import { makeSelectLocation } from '../Pages/Analysis/selectors';
-import { setLocation } from '../Pages/Analysis/actions';
+import { makeSelectLocation } from '../Pages/Investments/selectors';
+import { setLocation } from '../Pages/Investments/actions';
 
 export function Map(props) {
   useInjectReducer({ key: 'map', reducer });

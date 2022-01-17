@@ -11,6 +11,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Tab, Tabs, Typography } from '@material-ui/core';
 import { Skeleton } from '@material-ui/lab';
 import Paper from '@material-ui/core/Paper';
+import PaperChartLineSimple from 'components/PaperChartLineSimple';
+import { makeSelectLocation } from 'containers/Pages/Investments/selectors';
 import reducer from './reducer';
 import PaperChartLine from '../../../components/PaperChartLine';
 import PaperChartLineComplex from '../../../components/PaperChartLineComplex';
@@ -23,8 +25,6 @@ import {
   makeSelectCustomCharts,
   makeSelectIsGettingCharts,
 } from './selectors';
-import PaperChartLineSimple from '../../../components/PaperChartLineSimple';
-import { makeSelectLocation } from '../Analysis/selectors';
 import messages from './messages';
 
 const useStyles = makeStyles(theme => ({

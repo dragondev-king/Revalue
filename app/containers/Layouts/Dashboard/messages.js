@@ -35,6 +35,10 @@ export default defineMessages({
     id: `${scope}.analysis`,
     defaultMessage: 'Analysis',
   },
+  investments: {
+    id: `${scope}.investments`,
+    defaultMessage: 'Investments',
+  },
   administration: {
     id: `${scope}.administration`,
     defaultMessage: 'Administration',

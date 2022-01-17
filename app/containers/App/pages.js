@@ -5,6 +5,7 @@ import Settings from 'containers/Pages/Settings';
 import Account from 'containers/Pages/Account';
 import Register from 'containers/Pages/Register';
 import Simple from 'containers/Layouts/Simple';
+import Investment from 'containers/Pages/Investments';
 import Analysis from 'containers/Pages/Analysis';
 
 export const pages = [
@@ -38,9 +39,16 @@ export const pages = [
         restricted: false,
       },
       {
+        path: '/investments',
+        component: Investment,
+        exact: true,
+        private: false,
+        restricted: false,
+      },
+      {
         path: '/analysis',
         component: Analysis,
-        exact: true,
+        exact: false,
         private: false,
         restricted: false,
       },

@@ -10,6 +10,7 @@ function AutoComplete({
   label,
   onChange,
   popupIcon,
+  error,
   getOptionLabel,
 }) {
   return (
@@ -24,7 +25,13 @@ function AutoComplete({
       getOptionLabel={getOptionLabel}
       renderOption={renderOption}
       renderInput={params => (
-        <TextField key={id + label} {...params} label={label} margin="normal" />
+        <TextField
+          key={id + label}
+          {...params}
+          label={label}
+          error={error}
+          margin="normal"
+        />
       )}
     />
   );

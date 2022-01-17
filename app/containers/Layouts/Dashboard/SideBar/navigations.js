@@ -5,8 +5,8 @@ export const navigations = [
     icon: 'home',
   },
   {
-    label: 'analysis',
-    path: '/analysis',
+    label: 'investments',
+    path: '/investments',
     icon: 'equalizer',
   },
 ];
