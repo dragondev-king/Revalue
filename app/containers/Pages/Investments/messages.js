@@ -22,7 +22,7 @@ export default defineMessages({
   },
   location: {
     id: `${scope}.location`,
-    defaultMessage: 'Location',
+    defaultMessage: 'Location *',
   },
   status: {
     id: `${scope}.status`,
@@ -71,11 +71,11 @@ export default defineMessages({
   },
   bidAsk: {
     id: `${scope}.bidAsk`,
-    defaultMessage: 'Bid Ask',
+    defaultMessage: 'Bid Ask *',
   },
   financingRate: {
     id: `${scope}.financingRate`,
-    defaultMessage: 'Financing Rate',
+    defaultMessage: 'Financing Rate *',
   },
   // Other Investment Information
   otherInvestmentInformation: {
@@ -89,7 +89,7 @@ export default defineMessages({
   },
   acquisitionType: {
     id: `${scope}.acquisitionType`,
-    defaultMessage: 'Acquisition Type',
+    defaultMessage: 'Acquisition Type *',
   },
   entryFee: {
     id: `${scope}.entryFee`,
@@ -121,7 +121,7 @@ export default defineMessages({
   },
   interestRate: {
     id: `${scope}.interestRate`,
-    defaultMessage: 'Interest Rate',
+    defaultMessage: 'Interest Rate *',
   },
   bankCommission: {
     id: `${scope}.bankCommission`,
@@ -172,7 +172,7 @@ export default defineMessages({
   },
   timeToSale: {
     id: `${scope}.timeToSale`,
-    defaultMessage: 'Time to Sale',
+    defaultMessage: 'Time to Sale *',
   },
   timeToSaleInfo: {
     id: `${scope}.timeToSaleInfo`,
@@ -181,7 +181,7 @@ export default defineMessages({
   },
   irsRate: {
     id: `${scope}.irsRate`,
-    defaultMessage: 'IRS Rate',
+    defaultMessage: 'IRS Rate *',
   },
   exitBrokerFee: {
     id: `${scope}.exitBrokerFee`,
@@ -234,7 +234,7 @@ export default defineMessages({
   },
   confidencialImobiliarioPercentile: {
     id: `${scope}.confidencialImobiliarioPercentile`,
-    defaultMessage: 'Confidencial Imobiliario Percentile',
+    defaultMessage: 'Confidencial Imobiliario Percentile *',
   },
   confidencialImobiliarioPercentileInfo: {
     id: `${scope}.confidencialImobiliarioPercentileInfo`,
