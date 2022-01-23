@@ -114,6 +114,8 @@ export const initialState = {
     maxCapital: extractInputValueFromLocalStorage('maxCapital', null),
     bidAsk: extractInputValueFromLocalStorage('bidAsk', 5),
     financingRate: extractInputValueFromLocalStorage('financingRate', 80),
+    housePriceIndex: extractInputValueFromLocalStorage('housePriceIndex', 58),
+    minProfit: extractInputValueFromLocalStorage('minProfit', 59),
     // Other Investment Information
     // Acquisition Assumptions
     acquisitionType: extractInputValueFromLocalStorage(
@@ -134,10 +136,8 @@ export const initialState = {
     interestRate: extractInputValueFromLocalStorage('interestRate', 1),
     bankCommission: extractInputValueFromLocalStorage('bankCommission', 1000),
     amortization: extractInputValueFromLocalStorage('amortization', 30),
-    stampDutyMortgage: extractInputValueFromLocalStorage(
-      'stampDutyMortgage',
-      0.6,
-    ),
+    capexFinancing: extractInputValueFromLocalStorage('capexFinancing', 85),
+    capex: extractInputValueFromLocalStorage('capex', 86),
     stampDutyInterests: extractInputValueFromLocalStorage(
       'stampDutyInterests',
       0.04,

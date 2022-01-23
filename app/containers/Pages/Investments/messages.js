@@ -73,6 +73,14 @@ export default defineMessages({
     id: `${scope}.bidAsk`,
     defaultMessage: 'Bid Ask *',
   },
+  housePriceIndex: {
+    id: `${scope}.housePriceIndex`,
+    defaultMessage: 'House Price Index *',
+  },
+  minProfit: {
+    id: `${scope}.minProfit`,
+    defaultMessage: 'Min Profit *',
+  },
   financingRate: {
     id: `${scope}.financingRate`,
     defaultMessage: 'Financing Rate *',
@@ -147,6 +155,14 @@ export default defineMessages({
   stampDutyInterests: {
     id: `${scope}.stampDutyInterests`,
     defaultMessage: 'Stamp Duty Interests',
+  },
+  capexFinancing: {
+    id: `${scope}.capexFinancing`,
+    defaultMessage: 'CAPEX Financing',
+  },
+  capex: {
+    id: `${scope}.capex`,
+    defaultMessage: 'Capex',
   },
   // Operating Assumptions
   operatingAssumptions: {

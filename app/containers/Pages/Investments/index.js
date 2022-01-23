@@ -208,6 +208,8 @@ export function Investments(props) {
     props.getConditions();
     props.getAcquisitionTypes();
     props.getCIPs();
+    // call this function to get analysis data
+    // getAnalysisById()
   }, []);
 
   const validationSchema = yup.object().shape({
@@ -752,20 +754,52 @@ export function Investments(props) {
             <FormHelperText>{props.errors.maxCapital}</FormHelperText>
           </FormControl>
         </Grid>
+        <Grid item xs={3}>
+          <FormControl
+            variant="standard"
+            className="w-100"
+            error={props.errors.bidAsk}
+          >
+            <InputLabel>
+              {props.intl.formatMessage({
+                ...messages.bidAsk,
+              })}
+              <Tooltip
+                title={props.intl.formatMessage({
+                  ...messages.bidAskInfo,
+                })}
+              >
+                <IconButton className={classes.iconMr}>
+                  <InfoIcon className={classes.iconSize} color="primary" />
+                </IconButton>
+              </Tooltip>
+            </InputLabel>
+            <Input
+              onChange={handleChange}
+              type="number"
+              defaultValue={props.inputs.bidAsk}
+              name="bidAsk"
+              startAdornment={
+                <InputAdornment position="start">%</InputAdornment>
+              }
+            />
+            <FormHelperText>{props.errors.bidAsk}</FormHelperText>
+          </FormControl>
+        </Grid>
         <Grid item container spacing={6}>
           <Grid item xs={3}>
             <FormControl
               variant="standard"
               className="w-100"
-              error={props.errors.bidAsk}
+              error={props.errors.housePriceIndex}
             >
               <InputLabel>
                 {props.intl.formatMessage({
-                  ...messages.bidAsk,
+                  ...messages.housePriceIndex,
                 })}
                 <Tooltip
                   title={props.intl.formatMessage({
-                    ...messages.bidAskInfo,
+                    ...messages.housePriceIndex,
                   })}
                 >
                   <IconButton className={classes.iconMr}>
@@ -776,13 +810,13 @@ export function Investments(props) {
               <Input
                 onChange={handleChange}
                 type="number"
-                defaultValue={props.inputs.bidAsk}
-                name="bidAsk"
+                defaultValue={props.inputs.housePriceIndex}
+                name="housePriceIndex"
                 startAdornment={
-                  <InputAdornment position="start">%</InputAdornment>
+                  <InputAdornment position="start">&#8364;</InputAdornment>
                 }
               />
-              <FormHelperText>{props.errors.bidAsk}</FormHelperText>
+              <FormHelperText>{props.errors.minCapital}</FormHelperText>
             </FormControl>
           </Grid>
           <Grid item xs={3}>
@@ -815,6 +849,38 @@ export function Investments(props) {
                 }
               />
               <FormHelperText>{props.errors.financingRate}</FormHelperText>
+            </FormControl>
+          </Grid>
+          <Grid item xs={3}>
+            <FormControl
+              variant="standard"
+              className="w-100"
+              error={props.errors.minProfit}
+            >
+              <InputLabel>
+                {props.intl.formatMessage({
+                  ...messages.minProfit,
+                })}
+                <Tooltip
+                  title={props.intl.formatMessage({
+                    ...messages.minProfit,
+                  })}
+                >
+                  <IconButton className={classes.iconMr}>
+                    <InfoIcon className={classes.iconSize} color="primary" />
+                  </IconButton>
+                </Tooltip>
+              </InputLabel>
+              <Input
+                onChange={handleChange}
+                type="number"
+                defaultValue={props.inputs.minProfit}
+                name="minProfit"
+                startAdornment={
+                  <InputAdornment position="start">%</InputAdornment>
+                }
+              />
+              <FormHelperText>{props.errors.minProfit}</FormHelperText>
             </FormControl>
           </Grid>
         </Grid>
@@ -1192,6 +1258,38 @@ export function Investments(props) {
               <FormHelperText>{props.errors.stampDutyInterests}</FormHelperText>
             </FormControl>
           </Grid>
+          <Grid item xs={3}>
+            <FormControl
+              variant="standard"
+              className="w-100"
+              error={props.errors.capexFinancing}
+            >
+              <InputLabel>
+                {props.intl.formatMessage({
+                  ...messages.capexFinancing,
+                })}
+                <Tooltip
+                  title={props.intl.formatMessage({
+                    ...messages.capexFinancing,
+                  })}
+                >
+                  <IconButton className={classes.iconMr}>
+                    <InfoIcon className={classes.iconSize} color="primary" />
+                  </IconButton>
+                </Tooltip>
+              </InputLabel>
+              <Input
+                onChange={handleChange}
+                type="number"
+                defaultValue={props.inputs.capexFinancing}
+                name="capexFinancing"
+                startAdornment={
+                  <InputAdornment position="start">%</InputAdornment>
+                }
+              />
+              <FormHelperText>{props.errors.capexFinancing}</FormHelperText>
+            </FormControl>
+          </Grid>
         </Grid>
       </Grid>
     );
@@ -1270,6 +1368,38 @@ export function Investments(props) {
                 }
               />
               <FormHelperText>{props.errors.propertyTaxRate}</FormHelperText>
+            </FormControl>
+          </Grid>
+          <Grid item xs={3}>
+            <FormControl
+              variant="standard"
+              className="w-100"
+              error={props.errors.capex}
+            >
+              <InputLabel>
+                {props.intl.formatMessage({
+                  ...messages.capex,
+                })}
+                <Tooltip
+                  title={props.intl.formatMessage({
+                    ...messages.capex,
+                  })}
+                >
+                  <IconButton className={classes.iconMr}>
+                    <InfoIcon className={classes.iconSize} color="primary" />
+                  </IconButton>
+                </Tooltip>
+              </InputLabel>
+              <Input
+                onChange={handleChange}
+                type="number"
+                defaultValue={props.inputs.capex}
+                name="capex"
+                startAdornment={
+                  <InputAdornment position="start">%</InputAdornment>
+                }
+              />
+              <FormHelperText>{props.errors.capex}</FormHelperText>
             </FormControl>
           </Grid>
         </Grid>
@@ -1657,6 +1787,9 @@ export function Investments(props) {
             rowsPerPageOptions={[5]}
             checkboxSelection
             disableSelectionOnClick
+            onRowClick={event => {
+              props.history.push(`/analysis/${event.id}`);
+            }}
           />
         </Grid>
       </Grid>

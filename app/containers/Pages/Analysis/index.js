@@ -13,6 +13,9 @@ import messages from './messages';
 
 export function Analysis() {
   useInjectReducer({ key: 'analysis', reducer });
+  // useEffect(() => {
+  //   props.getAnalysisById(1);
+  // }, []);
 
   return (
     <div>
