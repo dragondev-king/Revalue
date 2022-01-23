@@ -138,6 +138,10 @@ export const initialState = {
     amortization: extractInputValueFromLocalStorage('amortization', 30),
     capexFinancing: extractInputValueFromLocalStorage('capexFinancing', 85),
     capex: extractInputValueFromLocalStorage('capex', 86),
+    stampDutyMortgage: extractInputValueFromLocalStorage(
+      'stampDutyMortgage',
+      0.6,
+    ),
     stampDutyInterests: extractInputValueFromLocalStorage(
       'stampDutyInterests',
       0.04,
