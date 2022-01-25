@@ -8,7 +8,7 @@
     "price": "qwe",
     "irr": "qwe",
     "profit": "qwe",
-    "report": "qwe"
+    "report": "Report"
   },
   {
     "id": 2,
@@ -19,7 +19,7 @@
     "price": "abc",
     "irr": "abc",
     "profit": "abc",
-    "report": "abc"
+    "report": "Report"
   },
   {
     "id": 3,
@@ -30,7 +30,7 @@
     "price": "lmn",
     "irr": "lmn",
     "profit": "lmn",
-    "report": "lmn"
+    "report": "Report"
   },
   {
     "id": 4,
@@ -41,7 +41,7 @@
     "price": "hij",
     "irr": "hij",
     "profit": "hij",
-    "report": "hij"
+    "report": "Report"
   },
   {
     "id": 5,
@@ -52,7 +52,7 @@
     "price": "qwe",
     "irr": "qwe",
     "profit": "qwe",
-    "report": "qwe"
+    "report": "Report"
   },
   {
     "id": 6,
@@ -63,7 +63,7 @@
     "price": "nop",
     "irr": "nop",
     "profit": "nop",
-    "report": "nop"
+    "report": "Report"
   },
   {
     "id": 7,
@@ -74,7 +74,7 @@
     "price": "xyz",
     "irr": "xyz",
     "profit": "xyz",
-    "report": "xyz"
+    "report": "Report"
   },
   {
     "id": 8,
@@ -85,7 +85,7 @@
     "price": "pqr",
     "irr": "pqr",
     "profit": "pqr",
-    "report": "pqr"
+    "report": "Report"
   },
   {
     "id": 9,
@@ -96,6 +96,6 @@
     "price": "qwe",
     "irr": "qwe",
     "profit": "qwe",
-    "report": "qwe"
+    "report": "Report"
   }
 ]

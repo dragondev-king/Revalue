@@ -151,43 +151,36 @@ const columns = [
     field: 'location',
     label: 'location',
     width: 140,
-    editable: true,
   },
   {
     field: 'asking',
     label: 'asking',
     width: 130,
-    editable: true,
   },
   {
     field: 'capital',
     label: 'capital',
     width: 130,
-    editable: true,
   },
   {
     field: 'costs',
     label: 'costs',
     width: 130,
-    editable: true,
   },
   {
     field: 'price',
     label: 'price',
     width: 130,
-    editable: true,
   },
   {
     field: 'irr',
     label: 'irr',
     width: 130,
-    editable: true,
   },
   {
     field: 'profit',
     label: 'profit',
     width: 130,
-    editable: true,
   },
   {
     field: 'report',

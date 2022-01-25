@@ -1,5 +1,4 @@
 import React, { memo, useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { FormattedMessage, injectIntl } from 'react-intl';
@@ -111,9 +110,14 @@ export function Analysis(props) {
     console.log('inputvalue', inputValue);
   }, []);
 
-  function renderPropertyAccordion() {
+  function displayProperty() {
     return (
-      <Grid item container spacing={6} className="mb-10">
+      <Grid item container spacing={6} className="mb-10 p-10">
+        <Typography variant="h6">
+          {props.intl.formatMessage({
+            ...messages.property,
+          })}
+        </Typography>
         <Grid item container spacing={6}>
           <Grid item xs={3}>
             <FormControl variant="standard" className="w-100">
@@ -187,8 +191,6 @@ export function Analysis(props) {
               />
             </FormControl>
           </Grid>
-        </Grid>
-        <Grid item container spacing={6}>
           <Grid item xs={3}>
             <FormControl variant="standard" className="w-100">
               <InputLabel>
@@ -218,331 +220,303 @@ export function Analysis(props) {
       </Grid>
     );
   }
-  function renderInvestmentKpiAccordion() {
+  function displayInvestmentKpi() {
     return (
-      <Grid item container spacing={6} className="mb-10">
-        <Grid item container spacing={6}>
-          <Grid item xs={3}>
-            <FormControl variant="standard" className="w-100">
-              <InputLabel>
-                <FormattedMessage {...messages.askingPrice} />
-                <Tooltip
-                  title={props.intl.formatMessage({
-                    ...messages.askingPrice,
-                  })}
-                >
-                  <IconButton className={classes.iconMr}>
-                    <InfoIcon className={classes.iconSize} color="primary" />
-                  </IconButton>
-                </Tooltip>
-              </InputLabel>
-              <Input
-                type="number"
-                value={props.analysis.askingPrice}
-                name="askingPrice"
-                readOnly
-              />
-            </FormControl>
-          </Grid>
-          <Grid item xs={3}>
-            <FormControl variant="standard" className="w-100">
-              <InputLabel>
-                <FormattedMessage {...messages.proposedEntryPrice} />
-                <Tooltip
-                  title={props.intl.formatMessage({
-                    ...messages.proposedEntryPrice,
-                  })}
-                >
-                  <IconButton className={classes.iconMr}>
-                    <InfoIcon className={classes.iconSize} color="primary" />
-                  </IconButton>
-                </Tooltip>
-              </InputLabel>
-              <Input
-                type="number"
-                value={props.analysis.propsedEntryPrice}
-                name="location"
-                readOnly
-                startAdornment={
-                  <InputAdornment position="start">&#8364;</InputAdornment>
-                }
-              />
-            </FormControl>
-          </Grid>
-          <Grid item xs={3}>
-            <FormControl variant="standard" className="w-100">
-              <InputLabel>
-                <FormattedMessage {...messages.estimatedExitPrice} />
-                <Tooltip
-                  title={props.intl.formatMessage({
-                    ...messages.estimatedExitPrice,
-                  })}
-                >
-                  <IconButton className={classes.iconMr}>
-                    <InfoIcon className={classes.iconSize} color="primary" />
-                  </IconButton>
-                </Tooltip>
-              </InputLabel>
-              <Input
-                type="number"
-                value={props.analysis.estimatedExitPrice}
-                name="location"
-                readOnly
-                startAdornment={
-                  <InputAdornment position="start">&#8364;</InputAdornment>
-                }
-              />
-            </FormControl>
-          </Grid>
-        </Grid>
-        <Grid item container spacing={6}>
-          <Grid item xs={3}>
-            <FormControl variant="standard" className="w-100">
-              <InputLabel>
-                <FormattedMessage {...messages.timeForSale} />
-                <Tooltip
-                  title={props.intl.formatMessage({
-                    ...messages.timeForSaleInfo,
-                  })}
-                >
-                  <IconButton className={classes.iconMr}>
-                    <InfoIcon className={classes.iconSize} color="primary" />
-                  </IconButton>
-                </Tooltip>
-              </InputLabel>
-              <Input
-                type="number"
-                value={props.analysis.timeForSale}
-                name="location"
-                readOnly
-                startAdornment={
-                  <InputAdornment position="start">&#8364;</InputAdornment>
-                }
-              />
-            </FormControl>
+      <Grid item container spacing={6} className="mb-10 p-10">
+        <Typography variant="h6">
+          {props.intl.formatMessage({
+            ...messages.investmentKpi,
+          })}
+        </Typography>
+        <Grid item container spacing={6} className="mb-10">
+          <Grid item container spacing={6}>
+            <Grid item xs={3}>
+              <FormControl variant="standard" className="w-100">
+                <InputLabel>
+                  <FormattedMessage {...messages.askingPrice} />
+                  <Tooltip
+                    title={props.intl.formatMessage({
+                      ...messages.askingPrice,
+                    })}
+                  >
+                    <IconButton className={classes.iconMr}>
+                      <InfoIcon className={classes.iconSize} color="primary" />
+                    </IconButton>
+                  </Tooltip>
+                </InputLabel>
+                <Input
+                  type="number"
+                  value={props.analysis.askingPrice}
+                  name="askingPrice"
+                  readOnly
+                />
+              </FormControl>
+            </Grid>
+            <Grid item xs={3}>
+              <FormControl variant="standard" className="w-100">
+                <InputLabel>
+                  <FormattedMessage {...messages.proposedEntryPrice} />
+                  <Tooltip
+                    title={props.intl.formatMessage({
+                      ...messages.proposedEntryPrice,
+                    })}
+                  >
+                    <IconButton className={classes.iconMr}>
+                      <InfoIcon className={classes.iconSize} color="primary" />
+                    </IconButton>
+                  </Tooltip>
+                </InputLabel>
+                <Input
+                  type="number"
+                  value={props.analysis.propsedEntryPrice}
+                  name="location"
+                  readOnly
+                  startAdornment={
+                    <InputAdornment position="start">&#8364;</InputAdornment>
+                  }
+                />
+              </FormControl>
+            </Grid>
+            <Grid item xs={3}>
+              <FormControl variant="standard" className="w-100">
+                <InputLabel>
+                  <FormattedMessage {...messages.estimatedExitPrice} />
+                  <Tooltip
+                    title={props.intl.formatMessage({
+                      ...messages.estimatedExitPrice,
+                    })}
+                  >
+                    <IconButton className={classes.iconMr}>
+                      <InfoIcon className={classes.iconSize} color="primary" />
+                    </IconButton>
+                  </Tooltip>
+                </InputLabel>
+                <Input
+                  type="number"
+                  value={props.analysis.estimatedExitPrice}
+                  name="location"
+                  readOnly
+                  startAdornment={
+                    <InputAdornment position="start">&#8364;</InputAdornment>
+                  }
+                />
+              </FormControl>
+            </Grid>
+            <Grid item xs={3}>
+              <FormControl variant="standard" className="w-100">
+                <InputLabel>
+                  <FormattedMessage {...messages.timeForSale} />
+                  <Tooltip
+                    title={props.intl.formatMessage({
+                      ...messages.timeForSaleInfo,
+                    })}
+                  >
+                    <IconButton className={classes.iconMr}>
+                      <InfoIcon className={classes.iconSize} color="primary" />
+                    </IconButton>
+                  </Tooltip>
+                </InputLabel>
+                <Input
+                  type="number"
+                  value={props.analysis.timeForSale}
+                  name="location"
+                  readOnly
+                  startAdornment={
+                    <InputAdornment position="start">&#8364;</InputAdornment>
+                  }
+                />
+              </FormControl>
+            </Grid>
           </Grid>
         </Grid>
       </Grid>
     );
   }
-  function renderCapitalAccordion() {
+  function displayCapital() {
     return (
-      <Grid item container spacing={6} className="mb-10">
-        <Grid item container spacing={6}>
-          <Grid item xs={3}>
-            <FormControl variant="standard" className="w-100">
-              <InputLabel>
-                <FormattedMessage {...messages.requiredEntryCapital} />
-                <Tooltip
-                  title={props.intl.formatMessage({
-                    ...messages.requiredEntryCapitalInfo,
-                  })}
-                >
-                  <IconButton className={classes.iconMr}>
-                    <InfoIcon className={classes.iconSize} color="primary" />
-                  </IconButton>
-                </Tooltip>
-              </InputLabel>
-              <Input
-                type="number"
-                value={props.analysis.requiredEntryCapital}
-                name="requiredEntryCapital"
-                readOnly
-              />
-            </FormControl>
-          </Grid>
-          <Grid item xs={4}>
-            <FormControl variant="standard" className="w-100">
-              <InputLabel>
-                <FormattedMessage {...messages.requiredCapitalInvestment} />
-                <Tooltip
-                  title={props.intl.formatMessage({
-                    ...messages.requiredCapitalInvestmentInfo,
-                  })}
-                >
-                  <IconButton className={classes.iconMr}>
-                    <InfoIcon className={classes.iconSize} color="primary" />
-                  </IconButton>
-                </Tooltip>
-              </InputLabel>
-              <Input
-                type="number"
-                value={props.analysis.requiredCapitalOverInvestPeriod}
-                name="propsedEntryPrice"
-                readOnly
-                startAdornment={
-                  <InputAdornment position="start">&#8364;</InputAdornment>
-                }
-              />
-            </FormControl>
-          </Grid>
-        </Grid>
-        <Grid item container spacing={6}>
-          <Grid item xs={3}>
-            <FormControl variant="standard" className="w-100">
-              <InputLabel>
-                <FormattedMessage {...messages.totalRequierd} />
-                <Tooltip
-                  title={props.intl.formatMessage({
-                    ...messages.totalRequierdInfo,
-                  })}
-                >
-                  <IconButton className={classes.iconMr}>
-                    <InfoIcon className={classes.iconSize} color="primary" />
-                  </IconButton>
-                </Tooltip>
-              </InputLabel>
-              <Input
-                type="number"
-                value={props.analysis.totalRequiredCapital}
-                name="totalRequiredCapital"
-                readOnly
-                startAdornment={
-                  <InputAdornment position="start">&#8364;</InputAdornment>
-                }
-              />
-            </FormControl>
+      <Grid item container spacing={6} className="mb-10 p-10">
+        <Typography variant="h6">
+          {props.intl.formatMessage({
+            ...messages.capital,
+          })}
+        </Typography>
+        <Grid item container spacing={6} className="mb-10">
+          <Grid item container spacing={6}>
+            <Grid item xs={3}>
+              <FormControl variant="standard" className="w-100">
+                <InputLabel>
+                  <FormattedMessage {...messages.requiredEntryCapital} />
+                  <Tooltip
+                    title={props.intl.formatMessage({
+                      ...messages.requiredEntryCapitalInfo,
+                    })}
+                  >
+                    <IconButton className={classes.iconMr}>
+                      <InfoIcon className={classes.iconSize} color="primary" />
+                    </IconButton>
+                  </Tooltip>
+                </InputLabel>
+                <Input
+                  type="number"
+                  value={props.analysis.requiredEntryCapital}
+                  name="requiredEntryCapital"
+                  readOnly
+                />
+              </FormControl>
+            </Grid>
+            <Grid item xs={4}>
+              <FormControl variant="standard" className="w-100">
+                <InputLabel>
+                  <FormattedMessage {...messages.requiredCapitalInvestment} />
+                  <Tooltip
+                    title={props.intl.formatMessage({
+                      ...messages.requiredCapitalInvestmentInfo,
+                    })}
+                  >
+                    <IconButton className={classes.iconMr}>
+                      <InfoIcon className={classes.iconSize} color="primary" />
+                    </IconButton>
+                  </Tooltip>
+                </InputLabel>
+                <Input
+                  type="number"
+                  value={props.analysis.requiredCapitalOverInvestPeriod}
+                  name="propsedEntryPrice"
+                  readOnly
+                  startAdornment={
+                    <InputAdornment position="start">&#8364;</InputAdornment>
+                  }
+                />
+              </FormControl>
+            </Grid>
+            <Grid item xs={3}>
+              <FormControl variant="standard" className="w-100">
+                <InputLabel>
+                  <FormattedMessage {...messages.totalRequierd} />
+                  <Tooltip
+                    title={props.intl.formatMessage({
+                      ...messages.totalRequierdInfo,
+                    })}
+                  >
+                    <IconButton className={classes.iconMr}>
+                      <InfoIcon className={classes.iconSize} color="primary" />
+                    </IconButton>
+                  </Tooltip>
+                </InputLabel>
+                <Input
+                  type="number"
+                  value={props.analysis.totalRequiredCapital}
+                  name="totalRequiredCapital"
+                  readOnly
+                  startAdornment={
+                    <InputAdornment position="start">&#8364;</InputAdornment>
+                  }
+                />
+              </FormControl>
+            </Grid>
           </Grid>
         </Grid>
       </Grid>
     );
   }
-  function renderReturnsAccordion() {
+  function displayReturns() {
     return (
-      <Grid item container spacing={6} className="mb-10">
-        <Grid item container spacing={6}>
-          <Grid item xs={3}>
-            <FormControl variant="standard" className="w-100">
-              <InputLabel>
-                <FormattedMessage {...messages.moic} />
-                <Tooltip
-                  title={props.intl.formatMessage({
-                    ...messages.moicInfo,
-                  })}
-                >
-                  <IconButton className={classes.iconMr}>
-                    <InfoIcon className={classes.iconSize} color="primary" />
-                  </IconButton>
-                </Tooltip>
-              </InputLabel>
-              <Input
-                type="number"
-                value={props.analysis.moic}
-                name="moic"
-                readOnly
-              />
-            </FormControl>
-          </Grid>
-          <Grid item xs={3}>
-            <FormControl variant="standard" className="w-100">
-              <InputLabel>
-                <FormattedMessage {...messages.profit} />
-                <Tooltip
-                  title={props.intl.formatMessage({
-                    ...messages.profitInfo,
-                  })}
-                >
-                  <IconButton className={classes.iconMr}>
-                    <InfoIcon className={classes.iconSize} color="primary" />
-                  </IconButton>
-                </Tooltip>
-              </InputLabel>
-              <Input
-                type="number"
-                value={props.analysis.profit}
-                name="profit"
-                readOnly
-                startAdornment={
-                  <InputAdornment position="start">&#8364;</InputAdornment>
-                }
-              />
-            </FormControl>
-          </Grid>
-          <Grid item xs={3}>
-            <FormControl variant="standard" className="w-100">
-              <InputLabel>
-                <FormattedMessage {...messages.irr} />
-                <Tooltip
-                  title={props.intl.formatMessage({
-                    ...messages.irrInfo,
-                  })}
-                >
-                  <IconButton className={classes.iconMr}>
-                    <InfoIcon className={classes.iconSize} color="primary" />
-                  </IconButton>
-                </Tooltip>
-              </InputLabel>
-              <Input
-                type="number"
-                value={props.analysis.irr}
-                name="irr"
-                readOnly
-                startAdornment={
-                  <InputAdornment position="start">&#8364;</InputAdornment>
-                }
-              />
-            </FormControl>
+      <Grid item container spacing={6} className="mb-10 p-10">
+        <Typography variant="h6">
+          {props.intl.formatMessage({
+            ...messages.returns,
+          })}
+        </Typography>
+        <Grid item container spacing={6} className="mb-10">
+          <Grid item container spacing={6}>
+            <Grid item xs={3}>
+              <FormControl variant="standard" className="w-100">
+                <InputLabel>
+                  <FormattedMessage {...messages.moic} />
+                  <Tooltip
+                    title={props.intl.formatMessage({
+                      ...messages.moicInfo,
+                    })}
+                  >
+                    <IconButton className={classes.iconMr}>
+                      <InfoIcon className={classes.iconSize} color="primary" />
+                    </IconButton>
+                  </Tooltip>
+                </InputLabel>
+                <Input
+                  type="number"
+                  value={props.analysis.moic}
+                  name="moic"
+                  readOnly
+                />
+              </FormControl>
+            </Grid>
+            <Grid item xs={3}>
+              <FormControl variant="standard" className="w-100">
+                <InputLabel>
+                  <FormattedMessage {...messages.profit} />
+                  <Tooltip
+                    title={props.intl.formatMessage({
+                      ...messages.profitInfo,
+                    })}
+                  >
+                    <IconButton className={classes.iconMr}>
+                      <InfoIcon className={classes.iconSize} color="primary" />
+                    </IconButton>
+                  </Tooltip>
+                </InputLabel>
+                <Input
+                  type="number"
+                  value={props.analysis.profit}
+                  name="profit"
+                  readOnly
+                  startAdornment={
+                    <InputAdornment position="start">&#8364;</InputAdornment>
+                  }
+                />
+              </FormControl>
+            </Grid>
+            <Grid item xs={3}>
+              <FormControl variant="standard" className="w-100">
+                <InputLabel>
+                  <FormattedMessage {...messages.irr} />
+                  <Tooltip
+                    title={props.intl.formatMessage({
+                      ...messages.irrInfo,
+                    })}
+                  >
+                    <IconButton className={classes.iconMr}>
+                      <InfoIcon className={classes.iconSize} color="primary" />
+                    </IconButton>
+                  </Tooltip>
+                </InputLabel>
+                <Input
+                  type="number"
+                  value={props.analysis.irr}
+                  name="irr"
+                  readOnly
+                  startAdornment={
+                    <InputAdornment position="start">&#8364;</InputAdornment>
+                  }
+                />
+              </FormControl>
+            </Grid>
           </Grid>
         </Grid>
       </Grid>
     );
   }
 
-  function renderAccordionGroup() {
-    return (
-      <Grid container direction="column" className="w-100 pt-30">
-        <Grid item className="pt-30">
-          <Accordion>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography>
-                <FormattedMessage {...messages.property} />
-              </Typography>
-            </AccordionSummary>
-            <AccordionDetails>{renderPropertyAccordion()}</AccordionDetails>
-          </Accordion>
-        </Grid>
-        <Grid item className="pt-30">
-          <Accordion>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography>
-                <FormattedMessage {...messages.investmentKpi} />
-              </Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              {renderInvestmentKpiAccordion()}
-            </AccordionDetails>
-          </Accordion>
-        </Grid>
-        <Grid item className="pt-30">
-          <Accordion>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography>
-                <FormattedMessage {...messages.capital} />
-              </Typography>
-            </AccordionSummary>
-            <AccordionDetails>{renderCapitalAccordion()}</AccordionDetails>
-          </Accordion>
-        </Grid>
-        <Grid item className="pt-30">
-          <Accordion>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography>
-                <FormattedMessage {...messages.returns} />
-              </Typography>
-            </AccordionSummary>
-            <AccordionDetails>{renderReturnsAccordion()}</AccordionDetails>
-          </Accordion>
-        </Grid>
-      </Grid>
-    );
-  }
   return (
     <div>
       <Helmet>
         <title>Analysis</title>
         <meta name="description" content="Description of Analysis" />
       </Helmet>
-      {renderAccordionGroup()}
+      {displayProperty()}
+      {displayInvestmentKpi()}
+      {displayCapital()}
+      {displayReturns()}
     </div>
   );
 }
