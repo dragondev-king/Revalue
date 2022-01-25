@@ -9,5 +9,10 @@ const makeSelectAnalysis = () =>
     substate => substate,
   );
 
+const makeSelectInputs = () =>
+  createSelector(
+    selectAnalysisDomain,
+    substate => substate.inputs,
+  );
 export default makeSelectAnalysis;
-export { selectAnalysisDomain };
+export { selectAnalysisDomain, makeSelectInputs };

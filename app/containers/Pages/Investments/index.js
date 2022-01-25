@@ -208,8 +208,6 @@ export function Investments(props) {
     props.getConditions();
     props.getAcquisitionTypes();
     props.getCIPs();
-    // call this function to get analysis data
-    // getAnalysisById()
   }, []);
 
   const validationSchema = yup.object().shape({
