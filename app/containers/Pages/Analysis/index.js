@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { FormattedMessage, injectIntl } from 'react-intl';
@@ -9,20 +9,18 @@ import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
 import InputAdornment from '@material-ui/core/InputAdornment';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Accordion from '@material-ui/core/Accordion';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
 import InfoIcon from '@material-ui/icons/Info';
 import { useInjectReducer } from 'utils/injectReducer';
 import { FormControl } from '@material-ui/core';
+import Skeleton from 'react-loading-skeleton';
 import messages from './messages';
-import makeSelectAnalysis, { makeSelectInputs } from './selectors';
+import { makeSelectAnalysis, makeSelectSkelton } from './selectors';
 import reducer from './reducer';
 import { getAnalysisDataById } from './actions';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 const useStyles = makeStyles(theme => ({
   appBarSpacer: theme.mixins.toolbar,
@@ -99,26 +97,26 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export function Analysis(props) {
+  // debugger
   const classes = useStyles();
   useInjectReducer({ key: 'analysis', reducer });
-  const [inputValue, setInputValue] = useState({ ...props.analysis[0] });
   useEffect(() => {
-    setInputValue({ ...props.analysis[0] });
     const path = window.location.pathname;
     const id = path.split('/').pop();
     props.getAnalysisDataById(id);
-    console.log('inputvalue', inputValue);
   }, []);
 
   function displayProperty() {
     return (
-      <Grid item container spacing={6} className="mb-10 p-10">
-        <Typography variant="h6">
-          {props.intl.formatMessage({
-            ...messages.property,
-          })}
-        </Typography>
-        <Grid item container spacing={6}>
+      <Grid item container spacing={4} className="mb-10 p-10">
+        <Grid item xs={12}>
+          <Typography variant="h6">
+            {props.intl.formatMessage({
+              ...messages.property,
+            })}
+          </Typography>
+        </Grid>
+        <Grid item container spacing={4}>
           <Grid item xs={3}>
             <FormControl variant="standard" className="w-100">
               <InputLabel>
@@ -135,7 +133,7 @@ export function Analysis(props) {
               </InputLabel>
               <Input
                 type="number"
-                value={props.analysis.location}
+                defaultValue={props.analysis.location}
                 name="location"
                 readOnly
               />
@@ -157,11 +155,11 @@ export function Analysis(props) {
               </InputLabel>
               <Input
                 type="number"
-                value={props.analysis.gca}
+                defaultValue={props.analysis.gca}
                 name="location"
                 readOnly
                 startAdornment={
-                  <InputAdornment position="start">&#8364;</InputAdornment>
+                  <InputAdornment position="start">m²</InputAdornment>
                 }
               />
             </FormControl>
@@ -182,11 +180,11 @@ export function Analysis(props) {
               </InputLabel>
               <Input
                 type="number"
-                value={props.analysis.gpa}
+                defaultValue={props.analysis.gpa}
                 name="location"
                 readOnly
                 startAdornment={
-                  <InputAdornment position="start">&#8364;</InputAdornment>
+                  <InputAdornment position="start">m²</InputAdornment>
                 }
               />
             </FormControl>
@@ -207,8 +205,213 @@ export function Analysis(props) {
               </InputLabel>
               <Input
                 type="number"
-                value={props.analysis.bedrooms}
+                defaultValue={props.analysis.bedrooms}
                 name="location"
+                readOnly
+                startAdornment={
+                  <InputAdornment position="start">#</InputAdornment>
+                }
+              />
+            </FormControl>
+          </Grid>
+        </Grid>
+      </Grid>
+    );
+  }
+  function displayInvestmentKpi() {
+    return (
+      <Grid item container spacing={4} className="mb-10 p-10">
+        <Grid item xs={12}>
+          <Typography variant="h6">
+            {props.intl.formatMessage({
+              ...messages.investmentKpi,
+            })}
+          </Typography>
+        </Grid>
+        <Grid item container spacing={4}>
+          <Grid item xs={3}>
+            <FormControl variant="standard" className="w-100">
+              <InputLabel>
+                <FormattedMessage {...messages.askingPrice} />
+                <Tooltip
+                  title={props.intl.formatMessage({
+                    ...messages.askingPriceInfo,
+                  })}
+                >
+                  <IconButton className={classes.iconMr}>
+                    <InfoIcon className={classes.iconSize} color="primary" />
+                  </IconButton>
+                </Tooltip>
+              </InputLabel>
+              <Input
+                type="number"
+                defaultValue={props.analysis.askingPrice}
+                name="askingPrice"
+                readOnly
+                startAdornment={
+                  <InputAdornment position="start">&#8364;</InputAdornment>
+                }
+              />
+            </FormControl>
+          </Grid>
+          <Grid item xs={3}>
+            <FormControl variant="standard" className="w-100">
+              <InputLabel>
+                <FormattedMessage {...messages.proposedEntryPrice} />
+                <Tooltip
+                  title={props.intl.formatMessage({
+                    ...messages.proposedEntryPriceInfo,
+                  })}
+                >
+                  <IconButton className={classes.iconMr}>
+                    <InfoIcon className={classes.iconSize} color="primary" />
+                  </IconButton>
+                </Tooltip>
+              </InputLabel>
+              <Input
+                type="number"
+                defaultValue={props.analysis.propsedEntryPrice}
+                name="location"
+                readOnly
+                startAdornment={
+                  <InputAdornment position="start">&#8364;</InputAdornment>
+                }
+              />
+            </FormControl>
+          </Grid>
+          <Grid item xs={3}>
+            <FormControl variant="standard" className="w-100">
+              <InputLabel>
+                <FormattedMessage {...messages.estimatedExitPrice} />
+                <Tooltip
+                  title={props.intl.formatMessage({
+                    ...messages.estimatedExitPriceInfo,
+                  })}
+                >
+                  <IconButton className={classes.iconMr}>
+                    <InfoIcon className={classes.iconSize} color="primary" />
+                  </IconButton>
+                </Tooltip>
+              </InputLabel>
+              <Input
+                type="number"
+                defaultValue={props.analysis.estimatedExitPrice}
+                name="location"
+                readOnly
+                startAdornment={
+                  <InputAdornment position="start">&#8364;</InputAdornment>
+                }
+              />
+            </FormControl>
+          </Grid>
+          <Grid item xs={3}>
+            <FormControl variant="standard" className="w-100">
+              <InputLabel>
+                <FormattedMessage {...messages.timeForSale} />
+                <Tooltip
+                  title={props.intl.formatMessage({
+                    ...messages.timeForSaleInfo,
+                  })}
+                >
+                  <IconButton className={classes.iconMr}>
+                    <InfoIcon className={classes.iconSize} color="primary" />
+                  </IconButton>
+                </Tooltip>
+              </InputLabel>
+              <Input
+                type="number"
+                defaultValue={props.analysis.timeForSale}
+                name="location"
+                readOnly
+                startAdornment={
+                  <InputAdornment position="start">MM</InputAdornment>
+                }
+              />
+            </FormControl>
+          </Grid>
+        </Grid>
+      </Grid>
+    );
+  }
+  function displayCapital() {
+    return (
+      <Grid item container spacing={4} className="mb-10 p-10">
+        <Grid item xs={12}>
+          <Typography variant="h6">
+            {props.intl.formatMessage({
+              ...messages.capital,
+            })}
+          </Typography>
+        </Grid>
+        <Grid item container spacing={4}>
+          <Grid item xs={3}>
+            <FormControl variant="standard" className="w-100">
+              <InputLabel>
+                <FormattedMessage {...messages.requiredEntryCapital} />
+                <Tooltip
+                  title={props.intl.formatMessage({
+                    ...messages.requiredEntryCapitalInfo,
+                  })}
+                >
+                  <IconButton className={classes.iconMr}>
+                    <InfoIcon className={classes.iconSize} color="primary" />
+                  </IconButton>
+                </Tooltip>
+              </InputLabel>
+              <Input
+                type="number"
+                defaultValue={props.analysis.requiredEntryCapital}
+                name="requiredEntryCapital"
+                readOnly
+                startAdornment={
+                  <InputAdornment position="start">&#8364;</InputAdornment>
+                }
+              />
+            </FormControl>
+          </Grid>
+          <Grid item xs={4}>
+            <FormControl variant="standard" className="w-100">
+              <InputLabel>
+                <FormattedMessage {...messages.requiredCapitalInvestment} />
+                <Tooltip
+                  title={props.intl.formatMessage({
+                    ...messages.requiredCapitalInvestmentInfo,
+                  })}
+                >
+                  <IconButton className={classes.iconMr}>
+                    <InfoIcon className={classes.iconSize} color="primary" />
+                  </IconButton>
+                </Tooltip>
+              </InputLabel>
+              <Input
+                type="number"
+                defaultValue={props.analysis.requiredCapitalOverInvestPeriod}
+                name="propsedEntryPrice"
+                readOnly
+                startAdornment={
+                  <InputAdornment position="start">&#8364;</InputAdornment>
+                }
+              />
+            </FormControl>
+          </Grid>
+          <Grid item xs={3}>
+            <FormControl variant="standard" className="w-100">
+              <InputLabel>
+                <FormattedMessage {...messages.totalRequierd} />
+                <Tooltip
+                  title={props.intl.formatMessage({
+                    ...messages.totalRequierdInfo,
+                  })}
+                >
+                  <IconButton className={classes.iconMr}>
+                    <InfoIcon className={classes.iconSize} color="primary" />
+                  </IconButton>
+                </Tooltip>
+              </InputLabel>
+              <Input
+                type="number"
+                defaultValue={props.analysis.totalRequiredCapital}
+                name="totalRequiredCapital"
                 readOnly
                 startAdornment={
                   <InputAdornment position="start">&#8364;</InputAdornment>
@@ -220,213 +423,18 @@ export function Analysis(props) {
       </Grid>
     );
   }
-  function displayInvestmentKpi() {
-    return (
-      <Grid item container spacing={6} className="mb-10 p-10">
-        <Typography variant="h6">
-          {props.intl.formatMessage({
-            ...messages.investmentKpi,
-          })}
-        </Typography>
-        <Grid item container spacing={6} className="mb-10">
-          <Grid item container spacing={6}>
-            <Grid item xs={3}>
-              <FormControl variant="standard" className="w-100">
-                <InputLabel>
-                  <FormattedMessage {...messages.askingPrice} />
-                  <Tooltip
-                    title={props.intl.formatMessage({
-                      ...messages.askingPrice,
-                    })}
-                  >
-                    <IconButton className={classes.iconMr}>
-                      <InfoIcon className={classes.iconSize} color="primary" />
-                    </IconButton>
-                  </Tooltip>
-                </InputLabel>
-                <Input
-                  type="number"
-                  value={props.analysis.askingPrice}
-                  name="askingPrice"
-                  readOnly
-                />
-              </FormControl>
-            </Grid>
-            <Grid item xs={3}>
-              <FormControl variant="standard" className="w-100">
-                <InputLabel>
-                  <FormattedMessage {...messages.proposedEntryPrice} />
-                  <Tooltip
-                    title={props.intl.formatMessage({
-                      ...messages.proposedEntryPrice,
-                    })}
-                  >
-                    <IconButton className={classes.iconMr}>
-                      <InfoIcon className={classes.iconSize} color="primary" />
-                    </IconButton>
-                  </Tooltip>
-                </InputLabel>
-                <Input
-                  type="number"
-                  value={props.analysis.propsedEntryPrice}
-                  name="location"
-                  readOnly
-                  startAdornment={
-                    <InputAdornment position="start">&#8364;</InputAdornment>
-                  }
-                />
-              </FormControl>
-            </Grid>
-            <Grid item xs={3}>
-              <FormControl variant="standard" className="w-100">
-                <InputLabel>
-                  <FormattedMessage {...messages.estimatedExitPrice} />
-                  <Tooltip
-                    title={props.intl.formatMessage({
-                      ...messages.estimatedExitPrice,
-                    })}
-                  >
-                    <IconButton className={classes.iconMr}>
-                      <InfoIcon className={classes.iconSize} color="primary" />
-                    </IconButton>
-                  </Tooltip>
-                </InputLabel>
-                <Input
-                  type="number"
-                  value={props.analysis.estimatedExitPrice}
-                  name="location"
-                  readOnly
-                  startAdornment={
-                    <InputAdornment position="start">&#8364;</InputAdornment>
-                  }
-                />
-              </FormControl>
-            </Grid>
-            <Grid item xs={3}>
-              <FormControl variant="standard" className="w-100">
-                <InputLabel>
-                  <FormattedMessage {...messages.timeForSale} />
-                  <Tooltip
-                    title={props.intl.formatMessage({
-                      ...messages.timeForSaleInfo,
-                    })}
-                  >
-                    <IconButton className={classes.iconMr}>
-                      <InfoIcon className={classes.iconSize} color="primary" />
-                    </IconButton>
-                  </Tooltip>
-                </InputLabel>
-                <Input
-                  type="number"
-                  value={props.analysis.timeForSale}
-                  name="location"
-                  readOnly
-                  startAdornment={
-                    <InputAdornment position="start">&#8364;</InputAdornment>
-                  }
-                />
-              </FormControl>
-            </Grid>
-          </Grid>
-        </Grid>
-      </Grid>
-    );
-  }
-  function displayCapital() {
-    return (
-      <Grid item container spacing={6} className="mb-10 p-10">
-        <Typography variant="h6">
-          {props.intl.formatMessage({
-            ...messages.capital,
-          })}
-        </Typography>
-        <Grid item container spacing={6} className="mb-10">
-          <Grid item container spacing={6}>
-            <Grid item xs={3}>
-              <FormControl variant="standard" className="w-100">
-                <InputLabel>
-                  <FormattedMessage {...messages.requiredEntryCapital} />
-                  <Tooltip
-                    title={props.intl.formatMessage({
-                      ...messages.requiredEntryCapitalInfo,
-                    })}
-                  >
-                    <IconButton className={classes.iconMr}>
-                      <InfoIcon className={classes.iconSize} color="primary" />
-                    </IconButton>
-                  </Tooltip>
-                </InputLabel>
-                <Input
-                  type="number"
-                  value={props.analysis.requiredEntryCapital}
-                  name="requiredEntryCapital"
-                  readOnly
-                />
-              </FormControl>
-            </Grid>
-            <Grid item xs={4}>
-              <FormControl variant="standard" className="w-100">
-                <InputLabel>
-                  <FormattedMessage {...messages.requiredCapitalInvestment} />
-                  <Tooltip
-                    title={props.intl.formatMessage({
-                      ...messages.requiredCapitalInvestmentInfo,
-                    })}
-                  >
-                    <IconButton className={classes.iconMr}>
-                      <InfoIcon className={classes.iconSize} color="primary" />
-                    </IconButton>
-                  </Tooltip>
-                </InputLabel>
-                <Input
-                  type="number"
-                  value={props.analysis.requiredCapitalOverInvestPeriod}
-                  name="propsedEntryPrice"
-                  readOnly
-                  startAdornment={
-                    <InputAdornment position="start">&#8364;</InputAdornment>
-                  }
-                />
-              </FormControl>
-            </Grid>
-            <Grid item xs={3}>
-              <FormControl variant="standard" className="w-100">
-                <InputLabel>
-                  <FormattedMessage {...messages.totalRequierd} />
-                  <Tooltip
-                    title={props.intl.formatMessage({
-                      ...messages.totalRequierdInfo,
-                    })}
-                  >
-                    <IconButton className={classes.iconMr}>
-                      <InfoIcon className={classes.iconSize} color="primary" />
-                    </IconButton>
-                  </Tooltip>
-                </InputLabel>
-                <Input
-                  type="number"
-                  value={props.analysis.totalRequiredCapital}
-                  name="totalRequiredCapital"
-                  readOnly
-                  startAdornment={
-                    <InputAdornment position="start">&#8364;</InputAdornment>
-                  }
-                />
-              </FormControl>
-            </Grid>
-          </Grid>
-        </Grid>
-      </Grid>
-    );
-  }
+  
   function displayReturns() {
     return (
-      <Grid item container spacing={6} className="mb-10 p-10">
-        <Typography variant="h6">
-          {props.intl.formatMessage({
-            ...messages.returns,
-          })}
-        </Typography>
+      <Grid item container spacing={4} className="mb-10 p-10">
+        <Grid item xs={12} p={0} m={0}>
+          <Typography variant="h6">
+            {props.intl.formatMessage({
+              ...messages.returns,
+            })}
+          </Typography>
+        </Grid>
+
         <Grid item container spacing={6} className="mb-10">
           <Grid item container spacing={6}>
             <Grid item xs={3}>
@@ -445,9 +453,12 @@ export function Analysis(props) {
                 </InputLabel>
                 <Input
                   type="number"
-                  value={props.analysis.moic}
+                  defaultValue={props.analysis.moic}
                   name="moic"
                   readOnly
+                  startAdornment={
+                    <InputAdornment position="start">x</InputAdornment>
+                  }
                 />
               </FormControl>
             </Grid>
@@ -467,7 +478,7 @@ export function Analysis(props) {
                 </InputLabel>
                 <Input
                   type="number"
-                  value={props.analysis.profit}
+                  defaultValue={props.analysis.profit}
                   name="profit"
                   readOnly
                   startAdornment={
@@ -492,11 +503,11 @@ export function Analysis(props) {
                 </InputLabel>
                 <Input
                   type="number"
-                  value={props.analysis.irr}
+                  defaultValue={props.analysis.irr}
                   name="irr"
                   readOnly
                   startAdornment={
-                    <InputAdornment position="start">&#8364;</InputAdornment>
+                    <InputAdornment position="start">%</InputAdornment>
                   }
                 />
               </FormControl>
@@ -513,24 +524,30 @@ export function Analysis(props) {
         <title>Analysis</title>
         <meta name="description" content="Description of Analysis" />
       </Helmet>
-      {displayProperty()}
-      {displayInvestmentKpi()}
-      {displayCapital()}
-      {displayReturns()}
+      {!props.isGettingAnalysisById ? (
+        [
+          displayProperty(),
+          displayInvestmentKpi(),
+          displayCapital(),
+          displayReturns(),
+        ]
+      ) : (
+        <Skeleton count={4} height={100} />
+      )}
     </div>
   );
 }
 
 const mapStateToProps = createStructuredSelector({
   analysis: makeSelectAnalysis(),
-  inputs: makeSelectInputs(),
+  isGettingAnalysisById: makeSelectSkelton(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    // getAcquisitionTypes: () => dispatch(getAcquisitionTypes())
     getAnalysisDataById: id => dispatch(getAnalysisDataById(id)),
-    // dispatch,
+    // setShowSkelton: defaultValue => dispatch(setShowSkelton(defaultValue)),
+    dispatch,
   };
 }
 

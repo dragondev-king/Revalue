@@ -1,21 +1,24 @@
 import produce from 'immer';
-import { GET_ANALYSIS_DATA_BY_ID } from './constants';
-import data from './data.json';
+import {
+  GET_ANALYSIS_DATA_BY_ID,
+  GET_ANALYSIS_DATA_SUCCESS_BY_ID,
+} from './constants';
 
-export const initialState = {};
+export const initialState = {
+  isGettingAnalysisById: false,
+  analysis: {},
+};
 
-/* eslint-disable default-case, no-param-reassign */
 const analysisReducer = (state = initialState, action) =>
   produce(state, draft => {
+    // eslint-disable-next-line default-case
     switch (action.type) {
       case GET_ANALYSIS_DATA_BY_ID:
-        // initialState.splice(0, initialState.length);
-        // eslint-disable-next-line prettier/prettier
-        const currentVal = data.find((item) => item.id === action.payload);
-        Object.assign(initialState, currentVal);
-        // initialState.push(currentVal[0]);
-        // eslint-disable-next-line no-unused-expressions
-        draft.data;
+        draft.isGettingAnalysisById = true;
+        break;
+      case GET_ANALYSIS_DATA_SUCCESS_BY_ID:
+        draft.analysis = action.payload;
+        draft.isGettingAnalysisById = false;
         break;
     }
   });

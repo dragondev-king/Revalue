@@ -201,6 +201,7 @@ export function Investments(props) {
     props.getConditions();
     props.getAcquisitionTypes();
     props.getCIPs();
+    console.log("props investmnet", props)
   }, []);
 
   const validationSchema = yup.object().shape({

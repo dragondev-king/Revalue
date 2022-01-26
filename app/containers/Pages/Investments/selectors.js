@@ -2,7 +2,6 @@ import { createSelector } from 'reselect';
 import { initialState } from './reducer';
 
 const selectInvestmentDomain = state => state.investment || initialState;
-
 const makeSelectInvestment = () =>
   createSelector(
     selectInvestmentDomain,
