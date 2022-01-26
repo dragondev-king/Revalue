@@ -73,7 +73,8 @@ export default defineMessages({
   },
   proposedEntryPriceInfo: {
     id: `${scope}.AcquisitionPrice`,
-    defaultMessage: 'Investor proposed acquisition Price. Value was calculated by multiplying the user imput Bid Ask discount on the Asking Value',
+    defaultMessage:
+      'Investor proposed acquisition Price. Value was calculated by multiplying the user imput Bid Ask discount on the Asking Value',
   },
   estimatedExitPrice: {
     id: `${scope}.estimatedExitPrice`,
@@ -81,7 +82,8 @@ export default defineMessages({
   },
   estimatedExitPriceInfo: {
     id: `${scope}.estimatedExitPriceInfo`,
-    defaultMessage: 'Based on the price per sqm of Confidencial Imobiliario Data base for the property location, typology and condition multiplyed by the Gross Private Area this the is the current market selling price of the property',
+    defaultMessage:
+      'Based on the price per sqm of Confidencial Imobiliario Data base for the property location, typology and condition multiplyed by the Gross Private Area this the is the current market selling price of the property',
   },
   timeForSale: {
     id: `${scope}.TimeForSale`,
@@ -89,7 +91,8 @@ export default defineMessages({
   },
   timeForSaleInfo: {
     id: `${scope}.TimeForSaleInfo`,
-    defaultMessage: 'Holding Period in months between Entry and Exit of Investment',
+    defaultMessage:
+      'Holding Period in months between Entry and Exit of Investment',
   },
   // capital
   requiredEntryCapital: {
@@ -98,7 +101,8 @@ export default defineMessages({
   },
   requiredEntryCapitalInfo: {
     id: `${scope}.requiredEntryCapitalInfo`,
-    defaultMessage: 'Required Capital for Investment. Acquistion Value - Acquisition Debt + Transfer Tax + Acquisition Stamp Duty + Registries + Bank Costs + Acquisition Stamp Duty',
+    defaultMessage:
+      'Required Capital for Investment. Acquistion Value - Acquisition Debt + Transfer Tax + Acquisition Stamp Duty + Registries + Bank Costs + Acquisition Stamp Duty',
   },
   requiredCapitalInvestment: {
     id: `${scope}.requiredCapitalInvestment`,
@@ -139,6 +143,7 @@ export default defineMessages({
   },
   irrInfo: {
     id: `${scope}.irrInfo`,
-    defaultMessage: 'The internal rate of return (IRR) is the annual rate of growth that an investment is expected to generate',
+    defaultMessage:
+      'The internal rate of return (IRR) is the annual rate of growth that an investment is expected to generate',
   },
 });

@@ -423,7 +423,7 @@ export function Analysis(props) {
       </Grid>
     );
   }
-  
+
   function displayReturns() {
     return (
       <Grid item container spacing={4} className="mb-10 p-10">
