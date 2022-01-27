@@ -22,15 +22,15 @@ export default defineMessages({
   },
   location: {
     id: `${scope}.location`,
-    defaultMessage: 'Location *',
+    defaultMessage: 'Property Location*',
   },
   status: {
     id: `${scope}.status`,
-    defaultMessage: 'Status',
+    defaultMessage: 'Property Status',
   },
   type: {
     id: `${scope}.type`,
-    defaultMessage: 'Type',
+    defaultMessage: 'Property Typology',
   },
   typology: {
     id: `${scope}.typology`,
@@ -38,15 +38,15 @@ export default defineMessages({
   },
   condition: {
     id: `${scope}.condition`,
-    defaultMessage: 'Condition',
+    defaultMessage: 'Property Condition',
   },
   minAskingPrice: {
     id: `${scope}.minAskingPrice`,
-    defaultMessage: 'Min Asking Price',
+    defaultMessage: 'Min Price',
   },
   maxAskingPrice: {
     id: `${scope}.maxAskingPrice`,
-    defaultMessage: 'Max Asking Price',
+    defaultMessage: 'Max Price',
   },
   minUsefulArea: {
     id: `${scope}.minUsefulArea`,
@@ -101,7 +101,7 @@ export default defineMessages({
   },
   entryFee: {
     id: `${scope}.entryFee`,
-    defaultMessage: 'Entry Fee',
+    defaultMessage: 'Entry Broker Fee',
   },
   stampDuty: {
     id: `${scope}.stampDuty`,
@@ -116,11 +116,11 @@ export default defineMessages({
   },
   landRegistryWithMortgage: {
     id: `${scope}.landRegistryWithMortgage`,
-    defaultMessage: 'Land Registry with Mortgage',
+    defaultMessage: 'Land Registry Inscription With Mortgage',
   },
   landRegistryWithoutMortgage: {
     id: `${scope}.landRegistryWithoutMortgage`,
-    defaultMessage: 'Land Registry without Mortgage',
+    defaultMessage: 'Land Registry Inscription without Mortgage',
   },
   // Finance Assumptions
   financeAssumptions: {
@@ -158,7 +158,7 @@ export default defineMessages({
   },
   capexFinancing: {
     id: `${scope}.capexFinancing`,
-    defaultMessage: 'CAPEX Financing',
+    defaultMessage: 'CAPEX Financed'
   },
   capex: {
     id: `${scope}.capex`,
@@ -175,7 +175,7 @@ export default defineMessages({
   },
   condominiumCostsInfo: {
     id: `${scope}.condominiumCostsInfo`,
-    defaultMessage: 'Estimated Condominium Costs Per Month',
+    defaultMessage: 'Estimated Condominium Costs',
   },
   propertyTaxRate: {
     id: `${scope}.propertyTaxRate`,
@@ -193,7 +193,7 @@ export default defineMessages({
   timeToSaleInfo: {
     id: `${scope}.timeToSaleInfo`,
     defaultMessage:
-      'Holding Period in months between Entry and Exit of Investment',
+      'Period in months between acquistion and exit',
   },
   irsRate: {
     id: `${scope}.irsRate`,
@@ -201,21 +201,20 @@ export default defineMessages({
   },
   exitBrokerFee: {
     id: `${scope}.exitBrokerFee`,
-    defaultMessage: 'Exit Broker Fee',
+    defaultMessage: 'Exit Broker Rate',
   },
   exitBrokerFeeInfo: {
     id: `${scope}.exitBrokerFeeInfo`,
-    defaultMessage:
-      'Commission paid to the broker by the buyer. % of the selling price',
+    defaultMessage:'Broker fee to exit transaction',
   },
   loanEarlyRepaymentFee: {
     id: `${scope}.loanEarlyRepaymentFee`,
-    defaultMessage: 'Loan Early Repayment Fee',
+    defaultMessage: 'Early Repayment Fee',
   },
   loanEarlyRepaymentFeeInfo: {
     id: `${scope}.loanEarlyRepaymentFeeInfo`,
     defaultMessage:
-      'The early redemption penalty for a variable acquisition mortgage is 0.50% (as per the rule of the Bank of Portugal) and 2% for a fixed rate mortgage.',
+      'An Early Redemption Penalty (also known as an Early Repayment Charge or ERC) is a fee you may be required to make to a lender if you pay off a loan or mortgage before the scheduled term of the credit facility, also sometimes referred to as a Redemption Penalty.',
   },
   capitalGainsTaxBase: {
     id: `${scope}.capitalGainsTaxBase`,
@@ -250,7 +249,7 @@ export default defineMessages({
   },
   confidencialImobiliarioPercentile: {
     id: `${scope}.confidencialImobiliarioPercentile`,
-    defaultMessage: 'Confidencial Imobiliario Percentile *',
+    defaultMessage: 'Percentile *',
   },
   confidencialImobiliarioPercentileInfo: {
     id: `${scope}.confidencialImobiliarioPercentileInfo`,
@@ -259,7 +258,7 @@ export default defineMessages({
   },
   minObservationsForPercentile: {
     id: `${scope}.minObservationsForPercentile`,
-    defaultMessage: 'Min Observations for Percentile',
+    defaultMessage: 'Min Percentile',
   },
   minAskingPriceInfo: {
     id: `${scope}.minAskingPriceInfo`,
@@ -283,19 +282,27 @@ export default defineMessages({
   },
   minCapitalInfo: {
     id: `${scope}.minCapitalInfo`,
-    defaultMessage: 'Min Capital',
+    defaultMessage: 'Minimium Required Capital for the Transaction to be filter in the analysis',
   },
   maxCapitalInfo: {
     id: `${scope}.maxCapitalInfo`,
-    defaultMessage: 'Max Capital',
+    defaultMessage: 'Maximum Required Capital for the Transaction to be filter in the analysis',
   },
   bidAskInfo: {
     id: `${scope}.bidAskInfo`,
-    defaultMessage: 'Bid Ask',
+    defaultMessage: 'Discount to Seller asking price',
+  },
+  housePriceIndexInfo: {
+    id: `${scope}.housePriceIndexInfo`,
+    defaultMessage: 'Property value grow per year',
   },
   financingRateInfo: {
     id: `${scope}.financingRateInfo`,
-    defaultMessage: 'Financing Rate',
+    defaultMessage: 'Financing Rate to acquition Price',
+  },
+  minProfitInfo: {
+    id: `${scope}.financingRateInfo`,
+    defaultMessage: 'Minimium Required Profit to be filter in the analysis',
   },
   otherInvestmentInformationInfo: {
     id: `${scope}.otherInvestmentInformationInfo`,
@@ -307,27 +314,27 @@ export default defineMessages({
   },
   acquisitionTypeInfo: {
     id: `${scope}.acquisitionTypeInfo`,
-    defaultMessage: 'Acquisition Type',
+    defaultMessage: 'Property will be for Investment or as a primary residence?',
   },
   entryFeeInfo: {
     id: `${scope}.entryFeeInfo`,
-    defaultMessage: 'Entry Fee',
+    defaultMessage: 'Is there a broker fee to be paid the buyer?',
   },
   landRegistryWithMortgageInfo: {
     id: `${scope}.landRegistryWithMortgageInfo`,
-    defaultMessage: 'Land Registry with Mortgage',
+    defaultMessage: 'The public deed contract , needs to be made by a recognized entity or person such as a public notary office, a lawyer or solicitor. A popular choice are the “Casa Pronta” (Ready House) notary offices, where the process can be more streamlined and cheaper than normal.For this reason, the reference in terms of price are the Casa Pronta notary offices, where it normally costs 375,00 €, including both the preparation of the public deed contract and the registry. With Mortgage normally will be 700€.',
   },
   landRegistryWithoutMortgageInfo: {
     id: `${scope}.landRegistryWithoutMortgageInfo`,
-    defaultMessage: 'Land Registry without Mortgage',
+    defaultMessage: 'The public deed contract , needs to be made by a recognized entity or person such as a public notary office, a lawyer or solicitor. A popular choice are the “Casa Pronta” (Ready House) notary offices, where the process can be more streamlined and cheaper than normal.For this reason, the reference in terms of price are the Casa Pronta notary offices, where it normally costs 375,00 €, including both the preparation of the public deed contract and the registry.',
   },
   interestRateInfo: {
     id: `${scope}.interestRateInfo`,
-    defaultMessage: 'Interest Rate',
+    defaultMessage: 'Mortgage Interest over Period',
   },
   amortizationInfo: {
     id: `${scope}.amortizationInfo`,
-    defaultMessage: 'Amortization',
+    defaultMessage: 'Amortization Period in years',
   },
   stampDutyInterestsInfo: {
     id: `${scope}.stampDutyInterestsInfo`,
@@ -339,15 +346,15 @@ export default defineMessages({
   },
   irsRateInfo: {
     id: `${scope}.irsRateInfo`,
-    defaultMessage: 'IRS Rate',
+    defaultMessage: 'IRS Rate with capital gains',
   },
   capitalGainsTaxBaseInfo: {
     id: `${scope}.capitalGainsTaxBaseInfo`,
-    defaultMessage: 'Capital gains Tax Base',
+    defaultMessage: 'IRS Rate on base Profit',
   },
   grossAreaToUsefulAreaInfo: {
     id: `${scope}.grossAreaToUsefulAreaInfo`,
-    defaultMessage: 'Gross Area To Useful Area',
+    defaultMessage: 'If Gross Private area not available this will be the base area for Exit value calculation',
   },
   minObservationsForPercentileInfo: {
     id: `${scope}.minObservationsForPercentileInfo`,

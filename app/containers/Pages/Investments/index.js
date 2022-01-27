@@ -389,7 +389,7 @@ export function Investments(props) {
         </Grid>
         <Grid item container xs>
           <Grid item container spacing={6}>
-            <Grid item xs={12}>
+            <Grid item xs={12}> 
               <FormControl
                 variant="standard"
                 className="w-100"
@@ -791,7 +791,7 @@ export function Investments(props) {
                 })}
                 <Tooltip
                   title={props.intl.formatMessage({
-                    ...messages.housePriceIndex,
+                    ...messages.housePriceIndexInfo,
                   })}
                 >
                   <IconButton className={classes.iconMr}>
@@ -805,7 +805,7 @@ export function Investments(props) {
                 defaultValue={props.inputs.housePriceIndex}
                 name="housePriceIndex"
                 startAdornment={
-                  <InputAdornment position="start">&#8364;</InputAdornment>
+                  <InputAdornment position="start">%</InputAdornment>
                 }
               />
               <FormHelperText>{props.errors.minCapital}</FormHelperText>
@@ -855,7 +855,7 @@ export function Investments(props) {
                 })}
                 <Tooltip
                   title={props.intl.formatMessage({
-                    ...messages.minProfit,
+                    ...messages.minProfitInfo,
                   })}
                 >
                   <IconButton className={classes.iconMr}>
@@ -869,7 +869,7 @@ export function Investments(props) {
                 defaultValue={props.inputs.minProfit}
                 name="minProfit"
                 startAdornment={
-                  <InputAdornment position="start">%</InputAdornment>
+                  <InputAdornment position="start">&#8364;</InputAdornment>
                 }
               />
               <FormHelperText>{props.errors.minProfit}</FormHelperText>
@@ -1004,7 +1004,7 @@ export function Investments(props) {
           </Grid>
         </Grid>
         <Grid item container spacing={6} className="mt-20">
-          <Grid item xs={3}>
+          <Grid item xs={4}>
             <FormControl
               variant="standard"
               className="w-100"
@@ -1038,7 +1038,7 @@ export function Investments(props) {
               </FormHelperText>
             </FormControl>
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={4}>
             <FormControl
               variant="standard"
               className="w-100"
