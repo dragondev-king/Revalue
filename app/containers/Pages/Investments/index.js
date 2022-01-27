@@ -31,6 +31,7 @@ import parse from 'autosuggest-highlight/parse';
 import match from 'autosuggest-highlight/match';
 import AutoComplete from 'components/AutoComplete';
 import SearchIcon from '@material-ui/icons/Search';
+import { Link } from 'react-router-dom';
 import messages from './messages';
 import PaperMap from '../../../components/PaperMap';
 import {
@@ -186,7 +187,11 @@ const columns = [
     field: 'report',
     label: 'report',
     width: 130,
-    editable: true,
+    renderCell: cellValues => (
+      <Link to={`/analysis/${cellValues.row.id}`} style={{ color: '#7866f4' }}>
+        Report
+      </Link>
+    ),
   },
 ];
 
@@ -389,7 +394,7 @@ export function Investments(props) {
         </Grid>
         <Grid item container xs>
           <Grid item container spacing={6}>
-            <Grid item xs={12}> 
+            <Grid item xs={12}>
               <FormControl
                 variant="standard"
                 className="w-100"
@@ -1779,9 +1784,10 @@ export function Investments(props) {
             rowsPerPageOptions={[5]}
             checkboxSelection
             disableSelectionOnClick
-            onRowClick={event => {
-              props.history.push(`/analysis/${event.id}`);
-            }}
+            // onCellClick={}
+            // onRowClick={event => {
+            //   props.history.push(`/analysis/${event.id}`);
+            // }}
           />
         </Grid>
       </Grid>

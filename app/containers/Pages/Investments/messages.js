@@ -158,7 +158,7 @@ export default defineMessages({
   },
   capexFinancing: {
     id: `${scope}.capexFinancing`,
-    defaultMessage: 'CAPEX Financed'
+    defaultMessage: 'CAPEX Financed',
   },
   capex: {
     id: `${scope}.capex`,
@@ -192,8 +192,7 @@ export default defineMessages({
   },
   timeToSaleInfo: {
     id: `${scope}.timeToSaleInfo`,
-    defaultMessage:
-      'Period in months between acquistion and exit',
+    defaultMessage: 'Period in months between acquistion and exit',
   },
   irsRate: {
     id: `${scope}.irsRate`,
@@ -205,7 +204,7 @@ export default defineMessages({
   },
   exitBrokerFeeInfo: {
     id: `${scope}.exitBrokerFeeInfo`,
-    defaultMessage:'Broker fee to exit transaction',
+    defaultMessage: 'Broker fee to exit transaction',
   },
   loanEarlyRepaymentFee: {
     id: `${scope}.loanEarlyRepaymentFee`,
@@ -282,11 +281,13 @@ export default defineMessages({
   },
   minCapitalInfo: {
     id: `${scope}.minCapitalInfo`,
-    defaultMessage: 'Minimium Required Capital for the Transaction to be filter in the analysis',
+    defaultMessage:
+      'Minimium Required Capital for the Transaction to be filter in the analysis',
   },
   maxCapitalInfo: {
     id: `${scope}.maxCapitalInfo`,
-    defaultMessage: 'Maximum Required Capital for the Transaction to be filter in the analysis',
+    defaultMessage:
+      'Maximum Required Capital for the Transaction to be filter in the analysis',
   },
   bidAskInfo: {
     id: `${scope}.bidAskInfo`,
@@ -314,7 +315,8 @@ export default defineMessages({
   },
   acquisitionTypeInfo: {
     id: `${scope}.acquisitionTypeInfo`,
-    defaultMessage: 'Property will be for Investment or as a primary residence?',
+    defaultMessage:
+      'Property will be for Investment or as a primary residence?',
   },
   entryFeeInfo: {
     id: `${scope}.entryFeeInfo`,
@@ -322,11 +324,13 @@ export default defineMessages({
   },
   landRegistryWithMortgageInfo: {
     id: `${scope}.landRegistryWithMortgageInfo`,
-    defaultMessage: 'The public deed contract , needs to be made by a recognized entity or person such as a public notary office, a lawyer or solicitor. A popular choice are the “Casa Pronta” (Ready House) notary offices, where the process can be more streamlined and cheaper than normal.For this reason, the reference in terms of price are the Casa Pronta notary offices, where it normally costs 375,00 €, including both the preparation of the public deed contract and the registry. With Mortgage normally will be 700€.',
+    defaultMessage:
+      'The public deed contract , needs to be made by a recognized entity or person such as a public notary office, a lawyer or solicitor. A popular choice are the “Casa Pronta” (Ready House) notary offices, where the process can be more streamlined and cheaper than normal.For this reason, the reference in terms of price are the Casa Pronta notary offices, where it normally costs 375,00 €, including both the preparation of the public deed contract and the registry. With Mortgage normally will be 700€.',
   },
   landRegistryWithoutMortgageInfo: {
     id: `${scope}.landRegistryWithoutMortgageInfo`,
-    defaultMessage: 'The public deed contract , needs to be made by a recognized entity or person such as a public notary office, a lawyer or solicitor. A popular choice are the “Casa Pronta” (Ready House) notary offices, where the process can be more streamlined and cheaper than normal.For this reason, the reference in terms of price are the Casa Pronta notary offices, where it normally costs 375,00 €, including both the preparation of the public deed contract and the registry.',
+    defaultMessage:
+      'The public deed contract , needs to be made by a recognized entity or person such as a public notary office, a lawyer or solicitor. A popular choice are the “Casa Pronta” (Ready House) notary offices, where the process can be more streamlined and cheaper than normal.For this reason, the reference in terms of price are the Casa Pronta notary offices, where it normally costs 375,00 €, including both the preparation of the public deed contract and the registry.',
   },
   interestRateInfo: {
     id: `${scope}.interestRateInfo`,
@@ -354,7 +358,8 @@ export default defineMessages({
   },
   grossAreaToUsefulAreaInfo: {
     id: `${scope}.grossAreaToUsefulAreaInfo`,
-    defaultMessage: 'If Gross Private area not available this will be the base area for Exit value calculation',
+    defaultMessage:
+      'If Gross Private area not available this will be the base area for Exit value calculation',
   },
   minObservationsForPercentileInfo: {
     id: `${scope}.minObservationsForPercentileInfo`,
