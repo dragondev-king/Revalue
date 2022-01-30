@@ -1488,7 +1488,9 @@ export function Analysis(props) {
                 })}
               </Typography>
             </AccordionSummary>
-            <AccordionDetails>{exitValueCalculationAccordion()}</AccordionDetails>
+            <AccordionDetails>
+              {exitValueCalculationAccordion()}
+            </AccordionDetails>
           </Accordion>
         </Grid>
       </Grid>
