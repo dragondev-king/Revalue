@@ -123,11 +123,19 @@ export default defineMessages({
   // returns
   moic: {
     id: `${scope}.moic`,
-    defaultMessage: 'MoIC',
+    defaultMessage: 'Entry Price',
   },
   moicInfo: {
-    id: `${scope}.moic Info`,
-    defaultMessage: 'MoIC',
+    id: `${scope}.moicInfo`,
+    defaultMessage: 'Acquisition Value + Acquisition Costs',
+  },
+  requiredInitialInvestment: {
+    id: `${scope}.requiredInitialInvestment`,
+    defaultMessage: 'Required Initial Investment',
+  },
+  requiredInitialInvestmentInfo: {
+    id: `${scope}.requiredInitialInvestmentInfo`,
+    defaultMessage: 'Required Initial Investment',
   },
   profit: {
     id: `${scope}.profit`,
@@ -146,4 +154,278 @@ export default defineMessages({
     defaultMessage:
       'The internal rate of return (IRR) is the annual rate of growth that an investment is expected to generate',
   },
+
+  // assumptions under investment analysis
+  // financing assumptions
+  financingAssumptions: {
+    id: `${scope}.financingAssumptions`,
+    defaultMessage: 'Financing Assumptions',
+  },
+  financingRate: {
+    id: `${scope}.financing`,
+    defaultMessage: 'financingRate',
+  },
+  financingRateInfo: {
+    id: `${scope}.financing`,
+    defaultMessage: 'Financing Rate to acquition Price',
+  },
+  capexFinanced: {
+    id: `${scope}.capexFinanced`,
+    defaultMessage: 'Capex Financed',
+  },
+  capexFinancedInfo: {
+    id: `${scope}.capexFinanced`,
+    defaultMessage: 'Capex Financed Info',
+  },
+  interestRate: {
+    id: `${scope}.interestRate`,
+    defaultMessage: 'Interest',
+  },
+  interestRateInfo: {
+    id: `${scope}.interestRateInfo`,
+    defaultMessage: 'Interest Rate',
+  },
+  amortization: {
+    id: `${scope}.amortization`,
+    defaultMessage: 'Amortization',
+  },
+  amortizationInfo: {
+    id: `${scope}.amortizationInfo`,
+    defaultMessage: 'Debt Repayment to the lender',
+  },
+  bankCommission: {
+    id: `${scope}.bankCommission`,
+    defaultMessage: 'Bank Commission',
+  },
+  bankCommissionInfo: {
+    id: `${scope}.bankCommissionInfo`,
+    defaultMessage: 'Bank fees vary, depending on the lender and loan amount. Details will be provided in the mortgage proposal document',
+  },
+  earlyRepaymentFee: {
+    id: `${scope}.earlyRepaymentFee`,
+    defaultMessage: 'Loan Early Repayment Fee',
+  },
+  earlyRepaymentFeeInfo: {
+    id: `${scope}.earlyRepaymentFeeInfo`,
+    defaultMessage: 'The early redemption penalty for a variable acquisition mortgage is 0.50% (as per the rule of the Bank of Portugal) and 2% for a fixed rate mortgage.',
+  },
+  // Area
+  area: {
+    id: `${scope}.area`,
+    defaultMessage: 'Area',
+  },
+  gca: {
+    id: `${scope}.GCA`,
+    defaultMessage: 'Gross Area',
+  },
+  areaGcaInfo: {
+    id: `${scope}.areaGcaInfo`,
+    defaultMessage: 'Gross Construction area corresponds to the sum of Private Gross Area and Dependent Area',
+  },
+  areaGPA: {
+    id: `${scope}.areaGPA`,
+    defaultMessage: 'Useful Area',
+  },
+  areaGPAInfo: {
+    id: `${scope}.areaGPAInfo`,
+    defaultMessage: 'Gross Private Area is area measured by the outer perimeter and axes of the walls',
+  },
+  // Acquistion
+  acquistion: {
+    id: `${scope}.acquistion`,
+    defaultMessage: 'Acquistion',
+  },
+  bidAsk: {
+    id: `${scope}.bidAsk`,
+    defaultMessage: 'Bis Ask',
+  },
+  bidAskInfo: {
+    id: `${scope}.bidAskInfo`,
+    defaultMessage: 'Discount to Seller asking price',
+  },
+  entryBrokerFee: {
+    id: `${scope}.entryBrokerFee`,
+    defaultMessage: 'Entry Broker Fee',
+  },
+  entryBrokerFeeInfo: {
+    id: `${scope}.entryBrokerFeeInfo`,
+    defaultMessage: 'Comission paid to the broker by the buyer. Typically sale comission is paid by the seller',
+  },
+  // operation assumptions
+  operationAssumptions: {
+    id: `${scope}.operationAssumptions`,
+    defaultMessage: 'Operation Assumptions',
+  },
+  capex: {
+    id: `${scope}.Capex`,
+    defaultMessage: 'Capex',
+  },
+  capexInfo: {
+    id: `${scope}.CapexInfo`,
+    defaultMessage: 'Capex Info',
+  },
+  condominiumCosts: {
+    id: `${scope}.condominiumCosts`,
+    defaultMessage: 'Condominium Costs',
+  },
+  condominiumCostsInfo: {
+    id: `${scope}.condominiumCostsInfo`,
+    defaultMessage: 'Estimated Condominium cost',
+  },
+  propertyTaxRate: {
+    id: `${scope}.PropertyTaxRate`,
+    defaultMessage: 'Property Tax Rate',
+  },
+  propertyTaxRateInfo: {
+    id: `${scope}.PropertyTaxRateInfo`,
+    defaultMessage: 'Property Tax Rate Info',
+  },
+
+  // taxes
+  taxes: {
+    id: `${scope}.taxes`,
+    defaultMessage: 'Taxes',
+  },
+  transferTax: {
+    id: `${scope}.transferTax`,
+    defaultMessage: 'Transfer Tax',
+  },
+  transferTaxInfo: {
+    id: `${scope}.transferTaxInfo`,
+    defaultMessage: 'transferTaxInfo',
+  },
+  acquisitionStampDuty: {
+    id: `${scope}.acquisitionStampDuty`,
+    defaultMessage: 'Stamp Duty',
+  },
+  acquisitionStampDutyInfo: {
+    id: `${scope}.acquisitionStampDutyInfo`,
+    defaultMessage: 'As a buyer, you need to pay stamp duty (Imposto de Selo) on deeds, contracts, bank mortgages and loans, documents, and titles. The rate changes according to the type and value of the property. The rate depending on the type of deed/operation is between 0.4% and 0.8%.When buying a house, you pay stamp duty to the notary while signing the deed of sale. The rate of this stamp duty is 0.8%.',
+  },
+  mortgageStampDuty: {
+    id: `${scope}.mortgageStampDuty`,
+    defaultMessage: 'Notary',
+  },
+  mortgageStampDutyInfo: {
+    id: `${scope}.mortgageStampDutyInfo`,
+    defaultMessage: 'The public deed contract , needs to be made by a recognized entity or person such as a public notary office, a lawyer or solicitor. A popular choice are the “Casa Pronta” (Ready House) notary offices, where the process can be more streamlined and cheaper than normal.For this reason, the reference in terms of price are the Casa Pronta notary offices, where it normally costs 375,00 €, including both the preparation of the public deed contract and the registry.',
+  },
+  interestStampDuty: {
+    id: `${scope}.interestStampDuty`,
+    defaultMessage: 'Stamp Duty Interest',
+  },
+  interestStampDutyInfo: {
+    id: `${scope}.interestStampDutyInfo`,
+    defaultMessage: 'Stamp Duty',
+  },
+  landRegistryWithMortgage: {
+    id: `${scope}.landRegistryWithMortgage`,
+    defaultMessage: 'Land Registry Inscription With Mortgage     ',
+  },
+  landRegistryWithMortgageInfo: {
+    id: `${scope}.landRegistryWithMortgageInfo`,
+    defaultMessage: 'The public deed contract , needs to be made by a recognized entity or person such as a public notary office, a lawyer or solicitor. A popular choice are the “Casa Pronta” (Ready House) notary offices, where the process can be more streamlined and cheaper than normal.For this reason, the reference in terms of price are the Casa Pronta notary offices, where it normally costs 375,00 €, including both the preparation of the public deed contract and the registry. With Mortgage normally will be 700€',
+  },
+  landRegistryWithoutMortgage: {
+    id: `${scope}.landRegistryWithMortgage`,
+    defaultMessage: 'Land Registry Inscription Without Mortgage',
+  },
+  landRegistryWithoutMortgageInfo: {
+    id: `${scope}.landRegistryWithMortgageInfo`,
+    defaultMessage: 'The public deed contract , needs to be made by a recognized entity or person such as a public notary office, a lawyer or solicitor. A popular choice are the “Casa Pronta” (Ready House) notary offices, where the process can be more streamlined and cheaper than normal.For this reason, the reference in terms of price are the Casa Pronta notary offices, where it normally costs 375,00 €, including both the preparation of the public deed contract and the registry.',
+  },
+  irs: {
+    id: `${scope}.irs`,
+    defaultMessage: 'IRS Rate',
+  },
+  irsInfo: {
+    id: `${scope}.irsInfo`,
+    defaultMessage: 'IRS Rate with capital gains    ',
+  },
+  capitalGainsTaxBase: {
+    id: `${scope}.capitalGainsTaxBase`,
+    defaultMessage: 'Capital Gains Tax Rate',
+  },
+  capitalGainsTaxBaseInfo: {
+    id: `${scope}.capitalGainsTaxBaseInfo`,
+    defaultMessage: 'IRS Rate on base Profit',
+  },
+  // exit value calculation
+  exitValueCalculation: {
+    id: `${scope}.exitValueCalculation`,
+    defaultMessage: 'Exit Value Calculation',
+  },
+  type: {
+    id: `${scope}.type`,
+    defaultMessage: 'Property Type',
+  },
+  typeInfo: {
+    id: `${scope}.typeinfo`,
+    defaultMessage: 'Please choose number of bedrooms for your analysis',
+  },
+  condition: {
+    id: `${scope}.condition`,
+    defaultMessage: 'Property Condition',
+  },
+  conditionInfo: {
+    id: `${scope}.conditioninfo`,
+    defaultMessage: 'Please choose if properties should be new or used for your analysis    ',
+  },
+  percentile: {
+    id: `${scope}.Percentile`,
+    defaultMessage: 'Percentile',
+  },
+  percentileInfo: {
+    id: `${scope}.percentileInfo`,
+    defaultMessage: 'Confidencial Imobiliario Percentile for Exit Value Calculation',
+  },
+  cap: {
+    id: `${scope}.cap`,
+    defaultMessage: 'Cap',
+  },
+  capInfo: {
+    id: `${scope}.cap info`,
+    defaultMessage: 'Max Delta between Asking Value and Confidencial Imobiliario Data Base',
+  },
+  floor: {
+    id: `${scope}.Floor`,
+    defaultMessage: 'Floor',
+  },
+  floorInfo: {
+    id: `${scope}.Floor Info`,
+    defaultMessage: 'Min Delta between Asking Value and Confidencial Imobiliario Data Base',
+  },
+  hpi: {
+    id: `${scope}.hpi`,
+    defaultMessage: 'House Price Index    ',
+  },
+  hpiInfo: {
+    id: `${scope}.hpiInfo`,
+    defaultMessage: 'Property value grow per year',
+  },
+  timeToSale: {
+    id: `${scope}.timeToSale`,
+    defaultMessage: 'Time To Sale',
+  },
+  timeToSaleInfo: {
+    id: `${scope}.timeToSaleInfo`,
+    defaultMessage: 'Period in months between acquistion and exit',
+  },
+  exitValueOverride: {
+    id: `${scope}.exitValueOverride`,
+    defaultMessage: 'Exit Value Override',
+  },
+  exitValueOverrideInfo: {
+    id: `${scope}.exitValueOverride Info`,
+    defaultMessage: 'Exit Value Override Info',
+  },
+  exitBrokerFee: {
+    id: `${scope}.exitBrokerFee`,
+    defaultMessage: 'Exit Pricerate',
+  },
+  exitBrokerFeeInfo: {
+    id: `${scope}.exitBrokerFeeInfo`,
+    defaultMessage: 'Based on Exit Price',
+  },
+
 });

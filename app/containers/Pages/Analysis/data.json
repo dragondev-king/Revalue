@@ -1,5 +1,5 @@
-[
-  {
+{
+  "anaylysis": {
     "id": "1",
     "location": "3",
     "gca": "4",
@@ -11,43 +11,271 @@
     "timeForSale": "11",
     "requiredEntryCapital": "13",
     "requiredCapitalOverInvestPeriod": "82",
+    "requiredInitialInvestment": "13",
     "totalRequiredCapital": "83",
     "moic": "84",
     "profit": "14",
     "irr": "15"
   },
-  {
-    "id": "2",
-    "location": "3",
-    "gca": "4",
-    "gpa": "5",
-    "bedrooms": "6",
-    "askingPrice": "1",
-    "propsedEntryPrice": "7",
-    "estimatedExitPrice": "9",
-    "timeForSale": "11",
-    "requiredEntryCapital": "13",
-    "requiredCapitalOverInvestPeriod": "82",
-    "totalRequiredCapital": "83",
-    "moic": "84",
-    "profit": "14",
-    "irr": "15"
-  },
-  {
-    "id": "3",
-    "location": "3",
-    "gca": "4",
-    "gpa": "5",
-    "bedrooms": "6",
-    "askingPrice": "1",
-    "propsedEntryPrice": "7",
-    "estimatedExitPrice": "9",
-    "timeForSale": "11",
-    "requiredEntryCapital": "13",
-    "requiredCapitalOverInvestPeriod": "82",
-    "totalRequiredCapital": "83",
-    "moic": "84",
-    "profit": "14",
-    "irr": "15"
+  "columns": [
+    {
+      "label": "Acquisition",
+      "width": 140
+    },
+    {
+      "label": "Total",
+      "width": 140
+    },
+    {
+      "label": "Year 1",
+      "width": 140
+    },
+    {
+      "label": "Year 2",
+      "width": 140
+    },
+    {
+      "label": "Year 3",
+      "width": 140
+    }
+  ],
+  "rows": [
+    {
+      "label": "Asking",
+      "total": "total",
+      "year1": "year1",
+      "year2": "year2",
+      "year3": "year3"
+    },
+    {
+      "label": "Acquisition Price",
+      "total": "total",
+      "year1": "year1",
+      "year2": "year2",
+      "year3": "year3"
+    },
+    {
+      "label": "Acquisition Broker Fee",
+      "total": "total",
+      "year1": "year1",
+      "year2": "year2",
+      "year3": "year3"
+    },
+    {
+      "label": "RETT",
+      "total": "total",
+      "year1": "year1",
+      "year2": "year2",
+      "year3": "year3"
+    },
+    {
+      "label": "Acquisition Stamp Duty",
+      "total": "total",
+      "year1": "year1",
+      "year2": "year2",
+      "year3": "year3"
+    },
+    {
+      "label": "Notary",
+      "total": "total",
+      "year1": "year1",
+      "year2": "year2",
+      "year3": "year3"
+    },
+    {
+      "label": "Mortgage Stamp Duty",
+      "total": "total",
+      "year1": "year1",
+      "year2": "year2",
+      "year3": "year3"
+    },
+    {
+      "label": "Bank Costs",
+      "total": "total",
+      "year1": "year1",
+      "year2": "year2",
+      "year3": "year3"
+    },
+    {
+      "label": "Total Acquistion Price",
+      "total": "total",
+      "year1": "year1",
+      "year2": "year2",
+      "year3": "year3"
+    },
+    {
+      "label": "Debt",
+      "total": "",
+      "year1": "",
+      "year2": "",
+      "year3": "",
+      "bold": true
+    },
+    {
+      "label": "BoP Debt",
+      "total": "total",
+      "year1": "year1",
+      "year2": "year2",
+      "year3": "year3"
+    },
+    {
+      "label": "Acquisiton Debt",
+      "total": "total",
+      "year1": "year1",
+      "year2": "year2",
+      "year3": "year3"
+    },
+    {
+      "label": "Capex Debt",
+      "total": "total",
+      "year1": "year1",
+      "year2": "year2",
+      "year3": "year3"
+    },
+    {
+      "label": "Amortization",
+      "total": "total",
+      "year1": "year1",
+      "year2": "year2",
+      "year3": "year3"
+    },
+    {
+      "label": "Interests",
+      "total": "total",
+      "year1": "year1",
+      "year2": "year2",
+      "year3": "year3"
+    },
+    {
+      "label": "EoP Debt",
+      "total": "total",
+      "year1": "year1",
+      "year2": "year2",
+      "year3": "year3"
+    },
+    {
+      "label": "Operating",
+      "total": "",
+      "year1": "",
+      "year2": "",
+      "year3": "",
+      "bold": true
+    },
+    {
+      "label": "Capex Equity",
+      "total": "total",
+      "year1": "year1",
+      "year2": "year2",
+      "year3": "year3"
+    },
+    {
+      "label": "Property Tax",
+      "total": "total",
+      "year1": "year1",
+      "year2": "year2",
+      "year3": "year3"
+    },
+    {
+      "label": "Condominium Costs",
+      "total": "total",
+      "year1": "year1",
+      "year2": "year2",
+      "year3": "year3"
+    },
+    {
+      "label": "Multirisk Insurance",
+      "total": "total",
+      "year1": "year1",
+      "year2": "year2",
+      "year3": "year3"
+    },
+    {
+      "label": "Life Insurance",
+      "total": "total",
+      "year1": "year1",
+      "year2": "year2",
+      "year3": "year3"
+    },
+    {
+      "label": "Market Value",
+      "total": "total",
+      "year1": "year1",
+      "year2": "year2",
+      "year3": "year3"
+    },
+    {
+      "label": "Loan early Repayment Fee",
+      "total": "total",
+      "year1": "year1",
+      "year2": "year2",
+      "year3": "year3"
+    },
+    {
+      "label": "Exit Price",
+      "total": "total",
+      "year1": "year1",
+      "year2": "year2",
+      "year3": "year3"
+    },
+    {
+      "label": "Exit Broker Fee",
+      "total": "total",
+      "year1": "year1",
+      "year2": "year2",
+      "year3": "year3"
+    },
+    {
+      "label": "Profit Before Tax",
+      "total": "total",
+      "year1": "year1",
+      "year2": "year2",
+      "year3": "year3"
+    },
+    {
+      "label": "Capital Gains",
+      "total": "total",
+      "year1": "year1",
+      "year2": "year2",
+      "year3": "year3"
+    },
+    {
+      "label": "Profite After Tax",
+      "total": "total",
+      "year1": "year1",
+      "year2": "year2",
+      "year3": "year3"
+    }
+  ],
+  "criteria": {
+    "financingRate": "57",
+    "capexFinanced": "85",
+    "interestRate": "35",
+    "amortization": "34",
+    "bankCommission": "30",
+    "earlyRepaymentFee": "40",
+    "GCA": "4",
+    "GPA": "5",
+    "bidAsk": "56",
+    "entrBrokerFee": "24",
+    "transferTax": "96",
+    "acquisitionStampDuty": "27",
+    "mortgageStampDuty": "28",
+    "interestStampDuty": "67",
+    "landRegistryWithMortgage": "64",
+    "landRegistryWithoutMortgage": "63",
+    "IRS": "75",
+    "capitalGainsTaxBase": "76",
+    "Capex": "86",
+    "condominiumCosts": "39",
+    "propertyTaxRate": "71",
+    "type": "47",
+    "condition": "49",
+    "percentile": "80",
+    "cap": "78",
+    "floor": "79",
+    "hpi": "58",
+    "timeToSell": "72",
+    "exitValueOverride": "97",
+    "exitBrokerFee": "42"
   }
-]
+}

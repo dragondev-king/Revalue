@@ -12,5 +12,26 @@ const makeSelectSkelton = () =>
     selectAnalysisDomain,
     substate => substate.isGettingAnalysisById,
   );
+const makeSelectColumns = () =>
+  createSelector(
+    selectAnalysisDomain,
+    substate => substate.columns,
+  );
+const makeSelectRows = () =>
+  createSelector(
+    selectAnalysisDomain,
+    substate => substate.rows,
+  );
+const makeSelectCriteria = () =>
+  createSelector(
+    selectAnalysisDomain,
+    substate => substate.criteria,
+  );
 
-export { makeSelectAnalysis, makeSelectSkelton };
+export {
+  makeSelectAnalysis,
+  makeSelectSkelton,
+  makeSelectColumns,
+  makeSelectRows,
+  makeSelectCriteria,
+};
