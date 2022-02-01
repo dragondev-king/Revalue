@@ -1,4 +1,4 @@
-import React, { memo, useEffect } from 'react';
+import React, { useState, memo, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { FormattedMessage, injectIntl } from 'react-intl';
@@ -10,8 +10,13 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
 import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
+import AutoComplete from 'components/AutoComplete';
+import SearchIcon from '@material-ui/icons/Search';
+import match from 'autosuggest-highlight/match';
+import parse from 'autosuggest-highlight/parse';
 import InfoIcon from '@material-ui/icons/Info';
 import { useInjectReducer } from 'utils/injectReducer';
 import {
@@ -36,9 +41,10 @@ import {
   makeSelectColumns,
   makeSelectRows,
   makeSelectCriteria,
+  makeSelectInputs,
 } from './selectors';
 import reducer from './reducer';
-import { getAnalysisDataById } from './actions';
+import { getAnalysisDataById, setLocation } from './actions';
 import 'react-loading-skeleton/dist/skeleton.css';
 
 const useStyles = makeStyles(theme => ({
@@ -122,6 +128,7 @@ export function Analysis(props) {
   // debugger
   const classes = useStyles();
   useInjectReducer({ key: 'analysis', reducer });
+
   useEffect(() => {
     const path = window.location.pathname;
     const id = path.split('/').pop();
@@ -599,12 +606,16 @@ export function Analysis(props) {
     );
   }
 
-  function locationAccordion() {
-    return <h1>Location Accordion</h1>;
-  }
   function financingAssumptionsAccordion() {
     return (
       <Grid item container spacing={4} className="mb-10 p-10">
+        <Grid item className="pb-0">
+          <Typography className={`${classes.title} m-0`}>
+            {props.intl.formatMessage({
+              ...messages.financingAssumptions,
+            })}
+          </Typography>
+        </Grid>
         <Grid item container spacing={4}>
           <Grid item xs={3}>
             <FormControl variant="standard" className="w-100">
@@ -763,6 +774,13 @@ export function Analysis(props) {
   function areaAccordion() {
     return (
       <Grid item container spacing={4} className="mb-10 p-10">
+        <Grid item className="pb-0">
+          <Typography className={`${classes.title} m-0`}>
+            {props.intl.formatMessage({
+              ...messages.area,
+            })}
+          </Typography>
+        </Grid>
         <Grid item container spacing={4}>
           <Grid item xs={3}>
             <FormControl variant="standard" className="w-100">
@@ -821,6 +839,13 @@ export function Analysis(props) {
   function operationAssumptionsAccordion() {
     return (
       <Grid item container spacing={4} className="mb-10 p-10">
+        <Grid item className="pb-0">
+          <Typography className={`${classes.title} m-0`}>
+            {props.intl.formatMessage({
+              ...messages.operationAssumptions,
+            })}
+          </Typography>
+        </Grid>
         <Grid item container spacing={4}>
           <Grid item xs={3}>
             <FormControl variant="standard" className="w-100">
@@ -904,6 +929,13 @@ export function Analysis(props) {
   function acquistionAccordion() {
     return (
       <Grid item container spacing={4} className="mb-10 p-10">
+        <Grid item className="pb-0">
+          <Typography className={`${classes.title} m-0`}>
+            {props.intl.formatMessage({
+              ...messages.acquistion,
+            })}
+          </Typography>
+        </Grid>
         <Grid item container spacing={4}>
           <Grid item xs={3}>
             <FormControl variant="standard" className="w-100">
@@ -962,6 +994,13 @@ export function Analysis(props) {
   function taxesAccordion() {
     return (
       <Grid item container spacing={4} className="mb-10 p-10">
+        <Grid item className="pb-0">
+          <Typography className={`${classes.title} m-0`}>
+            {props.intl.formatMessage({
+              ...messages.taxes,
+            })}
+          </Typography>
+        </Grid>
         <Grid item container spacing={4}>
           <Grid item xs={3}>
             <FormControl variant="standard" className="w-100">
@@ -1170,6 +1209,13 @@ export function Analysis(props) {
   function exitValueCalculationAccordion() {
     return (
       <Grid item container spacing={4} className="mb-10 p-10">
+        <Grid item className="pb-0">
+          <Typography className={`${classes.title} m-0`}>
+            {props.intl.formatMessage({
+              ...messages.exitValueCalculation,
+            })}
+          </Typography>
+        </Grid>
         <Grid item container spacing={4}>
           <Grid item xs={3}>
             <FormControl variant="standard" className="w-100">
@@ -1400,6 +1446,53 @@ export function Analysis(props) {
       </Grid>
     );
   }
+  function locationAccordion() {
+    return (
+      <Grid item container spacing={4} className="mb-10 p-10">
+        <Grid item className="pb-0">
+          <Typography className={`${classes.title} m-0`}>
+            {props.intl.formatMessage({
+              ...messages.location,
+            })}
+          </Typography>
+        </Grid>
+        <Grid item container spacing={4}>
+          <Grid item xs={12}>
+            <FormControl variant="standard" className="w-100" >
+              <AutoComplete
+                value={props.inputs.location}
+                onChange={(event, newValue) => {
+                  props.setLocation(newValue);
+                }}
+                disabled
+                name="location"
+                defaultValue={props.inputs.location}
+                options={[]}
+              />
+            </FormControl>
+          </Grid>
+        </Grid>
+      </Grid>
+    );
+  }
+  function criteriaAccordion() {
+    return (
+      <Grid
+        container
+        direction="column"
+        justifyContent="flex-start"
+        className="mb-10"
+      >
+        {locationAccordion()}
+        {financingAssumptionsAccordion()}
+        {areaAccordion()}
+        {acquistionAccordion()}
+        {operationAssumptionsAccordion()}
+        {taxesAccordion()}
+        {exitValueCalculationAccordion()}
+      </Grid>
+    );
+  }
   function renderAccordionGroup() {
     return (
       <Grid container direction="column" className="w-100 pt-30">
@@ -1408,89 +1501,11 @@ export function Analysis(props) {
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
               <Typography>
                 {props.intl.formatMessage({
-                  ...messages.location,
+                  ...messages.criteria,
                 })}
               </Typography>
             </AccordionSummary>
-            <AccordionDetails>{locationAccordion()}</AccordionDetails>
-          </Accordion>
-        </Grid>
-        <Grid item className="pt-30">
-          <Accordion>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography>
-                {props.intl.formatMessage({
-                  ...messages.financingAssumptions,
-                })}
-              </Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              {financingAssumptionsAccordion()}
-            </AccordionDetails>
-          </Accordion>
-        </Grid>
-        <Grid item className="pt-30">
-          <Accordion>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography>
-                {props.intl.formatMessage({
-                  ...messages.area,
-                })}
-              </Typography>
-            </AccordionSummary>
-            <AccordionDetails>{areaAccordion()}</AccordionDetails>
-          </Accordion>
-        </Grid>
-        <Grid item className="pt-30">
-          <Accordion>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography>
-                {props.intl.formatMessage({
-                  ...messages.acquistion,
-                })}
-              </Typography>
-            </AccordionSummary>
-            <AccordionDetails>{acquistionAccordion()}</AccordionDetails>
-          </Accordion>
-        </Grid>
-        <Grid item className="pt-30">
-          <Accordion>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography>
-                {props.intl.formatMessage({
-                  ...messages.operationAssumptions,
-                })}
-              </Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              {operationAssumptionsAccordion()}
-            </AccordionDetails>
-          </Accordion>
-        </Grid>
-        <Grid item className="pt-30">
-          <Accordion>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography>
-                {props.intl.formatMessage({
-                  ...messages.taxes,
-                })}
-              </Typography>
-            </AccordionSummary>
-            <AccordionDetails>{taxesAccordion()}</AccordionDetails>
-          </Accordion>
-        </Grid>
-        <Grid item className="pt-30">
-          <Accordion>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography>
-                {props.intl.formatMessage({
-                  ...messages.exitValueCalculation,
-                })}
-              </Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              {exitValueCalculationAccordion()}
-            </AccordionDetails>
+            <AccordionDetails>{criteriaAccordion()}</AccordionDetails>
           </Accordion>
         </Grid>
       </Grid>
@@ -1524,11 +1539,13 @@ const mapStateToProps = createStructuredSelector({
   columns: makeSelectColumns(),
   rows: makeSelectRows(),
   criteria: makeSelectCriteria(),
+  inputs: makeSelectInputs(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
     getAnalysisDataById: id => dispatch(getAnalysisDataById(id)),
+    setLocation: location => dispatch(setLocation(location)),
     // setShowSkelton: defaultValue => dispatch(setShowSkelton(defaultValue)),
     dispatch,
   };

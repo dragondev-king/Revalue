@@ -157,6 +157,10 @@ export default defineMessages({
 
   // assumptions under investment analysis
   // financing assumptions
+  criteria: {
+    id: `${scope}.criteria`,
+    defaultMessage: 'Criteria',
+  },
   financingAssumptions: {
     id: `${scope}.financingAssumptions`,
     defaultMessage: 'Financing Assumptions',
@@ -306,7 +310,7 @@ export default defineMessages({
   acquisitionStampDutyInfo: {
     id: `${scope}.acquisitionStampDutyInfo`,
     defaultMessage:
-      'As a buyer, you need to pay stamp duty (Imposto de Selo) on deeds, contracts, bank mortgages and loans, documents, and titles. The rate changes according to the type and value of the property. The rate depending on the type of deed/operation is between 0.4% and 0.8%.When buying a house, you pay stamp duty to the notary while signing the deed of sale. The rate of this stamp duty is 0.8%.',
+      'As a buyer, you need to pay stamp duty (Imposto de Selo) on deeds, contracts, bank mortgages and loans, documents, and titles. The rate changes according to the type and value of the property. The rate depending on the type of deed/operation is between 0.4% and 0.8%.When buying a house, you pay stamp duty to the notary while signing the deed of sale. The rate of this stamp duty is 0.8%.',
   },
   mortgageStampDuty: {
     id: `${scope}.mortgageStampDuty`,
@@ -315,7 +319,7 @@ export default defineMessages({
   mortgageStampDutyInfo: {
     id: `${scope}.mortgageStampDutyInfo`,
     defaultMessage:
-      'The public deed contract , needs to be made by a recognized entity or person such as a public notary office, a lawyer or solicitor. A popular choice are the “Casa Pronta” (Ready House) notary offices, where the process can be more streamlined and cheaper than normal.For this reason, the reference in terms of price are the Casa Pronta notary offices, where it normally costs 375,00 €, including both the preparation of the public deed contract and the registry.',
+      'The public deed contract , needs to be made by a recognized entity or person such as a public notary office, a lawyer or solicitor. A popular choice are the “Casa Pronta” (Ready House) notary offices, where the process can be more streamlined and cheaper than normal.For this reason, the reference in terms of price are the Casa Pronta notary offices, where it normally costs 375,00 €, including both the preparation of the public deed contract and the registry.',
   },
   interestStampDuty: {
     id: `${scope}.interestStampDuty`,
@@ -332,7 +336,7 @@ export default defineMessages({
   landRegistryWithMortgageInfo: {
     id: `${scope}.landRegistryWithMortgageInfo`,
     defaultMessage:
-      'The public deed contract , needs to be made by a recognized entity or person such as a public notary office, a lawyer or solicitor. A popular choice are the “Casa Pronta” (Ready House) notary offices, where the process can be more streamlined and cheaper than normal.For this reason, the reference in terms of price are the Casa Pronta notary offices, where it normally costs 375,00 €, including both the preparation of the public deed contract and the registry. With Mortgage normally will be 700€',
+      'The public deed contract , needs to be made by a recognized entity or person such as a public notary office, a lawyer or solicitor. A popular choice are the “Casa Pronta” (Ready House) notary offices, where the process can be more streamlined and cheaper than normal.For this reason, the reference in terms of price are the Casa Pronta notary offices, where it normally costs 375,00 €, including both the preparation of the public deed contract and the registry. With Mortgage normally will be 700€',
   },
   landRegistryWithoutMortgage: {
     id: `${scope}.landRegistryWithMortgage`,
@@ -341,7 +345,7 @@ export default defineMessages({
   landRegistryWithoutMortgageInfo: {
     id: `${scope}.landRegistryWithMortgageInfo`,
     defaultMessage:
-      'The public deed contract , needs to be made by a recognized entity or person such as a public notary office, a lawyer or solicitor. A popular choice are the “Casa Pronta” (Ready House) notary offices, where the process can be more streamlined and cheaper than normal.For this reason, the reference in terms of price are the Casa Pronta notary offices, where it normally costs 375,00 €, including both the preparation of the public deed contract and the registry.',
+      'The public deed contract , needs to be made by a recognized entity or person such as a public notary office, a lawyer or solicitor. A popular choice are the “Casa Pronta” (Ready House) notary offices, where the process can be more streamlined and cheaper than normal.For this reason, the reference in terms of price are the Casa Pronta notary offices, where it normally costs 375,00 €, including both the preparation of the public deed contract and the registry.',
   },
   irs: {
     id: `${scope}.irs`,

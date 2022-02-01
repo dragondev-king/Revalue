@@ -398,7 +398,7 @@ export function Investments(props) {
               <FormControl
                 variant="standard"
                 className="w-100"
-                error={props.errors.location}
+                // error={props.errors.location}
               >
                 <AutoComplete
                   value={props.inputs.location}
@@ -409,9 +409,10 @@ export function Investments(props) {
                   }}
                   error={props.errors.location}
                   name="location"
-                  defaultValue={props.inputs.location}
-                  options={props.locations}
-                  label={props.intl.formatMessage({ ...messages.location })}
+                  // defaultValue={props.inputs.location}
+                  defaultValue="TEST"
+                  // options={props.locations}
+                  // label={props.intl.formatMessage({ ...messages.location })}
                   popupIcon={<SearchIcon />}
                   renderOption={(option, value) => {
                     const matches = match(option, value.inputValue);

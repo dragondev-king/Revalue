@@ -2,14 +2,25 @@ import produce from 'immer';
 import {
   GET_ANALYSIS_DATA_BY_ID,
   GET_ANALYSIS_DATA_SUCCESS_BY_ID,
+  SET_LOCATION,
 } from './constants';
 
+export function extractInputValueFromLocalStorage(value, defaultValue) {
+  return JSON.parse(localStorage.getItem('inputs')) &&
+    JSON.parse(localStorage.getItem('inputs'))[value] &&
+    JSON.parse(localStorage.getItem('inputs'))[value] !== null
+    ? JSON.parse(localStorage.getItem('inputs'))[value]
+    : defaultValue;
+}
 export const initialState = {
   isGettingAnalysisById: false,
   analysis: {},
   columns: [],
   rows: [],
   criteria: {},
+  inputs: {
+    location: extractInputValueFromLocalStorage('location', 'Lisboa, Portugal'),
+  },
 };
 
 const analysisReducer = (state = initialState, action) =>
@@ -25,6 +36,9 @@ const analysisReducer = (state = initialState, action) =>
         draft.rows = action.payload.rows;
         draft.criteria = action.payload.criteria;
         draft.isGettingAnalysisById = false;
+        break;
+      case SET_LOCATION:
+        draft.inputs.location = action.payload;
         break;
     }
   });

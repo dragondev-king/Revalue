@@ -12,6 +12,7 @@ function AutoComplete({
   popupIcon,
   error,
   getOptionLabel,
+  disabled,
 }) {
   return (
     <Autocomplete
@@ -24,6 +25,7 @@ function AutoComplete({
       popupIcon={popupIcon}
       getOptionLabel={getOptionLabel}
       renderOption={renderOption}
+      disabled={disabled}
       renderInput={params => (
         <TextField
           key={id + label}

@@ -27,6 +27,11 @@ const makeSelectCriteria = () =>
     selectAnalysisDomain,
     substate => substate.criteria,
   );
+  const makeSelectInputs = () =>
+  createSelector(
+    selectAnalysisDomain,
+    substate => substate.inputs,
+  );
 
 export {
   makeSelectAnalysis,
@@ -34,4 +39,5 @@ export {
   makeSelectColumns,
   makeSelectRows,
   makeSelectCriteria,
+  makeSelectInputs
 };
