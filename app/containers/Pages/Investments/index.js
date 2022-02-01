@@ -398,7 +398,7 @@ export function Investments(props) {
               <FormControl
                 variant="standard"
                 className="w-100"
-                // error={props.errors.location}
+                error={props.errors.location}
               >
                 <AutoComplete
                   value={props.inputs.location}
