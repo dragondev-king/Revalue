@@ -114,8 +114,8 @@ export const initialState = {
     maxCapital: extractInputValueFromLocalStorage('maxCapital', null),
     bidAsk: extractInputValueFromLocalStorage('bidAsk', 5),
     financingRate: extractInputValueFromLocalStorage('financingRate', 80),
-    housePriceIndex: extractInputValueFromLocalStorage('housePriceIndex', 58),
-    minProfit: extractInputValueFromLocalStorage('minProfit', 59),
+    housePriceIndex: extractInputValueFromLocalStorage('housePriceIndex', 2),
+    minProfit: extractInputValueFromLocalStorage('minProfit', null),
     // Other Investment Information
     // Acquisition Assumptions
     acquisitionType: extractInputValueFromLocalStorage(
