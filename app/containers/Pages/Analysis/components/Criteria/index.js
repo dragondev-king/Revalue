@@ -15,12 +15,12 @@ import {
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
-import AutoComplete from '../../../components/AutoComplete';
-import { useStyles } from './style';
-import messages from './messages';
+import AutoComplete from 'components/AutoComplete';
+import { useStyles } from 'containers/Pages/Analysis/style';
+import messages from 'containers/Pages/Analysis/messages';
 import Skeleton from 'react-loading-skeleton';
 
-const Criteria = ({ props }) => {
+const Index = ({ props }) => {
   const classes = useStyles();
   function financingAssumptionsAccordion() {
     return (
@@ -939,4 +939,4 @@ const Criteria = ({ props }) => {
   );
 };
 
-export default Criteria;
+export default Index;

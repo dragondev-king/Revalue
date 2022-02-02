@@ -13,12 +13,12 @@ import { Skeleton } from '@material-ui/lab';
 import Paper from '@material-ui/core/Paper';
 import PaperChartLineSimple from 'components/PaperChartLineSimple';
 import { makeSelectLocation } from 'containers/Pages/Investments/selectors';
+import PaperChartLine from 'components/PaperChartLine';
+import PaperChartLineComplex from 'components/PaperChartLineComplex';
+import PaperChartBar from 'components/PaperChartBar';
+import PaperMap from 'components/PaperMap';
+import PaperChartPie from 'components/PaperChartPie';
 import reducer from './reducer';
-import PaperChartLine from '../../../components/PaperChartLine';
-import PaperChartLineComplex from '../../../components/PaperChartLineComplex';
-import PaperChartBar from '../../../components/PaperChartBar';
-import PaperMap from '../../../components/PaperMap';
-import PaperChartPie from '../../../components/PaperChartPie';
 import { getChartsByLocation } from './actions';
 import {
   makeSelectCharts,

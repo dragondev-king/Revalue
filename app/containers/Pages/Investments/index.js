@@ -32,8 +32,8 @@ import match from 'autosuggest-highlight/match';
 import AutoComplete from 'components/AutoComplete';
 import SearchIcon from '@material-ui/icons/Search';
 import { Link } from 'react-router-dom';
+import PaperMap from 'components/PaperMap';
 import messages from './messages';
-import PaperMap from '../../../components/PaperMap';
 import {
   makeSelectLocations,
   makeSelectTypes,
@@ -206,7 +206,6 @@ export function Investments(props) {
     props.getConditions();
     props.getAcquisitionTypes();
     props.getCIPs();
-    console.log('props investmnet', props);
   }, []);
 
   const validationSchema = yup.object().shape({

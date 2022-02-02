@@ -1,4 +1,4 @@
-import React, { useState, memo, useEffect } from 'react';
+import React, { memo, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { FormattedMessage, injectIntl } from 'react-intl';
@@ -9,30 +9,15 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
 import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
-import AutoComplete from 'components/AutoComplete';
-import SearchIcon from '@material-ui/icons/Search';
-import match from 'autosuggest-highlight/match';
-import parse from 'autosuggest-highlight/parse';
 import InfoIcon from '@material-ui/icons/Info';
 import { useInjectReducer } from 'utils/injectReducer';
-import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  FormControl,
-} from '@material-ui/core';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-// import Table from '@material-ui/core/Table';
-// import TableBody from '@material-ui/core/TableBody';
-// import TableCell from '@material-ui/core/TableCell';
-// import TableContainer from '@material-ui/core/TableContainer';
-// import TableHead from '@material-ui/core/TableHead';
-// import TableRow from '@material-ui/core/TableRow';
-// import Paper from '@material-ui/core/Paper';
+import { FormControl } from '@material-ui/core';
+
 import Skeleton from 'react-loading-skeleton';
+import Table from 'containers/Pages/Analysis/components/Table';
+import Criteria from 'containers/Pages/Analysis/components/Criteria';
 import messages from './messages';
 import {
   makeSelectAnalysis,
@@ -44,8 +29,6 @@ import {
 } from './selectors';
 import reducer from './reducer';
 import { getAnalysisDataById, setLocation } from './actions';
-import Table from './Table';
-import Criteria from './Criteria';
 import 'react-loading-skeleton/dist/skeleton.css';
 import { useStyles } from './style';
 
@@ -525,7 +508,6 @@ function mapDispatchToProps(dispatch) {
   return {
     getAnalysisDataById: id => dispatch(getAnalysisDataById(id)),
     setLocation: location => dispatch(setLocation(location)),
-    // setShowSkelton: defaultValue => dispatch(setShowSkelton(defaultValue)),
     dispatch,
   };
 }

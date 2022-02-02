@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import React from 'react';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -7,7 +8,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Skeleton from 'react-loading-skeleton';
-import { useStyles } from './style';
+import { useStyles } from 'containers/Pages/Analysis/style';
 
 const DisplayTable = ({ props }) => {
   const classes = useStyles();
