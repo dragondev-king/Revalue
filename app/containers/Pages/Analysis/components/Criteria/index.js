@@ -19,9 +19,18 @@ import AutoComplete from 'components/AutoComplete';
 import { useStyles } from 'containers/Pages/Analysis/style';
 import messages from 'containers/Pages/Analysis/messages';
 import Skeleton from 'react-loading-skeleton';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 
 const Index = ({ props }) => {
   const classes = useStyles();
+
+  function handleChange(event) {
+    const { name, value } = event.target;
+    props.setInputValue(name, value);
+    // props.setInputError(name, '');
+    // props.setAnalyzeButtonDisabled(false);
+  }
   function financingAssumptionsAccordion() {
     return (
       <Grid item container spacing={4} className="mb-10 p-10">
@@ -873,19 +882,26 @@ const Index = ({ props }) => {
           </Typography>
         </Grid>
         <Grid item container spacing={4}>
-          <Grid item xs={12}>
+          <Grid item xs={3}>
             <FormControl variant="standard" className="w-100">
-              <AutoComplete
-                value={props.inputs.location}
-                onChange={(event, newValue) => {
-                  props.setLocation(newValue);
-                }}
-                disabled
-                name="location"
-                defaultValue={props.inputs.location}
-                label={props.intl.formatMessage({ ...messages.location })}
-                options={[]}
-              />
+              <InputLabel>
+                {props.intl.formatMessage({
+                  ...messages.location,
+                })}
+              </InputLabel>
+              <Select
+                value="test"
+                name="type"
+                renderValue={() => props.inputs.location}
+                onChange={handleChange}
+                readOnly
+              >
+                {[].map(index => (
+                  <MenuItem key={index} value={index}>
+                    {index}
+                  </MenuItem>
+                ))}
+              </Select>
             </FormControl>
           </Grid>
         </Grid>

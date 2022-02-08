@@ -39,5 +39,5 @@ export {
   makeSelectColumns,
   makeSelectRows,
   makeSelectCriteria,
-  makeSelectInputs
+  makeSelectInputs,
 };

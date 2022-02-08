@@ -28,7 +28,17 @@ import {
   makeSelectInputs,
 } from './selectors';
 import reducer from './reducer';
-import { getAnalysisDataById, setLocation } from './actions';
+import {
+  getAnalysisDataById,
+  setLocation,
+  getLocations,
+  getTypes,
+  getTypologies,
+  getConditions,
+  getAcquisitionTypes,
+  getCIPs,
+  getStatus,
+} from './actions';
 import 'react-loading-skeleton/dist/skeleton.css';
 import { useStyles } from './style';
 
@@ -40,6 +50,16 @@ export function Analysis(props) {
     const path = window.location.pathname;
     const id = path.split('/').pop();
     props.getAnalysisDataById(id);
+  }, []);
+
+  useEffect(() => {
+    props.getLocations();
+    props.getTypes();
+    props.getTypologies();
+    props.getStatus();
+    props.getConditions();
+    props.getAcquisitionTypes();
+    props.getCIPs();
   }, []);
 
   function displayProperty() {
@@ -508,6 +528,13 @@ function mapDispatchToProps(dispatch) {
   return {
     getAnalysisDataById: id => dispatch(getAnalysisDataById(id)),
     setLocation: location => dispatch(setLocation(location)),
+    getLocations: () => dispatch(getLocations()),
+    getTypes: () => dispatch(getTypes()),
+    getTypologies: () => dispatch(getTypologies()),
+    getConditions: () => dispatch(getConditions()),
+    getStatus: () => dispatch(getStatus()),
+    getAcquisitionTypes: () => dispatch(getAcquisitionTypes()),
+    getCIPs: () => dispatch(getCIPs()),
     dispatch,
   };
 }
