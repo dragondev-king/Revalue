@@ -44,6 +44,8 @@ export const initialState = {
     location: extractInputValueFromLocalStorage('location', 'Lisboa, Portugal'),
     type: extractInputValueFromLocalStorage('type', 'All'),
   },
+  estimatedTableColumns: [],
+  estimatedTableRows: [],
 };
 
 const analysisReducer = (state = initialState, action) =>
@@ -58,6 +60,8 @@ const analysisReducer = (state = initialState, action) =>
         draft.columns = action.payload.columns;
         draft.rows = action.payload.rows;
         draft.criteria = action.payload.criteria;
+        draft.estimatedTableColumns = action.payload.estimatedTableColumns;
+        draft.estimatedTableRows = action.payload.estimatedTableRows;
         draft.isGettingAnalysisById = false;
         break;
       case SET_LOCATION:

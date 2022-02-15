@@ -27,10 +27,20 @@ const makeSelectCriteria = () =>
     selectAnalysisDomain,
     substate => substate.criteria,
   );
-  const makeSelectInputs = () =>
+const makeSelectInputs = () =>
   createSelector(
     selectAnalysisDomain,
     substate => substate.inputs,
+  );
+const makeSelectEstimatedTableColumns = () =>
+  createSelector(
+    selectAnalysisDomain,
+    substate => substate.estimatedTableColumns,
+  );
+const makeSelectEstimatedTableRows = () =>
+  createSelector(
+    selectAnalysisDomain,
+    substate => substate.estimatedTableRows,
   );
 
 export {
@@ -40,4 +50,6 @@ export {
   makeSelectRows,
   makeSelectCriteria,
   makeSelectInputs,
+  makeSelectEstimatedTableColumns,
+  makeSelectEstimatedTableRows,
 };

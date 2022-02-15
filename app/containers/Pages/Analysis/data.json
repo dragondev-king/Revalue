@@ -277,5 +277,30 @@
     "timeToSell": "72",
     "exitValueOverride": "97",
     "exitBrokerFee": "42"
-  }
+  },
+  "estimatedTableColumns": [
+    {
+      "label": "Exit Price",
+      "width": 140
+    },
+    {
+      "label": "Acquisition Price",
+      "width": 140
+    }
+  ],
+  "estimatedTableRows": [
+    {
+      "exitPrice": "12813",
+      "acquisitionPrice": "90250"
+    },
+    {
+      "exitPrice": "12813",
+      "acquisitionPrice": "90250"
+    },
+    {
+      "exitPrice": "12813",
+      "acquisitionPrice": "90250"
+    }
+  ]
+
 }

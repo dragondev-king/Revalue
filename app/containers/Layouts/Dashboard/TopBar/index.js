@@ -8,8 +8,11 @@ import {
   MenuItem,
   IconButton,
   Icon,
+  InputLabel,
   Grid,
   Typography,
+  FormControl,
+  Select,
 } from '@material-ui/core';
 import { logOut } from 'containers/Authentication/actions';
 import { FormattedMessage } from 'react-intl';
@@ -45,6 +48,7 @@ const useStyles = makeStyles(theme => ({
 
 export function TopBar(props) {
   const classes = useStyles();
+  const [age, setAge] = React.useState('');
 
   useInjectReducer({ key: 'dashboard', reducer });
 
@@ -52,6 +56,11 @@ export function TopBar(props) {
     props.logOut(props.push);
   };
 
+  const language = [{ name: 'En' }, { name: 'Pt' }];
+
+  const handleChange = event => {
+    setAge(event.target.value);
+  };
   const handleSidebarToggle = () => {
     let mode;
     if (isMdScreen()) {
@@ -70,6 +79,25 @@ export function TopBar(props) {
           [classes.fixed]: true,
         })}
       >
+        <Grid
+          item
+          container
+          className="mt-5"
+          spacing={4}
+          justifyContent="flex-end"
+        >
+          <Grid item xs={3} className="mt-5">
+            <FormControl variant="standard" className="w-100">
+              <Select name="type" defaultValue="En" onChange={handleChange}>
+                {language.map(value => (
+                  <MenuItem key={value} value={value.name}>
+                    {value.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>
+        </Grid>
         {/*   <Grid container alignContent="space-between" alignItems="center">
           <Grid item>
             <IconButton onClick={handleSidebarToggle} className="hide-on-lg">

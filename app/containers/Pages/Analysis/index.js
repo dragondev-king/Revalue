@@ -26,6 +26,8 @@ import {
   makeSelectRows,
   makeSelectCriteria,
   makeSelectInputs,
+  makeSelectEstimatedTableColumns,
+  makeSelectEstimatedTableRows,
 } from './selectors';
 import reducer from './reducer';
 import {
@@ -41,7 +43,8 @@ import {
 } from './actions';
 import 'react-loading-skeleton/dist/skeleton.css';
 import { useStyles } from './style';
-
+import DisplayEstimatedProfit from './components/EstimatedProfit';
+import ValuationModal from './components/ValuationModel'
 export function Analysis(props) {
   const classes = useStyles();
   useInjectReducer({ key: 'analysis', reducer });
@@ -509,7 +512,9 @@ export function Analysis(props) {
       ) : (
         <Skeleton count={6} height={100} />
       )}
+      <DisplayEstimatedProfit props={props} />
       <Table props={props} />
+      <ValuationModal props={props}/>
       <Criteria props={props} />
     </div>
   );
@@ -522,6 +527,8 @@ const mapStateToProps = createStructuredSelector({
   rows: makeSelectRows(),
   criteria: makeSelectCriteria(),
   inputs: makeSelectInputs(),
+  estimatedTableColumns: makeSelectEstimatedTableColumns(),
+  estimatedTableRows: makeSelectEstimatedTableRows(),
 });
 
 function mapDispatchToProps(dispatch) {

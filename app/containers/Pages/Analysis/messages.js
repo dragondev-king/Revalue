@@ -444,4 +444,33 @@ export default defineMessages({
     id: `${scope}.exitBrokerFeeInfo`,
     defaultMessage: 'Based on Exit Price',
   },
+
+  // Estimated Profit
+  estimatedProfit: {
+    id: `${scope}.estimatedProfit`,
+    defaultMessage: 'Estimated Profit',
+  },
+
+  // Valution Model
+  valuationModel: {
+    id: `${scope}.valuationModel`,
+    defaultMessage: 'Valuation Model Configuration',
+  },
+  propertyStatus: {
+    id: `${scope}.propertyStatus`,
+    defaultMessage: 'Property Status',
+  },
+  parish: {
+    id: `${scope}.parish`,
+    defaultMessage: 'Parish',
+  },
+  soldUnits: {
+    id: `${scope}.soldUnits`,
+    defaultMessage: 'Sold Units',
+  },
+  forSale: {
+    id: `${scope}.forSale`,
+    defaultMessage: 'For Sale',
+  },
+
 });
