@@ -25,6 +25,8 @@ import {
 } from 'containers/Authentication/selectors';
 import messages from '../messages';
 import reducer from '../reducer';
+import { changeLocale } from '../../../LanguageProvider/actions';
+import { makeSelectLocale } from '../../../LanguageProvider/selectors';
 import { useInjectReducer } from '../../../../utils/injectReducer';
 
 // eslint-disable-next-line no-unused-vars
@@ -48,7 +50,6 @@ const useStyles = makeStyles(theme => ({
 
 export function TopBar(props) {
   const classes = useStyles();
-  const [age, setAge] = React.useState('');
 
   useInjectReducer({ key: 'dashboard', reducer });
 
@@ -56,10 +57,10 @@ export function TopBar(props) {
     props.logOut(props.push);
   };
 
-  const language = [{ name: 'En' }, { name: 'Pt' }];
+  const language = [{ name: 'en' }, { name: 'pt' }];
 
   const handleChange = event => {
-    setAge(event.target.value);
+    props.changeLocale(event.target.value);
   };
   const handleSidebarToggle = () => {
     let mode;
@@ -88,7 +89,11 @@ export function TopBar(props) {
         >
           <Grid item xs={3} className="mt-5">
             <FormControl variant="standard" className="w-100">
-              <Select name="type" defaultValue="En" onChange={handleChange}>
+              <Select
+                name="type"
+                defaultValue={props.language}
+                onChange={handleChange}
+              >
                 {language.map(value => (
                   <MenuItem key={value} value={value.name}>
                     {value.name}
@@ -163,11 +168,13 @@ export function TopBar(props) {
 const mapStateToProps = createStructuredSelector({
   user: makeSelectUser(),
   authenticated: makeSelectAuthenticated(),
+  language: makeSelectLocale(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
     logOut: push => dispatch(logOut(push)),
+    changeLocale: input => dispatch(changeLocale(input)),
     dispatch,
   };
 }
