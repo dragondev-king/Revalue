@@ -32,16 +32,7 @@ export default defineMessages({
     id: `${scope}.locationInfo`,
     defaultMessage: 'Property Location',
   },
-  GCA: {
-    id: `${scope}.gca`,
-    defaultMessage: 'Gross Area',
-  },
-  gcaInfo: {
-    id: `${scope}.gcaInfo`,
-    defaultMessage:
-      'Gross Construction area corresponds to the sum of Private Gross Area and Dependent Area',
-  },
-  GPA: {
+  gpa: {
     id: `${scope}.gpa`,
     defaultMessage: 'Useful Area',
   },
@@ -68,11 +59,11 @@ export default defineMessages({
     defaultMessage: 'Seller asking price for the property',
   },
   proposedEntryPrice: {
-    id: `${scope}.AcquisitionPrice`,
+    id: `${scope}.proposedEntryPrice`,
     defaultMessage: 'Acquisition Price',
   },
   proposedEntryPriceInfo: {
-    id: `${scope}.AcquisitionPrice`,
+    id: `${scope}.proposedEntryPriceInfo`,
     defaultMessage:
       'Investor proposed acquisition Price. Value was calculated by multiplying the user imput Bid Ask discount on the Asking Value',
   },
@@ -102,23 +93,23 @@ export default defineMessages({
   requiredEntryCapitalInfo: {
     id: `${scope}.requiredEntryCapitalInfo`,
     defaultMessage:
-      'Required Capital for Investment. Acquistion Value - Acquisition Debt + Transfer Tax + Acquisition Stamp Duty + Registries + Bank Costs + Acquisition Stamp Duty',
+      'Required Capital for Investment. Acquisition Value - Acquisition Debt + Transfer Tax + Acquisition Stamp Duty + Registries + Bank Costs + Acquisition Stamp Duty',
   },
   requiredCapitalInvestment: {
     id: `${scope}.requiredCapitalInvestment`,
-    defaultMessage: 'Required Capital over Perioid',
+    defaultMessage: 'Required Capital over Period',
   },
   requiredCapitalInvestmentInfo: {
     id: `${scope}.requiredCapitalInvestmentInfo`,
     defaultMessage: 'Required Capital over Period',
   },
-  totalRequierd: {
-    id: `${scope}.totalRequierd`,
-    defaultMessage: 'Total Requierd Capita over Period',
+  totalRequired: {
+    id: `${scope}.totalRequired`,
+    defaultMessage: 'Total Required Capital over Period',
   },
-  totalRequierdInfo: {
-    id: `${scope}.totalRequierdInfo`,
-    defaultMessage: 'Total Requierd Capita over Period',
+  totalRequiredInfo: {
+    id: `${scope}.totalRequiredInfo`,
+    defaultMessage: 'Total Required Capital over Period',
   },
   // returns
   moic: {
@@ -154,7 +145,6 @@ export default defineMessages({
     defaultMessage:
       'The internal rate of return (IRR) is the annual rate of growth that an investment is expected to generate',
   },
-
   // assumptions under investment analysis
   // financing assumptions
   criteria: {
@@ -166,19 +156,19 @@ export default defineMessages({
     defaultMessage: 'Financing Assumptions',
   },
   financingRate: {
-    id: `${scope}.financing`,
+    id: `${scope}.financingRate`,
     defaultMessage: 'financingRate',
   },
   financingRateInfo: {
-    id: `${scope}.financing`,
-    defaultMessage: 'Financing Rate to acquition Price',
+    id: `${scope}.financingRateInfo`,
+    defaultMessage: 'Financing Rate to acquisition Price',
   },
   capexFinanced: {
     id: `${scope}.capexFinanced`,
     defaultMessage: 'Capex Financed',
   },
   capexFinancedInfo: {
-    id: `${scope}.capexFinanced`,
+    id: `${scope}.capexFinancedInfo`,
     defaultMessage: 'Capex Financed Info',
   },
   interestRate: {
@@ -229,19 +219,19 @@ export default defineMessages({
     defaultMessage:
       'Gross Construction area corresponds to the sum of Private Gross Area and Dependent Area',
   },
-  areaGPA: {
-    id: `${scope}.areaGPA`,
+  areaGpa: {
+    id: `${scope}.areaGpa`,
     defaultMessage: 'Useful Area',
   },
-  areaGPAInfo: {
-    id: `${scope}.areaGPAInfo`,
+  areaGpaInfo: {
+    id: `${scope}.areaGpaInfo`,
     defaultMessage:
       'Gross Private Area is area measured by the outer perimeter and axes of the walls',
   },
-  // Acquistion
-  acquistion: {
-    id: `${scope}.acquistion`,
-    defaultMessage: 'Acquistion',
+  // Acquisition
+  acquisition: {
+    id: `${scope}.acquisition`,
+    defaultMessage: 'Acquisition',
   },
   bidAsk: {
     id: `${scope}.bidAsk`,
@@ -258,7 +248,7 @@ export default defineMessages({
   entryBrokerFeeInfo: {
     id: `${scope}.entryBrokerFeeInfo`,
     defaultMessage:
-      'Comission paid to the broker by the buyer. Typically sale comission is paid by the seller',
+      'Commission paid to the broker by the buyer. Typically sale commission is paid by the seller',
   },
   // operation assumptions
   operationAssumptions: {
@@ -331,7 +321,7 @@ export default defineMessages({
   },
   landRegistryWithMortgage: {
     id: `${scope}.landRegistryWithMortgage`,
-    defaultMessage: 'Land Registry Inscription With Mortgage     ',
+    defaultMessage: 'Land Registry Inscription With Mortgage',
   },
   landRegistryWithMortgageInfo: {
     id: `${scope}.landRegistryWithMortgageInfo`,
@@ -339,11 +329,11 @@ export default defineMessages({
       'The public deed contract , needs to be made by a recognized entity or person such as a public notary office, a lawyer or solicitor. A popular choice are the “Casa Pronta” (Ready House) notary offices, where the process can be more streamlined and cheaper than normal.For this reason, the reference in terms of price are the Casa Pronta notary offices, where it normally costs 375,00 €, including both the preparation of the public deed contract and the registry. With Mortgage normally will be 700€',
   },
   landRegistryWithoutMortgage: {
-    id: `${scope}.landRegistryWithMortgage`,
+    id: `${scope}.landRegistryWithoutMortgage`,
     defaultMessage: 'Land Registry Inscription Without Mortgage',
   },
   landRegistryWithoutMortgageInfo: {
-    id: `${scope}.landRegistryWithMortgageInfo`,
+    id: `${scope}.landRegistryWithoutMortgageInfo`,
     defaultMessage:
       'The public deed contract , needs to be made by a recognized entity or person such as a public notary office, a lawyer or solicitor. A popular choice are the “Casa Pronta” (Ready House) notary offices, where the process can be more streamlined and cheaper than normal.For this reason, the reference in terms of price are the Casa Pronta notary offices, where it normally costs 375,00 €, including both the preparation of the public deed contract and the registry.',
   },
@@ -353,7 +343,7 @@ export default defineMessages({
   },
   irsInfo: {
     id: `${scope}.irsInfo`,
-    defaultMessage: 'IRS Rate with capital gains    ',
+    defaultMessage: 'IRS Rate with capital gains',
   },
   capitalGainsTaxBase: {
     id: `${scope}.capitalGainsTaxBase`,
@@ -373,7 +363,7 @@ export default defineMessages({
     defaultMessage: 'Property Type',
   },
   typeInfo: {
-    id: `${scope}.typeinfo`,
+    id: `${scope}.typeInfo`,
     defaultMessage: 'Please choose number of bedrooms for your analysis',
   },
   condition: {
@@ -381,7 +371,7 @@ export default defineMessages({
     defaultMessage: 'Property Condition',
   },
   conditionInfo: {
-    id: `${scope}.conditioninfo`,
+    id: `${scope}.conditionInfo`,
     defaultMessage:
       'Please choose if properties should be new or used for your analysis    ',
   },
@@ -399,7 +389,7 @@ export default defineMessages({
     defaultMessage: 'Cap',
   },
   capInfo: {
-    id: `${scope}.cap info`,
+    id: `${scope}.capInfo`,
     defaultMessage:
       'Max Delta between Asking Value and Confidencial Imobiliario Data Base',
   },
@@ -426,7 +416,7 @@ export default defineMessages({
   },
   timeToSaleInfo: {
     id: `${scope}.timeToSaleInfo`,
-    defaultMessage: 'Period in months between acquistion and exit',
+    defaultMessage: 'Period in months between acquisition and exit',
   },
   exitValueOverride: {
     id: `${scope}.exitValueOverride`,
@@ -472,5 +462,4 @@ export default defineMessages({
     id: `${scope}.forSale`,
     defaultMessage: 'For Sale',
   },
-
 });

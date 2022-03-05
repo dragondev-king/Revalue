@@ -192,7 +192,7 @@ export default defineMessages({
   },
   timeToSaleInfo: {
     id: `${scope}.timeToSaleInfo`,
-    defaultMessage: 'Period in months between acquistion and exit',
+    defaultMessage: 'Period in months between acquisition and exit',
   },
   irsRate: {
     id: `${scope}.irsRate`,
@@ -302,7 +302,7 @@ export default defineMessages({
     defaultMessage: 'Financing Rate to acquition Price',
   },
   minProfitInfo: {
-    id: `${scope}.financingRateInfo`,
+    id: `${scope}.minProfitInfo`,
     defaultMessage: 'Minimium Required Profit to be filter in the analysis',
   },
   otherInvestmentInformationInfo: {

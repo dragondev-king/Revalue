@@ -19,32 +19,30 @@ const DisplayTable = ({ props }) => {
           <Table className={classes.table} aria-label="simple table">
             <TableHead>
               <TableRow>
-                {props.columns.map((item, index) => (
+                {props.columns.map((column, index) => (
                   <TableCell
-                    align={`${index === 0 ? 'left' : 'center'}`}
+                    align="center"
                     key={index}
-                    className={classes.tableLable}
+                    className={classes.tableLabel}
                   >
-                    {item.label}
+                    {column.label}
                   </TableCell>
                 ))}
               </TableRow>
             </TableHead>
             <TableBody>
               {props.rows.map(row => (
-                <TableRow key={row.name}>
-                  <TableCell
-                    align="left"
-                    component="th"
-                    scope="row"
-                    className={`${row.bold ? classes.tableLable : ''}`}
-                  >
-                    {row.label}
-                  </TableCell>
-                  <TableCell align="center">{row.total}</TableCell>
-                  <TableCell align="center">{row.year1}</TableCell>
-                  <TableCell align="center">{row.year2}</TableCell>
-                  <TableCell align="center">{row.year3}</TableCell>
+                <TableRow>
+                  {Object.entries(row).map((rowInfo, index) => (
+                    <TableCell
+                      align="center"
+                      component="th"
+                      scope="row"
+                      className={`${row.bold ? classes.tableLabel : ''}`}
+                    >
+                      {row[`v${index}`]}
+                    </TableCell>
+                  ))}
                 </TableRow>
               ))}
             </TableBody>

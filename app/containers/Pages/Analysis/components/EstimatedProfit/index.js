@@ -30,22 +30,30 @@ const DisplayEstimatedProfit = ({ props }) => {
             <Table className={classes.table} aria-label="simple table">
               <TableHead>
                 <TableRow>
-                  {props.estimatedTableColumns.map((item, index) => (
+                  {props.estimatedTableColumns.map((column, index) => (
                     <TableCell
                       align="center"
                       key={index}
-                      className={classes.tableLable}
+                      className={classes.tableLabel}
                     >
-                      {item.label}
+                      {column.label}
                     </TableCell>
                   ))}
                 </TableRow>
               </TableHead>
               <TableBody>
                 {props.estimatedTableRows.map(row => (
-                  <TableRow key={row.name}>
-                    <TableCell align="center">{row.exitPrice}</TableCell>
-                    <TableCell align="center">{row.acquisitionPrice}</TableCell>
+                  <TableRow>
+                    {Object.entries(row).map((rowInfo, index) => (
+                      <TableCell
+                        align="center"
+                        component="th"
+                        scope="row"
+                        className={`${row.bold ? classes.tableLabel : ''}`}
+                      >
+                        {row[`v${index}`]}
+                      </TableCell>
+                    ))}
                   </TableRow>
                 ))}
               </TableBody>

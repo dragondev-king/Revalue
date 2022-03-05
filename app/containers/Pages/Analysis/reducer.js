@@ -48,20 +48,21 @@ export const initialState = {
   estimatedTableRows: [],
 };
 
+/* eslint-disable default-case, no-param-reassign */
 const analysisReducer = (state = initialState, action) =>
   produce(state, draft => {
-    // eslint-disable-next-line default-case
     switch (action.type) {
       case GET_ANALYSIS_DATA_BY_ID:
         draft.isGettingAnalysisById = true;
         break;
       case GET_ANALYSIS_DATA_SUCCESS_BY_ID:
         draft.analysis = action.payload.anaylysis;
-        draft.columns = action.payload.columns;
-        draft.rows = action.payload.rows;
+        draft.columns = action.payload.breakdownTable.columns;
+        draft.rows = action.payload.breakdownTable.rows;
         draft.criteria = action.payload.criteria;
-        draft.estimatedTableColumns = action.payload.estimatedTableColumns;
-        draft.estimatedTableRows = action.payload.estimatedTableRows;
+        draft.estimatedTableColumns =
+          action.payload.estimatedProfitTable.columns;
+        draft.estimatedTableRows = action.payload.estimatedProfitTable.rows;
         draft.isGettingAnalysisById = false;
         break;
       case SET_LOCATION:

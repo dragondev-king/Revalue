@@ -72,7 +72,7 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     marginTop: '32px',
   },
-  tableLable: {
+  tableLabel: {
     fontWeight: 'bold',
   },
 }));

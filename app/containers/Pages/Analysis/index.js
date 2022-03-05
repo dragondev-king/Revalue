@@ -44,7 +44,7 @@ import {
 import 'react-loading-skeleton/dist/skeleton.css';
 import { useStyles } from './style';
 import DisplayEstimatedProfit from './components/EstimatedProfit';
-import ValuationModal from './components/ValuationModel'
+import ValuationModal from './components/ValuationModel';
 export function Analysis(props) {
   const classes = useStyles();
   useInjectReducer({ key: 'analysis', reducer });
@@ -101,7 +101,7 @@ export function Analysis(props) {
           <Grid item xs={3}>
             <FormControl variant="standard" className="w-100">
               <InputLabel>
-                <FormattedMessage {...messages.GCA} />
+                <FormattedMessage {...messages.gca} />
                 <Tooltip
                   title={props.intl.formatMessage({
                     ...messages.gcaInfo,
@@ -126,7 +126,7 @@ export function Analysis(props) {
           <Grid item xs={3}>
             <FormControl variant="standard" className="w-100">
               <InputLabel>
-                <FormattedMessage {...messages.GPA} />
+                <FormattedMessage {...messages.gpa} />
                 <Tooltip
                   title={props.intl.formatMessage({
                     ...messages.gpaInfo,
@@ -356,10 +356,10 @@ export function Analysis(props) {
           <Grid item xs={3}>
             <FormControl variant="standard" className="w-100">
               <InputLabel>
-                <FormattedMessage {...messages.totalRequierd} />
+                <FormattedMessage {...messages.totalRequired} />
                 <Tooltip
                   title={props.intl.formatMessage({
-                    ...messages.totalRequierdInfo,
+                    ...messages.totalRequiredInfo,
                   })}
                 >
                   <IconButton className={classes.iconMr}>
@@ -514,7 +514,7 @@ export function Analysis(props) {
       )}
       <DisplayEstimatedProfit props={props} />
       <Table props={props} />
-      <ValuationModal props={props}/>
+      <ValuationModal props={props} />
       <Criteria props={props} />
     </div>
   );

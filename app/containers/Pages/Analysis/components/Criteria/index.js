@@ -15,7 +15,6 @@ import {
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
-import AutoComplete from 'components/AutoComplete';
 import { useStyles } from 'containers/Pages/Analysis/style';
 import messages from 'containers/Pages/Analysis/messages';
 import Skeleton from 'react-loading-skeleton';
@@ -223,8 +222,8 @@ const Index = ({ props }) => {
               </InputLabel>
               <Input
                 type="number"
-                defaultValue={props.criteria.GCA}
-                name="GCA"
+                defaultValue={props.criteria.gca}
+                name="gca"
                 readOnly
                 startAdornment={
                   <InputAdornment position="start">㎡</InputAdornment>
@@ -235,10 +234,10 @@ const Index = ({ props }) => {
           <Grid item xs={3}>
             <FormControl variant="standard" className="w-100">
               <InputLabel>
-                <FormattedMessage {...messages.areaGPA} />
+                <FormattedMessage {...messages.areaGpa} />
                 <Tooltip
                   title={props.intl.formatMessage({
-                    ...messages.areaGPAInfo,
+                    ...messages.areaGpaInfo,
                   })}
                 >
                   <IconButton className={classes.iconMr}>
@@ -248,8 +247,8 @@ const Index = ({ props }) => {
               </InputLabel>
               <Input
                 type="number"
-                defaultValue={props.criteria.GPA}
-                name="areaGPA"
+                defaultValue={props.criteria.Gpa}
+                name="areaGpa"
                 readOnly
                 startAdornment={
                   <InputAdornment position="start">㎡</InputAdornment>
@@ -314,7 +313,7 @@ const Index = ({ props }) => {
               <Input
                 type="number"
                 defaultValue={props.criteria.condominiumCosts}
-                name="areaGPA"
+                name="areaGpa"
                 readOnly
                 startAdornment={
                   <InputAdornment position="start">&#8364;</InputAdornment>
@@ -339,7 +338,7 @@ const Index = ({ props }) => {
               <Input
                 type="number"
                 defaultValue={props.criteria.propertyTaxRate}
-                name="areaGPA"
+                name="areaGpa"
                 readOnly
                 startAdornment={
                   <InputAdornment position="start">%</InputAdornment>
@@ -351,13 +350,13 @@ const Index = ({ props }) => {
       </Grid>
     );
   }
-  function acquistionAccordion() {
+  function acquisitionAccordion() {
     return (
       <Grid item container spacing={4} className="mb-10 p-10">
         <Grid item className="pb-0">
           <Typography className={`${classes.title} m-0`}>
             {props.intl.formatMessage({
-              ...messages.acquistion,
+              ...messages.acquisition,
             })}
           </Typography>
         </Grid>
@@ -469,7 +468,7 @@ const Index = ({ props }) => {
               <Input
                 type="number"
                 defaultValue={props.criteria.acquisitionStampDuty}
-                name="areaGPA"
+                name="areaGpa"
                 readOnly
                 startAdornment={
                   <InputAdornment position="start">&#8364;</InputAdornment>
@@ -919,7 +918,7 @@ const Index = ({ props }) => {
         {locationAccordion()}
         {financingAssumptionsAccordion()}
         {areaAccordion()}
-        {acquistionAccordion()}
+        {acquisitionAccordion()}
         {operationAssumptionsAccordion()}
         {taxesAccordion()}
         {exitValueCalculationAccordion()}
