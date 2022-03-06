@@ -209,10 +209,10 @@ const Index = ({ props }) => {
           <Grid item xs={3}>
             <FormControl variant="standard" className="w-100">
               <InputLabel>
-                <FormattedMessage {...messages.gca} />
+                <FormattedMessage {...messages.grossArea} />
                 <Tooltip
                   title={props.intl.formatMessage({
-                    ...messages.areaGcaInfo,
+                    ...messages.grossAreaInfo,
                   })}
                 >
                   <IconButton className={classes.iconMr}>
@@ -222,8 +222,8 @@ const Index = ({ props }) => {
               </InputLabel>
               <Input
                 type="number"
-                defaultValue={props.criteria.gca}
-                name="gca"
+                defaultValue={props.criteria.grossArea}
+                name="grossArea"
                 readOnly
                 startAdornment={
                   <InputAdornment position="start">㎡</InputAdornment>
@@ -234,10 +234,10 @@ const Index = ({ props }) => {
           <Grid item xs={3}>
             <FormControl variant="standard" className="w-100">
               <InputLabel>
-                <FormattedMessage {...messages.areaGpa} />
+                <FormattedMessage {...messages.usefulArea} />
                 <Tooltip
                   title={props.intl.formatMessage({
-                    ...messages.areaGpaInfo,
+                    ...messages.usefulAreaInfo,
                   })}
                 >
                   <IconButton className={classes.iconMr}>
@@ -248,7 +248,7 @@ const Index = ({ props }) => {
               <Input
                 type="number"
                 defaultValue={props.criteria.Gpa}
-                name="areaGpa"
+                name="usefulArea"
                 readOnly
                 startAdornment={
                   <InputAdornment position="start">㎡</InputAdornment>
@@ -313,7 +313,7 @@ const Index = ({ props }) => {
               <Input
                 type="number"
                 defaultValue={props.criteria.condominiumCosts}
-                name="areaGpa"
+                name="usefulArea"
                 readOnly
                 startAdornment={
                   <InputAdornment position="start">&#8364;</InputAdornment>
@@ -338,7 +338,7 @@ const Index = ({ props }) => {
               <Input
                 type="number"
                 defaultValue={props.criteria.propertyTaxRate}
-                name="areaGpa"
+                name="usefulArea"
                 readOnly
                 startAdornment={
                   <InputAdornment position="start">%</InputAdornment>
@@ -468,7 +468,7 @@ const Index = ({ props }) => {
               <Input
                 type="number"
                 defaultValue={props.criteria.acquisitionStampDuty}
-                name="areaGpa"
+                name="usefulArea"
                 readOnly
                 startAdornment={
                   <InputAdornment position="start">&#8364;</InputAdornment>

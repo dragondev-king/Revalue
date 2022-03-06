@@ -101,10 +101,10 @@ export function Analysis(props) {
           <Grid item xs={3}>
             <FormControl variant="standard" className="w-100">
               <InputLabel>
-                <FormattedMessage {...messages.gca} />
+                <FormattedMessage {...messages.grossArea} />
                 <Tooltip
                   title={props.intl.formatMessage({
-                    ...messages.gcaInfo,
+                    ...messages.grossAreaInfo,
                   })}
                 >
                   <IconButton className={classes.iconMr}>
@@ -114,7 +114,7 @@ export function Analysis(props) {
               </InputLabel>
               <Input
                 type="number"
-                defaultValue={props.analysis.gca}
+                defaultValue={props.analysis.grossArea}
                 name="location"
                 readOnly
                 startAdornment={
@@ -126,10 +126,10 @@ export function Analysis(props) {
           <Grid item xs={3}>
             <FormControl variant="standard" className="w-100">
               <InputLabel>
-                <FormattedMessage {...messages.gpa} />
+                <FormattedMessage {...messages.usefulArea} />
                 <Tooltip
                   title={props.intl.formatMessage({
-                    ...messages.gpaInfo,
+                    ...messages.usefulAreaInfo,
                   })}
                 >
                   <IconButton className={classes.iconMr}>
@@ -139,7 +139,7 @@ export function Analysis(props) {
               </InputLabel>
               <Input
                 type="number"
-                defaultValue={props.analysis.gpa}
+                defaultValue={props.analysis.usefulArea}
                 name="location"
                 readOnly
                 startAdornment={

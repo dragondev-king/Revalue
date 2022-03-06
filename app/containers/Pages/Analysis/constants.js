@@ -15,3 +15,14 @@ export const GET_TYPOLOGIES_SUCCESS = 'app/Analysis/GET_TYPOLOGIES_SUCCESS';
 
 export const GET_CONDITIONS = 'app/Analysis/GET_CONDITIONS';
 export const GET_CONDITIONS_SUCCESS = 'app/Analysis/GET_CONDITIONS_SUCCESS';
+
+export const GET_STATUS = 'app/Investments/GET_STATUS';
+export const GET_STATUS_SUCCESS = 'app/Investments/GET_STATUS_SUCCESS';
+
+export const GET_ACQUISITION_TYPES = 'app/Investments/GET_ACQUISITION_TYPES';
+export const GET_ACQUISITION_TYPES_SUCCESS =
+  'app/Investments/GET_ACQUISITION_TYPES_SUCCESS';
+
+export const GET_CI_PERCENTILES = 'app/Investments/GET_CI_PERCENTILES';
+export const GET_CI_PERCENTILES_SUCCESS =
+  'app/Investments/GET_CI_PERCENTILES_SUCCESS';

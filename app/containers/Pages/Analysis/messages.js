@@ -32,15 +32,6 @@ export default defineMessages({
     id: `${scope}.locationInfo`,
     defaultMessage: 'Property Location',
   },
-  gpa: {
-    id: `${scope}.gpa`,
-    defaultMessage: 'Useful Area',
-  },
-  gpaInfo: {
-    id: `${scope}.gpaInfo`,
-    defaultMessage:
-      'Gross Private Area is area measured by the outer perimeter and axes of the walls',
-  },
   bedrooms: {
     id: `${scope}.bedrooms`,
     defaultMessage: 'Bedrooms',
@@ -210,21 +201,21 @@ export default defineMessages({
     id: `${scope}.area`,
     defaultMessage: 'Area',
   },
-  gca: {
-    id: `${scope}.GCA`,
+  grossArea: {
+    id: `${scope}.grossArea`,
     defaultMessage: 'Gross Area',
   },
-  areaGcaInfo: {
-    id: `${scope}.areaGcaInfo`,
+  grossAreaInfo: {
+    id: `${scope}.grossAreaInfo`,
     defaultMessage:
       'Gross Construction area corresponds to the sum of Private Gross Area and Dependent Area',
   },
-  areaGpa: {
-    id: `${scope}.areaGpa`,
+  usefulArea: {
+    id: `${scope}.usefulArea`,
     defaultMessage: 'Useful Area',
   },
-  areaGpaInfo: {
-    id: `${scope}.areaGpaInfo`,
+  usefulAreaInfo: {
+    id: `${scope}.usefulAreaInfo`,
     defaultMessage:
       'Gross Private Area is area measured by the outer perimeter and axes of the walls',
   },
