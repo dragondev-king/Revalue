@@ -45,6 +45,7 @@ import 'react-loading-skeleton/dist/skeleton.css';
 import { useStyles } from './style';
 import DisplayEstimatedProfit from './components/EstimatedProfit';
 import ValuationModal from './components/ValuationModel';
+
 export function Analysis(props) {
   const classes = useStyles();
   useInjectReducer({ key: 'analysis', reducer });
@@ -78,7 +79,12 @@ export function Analysis(props) {
         <Grid item container spacing={4}>
           <Grid item xs={3}>
             <FormControl variant="standard" className="w-100">
-              <InputLabel>
+              <InputLabel
+                classes={{
+                  root: classes.label,
+                  shrink: classes.labelShrinked,
+                }}
+              >
                 <FormattedMessage {...messages.location} />
                 <Tooltip
                   title={props.intl.formatMessage({
@@ -100,7 +106,12 @@ export function Analysis(props) {
           </Grid>
           <Grid item xs={3}>
             <FormControl variant="standard" className="w-100">
-              <InputLabel>
+              <InputLabel
+                classes={{
+                  root: classes.label,
+                  shrink: classes.labelShrinked,
+                }}
+              >
                 <FormattedMessage {...messages.grossArea} />
                 <Tooltip
                   title={props.intl.formatMessage({
@@ -125,7 +136,12 @@ export function Analysis(props) {
           </Grid>
           <Grid item xs={3}>
             <FormControl variant="standard" className="w-100">
-              <InputLabel>
+              <InputLabel
+                classes={{
+                  root: classes.label,
+                  shrink: classes.labelShrinked,
+                }}
+              >
                 <FormattedMessage {...messages.usefulArea} />
                 <Tooltip
                   title={props.intl.formatMessage({
@@ -150,7 +166,12 @@ export function Analysis(props) {
           </Grid>
           <Grid item xs={3}>
             <FormControl variant="standard" className="w-100">
-              <InputLabel>
+              <InputLabel
+                classes={{
+                  root: classes.label,
+                  shrink: classes.labelShrinked,
+                }}
+              >
                 <FormattedMessage {...messages.bedrooms} />
                 <Tooltip
                   title={props.intl.formatMessage({
@@ -190,7 +211,12 @@ export function Analysis(props) {
         <Grid item container spacing={4}>
           <Grid item xs={3}>
             <FormControl variant="standard" className="w-100">
-              <InputLabel>
+              <InputLabel
+                classes={{
+                  root: classes.label,
+                  shrink: classes.labelShrinked,
+                }}
+              >
                 <FormattedMessage {...messages.askingPrice} />
                 <Tooltip
                   title={props.intl.formatMessage({
@@ -215,7 +241,12 @@ export function Analysis(props) {
           </Grid>
           <Grid item xs={3}>
             <FormControl variant="standard" className="w-100">
-              <InputLabel>
+              <InputLabel
+                classes={{
+                  root: classes.label,
+                  shrink: classes.labelShrinked,
+                }}
+              >
                 <FormattedMessage {...messages.proposedEntryPrice} />
                 <Tooltip
                   title={props.intl.formatMessage({
@@ -240,7 +271,12 @@ export function Analysis(props) {
           </Grid>
           <Grid item xs={3}>
             <FormControl variant="standard" className="w-100">
-              <InputLabel>
+              <InputLabel
+                classes={{
+                  root: classes.label,
+                  shrink: classes.labelShrinked,
+                }}
+              >
                 <FormattedMessage {...messages.estimatedExitPrice} />
                 <Tooltip
                   title={props.intl.formatMessage({
@@ -265,7 +301,12 @@ export function Analysis(props) {
           </Grid>
           <Grid item xs={3}>
             <FormControl variant="standard" className="w-100">
-              <InputLabel>
+              <InputLabel
+                classes={{
+                  root: classes.label,
+                  shrink: classes.labelShrinked,
+                }}
+              >
                 <FormattedMessage {...messages.timeForSale} />
                 <Tooltip
                   title={props.intl.formatMessage({
@@ -305,7 +346,12 @@ export function Analysis(props) {
         <Grid item container spacing={4}>
           <Grid item xs={3}>
             <FormControl variant="standard" className="w-100">
-              <InputLabel>
+              <InputLabel
+                classes={{
+                  root: classes.label,
+                  shrink: classes.labelShrinked,
+                }}
+              >
                 <FormattedMessage {...messages.requiredEntryCapital} />
                 <Tooltip
                   title={props.intl.formatMessage({
@@ -328,9 +374,14 @@ export function Analysis(props) {
               />
             </FormControl>
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={3}>
             <FormControl variant="standard" className="w-100">
-              <InputLabel>
+              <InputLabel
+                classes={{
+                  root: classes.label,
+                  shrink: classes.labelShrinked,
+                }}
+              >
                 <FormattedMessage {...messages.requiredCapitalInvestment} />
                 <Tooltip
                   title={props.intl.formatMessage({
@@ -355,7 +406,12 @@ export function Analysis(props) {
           </Grid>
           <Grid item xs={3}>
             <FormControl variant="standard" className="w-100">
-              <InputLabel>
+              <InputLabel
+                classes={{
+                  root: classes.label,
+                  shrink: classes.labelShrinked,
+                }}
+              >
                 <FormattedMessage {...messages.totalRequired} />
                 <Tooltip
                   title={props.intl.formatMessage({
@@ -382,114 +438,130 @@ export function Analysis(props) {
       </Grid>
     );
   }
-
   function displayReturns() {
     return (
       <Grid item container spacing={4} className="mb-10 p-10">
-        <Grid item xs={12} p={0} m={0}>
+        <Grid item xs={12}>
           <Typography variant="h6">
             {props.intl.formatMessage({
               ...messages.returns,
             })}
           </Typography>
         </Grid>
-
-        <Grid item container spacing={6} className="mb-10">
-          <Grid item container spacing={6}>
-            <Grid item xs={3}>
-              <FormControl variant="standard" className="w-100">
-                <InputLabel>
-                  <FormattedMessage {...messages.moic} />
-                  <Tooltip
-                    title={props.intl.formatMessage({
-                      ...messages.moicInfo,
-                    })}
-                  >
-                    <IconButton className={classes.iconMr}>
-                      <InfoIcon className={classes.iconSize} color="primary" />
-                    </IconButton>
-                  </Tooltip>
-                </InputLabel>
-                <Input
-                  type="number"
-                  defaultValue={props.analysis.moic}
-                  name="moic"
-                  readOnly
-                />
-              </FormControl>
-            </Grid>
-            <Grid item xs={3}>
-              <FormControl variant="standard" className="w-100">
-                <InputLabel>
-                  <FormattedMessage {...messages.requiredInitialInvestment} />
-                  <Tooltip
-                    title={props.intl.formatMessage({
-                      ...messages.requiredInitialInvestmentInfo,
-                    })}
-                  >
-                    <IconButton className={classes.iconMr}>
-                      <InfoIcon className={classes.iconSize} color="primary" />
-                    </IconButton>
-                  </Tooltip>
-                </InputLabel>
-                <Input
-                  type="number"
-                  defaultValue={props.analysis.requiredInitialInvestment}
-                  name="requiredInitialInvestment"
-                  readOnly
-                />
-              </FormControl>
-            </Grid>
-            <Grid item xs={3}>
-              <FormControl variant="standard" className="w-100">
-                <InputLabel>
-                  <FormattedMessage {...messages.profit} />
-                  <Tooltip
-                    title={props.intl.formatMessage({
-                      ...messages.profitInfo,
-                    })}
-                  >
-                    <IconButton className={classes.iconMr}>
-                      <InfoIcon className={classes.iconSize} color="primary" />
-                    </IconButton>
-                  </Tooltip>
-                </InputLabel>
-                <Input
-                  type="number"
-                  defaultValue={props.analysis.profit}
-                  name="profit"
-                  readOnly
-                  startAdornment={
-                    <InputAdornment position="start">&#8364;</InputAdornment>
-                  }
-                />
-              </FormControl>
-            </Grid>
-            <Grid item xs={3}>
-              <FormControl variant="standard" className="w-100">
-                <InputLabel>
-                  <FormattedMessage {...messages.irr} />
-                  <Tooltip
-                    title={props.intl.formatMessage({
-                      ...messages.irrInfo,
-                    })}
-                  >
-                    <IconButton className={classes.iconMr}>
-                      <InfoIcon className={classes.iconSize} color="primary" />
-                    </IconButton>
-                  </Tooltip>
-                </InputLabel>
-                <Input
-                  type="number"
-                  defaultValue={props.analysis.irr}
-                  name="irr"
-                  readOnly
-                  startAdornment={
-                    <InputAdornment position="start">%</InputAdornment>
-                  }
-                />
-              </FormControl>
-            </Grid>
+        <Grid item container spacing={4}>
+          <Grid item xs={3}>
+            <FormControl variant="standard" className="w-100">
+              <InputLabel
+                classes={{
+                  root: classes.label,
+                  shrink: classes.labelShrinked,
+                }}
+              >
+                <FormattedMessage {...messages.moic} />
+                <Tooltip
+                  title={props.intl.formatMessage({
+                    ...messages.moicInfo,
+                  })}
+                >
+                  <IconButton className={classes.iconMr}>
+                    <InfoIcon className={classes.iconSize} color="primary" />
+                  </IconButton>
+                </Tooltip>
+              </InputLabel>
+              <Input
+                type="number"
+                defaultValue={props.analysis.moic}
+                name="moic"
+                readOnly
+              />
+            </FormControl>
+          </Grid>
+          <Grid item xs={3}>
+            <FormControl variant="standard" className="w-100">
+              <InputLabel
+                classes={{
+                  root: classes.label,
+                  shrink: classes.labelShrinked,
+                }}
+              >
+                <FormattedMessage {...messages.requiredInitialInvestment} />
+                <Tooltip
+                  title={props.intl.formatMessage({
+                    ...messages.requiredInitialInvestmentInfo,
+                  })}
+                >
+                  <IconButton className={classes.iconMr}>
+                    <InfoIcon className={classes.iconSize} color="primary" />
+                  </IconButton>
+                </Tooltip>
+              </InputLabel>
+              <Input
+                type="number"
+                defaultValue={props.analysis.requiredInitialInvestment}
+                name="requiredInitialInvestment"
+                readOnly
+              />
+            </FormControl>
+          </Grid>
+          <Grid item xs={3}>
+            <FormControl variant="standard" className="w-100">
+              <InputLabel
+                classes={{
+                  root: classes.label,
+                  shrink: classes.labelShrinked,
+                }}
+              >
+                <FormattedMessage {...messages.profit} />
+                <Tooltip
+                  title={props.intl.formatMessage({
+                    ...messages.profitInfo,
+                  })}
+                >
+                  <IconButton className={classes.iconMr}>
+                    <InfoIcon className={classes.iconSize} color="primary" />
+                  </IconButton>
+                </Tooltip>
+              </InputLabel>
+              <Input
+                type="number"
+                defaultValue={props.analysis.profit}
+                name="profit"
+                readOnly
+                startAdornment={
+                  <InputAdornment position="start">&#8364;</InputAdornment>
+                }
+              />
+            </FormControl>
+          </Grid>
+          <Grid item xs={3}>
+            <FormControl variant="standard" className="w-100">
+              <InputLabel
+                classes={{
+                  root: classes.label,
+                  shrink: classes.labelShrinked,
+                }}
+              >
+                <FormattedMessage {...messages.irr} />
+                <Tooltip
+                  title={props.intl.formatMessage({
+                    ...messages.irrInfo,
+                  })}
+                >
+                  <IconButton className={classes.iconMr}>
+                    <InfoIcon className={classes.iconSize} color="primary" />
+                  </IconButton>
+                </Tooltip>
+              </InputLabel>
+              <Input
+                type="number"
+                defaultValue={props.analysis.irr}
+                name="irr"
+                readOnly
+                startAdornment={
+                  <InputAdornment position="start">%</InputAdornment>
+                }
+              />
+            </FormControl>
           </Grid>
         </Grid>
       </Grid>

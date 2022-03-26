@@ -75,6 +75,17 @@ const useStyles = makeStyles(theme => ({
   tableLabel: {
     fontWeight: 'bold',
   },
+  label: {
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
+    right: '22px !important',
+    bottom: '0px',
+  },
+
+  labelShrinked: {
+    right: 'unset',
+  },
 }));
 
 export { useStyles };
