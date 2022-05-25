@@ -103,8 +103,8 @@ class MapComponent extends Component {
     this.boundaries = new MapBoundaries(
       this.map,
       this.props.boundaries,
-      this.props.location,
-      this.props.setLocation,
+      this.props.propertyLocation,
+      this.props.setPropertyLocation,
     );
   }
 

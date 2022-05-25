@@ -15,7 +15,7 @@ import { getLocationBoundariesByLocation } from './actions';
 import { makeSelectAuthenticated } from '../Authentication/selectors';
 import reducer from './reducer';
 import { useInjectReducer } from '../../utils/injectReducer';
-import { makeSelectLocation } from '../Pages/Investments/selectors';
+import { makeSelectPropertyLocation } from '../Pages/Investments/selectors';
 import { setLocation } from '../Pages/Investments/actions';
 
 export function Map(props) {
@@ -44,7 +44,7 @@ const mapStateToProps = createStructuredSelector({
   authenticated: makeSelectAuthenticated(),
   center: makeSelectCenter(),
   boundaries: makeSelectBoundaries(),
-  location: makeSelectLocation(),
+  location: makeSelectPropertyLocation(),
   errorGettingBoundaries: makeSelectErrorGettingBoundaries(),
   isGettingBoundaries: makeSelectIsGettingBoundaries(),
   isVendorScriptsLoaded: makeSelectIsVendorScriptsLoaded(),

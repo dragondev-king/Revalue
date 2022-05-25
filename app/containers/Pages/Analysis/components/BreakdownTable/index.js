@@ -19,32 +19,38 @@ const DisplayTable = ({ props }) => {
           <Table className={classes.table} aria-label="simple table">
             <TableHead>
               <TableRow>
-                {props.columns.map((column, index) => (
-                  <TableCell
-                    align="center"
-                    key={index}
-                    className={classes.tableLabel}
-                  >
-                    {column.label}
-                  </TableCell>
-                ))}
+                {props.anaylsis &&
+                  props.anaylsis.breakdownTable &&
+                  props.anaylsis.breakdownTable.columns &&
+                  props.anaylsis.breakdownTable.columns.map((column, index) => (
+                    <TableCell
+                      align="center"
+                      key={index}
+                      className={classes.tableLabel}
+                    >
+                      {column.label}
+                    </TableCell>
+                  ))}
               </TableRow>
             </TableHead>
             <TableBody>
-              {props.rows.map(row => (
-                <TableRow>
-                  {Object.entries(row).map((rowInfo, index) => (
-                    <TableCell
-                      align="center"
-                      component="th"
-                      scope="row"
-                      className={`${row.bold ? classes.tableLabel : ''}`}
-                    >
-                      {row[`v${index}`]}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              ))}
+              {props.anaylsis &&
+                props.anaylsis.breakdownTable &&
+                props.anaylsis.breakdownTable.rows &&
+                props.anaylsis.breakdownTable.rows.map(row => (
+                  <TableRow>
+                    {Object.entries(row).map((rowInfo, index) => (
+                      <TableCell
+                        align="center"
+                        component="th"
+                        scope="row"
+                        className={`${row.bold ? classes.tableLabel : ''}`}
+                      >
+                        {row[`v${index}`]}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                ))}
             </TableBody>
           </Table>
         </TableContainer>

@@ -83,7 +83,7 @@ const useStyles = makeStyles(theme => ({
     bottom: '0px',
   },
 
-  labelShrinked: {
+  labelShrunk: {
     right: 'unset',
   },
 }));

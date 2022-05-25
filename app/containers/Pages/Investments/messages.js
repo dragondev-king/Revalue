@@ -15,29 +15,29 @@ export default defineMessages({
     id: `${scope}.tooltip`,
     defaultMessage: 'Info',
   },
+  location: {
+    id: `${scope}.location`,
+    defaultMessage: 'Location',
+  },
   // Property Information
   propertyInformation: {
     id: `${scope}.propertyInformation`,
     defaultMessage: 'Property Information',
   },
-  location: {
-    id: `${scope}.location`,
-    defaultMessage: 'Property Location*',
+  propertyLocation: {
+    id: `${scope}.propertyLocation`,
+    defaultMessage: 'Property Location *',
   },
-  status: {
-    id: `${scope}.status`,
-    defaultMessage: 'Property Status',
+  propertyType: {
+    id: `${scope}.propertyType`,
+    defaultMessage: 'Property Type',
   },
-  type: {
-    id: `${scope}.type`,
+  propertyTypology: {
+    id: `${scope}.propertyTypology`,
     defaultMessage: 'Property Typology',
   },
-  typology: {
-    id: `${scope}.typology`,
-    defaultMessage: 'Typology',
-  },
-  condition: {
-    id: `${scope}.condition`,
+  propertyCondition: {
+    id: `${scope}.propertyCondition`,
     defaultMessage: 'Property Condition',
   },
   minAskingPrice: {
@@ -69,12 +69,12 @@ export default defineMessages({
     id: `${scope}.maxCapital`,
     defaultMessage: 'Max Capital',
   },
-  bidAsk: {
-    id: `${scope}.bidAsk`,
+  bidAskRate: {
+    id: `${scope}.bidAskRate`,
     defaultMessage: 'Bid Ask *',
   },
-  housePriceIndex: {
-    id: `${scope}.housePriceIndex`,
+  housePriceIndexRate: {
+    id: `${scope}.housePriceIndexRate`,
     defaultMessage: 'House Price Index *',
   },
   minProfit: {
@@ -99,27 +99,27 @@ export default defineMessages({
     id: `${scope}.acquisitionType`,
     defaultMessage: 'Acquisition Type *',
   },
-  entryFee: {
-    id: `${scope}.entryFee`,
+  entryBrokerRate: {
+    id: `${scope}.entryBrokerRate`,
     defaultMessage: 'Entry Broker Fee',
   },
-  stampDuty: {
-    id: `${scope}.stampDuty`,
+  stampDutyRate: {
+    id: `${scope}.stampDutyRate`,
     defaultMessage: 'Stamp Duty',
   },
-  stampDutyInfo: {
-    id: `${scope}.stampDutyInfo`,
+  stampDutyRateInfo: {
+    id: `${scope}.stampDutyRateInfo`,
     defaultMessage:
       'As a buyer, you need to pay stamp duty (Imposto de Selo) on deeds, contracts, bank mortgages and loans, documents, and titles. ' +
       'The rate changes according to the type and value of the property. The rate depending on the type of deed/operation is between 0.4% and 0.8%.\n' +
       'When buying a house, you pay stamp duty to the notary while signing the deed of sale. The rate of this stamp duty is 0.8%.',
   },
-  landRegistryWithMortgage: {
-    id: `${scope}.landRegistryWithMortgage`,
+  landRegistryInscriptionWithMortgage: {
+    id: `${scope}.landRegistryInscriptionWithMortgage`,
     defaultMessage: 'Land Registry Inscription With Mortgage',
   },
-  landRegistryWithoutMortgage: {
-    id: `${scope}.landRegistryWithoutMortgage`,
+  landRegistryInscriptionWithoutMortgage: {
+    id: `${scope}.landRegistryInscriptionWithoutMortgage`,
     defaultMessage: 'Land Registry Inscription without Mortgage',
   },
   // Finance Assumptions
@@ -144,20 +144,20 @@ export default defineMessages({
     id: `${scope}.amortization`,
     defaultMessage: 'Amortization',
   },
-  stampDutyMortgage: {
-    id: `${scope}.stampDutyMortgage`,
+  stampDutyMortgageRate: {
+    id: `${scope}.stampDutyMortgageRate`,
     defaultMessage: 'Stamp Duty Mortgage',
   },
-  stampDutyMortgageInfo: {
-    id: `${scope}.stampDutyMortgageInfo`,
+  stampDutyMortgageRateInfo: {
+    id: `${scope}.stampDutyMortgageRateInfo`,
     defaultMessage: 'The mortgage stamp duty is 0.60% of the final loan amount',
   },
-  stampDutyInterests: {
-    id: `${scope}.stampDutyInterests`,
+  stampDutyInterestRate: {
+    id: `${scope}.stampDutyInterestRate`,
     defaultMessage: 'Stamp Duty Interests',
   },
-  capexFinancing: {
-    id: `${scope}.capexFinancing`,
+  capexFinancingRate: {
+    id: `${scope}.capexFinancingRate`,
     defaultMessage: 'CAPEX Financed',
   },
   capex: {
@@ -181,6 +181,14 @@ export default defineMessages({
     id: `${scope}.propertyTaxRate`,
     defaultMessage: 'Property Tax Rate',
   },
+  multiRiskInsurance: {
+    id: `${scope}.multiRiskInsurance`,
+    defaultMessage: 'multiRiskInsurance',
+  },
+  lifeInsurance: {
+    id: `${scope}.lifeInsurance`,
+    defaultMessage: 'lifeInsurance',
+  },
   // Exit Assumptions
   exitAssumptions: {
     id: `${scope}.exitAssumptions`,
@@ -198,25 +206,25 @@ export default defineMessages({
     id: `${scope}.irsRate`,
     defaultMessage: 'IRS Rate *',
   },
-  exitBrokerFee: {
-    id: `${scope}.exitBrokerFee`,
+  exitBrokerRate: {
+    id: `${scope}.exitBrokerRate`,
     defaultMessage: 'Exit Broker Rate',
   },
-  exitBrokerFeeInfo: {
-    id: `${scope}.exitBrokerFeeInfo`,
+  exitBrokerRateInfo: {
+    id: `${scope}.exitBrokerRateInfo`,
     defaultMessage: 'Broker fee to exit transaction',
   },
-  loanEarlyRepaymentFee: {
-    id: `${scope}.loanEarlyRepaymentFee`,
+  earlyRepaymentRate: {
+    id: `${scope}.earlyRepaymentRate`,
     defaultMessage: 'Early Repayment Fee',
   },
-  loanEarlyRepaymentFeeInfo: {
-    id: `${scope}.loanEarlyRepaymentFeeInfo`,
+  earlyRepaymentRateInfo: {
+    id: `${scope}.earlyRepaymentRateInfo`,
     defaultMessage:
       'An Early Redemption Penalty (also known as an Early Repayment Charge or ERC) is a fee you may be required to make to a lender if you pay off a loan or mortgage before the scheduled term of the credit facility, also sometimes referred to as a Redemption Penalty.',
   },
-  capitalGainsTaxBase: {
-    id: `${scope}.capitalGainsTaxBase`,
+  capitalGainsTaxRate: {
+    id: `${scope}.capitalGainsTaxRate`,
     defaultMessage: 'Capital gains Tax Base',
   },
   // Valuation Model Configuration
@@ -224,25 +232,25 @@ export default defineMessages({
     id: `${scope}.valuationModelConfiguration`,
     defaultMessage: 'Valuation Model Configuration',
   },
-  grossAreaToUsefulArea: {
-    id: `${scope}.grossAreaToUsefulArea`,
+  grossAreaToUsefulAreaRate: {
+    id: `${scope}.grossAreaToUsefulAreaRate`,
     defaultMessage: 'Gross Area To Useful Area',
   },
-  floor: {
-    id: `${scope}.floor`,
+  floorRate: {
+    id: `${scope}.floorRate`,
     defaultMessage: 'Floor',
   },
-  floorInfo: {
-    id: `${scope}.floorInfo`,
+  floorRateInfo: {
+    id: `${scope}.floorRateInfo`,
     defaultMessage:
       'Min Delta between Asking Value and Confidencial Imobiliario Data Base',
   },
-  cap: {
-    id: `${scope}.cap`,
-    defaultMessage: 'Cap',
+  capRate: {
+    id: `${scope}.capRate`,
+    defaultMessage: 'capRate',
   },
-  capInfo: {
-    id: `${scope}.capInfo`,
+  capRateInfo: {
+    id: `${scope}.capRateInfo`,
     defaultMessage:
       'Max Delta between Asking Value and Confidencial Imobiliario Data Base',
   },
@@ -289,12 +297,12 @@ export default defineMessages({
     defaultMessage:
       'Maximum Required Capital for the Transaction to be filter in the analysis',
   },
-  bidAskInfo: {
-    id: `${scope}.bidAskInfo`,
+  bidAskRateInfo: {
+    id: `${scope}.bidAskRateInfo`,
     defaultMessage: 'Discount to Seller asking price',
   },
-  housePriceIndexInfo: {
-    id: `${scope}.housePriceIndexInfo`,
+  housePriceIndexRateInfo: {
+    id: `${scope}.housePriceIndexRateInfo`,
     defaultMessage: 'Property value grow per year',
   },
   financingRateInfo: {
@@ -318,17 +326,17 @@ export default defineMessages({
     defaultMessage:
       'Property will be for Investment or as a primary residence?',
   },
-  entryFeeInfo: {
-    id: `${scope}.entryFeeInfo`,
+  entryBrokerRateInfo: {
+    id: `${scope}.entryBrokerRateInfo`,
     defaultMessage: 'Is there a broker fee to be paid the buyer?',
   },
-  landRegistryWithMortgageInfo: {
-    id: `${scope}.landRegistryWithMortgageInfo`,
+  landRegistryInscriptionWithMortgageInfo: {
+    id: `${scope}.landRegistryInscriptionWithMortgageInfo`,
     defaultMessage:
       'The public deed contract , needs to be made by a recognized entity or person such as a public notary office, a lawyer or solicitor. A popular choice are the “Casa Pronta” (Ready House) notary offices, where the process can be more streamlined and cheaper than normal.For this reason, the reference in terms of price are the Casa Pronta notary offices, where it normally costs 375,00 €, including both the preparation of the public deed contract and the registry. With Mortgage normally will be 700€.',
   },
-  landRegistryWithoutMortgageInfo: {
-    id: `${scope}.landRegistryWithoutMortgageInfo`,
+  landRegistryInscriptionWithoutMortgageInfo: {
+    id: `${scope}.landRegistryInscriptionWithoutMortgageInfo`,
     defaultMessage:
       'The public deed contract , needs to be made by a recognized entity or person such as a public notary office, a lawyer or solicitor. A popular choice are the “Casa Pronta” (Ready House) notary offices, where the process can be more streamlined and cheaper than normal.For this reason, the reference in terms of price are the Casa Pronta notary offices, where it normally costs 375,00 €, including both the preparation of the public deed contract and the registry.',
   },
@@ -340,8 +348,8 @@ export default defineMessages({
     id: `${scope}.amortizationInfo`,
     defaultMessage: 'Amortization Period in years',
   },
-  stampDutyInterestsInfo: {
-    id: `${scope}.stampDutyInterestsInfo`,
+  stampDutyInterestRateInfo: {
+    id: `${scope}.stampDutyInterestRateInfo`,
     defaultMessage: 'Stamp Duty Interests',
   },
   propertyTaxRateInfo: {
@@ -352,12 +360,12 @@ export default defineMessages({
     id: `${scope}.irsRateInfo`,
     defaultMessage: 'IRS Rate with capital gains',
   },
-  capitalGainsTaxBaseInfo: {
-    id: `${scope}.capitalGainsTaxBaseInfo`,
+  capitalGainsTaxRateInfo: {
+    id: `${scope}.capitalGainsTaxRateInfo`,
     defaultMessage: 'IRS Rate on base Profit',
   },
-  grossAreaToUsefulAreaInfo: {
-    id: `${scope}.grossAreaToUsefulAreaInfo`,
+  grossAreaToUsefulAreaRateInfo: {
+    id: `${scope}.grossAreaToUsefulAreaRateInfo`,
     defaultMessage:
       'If Gross Private area not available this will be the base area for Exit value calculation',
   },

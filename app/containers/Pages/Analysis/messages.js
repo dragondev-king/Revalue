@@ -26,10 +26,18 @@ export default defineMessages({
   // property
   location: {
     id: `${scope}.location`,
-    defaultMessage: 'Property Location',
+    defaultMessage: 'Location',
   },
   locationInfo: {
     id: `${scope}.locationInfo`,
+    defaultMessage: 'location',
+  },
+  propertyLocation: {
+    id: `${scope}.propertyLocation`,
+    defaultMessage: 'Property Location',
+  },
+  propertyLocationInfo: {
+    id: `${scope}.propertyLocationInfo`,
     defaultMessage: 'Property Location',
   },
   bedrooms: {
@@ -119,6 +127,15 @@ export default defineMessages({
     id: `${scope}.requiredInitialInvestmentInfo`,
     defaultMessage: 'Required Initial Investment',
   },
+  capRate: {
+    id: `${scope}.capRate`,
+    defaultMessage: 'capRate',
+  },
+  capRateInfo: {
+    id: `${scope}.capRateInfo`,
+    defaultMessage:
+      'Max Delta between Asking Value and Confidencial Imobiliario Data Base',
+  },
   profit: {
     id: `${scope}.profit`,
     defaultMessage: 'Profit After Tax',
@@ -187,12 +204,12 @@ export default defineMessages({
     defaultMessage:
       'Bank fees vary, depending on the lender and loan amount. Details will be provided in the mortgage proposal document',
   },
-  earlyRepaymentFee: {
-    id: `${scope}.earlyRepaymentFee`,
+  earlyRepaymentRate: {
+    id: `${scope}.earlyRepaymentRate`,
     defaultMessage: 'Loan Early Repayment Fee',
   },
-  earlyRepaymentFeeInfo: {
-    id: `${scope}.earlyRepaymentFeeInfo`,
+  earlyRepaymentRateInfo: {
+    id: `${scope}.earlyRepaymentRateInfo`,
     defaultMessage:
       'The early redemption penalty for a variable acquisition mortgage is 0.50% (as per the rule of the Bank of Portugal) and 2% for a fixed rate mortgage.',
   },
@@ -224,20 +241,20 @@ export default defineMessages({
     id: `${scope}.acquisition`,
     defaultMessage: 'Acquisition',
   },
-  bidAsk: {
-    id: `${scope}.bidAsk`,
+  bidAskRate: {
+    id: `${scope}.bidAskRate`,
     defaultMessage: 'Bis Ask',
   },
-  bidAskInfo: {
-    id: `${scope}.bidAskInfo`,
+  bidAskRateInfo: {
+    id: `${scope}.bidAskRateInfo`,
     defaultMessage: 'Discount to Seller asking price',
   },
-  entryBrokerFee: {
-    id: `${scope}.entryBrokerFee`,
+  entryBrokerRate: {
+    id: `${scope}.entryBrokerRate`,
     defaultMessage: 'Entry Broker Fee',
   },
-  entryBrokerFeeInfo: {
-    id: `${scope}.entryBrokerFeeInfo`,
+  entryBrokerRateInfo: {
+    id: `${scope}.entryBrokerRateInfo`,
     defaultMessage:
       'Commission paid to the broker by the buyer. Typically sale commission is paid by the seller',
   },
@@ -310,21 +327,21 @@ export default defineMessages({
     id: `${scope}.interestStampDutyInfo`,
     defaultMessage: 'Stamp Duty',
   },
-  landRegistryWithMortgage: {
-    id: `${scope}.landRegistryWithMortgage`,
+  landRegistryInscriptionWithMortgage: {
+    id: `${scope}.landRegistryInscriptionWithMortgage`,
     defaultMessage: 'Land Registry Inscription With Mortgage',
   },
-  landRegistryWithMortgageInfo: {
-    id: `${scope}.landRegistryWithMortgageInfo`,
+  landRegistryInscriptionWithMortgageInfo: {
+    id: `${scope}.landRegistryInscriptionWithMortgageInfo`,
     defaultMessage:
       'The public deed contract , needs to be made by a recognized entity or person such as a public notary office, a lawyer or solicitor. A popular choice are the “Casa Pronta” (Ready House) notary offices, where the process can be more streamlined and cheaper than normal.For this reason, the reference in terms of price are the Casa Pronta notary offices, where it normally costs 375,00 €, including both the preparation of the public deed contract and the registry. With Mortgage normally will be 700€',
   },
-  landRegistryWithoutMortgage: {
-    id: `${scope}.landRegistryWithoutMortgage`,
+  landRegistryInscriptionWithoutMortgage: {
+    id: `${scope}.landRegistryInscriptionWithoutMortgage`,
     defaultMessage: 'Land Registry Inscription Without Mortgage',
   },
-  landRegistryWithoutMortgageInfo: {
-    id: `${scope}.landRegistryWithoutMortgageInfo`,
+  landRegistryInscriptionWithoutMortgageInfo: {
+    id: `${scope}.landRegistryInscriptionWithoutMortgageInfo`,
     defaultMessage:
       'The public deed contract , needs to be made by a recognized entity or person such as a public notary office, a lawyer or solicitor. A popular choice are the “Casa Pronta” (Ready House) notary offices, where the process can be more streamlined and cheaper than normal.For this reason, the reference in terms of price are the Casa Pronta notary offices, where it normally costs 375,00 €, including both the preparation of the public deed contract and the registry.',
   },
@@ -336,12 +353,12 @@ export default defineMessages({
     id: `${scope}.irsInfo`,
     defaultMessage: 'IRS Rate with capital gains',
   },
-  capitalGainsTaxBase: {
-    id: `${scope}.capitalGainsTaxBase`,
+  capitalGainsTaxRate: {
+    id: `${scope}.capitalGainsTaxRate`,
     defaultMessage: 'Capital Gains Tax Rate',
   },
-  capitalGainsTaxBaseInfo: {
-    id: `${scope}.capitalGainsTaxBaseInfo`,
+  capitalGainsTaxRateInfo: {
+    id: `${scope}.capitalGainsTaxRateInfo`,
     defaultMessage: 'IRS Rate on base Profit',
   },
   // exit value calculation
@@ -384,11 +401,11 @@ export default defineMessages({
     defaultMessage:
       'Max Delta between Asking Value and Confidencial Imobiliario Data Base',
   },
-  floor: {
+  floorRate: {
     id: `${scope}.Floor`,
     defaultMessage: 'Floor',
   },
-  floorInfo: {
+  floorRateInfo: {
     id: `${scope}.Floor Info`,
     defaultMessage:
       'Min Delta between Asking Value and Confidencial Imobiliario Data Base',
@@ -417,12 +434,12 @@ export default defineMessages({
     id: `${scope}.exitValueOverride Info`,
     defaultMessage: 'Exit Value Override Info',
   },
-  exitBrokerFee: {
-    id: `${scope}.exitBrokerFee`,
+  exitBrokerRate: {
+    id: `${scope}.exitBrokerRate`,
     defaultMessage: 'Exit Pricerate',
   },
-  exitBrokerFeeInfo: {
-    id: `${scope}.exitBrokerFeeInfo`,
+  exitBrokerRateInfo: {
+    id: `${scope}.exitBrokerRateInfo`,
     defaultMessage: 'Based on Exit Price',
   },
 
@@ -431,7 +448,6 @@ export default defineMessages({
     id: `${scope}.estimatedProfit`,
     defaultMessage: 'Estimated Profit',
   },
-
   // Valution Model
   valuationModel: {
     id: `${scope}.valuationModel`,

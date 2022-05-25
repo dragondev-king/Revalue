@@ -3,19 +3,8 @@ import React, { memo } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import Menu from 'components/Menu';
-import {
-  MenuItem,
-  IconButton,
-  Icon,
-  InputLabel,
-  Grid,
-  Typography,
-  FormControl,
-  Select,
-} from '@material-ui/core';
+import { MenuItem, Grid, FormControl, Select } from '@material-ui/core';
 import { logOut } from 'containers/Authentication/actions';
-import { FormattedMessage } from 'react-intl';
 import { isMdScreen } from 'utils/isMdScreen';
 import { classList } from 'utils/classList';
 import { createStructuredSelector } from 'reselect';
@@ -23,11 +12,10 @@ import {
   makeSelectUser,
   makeSelectAuthenticated,
 } from 'containers/Authentication/selectors';
-import messages from '../messages';
+import { changeLocale } from 'containers/LanguageProvider/actions';
+import { makeSelectLocale } from 'containers/LanguageProvider/selectors';
+import { useInjectReducer } from 'utils/injectReducer';
 import reducer from '../reducer';
-import { changeLocale } from '../../../LanguageProvider/actions';
-import { makeSelectLocale } from '../../../LanguageProvider/selectors';
-import { useInjectReducer } from '../../../../utils/injectReducer';
 
 // eslint-disable-next-line no-unused-vars
 const useStyles = makeStyles(theme => ({

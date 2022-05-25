@@ -12,10 +12,10 @@ import transparentIcon from './transparent.png';
 import config from './config';
 
 class MapBoundaries {
-  constructor(map, boundaries, location, setLocation) {
+  constructor(map, boundaries, propertyLocation, setPropertyLocation) {
     this.map = map;
     this.boundaries = boundaries;
-    this.setLocation = setLocation;
+    this.setPropertyLocation = setPropertyLocation;
     this.mouseoverEvent = null;
     this.mouseoutEvent = null;
 
@@ -189,7 +189,7 @@ class MapBoundaries {
       return;
     }
 
-    this.setLocation(feature.getProperty('fullName'));
+    this.setPropertyLocation(feature.getProperty('fullName'));
     this.hideMarker();
   }
 

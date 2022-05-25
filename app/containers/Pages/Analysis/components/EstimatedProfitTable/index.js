@@ -13,7 +13,7 @@ import { Typography } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import messages from '../../messages';
 
-const DisplayEstimatedProfit = ({ props }) => {
+const EstimatedProfitTable = ({ props }) => {
   const classes = useStyles();
   return (
     <Grid item container spacing={4} className="mb-10 p-10">
@@ -30,32 +30,40 @@ const DisplayEstimatedProfit = ({ props }) => {
             <Table className={classes.table} aria-label="simple table">
               <TableHead>
                 <TableRow>
-                  {props.estimatedTableColumns.map((column, index) => (
-                    <TableCell
-                      align="center"
-                      key={index}
-                      className={classes.tableLabel}
-                    >
-                      {column.label}
-                    </TableCell>
-                  ))}
+                  {props.anaylsis &&
+                    props.anaylsis.estimatedProfitTable &&
+                    props.anaylsis.estimatedProfitTable.columns &&
+                    props.anaylsis.estimatedProfitTable.columns.map(
+                      (column, index) => (
+                        <TableCell
+                          align="center"
+                          key={index}
+                          className={classes.tableLabel}
+                        >
+                          {column.label}
+                        </TableCell>
+                      ),
+                    )}
                 </TableRow>
               </TableHead>
               <TableBody>
-                {props.estimatedTableRows.map(row => (
-                  <TableRow>
-                    {Object.entries(row).map((rowInfo, index) => (
-                      <TableCell
-                        align="center"
-                        component="th"
-                        scope="row"
-                        className={`${row.bold ? classes.tableLabel : ''}`}
-                      >
-                        {row[`v${index}`]}
-                      </TableCell>
-                    ))}
-                  </TableRow>
-                ))}
+                {props.anaylsis &&
+                  props.anaylsis.estimatedProfitTable &&
+                  props.anaylsis.estimatedProfitTable.rows &&
+                  props.anaylsis.estimatedProfitTable.rows.map(row => (
+                    <TableRow>
+                      {Object.entries(row).map((rowInfo, index) => (
+                        <TableCell
+                          align="center"
+                          component="th"
+                          scope="row"
+                          className={`${row.bold ? classes.tableLabel : ''}`}
+                        >
+                          {row[`v${index}`]}
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                  ))}
               </TableBody>
             </Table>
           </TableContainer>
@@ -66,4 +74,4 @@ const DisplayEstimatedProfit = ({ props }) => {
     </Grid>
   );
 };
-export default DisplayEstimatedProfit;
+export default EstimatedProfitTable;

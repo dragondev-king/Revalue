@@ -8,34 +8,34 @@ const makeSelectInvestment = () =>
     substate => substate.investment,
   );
 
-const makeSelectLocations = () =>
+const makeSelectPropertyLocations = () =>
   createSelector(
     selectInvestmentDomain,
-    substate => substate.locations,
+    substate => substate.propertyLocations,
   );
 
-const makeSelectLocation = () =>
+const makeSelectPropertyLocation = () =>
   createSelector(
     selectInvestmentDomain,
-    substate => substate.location,
+    substate => substate.propertyLocation,
   );
 
-const makeSelectTypes = () =>
+const makeSelectPropertyTypes = () =>
   createSelector(
     selectInvestmentDomain,
-    substate => substate.types,
+    substate => substate.propertyTypes,
   );
 
-const makeSelectTypologies = () =>
+const makeSelectPropertyTypologies = () =>
   createSelector(
     selectInvestmentDomain,
-    substate => substate.typologies,
+    substate => substate.propertyTypologies,
   );
 
-const makeSelectConditions = () =>
+const makeSelectPropertyConditions = () =>
   createSelector(
     selectInvestmentDomain,
-    substate => substate.conditions,
+    substate => substate.propertyConditions,
   );
 
 const makeSelectStatus = () =>
@@ -94,12 +94,12 @@ const makeSelectAnalyzeButtonDisabled = () =>
 
 export {
   makeSelectInvestment,
-  makeSelectLocations,
-  makeSelectLocation,
-  makeSelectTypes,
+  makeSelectPropertyLocations,
+  makeSelectPropertyLocation,
+  makeSelectPropertyTypes,
   makeSelectStatus,
-  makeSelectTypologies,
-  makeSelectConditions,
+  makeSelectPropertyTypologies,
+  makeSelectPropertyConditions,
   makeSelectAcquisitionTypes,
   makeSelectInputs,
   makeSelectErrors,

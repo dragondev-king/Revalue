@@ -106,7 +106,7 @@ const getClient = (component = null) => {
     case 'PROPERTY_MANAGER':
       options.baseURL = process.env.PROPERTY_MANAGER;
       options.headers = {
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
+        Authorization: `Basic YWRtaW46NWJyV1dXM0ZvYTNS`,
       };
       break;
     default:

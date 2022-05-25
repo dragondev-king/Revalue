@@ -1,13 +1,23 @@
-// import { ApiClient } from 'containers/ApiClient/index';
+/* eslint-disable */
+import { ApiClient } from 'containers/ApiClient/index';
 import {
-  GET_LOCATIONS,
-  GET_LOCATIONS_SUCCESS,
-  GET_TYPES,
-  GET_TYPES_SUCCESS,
-  GET_TYPOLOGIES,
-  GET_TYPOLOGIES_SUCCESS,
-  GET_CONDITIONS,
-  GET_CONDITIONS_SUCCESS,
+  PROPERTIES_TYPOLOGIES,
+  LOCATIONS_FULL_NAMES,
+  ANALYSIS,
+  ACQUISITION_TYPES,
+  PROPERTIES_CONDITIONS,
+  PROPERTIES_TYPES,
+  PERCENTILES,
+} from 'containers/ApiClient/PropertyManager/constants';
+import {
+  GET_PROPERTY_LOCATIONS,
+  GET_PROPERTY_LOCATIONS_SUCCESS,
+  GET_PROPERTY_TYPES,
+  GET_PROPERTY_TYPES_SUCCESS,
+  GET_PROPERTY_TYPOLOGIES,
+  GET_PROPERTY_TYPOLOGIES_SUCCESS,
+  GET_PROPERTY_CONDITIONS,
+  GET_PROPERTY_CONDITIONS_SUCCESS,
   GET_ACQUISITION_TYPES,
   GET_ACQUISITION_TYPES_SUCCESS,
   GET_CI_PERCENTILES,
@@ -16,19 +26,18 @@ import {
   GET_ANALYSIS_DATA,
   GET_ANALYSIS_DATA_SUCCESS,
   SET_ANALYZE_BUTTON_DISABLED,
-  GET_STATUS,
-  GET_STATUS_SUCCESS,
-  SET_LOCATION,
+  SET_PROPERTY_LOCATION,
   SET_INPUT_VALUE,
+  GET_ANALYSIS_DATA_ERROR,
 } from './constants';
-import tableData from './data.json';
 
-export const getLocations = () => async dispatch => {
+// TODO refactor to api calls
+export const getPropertyLocations = () => async dispatch => {
   dispatch({
-    type: GET_LOCATIONS,
+    type: GET_PROPERTY_LOCATIONS,
   });
   dispatch({
-    type: GET_LOCATIONS_SUCCESS,
+    type: GET_PROPERTY_LOCATIONS_SUCCESS,
     payload: [
       'Portugal',
       'Bragança, Portugal',
@@ -93,46 +102,143 @@ export const getLocations = () => async dispatch => {
       'Belém, Lisboa, Lisboa, Portugal',
     ],
   });
+  /* const propertyManagerApiClient = new ApiClient('PROPERTY_MANAGER');
+  await propertyManagerApiClient
+    .get(LOCATIONS_FULL_NAMES)
+    .then(response => {
+      dispatch({
+        type: GET_PROPERTY_LOCATIONS_SUCCESS,
+        payload: response.data,
+      });
+    })
+    .catch(error => {
+      // eslint-disable-next-line no-console
+      console.log(error);
+    }); */
 };
 
-export const getTypes = () => async dispatch => {
+export const getPropertyTypes = () => async dispatch => {
   dispatch({
-    type: GET_TYPES,
+    type: GET_PROPERTY_TYPES,
   });
   dispatch({
-    type: GET_TYPES_SUCCESS,
-    payload: ['Apartment', 'Dwelling', 'All'],
+    type: GET_PROPERTY_TYPES_SUCCESS,
+    payload: [
+      {
+        name: 'type.apartment',
+        label: 'Apartment',
+      },
+      {
+        name: 'type.house',
+        label: 'House',
+      },
+      {
+        name: 'all',
+        label: 'All',
+      },
+    ],
   });
+  /*  const propertyManagerApiClient = new ApiClient('PROPERTY_MANAGER');
+  await propertyManagerApiClient
+    .get(PROPERTIES_TYPES)
+    .then(response => {
+      dispatch({
+        type: GET_PROPERTY_TYPES_SUCCESS,
+        payload: response.data,
+      });
+    })
+    .catch(error => {
+      // eslint-disable-next-line no-console
+      console.log(error);
+    }); */
 };
 
-export const getTypologies = () => async dispatch => {
+export const getPropertyTypologies = () => async dispatch => {
   dispatch({
-    type: GET_TYPOLOGIES,
+    type: GET_PROPERTY_TYPOLOGIES,
   });
   dispatch({
-    type: GET_TYPOLOGIES_SUCCESS,
-    payload: ['T0', 'T1', 'T2', 'T3', 'T4+', 'All'],
+    type: GET_PROPERTY_TYPOLOGIES_SUCCESS,
+    payload: [
+      {
+        name: 'T0',
+        label: 'T0',
+      },
+      {
+        name: 'T1',
+        label: 'T1',
+      },
+      {
+        name: 'T2',
+        label: 'T2',
+      },
+      {
+        name: 'T3',
+        label: 'T3',
+      },
+      {
+        name: 'T4',
+        label: 'T4',
+      },
+      {
+        name: 'T4+',
+        label: 'T4+',
+      },
+      {
+        name: 'all',
+        label: 'All',
+      },
+    ],
   });
+  /* const propertyManagerApiClient = new ApiClient('PROPERTY_MANAGER');
+  await propertyManagerApiClient
+    .get(PROPERTIES_TYPOLOGIES)
+    .then(response => {
+      dispatch({
+        type: GET_PROPERTY_TYPOLOGIES_SUCCESS,
+        payload: response.data,
+      });
+    })
+    .catch(error => {
+      // eslint-disable-next-line no-console
+      console.log(error);
+    }); */
 };
 
-export const getStatus = () => async dispatch => {
+export const getPropertyConditions = () => async dispatch => {
   dispatch({
-    type: GET_STATUS,
+    type: GET_PROPERTY_CONDITIONS,
   });
   dispatch({
-    type: GET_STATUS_SUCCESS,
-    payload: ['Leased', 'Vacant', 'All'],
+    type: GET_PROPERTY_CONDITIONS_SUCCESS,
+    payload: [
+      {
+        name: 'condition.new',
+        label: 'New',
+      },
+      {
+        name: 'condition.used',
+        label: 'Used',
+      },
+      {
+        name: 'all',
+        label: 'All',
+      },
+    ],
   });
-};
-
-export const getConditions = () => async dispatch => {
-  dispatch({
-    type: GET_CONDITIONS,
-  });
-  dispatch({
-    type: GET_CONDITIONS_SUCCESS,
-    payload: ['New', 'Used', 'All'],
-  });
+  /*  const propertyManagerApiClient = new ApiClient('PROPERTY_MANAGER');
+  await propertyManagerApiClient
+    .get(PROPERTIES_CONDITIONS)
+    .then(response => {
+      dispatch({
+        type: GET_PROPERTY_CONDITIONS_SUCCESS,
+        payload: response.data,
+      });
+    })
+    .catch(error => {
+      // eslint-disable-next-line no-console
+      console.log(error);
+    }); */
 };
 
 export const getAcquisitionTypes = () => async dispatch => {
@@ -141,8 +247,30 @@ export const getAcquisitionTypes = () => async dispatch => {
   });
   dispatch({
     type: GET_ACQUISITION_TYPES_SUCCESS,
-    payload: ['Investment', 'Main Residence'],
+    payload: [
+      {
+        name: 'acquisition.type.investment',
+        label: 'Investment',
+      },
+      {
+        name: 'acquisition.type.permanent.housing',
+        label: 'Permanent Housing',
+      },
+    ],
   });
+  /* const propertyManagerApiClient = new ApiClient('PROPERTY_MANAGER');
+  await propertyManagerApiClient
+    .get(ACQUISITION_TYPES)
+    .then(response => {
+      dispatch({
+        type: GET_ACQUISITION_TYPES_SUCCESS,
+        payload: response.data,
+      });
+    })
+    .catch(error => {
+      // eslint-disable-next-line no-console
+      console.log(error);
+    }); */
 };
 
 export const getCIPs = () => async dispatch => {
@@ -151,8 +279,27 @@ export const getCIPs = () => async dispatch => {
   });
   dispatch({
     type: GET_CI_PERCENTILES_SUCCESS,
-    payload: ['5%', '25%', '50%', '75%', '95%', 'Case by Case'],
+    payload: [
+      { name: '5', label: '5' },
+      { name: '25', label: '25' },
+      { name: '50', label: '50' },
+      { name: '75', label: '75' },
+      { name: '95', label: '95' },
+    ],
   });
+  /* const propertyManagerApiClient = new ApiClient('PROPERTY_MANAGER');
+  await propertyManagerApiClient
+    .get(PERCENTILES)
+    .then(response => {
+      dispatch({
+        type: GET_CI_PERCENTILES_SUCCESS,
+        payload: response.data,
+      });
+    })
+    .catch(error => {
+      // eslint-disable-next-line no-console
+      console.log(error);
+    }); */
 };
 
 export const setInputValue = (input, value) => ({
@@ -176,23 +323,47 @@ export const setAnalyzeButtonDisabled = state => ({
   payload: state,
 });
 
-export const getAnalysisData = () => async dispatch => {
+export const getAnalysisData = inputs => async dispatch => {
   dispatch({
     type: GET_ANALYSIS_DATA,
   });
-  await delay(2000);
   dispatch({
     type: GET_ANALYSIS_DATA_SUCCESS,
-    payload: tableData,
+    payload: [
+      {
+        id: 159,
+        propertyLocation: 'Arroios, Lisboa, Lisboa, Portugal',
+        propertyAskingPrice: 300000,
+        propertyArea: 80,
+        propertyRooms: 2,
+        entryCapital: 73784.91,
+        exitPrice: 602992.5371472538930817108848714269697666168212890625,
+        profit: -144973.89705247833713210975474794395267963409423828125,
+      },
+    ],
   });
+  /* const propertyManagerApiClient = new ApiClient('PROPERTY_MANAGER');
+  await propertyManagerApiClient
+    .post(ANALYSIS, { ...inputs, analysisType: 'BUY_AND_SELL' })
+    .then(response => {
+      dispatch({
+        type: GET_ANALYSIS_DATA_SUCCESS,
+        payload: response.data,
+      });
+    })
+    .catch(error => {
+      // eslint-disable-next-line no-console
+      console.log(error);
+      dispatch({
+        type: GET_ANALYSIS_DATA_ERROR,
+      });
+    }); */
 };
 
-export const setLocation = location => dispatch => {
-  localStorage.setItem('location', JSON.stringify(location));
+export const setPropertyLocation = propertyLocation => dispatch => {
+  localStorage.setItem('propertyLocation', JSON.stringify(propertyLocation));
   dispatch({
-    type: SET_LOCATION,
-    payload: location,
+    type: SET_PROPERTY_LOCATION,
+    payload: propertyLocation,
   });
 };
-
-const delay = ms => new Promise(res => setTimeout(res, ms));

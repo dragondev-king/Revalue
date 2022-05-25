@@ -1,282 +1,75 @@
 {
-  "anaylysis": {
-    "id": "1",
-    "location": "3",
-    "grossArea": "4",
-    "usefulArea": "5",
-    "bedrooms": "6",
-    "askingPrice": "1",
-    "propsedEntryPrice": "7",
-    "estimatedExitPrice": "9",
-    "timeForSale": "11",
-    "requiredEntryCapital": "13",
-    "requiredCapitalOverInvestPeriod": "82",
-    "requiredInitialInvestment": "13",
-    "totalRequiredCapital": "83",
-    "moic": "84",
-    "profit": "14",
-    "irr": "15"
+  "ciPercentile": 95,
+  "area": 80,
+  "financingRate": 23,
+  "transactionPricePerSquareMeter": 5714,
+  "overrideTransactionPricePerSquareMeter": 5714,
+  "askingPricePerSquareMeter": 3750,
+  "exitPrice": 459399.91430125449934251946615404449403285980224609375,
+  "entryPrice": 301784.91,
+  "entryCapital": 73784.91,
+  "acquisitionPrice": 285000.0,
+  "rett": 11786.91,
+  "propertyTaxFee": 450.0,
+  "openingBalance": 232000.0,
+  "interest": 1373472.0,
+  "operatingCosts": 274712.51111,
+  "exitBrokerFee": 22969.9957150627249671259733077022247016429901123046875,
+  "profitBeforeTax": -123282.5925238082256246065071536577306687831878662109375,
+  "profitAfterTax": -187519.373892736991780915531080609071068465709686279296875,
+  "tax": 64236.781368928766156309023926951340399682521820068359375,
+  "property": {
+    "askingPrice": 300000,
+    "rooms": 2,
+    "bathrooms": "1",
+    "usefulArea": 80,
+    "grossArea": 90,
+    "energyEfficiencyRating": "B",
+    "status": "SALE",
+    "type": "APARTMENT",
+    "typology": "T1",
+    "condition": "USED",
+    "constructionYear": 1990,
+    "sourceName": "IMOVIRTUAL",
+    "sourceAgency": " Remax Prestige",
+    "sourceUid": "123",
+    "sourceUrl": "https://www.imovirtual.com/en/anuncio/apartamento-t2-para-venda-ID17QbP.html#8a21b263c5",
+    "country": "Portugal",
+    "district": "Lisboa",
+    "municipality": "Lisboa",
+    "parish": "Arroios"
   },
-  "columns": [
-    {
-      "label": "Acquisition",
-      "width": 140
-    },
-    {
-      "label": "Total",
-      "width": 140
-    },
-    {
-      "label": "Year 1",
-      "width": 140
-    },
-    {
-      "label": "Year 2",
-      "width": 140
-    },
-    {
-      "label": "Year 3",
-      "width": 140
-    }
-  ],
-  "rows": [
-    {
-      "label": "Asking",
-      "total": "total",
-      "year1": "year1",
-      "year2": "year2",
-      "year3": "year3"
-    },
-    {
-      "label": "Acquisition Price",
-      "total": "total",
-      "year1": "year1",
-      "year2": "year2",
-      "year3": "year3"
-    },
-    {
-      "label": "Acquisition Broker Fee",
-      "total": "total",
-      "year1": "year1",
-      "year2": "year2",
-      "year3": "year3"
-    },
-    {
-      "label": "RETT",
-      "total": "total",
-      "year1": "year1",
-      "year2": "year2",
-      "year3": "year3"
-    },
-    {
-      "label": "Acquisition Stamp Duty",
-      "total": "total",
-      "year1": "year1",
-      "year2": "year2",
-      "year3": "year3"
-    },
-    {
-      "label": "Notary",
-      "total": "total",
-      "year1": "year1",
-      "year2": "year2",
-      "year3": "year3"
-    },
-    {
-      "label": "Mortgage Stamp Duty",
-      "total": "total",
-      "year1": "year1",
-      "year2": "year2",
-      "year3": "year3"
-    },
-    {
-      "label": "Bank Costs",
-      "total": "total",
-      "year1": "year1",
-      "year2": "year2",
-      "year3": "year3"
-    },
-    {
-      "label": "Total Acquistion Price",
-      "total": "total",
-      "year1": "year1",
-      "year2": "year2",
-      "year3": "year3"
-    },
-    {
-      "label": "Debt",
-      "total": "",
-      "year1": "",
-      "year2": "",
-      "year3": "",
-      "bold": true
-    },
-    {
-      "label": "BoP Debt",
-      "total": "total",
-      "year1": "year1",
-      "year2": "year2",
-      "year3": "year3"
-    },
-    {
-      "label": "Acquisiton Debt",
-      "total": "total",
-      "year1": "year1",
-      "year2": "year2",
-      "year3": "year3"
-    },
-    {
-      "label": "Capex Debt",
-      "total": "total",
-      "year1": "year1",
-      "year2": "year2",
-      "year3": "year3"
-    },
-    {
-      "label": "Amortization",
-      "total": "total",
-      "year1": "year1",
-      "year2": "year2",
-      "year3": "year3"
-    },
-    {
-      "label": "Interests",
-      "total": "total",
-      "year1": "year1",
-      "year2": "year2",
-      "year3": "year3"
-    },
-    {
-      "label": "EoP Debt",
-      "total": "total",
-      "year1": "year1",
-      "year2": "year2",
-      "year3": "year3"
-    },
-    {
-      "label": "Operating",
-      "total": "",
-      "year1": "",
-      "year2": "",
-      "year3": "",
-      "bold": true
-    },
-    {
-      "label": "Capex Equity",
-      "total": "total",
-      "year1": "year1",
-      "year2": "year2",
-      "year3": "year3"
-    },
-    {
-      "label": "Property Tax",
-      "total": "total",
-      "year1": "year1",
-      "year2": "year2",
-      "year3": "year3"
-    },
-    {
-      "label": "Condominium Costs",
-      "total": "total",
-      "year1": "year1",
-      "year2": "year2",
-      "year3": "year3"
-    },
-    {
-      "label": "Multirisk Insurance",
-      "total": "total",
-      "year1": "year1",
-      "year2": "year2",
-      "year3": "year3"
-    },
-    {
-      "label": "Life Insurance",
-      "total": "total",
-      "year1": "year1",
-      "year2": "year2",
-      "year3": "year3"
-    },
-    {
-      "label": "Market Value",
-      "total": "total",
-      "year1": "year1",
-      "year2": "year2",
-      "year3": "year3"
-    },
-    {
-      "label": "Loan early Repayment Fee",
-      "total": "total",
-      "year1": "year1",
-      "year2": "year2",
-      "year3": "year3"
-    },
-    {
-      "label": "Exit Price",
-      "total": "total",
-      "year1": "year1",
-      "year2": "year2",
-      "year3": "year3"
-    },
-    {
-      "label": "Exit Broker Fee",
-      "total": "total",
-      "year1": "year1",
-      "year2": "year2",
-      "year3": "year3"
-    },
-    {
-      "label": "Profit Before Tax",
-      "total": "total",
-      "year1": "year1",
-      "year2": "year2",
-      "year3": "year3"
-    },
-    {
-      "label": "Capital Gains",
-      "total": "total",
-      "year1": "year1",
-      "year2": "year2",
-      "year3": "year3"
-    },
-    {
-      "label": "Profite After Tax",
-      "total": "total",
-      "year1": "year1",
-      "year2": "year2",
-      "year3": "year3"
-    }
-  ],
   "criteria": {
-    "financingRate": "57",
-    "capexFinanced": "85",
-    "interestRate": "35",
-    "amortization": "34",
-    "bankCommission": "30",
-    "earlyRepaymentFee": "40",
-    "grossArea": "4",
-    "usefulArea": "5",
-    "bidAsk": "56",
-    "entrBrokerFee": "24",
-    "transferTax": "96",
-    "acquisitionStampDuty": "27",
-    "mortgageStampDuty": "28",
-    "interestStampDuty": "67",
-    "landRegistryWithMortgage": "64",
-    "landRegistryWithoutMortgage": "63",
-    "IRS": "75",
-    "capitalGainsTaxBase": "76",
-    "Capex": "86",
-    "condominiumCosts": "39",
-    "propertyTaxRate": "71",
-    "type": "47",
-    "condition": "49",
-    "percentile": "80",
-    "cap": "78",
-    "floor": "79",
-    "hpi": "58",
-    "timeToSell": "72",
-    "exitValueOverride": "97",
-    "exitBrokerFee": "42"
+    "analysisType": "BUY_AND_SELL",
+    "bidAskRate": 0.05,
+    "financingRate": 0.8,
+    "housePriceIndexRate": 0.01,
+    "acquisitionType": "INVESTMENT",
+    "entryBrokerRate": 0,
+    "stampDutyRate": 0.008,
+    "landRegistryInscriptionWithoutMortgage": 700,
+    "landRegistryInscriptionWithMortgage": 350,
+    "bankCommission": 1000,
+    "stampDutyInterestRate": 0.004,
+    "stampDutyMortgageRate": 0.006,
+    "capexFinancingRate": 0.8,
+    "interestRate": 0.01,
+    "amortization": 30,
+    "condominiumCosts": 30,
+    "propertyTaxRate": 0.003,
+    "capex": 5000,
+    "multiRiskInsurance": 15,
+    "lifeInsurance": 15,
+    "exitBrokerRate": 0.05,
+    "capitalGainsTaxRate": 0.5,
+    "timeToSale": 6,
+    "earlyRepaymentRate": 0.005,
+    "taxResidentInPortugal": true,
+    "currentIrsRate": 0.3,
+    "grossAreaToUsefulAreaRate": 0.1,
+    "floorRate": 1,
+    "capRate": 1,
+    "ciPercentile": "95"
   },
   "estimatedProfitTable": {
     "columns": [
@@ -284,61 +77,61 @@
         "label": "exitPrice"
       },
       {
-        "label": 290614.5
+        "label": 270750.0
       },
       {
-        "label": 275319.0
+        "label": 256500.0
       },
       {
-        "label": 305910.0
+        "label": 285000.0
       },
       {
-        "label": 321205.5
+        "label": 299250.0
       },
       {
-        "label": 336501.0
+        "label": 313500.0
       }
     ],
     "rows": [
       {
-        "v0": 0.64581,
-        "v1": -582052.131771,
-        "v2": -551811.228771,
-        "v3": -612293.034771,
-        "v4": -642533.937771,
-        "v5": -672774.840771
+        "v0": 436429.91430125449934251946615404449403285980224609375,
+        "v1": -178163.284137736991780915531080609071068465709686279296875,
+        "v2": -150258.919382736991780915531080609071068465709686279296875,
+        "v3": -206067.648892736991780915531080609071068465709686279296875,
+        "v4": -233971.905391736991780915531080609071068465709686279296875,
+        "v5": -261876.141896736991780915531080609071068465709686279296875
       },
       {
-        "v0": 0.61182,
-        "v1": -582052.162362,
-        "v2": -551811.259362,
-        "v3": -612293.065362,
-        "v4": -642533.968362,
-        "v5": -672774.871362
+        "v0": 413459.92430125449934251946615404449403285980224609375,
+        "v1": -196711.551062736991780915531080609071068465709686279296875,
+        "v2": -168807.186307736991780915531080609071068465709686279296875,
+        "v3": -224615.915817736991780915531080609071068465709686279296875,
+        "v4": -252520.172316736991780915531080609071068465709686279296875,
+        "v5": -280424.408821736991780915531080609071068465709686279296875
       },
       {
-        "v0": 0.6798,
-        "v1": -582052.10118,
-        "v2": -551811.19818,
-        "v3": -612293.00418,
-        "v4": -642533.90718,
-        "v5": -672774.81018
+        "v0": 459399.91430125449934251946615404449403285980224609375,
+        "v1": -159615.009137736991780915531080609071068465709686279296875,
+        "v2": -131710.644382736991780915531080609071068465709686279296875,
+        "v3": -187519.373892736991780915531080609071068465709686279296875,
+        "v4": -215423.630391736991780915531080609071068465709686279296875,
+        "v5": -243327.866896736991780915531080609071068465709686279296875
       },
       {
-        "v0": 0.71379,
-        "v1": -582052.070589,
-        "v2": -551811.167589,
-        "v3": -612292.973589,
-        "v4": -642533.876589,
-        "v5": -672774.779589
+        "v0": 482369.91430125449934251946615404449403285980224609375,
+        "v1": -141066.734137736991780915531080609071068465709686279296875,
+        "v2": -113162.369382736991780915531080609071068465709686279296875,
+        "v3": -168971.098892736991780915531080609071068465709686279296875,
+        "v4": -196875.355391736991780915531080609071068465709686279296875,
+        "v5": -224779.591896736991780915531080609071068465709686279296875
       },
       {
-        "v0": 0.74778,
-        "v1": -582052.039998,
-        "v2": -551811.136998,
-        "v3": -612292.942998,
-        "v4": -642533.845998,
-        "v5": -672774.748998
+        "v0": 505339.90430125449934251946615404449403285980224609375,
+        "v1": -122518.467212736991780915531080609071068465709686279296875,
+        "v2": -94614.102457736991780915531080609071068465709686279296875,
+        "v3": -150422.831967736991780915531080609071068465709686279296875,
+        "v4": -178327.088466736991780915531080609071068465709686279296875,
+        "v5": -206231.324971736991780915531080609071068465709686279296875
       }
     ]
   },
@@ -372,31 +165,31 @@
       },
       {
         "v0": "asking",
-        "v1": 339900
+        "v1": 300000
       },
       {
         "v0": "acquisitionPrice",
-        "v1": 305910.0
+        "v1": 285000.0
       },
       {
-        "v0": "entryBrokerFee",
+        "v0": "entryBrokerRate",
         "v1": 0
       },
       {
         "v0": "rett",
-        "v1": 19555.7
+        "v1": 11786.91
       },
       {
-        "v0": "acquisitionStampDuty",
-        "v1": 305910.1
+        "v0": "acquisitionStampDutyFee",
+        "v1": 285000.008
       },
       {
         "v0": "notary",
         "v1": 350
       },
       {
-        "v0": "mortgageStampDuty",
-        "v1": 24472.8
+        "v0": "mortgageStampDutyFee",
+        "v1": 1368.0
       },
       {
         "v0": "bankCommission",
@@ -404,23 +197,23 @@
       },
       {
         "v0": "totalAcquisition",
-        "v1": 657198.6
+        "v1": 584504.918
       },
       {
         "v0": "debt"
       },
       {
-        "v0": "boPDebt",
-        "v1": 309910.8,
-        "v2": 309219.88,
-        "v3": 309219.88,
-        "v4": 308528.96,
-        "v5": 308528.96,
-        "v6": 307838.04
+        "v0": "bopDebt",
+        "v1": 289000.8,
+        "v2": 288356.3556,
+        "v3": 288356.3556,
+        "v4": 287711.9112,
+        "v5": 287711.9112,
+        "v6": 287067.4668
       },
       {
         "v0": "acquisitionDebt",
-        "v1": 305910.8
+        "v1": 285000.8
       },
       {
         "v0": "capexDebt",
@@ -428,30 +221,30 @@
       },
       {
         "v0": "amortization",
-        "v1": 690.92,
-        "v2": 690.92,
-        "v3": 690.92,
-        "v4": 690.92,
-        "v5": 690.92,
-        "v6": 307838.04
+        "v1": 644.4444,
+        "v2": 644.4444,
+        "v3": 644.4444,
+        "v4": 644.4444,
+        "v5": 644.4444,
+        "v6": 287067.4668
       },
       {
         "v0": "interests",
-        "v1": 2840.849,
-        "v2": 2834.5163,
-        "v3": 2834.5163,
-        "v4": 2828.1825,
-        "v5": 2828.1825,
-        "v6": 2821.8487
+        "v1": 241.797336,
+        "v2": 241.258188,
+        "v3": 241.258188,
+        "v4": 240.7189396,
+        "v5": 240.7189396,
+        "v6": 240.1797916
       },
       {
         "v0": "eopDebt",
-        "v1": 309219.88,
-        "v2": 309219.88,
-        "v3": 308528.96,
-        "v4": 308528.96,
-        "v5": 307838.04,
-        "v6": 307838.04
+        "v1": 288356.3556,
+        "v2": 288356.3556,
+        "v3": 287711.9112,
+        "v4": 287711.9112,
+        "v5": 287067.4668,
+        "v6": 287067.4668
       },
       {
         "v0": "operating"
@@ -461,9 +254,7 @@
         "v1": 0.2
       },
       {
-        "v0": "propertyTax",
-        "v2": 33990.0,
-        "v5": 33990.0
+        "v0": "propertyTax"
       },
       {
         "v0": "condominiumCosts",
@@ -494,46 +285,46 @@
       },
       {
         "v0": "marketValue",
-        "v1": 462182425600.0,
-        "v2": 462182425600.0,
-        "v3": 462182425600.0,
-        "v4": 462182425600.0,
-        "v5": 462182425600.0,
-        "v6": 462182425600.0
+        "v1": 457120,
+        "v2": 457120,
+        "v3": 457120,
+        "v4": 457120,
+        "v5": 457120,
+        "v6": 457120
       },
       {
         "v0": "exitPrice",
-        "v6": 0.67984
+        "v6": 459399.91430125449934251946615404449403285980224609375
       },
       {
         "v0": "loanEarlyRepaymentFee",
-        "v6": 24527.344
+        "v6": 1143.88889
       },
       {
-        "v0": "exitBrokerFee",
-        "v6": 0.067984
+        "v0": "exitBrokerRate",
+        "v6": 22969.9957150627249671259733077022247016429901123046875
       },
       {
         "v0": "profitBeforeTax",
-        "v1": 966761.369,
-        "v2": 37635.4363,
-        "v3": 3645.4363,
-        "v4": 3639.1025,
-        "v5": 37629.1025,
-        "v6": 335307.980524
+        "v1": 870512.159736,
+        "v2": 1005.702588,
+        "v3": 1005.702588,
+        "v4": 1005.1633396,
+        "v5": 1005.1633396,
+        "v6": 770941.4454979172243096454394617467187345027923583984375
       },
       {
         "v0": "capitalGainsTax",
-        "v6": 0
+        "v6": 64236.781368928766156309023926951340399682521820068359375
       },
       {
         "v0": "profitAfterTax",
-        "v1": 966761.369,
-        "v2": 37635.4363,
-        "v3": 3645.4363,
-        "v4": 3639.1025,
-        "v5": 37629.1025,
-        "v6": 335307.980524
+        "v1": 870512.159736,
+        "v2": 1005.702588,
+        "v3": 1005.702588,
+        "v4": 1005.1633396,
+        "v5": 1005.1633396,
+        "v6": 706704.664128988458153336415534795378334820270538330078125
       }
     ]
   }

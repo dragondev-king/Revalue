@@ -18,18 +18,10 @@ import IconButton from '@material-ui/core/IconButton';
 import { useStyles } from 'containers/Pages/Analysis/style';
 import messages from 'containers/Pages/Analysis/messages';
 import Skeleton from 'react-loading-skeleton';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
 
-const Index = ({ props }) => {
+const Criteria = ({ props }) => {
   const classes = useStyles();
 
-  function handleChange(event) {
-    const { name, value } = event.target;
-    props.setInputValue(name, value);
-    // props.setInputError(name, '');
-    // props.setAnalyzeButtonDisabled(false);
-  }
   function financingAssumptionsAccordion() {
     return (
       <Grid item container spacing={4} className="mb-10 p-10">
@@ -57,7 +49,7 @@ const Index = ({ props }) => {
               </InputLabel>
               <Input
                 type="number"
-                defaultValue={props.criteria.financingRate}
+                defaultValue={props.analysis.criteria.financingRate}
                 name="financingRate"
                 readOnly
                 startAdornment={
@@ -82,7 +74,7 @@ const Index = ({ props }) => {
               </InputLabel>
               <Input
                 type="number"
-                defaultValue={props.criteria.capexFinanced}
+                defaultValue={props.analysis.criteria.capexFinanced}
                 name="capexFinanced"
                 readOnly
                 startAdornment={
@@ -107,7 +99,7 @@ const Index = ({ props }) => {
               </InputLabel>
               <Input
                 type="number"
-                defaultValue={props.criteria.interestRate}
+                defaultValue={props.analysis.criteria.interestRate}
                 name="interestRate"
                 readOnly
                 startAdornment={
@@ -132,7 +124,7 @@ const Index = ({ props }) => {
               </InputLabel>
               <Input
                 type="number"
-                defaultValue={props.criteria.amortization}
+                defaultValue={props.analysis.criteria.amortization}
                 name="amortization"
                 readOnly
                 startAdornment={
@@ -157,7 +149,7 @@ const Index = ({ props }) => {
               </InputLabel>
               <Input
                 type="number"
-                defaultValue={props.criteria.bankCommission}
+                defaultValue={props.analysis.criteria.bankCommission}
                 name="bankCommission"
                 readOnly
                 startAdornment={
@@ -169,10 +161,10 @@ const Index = ({ props }) => {
           <Grid item xs={3}>
             <FormControl variant="standard" className="w-100">
               <InputLabel>
-                <FormattedMessage {...messages.earlyRepaymentFee} />
+                <FormattedMessage {...messages.earlyRepaymentRate} />
                 <Tooltip
                   title={props.intl.formatMessage({
-                    ...messages.earlyRepaymentFeeInfo,
+                    ...messages.earlyRepaymentRateInfo,
                   })}
                 >
                   <IconButton className={classes.iconMr}>
@@ -182,8 +174,8 @@ const Index = ({ props }) => {
               </InputLabel>
               <Input
                 type="number"
-                defaultValue={props.criteria.earlyRepaymentFee}
-                name="earlyRepaymentFee"
+                defaultValue={props.analysis.criteria.earlyRepaymentRate}
+                name="earlyRepaymentRate"
                 readOnly
                 startAdornment={
                   <InputAdornment position="start">&#8364;</InputAdornment>
@@ -222,7 +214,7 @@ const Index = ({ props }) => {
               </InputLabel>
               <Input
                 type="number"
-                defaultValue={props.criteria.grossArea}
+                defaultValue={props.analysis.criteria.grossArea}
                 name="grossArea"
                 readOnly
                 startAdornment={
@@ -247,7 +239,7 @@ const Index = ({ props }) => {
               </InputLabel>
               <Input
                 type="number"
-                defaultValue={props.criteria.Gpa}
+                defaultValue={props.analysis.criteria.Gpa}
                 name="usefulArea"
                 readOnly
                 startAdornment={
@@ -287,7 +279,7 @@ const Index = ({ props }) => {
               </InputLabel>
               <Input
                 type="number"
-                defaultValue={props.criteria.Capex}
+                defaultValue={props.analysis.criteria.Capex}
                 name="Capex"
                 readOnly
                 startAdornment={
@@ -312,7 +304,7 @@ const Index = ({ props }) => {
               </InputLabel>
               <Input
                 type="number"
-                defaultValue={props.criteria.condominiumCosts}
+                defaultValue={props.analysis.criteria.condominiumCosts}
                 name="usefulArea"
                 readOnly
                 startAdornment={
@@ -337,7 +329,7 @@ const Index = ({ props }) => {
               </InputLabel>
               <Input
                 type="number"
-                defaultValue={props.criteria.propertyTaxRate}
+                defaultValue={props.analysis.criteria.propertyTaxRate}
                 name="usefulArea"
                 readOnly
                 startAdornment={
@@ -364,10 +356,10 @@ const Index = ({ props }) => {
           <Grid item xs={3}>
             <FormControl variant="standard" className="w-100">
               <InputLabel>
-                <FormattedMessage {...messages.bidAsk} />
+                <FormattedMessage {...messages.bidAskRate} />
                 <Tooltip
                   title={props.intl.formatMessage({
-                    ...messages.bidAskInfo,
+                    ...messages.bidAskRateInfo,
                   })}
                 >
                   <IconButton className={classes.iconMr}>
@@ -377,8 +369,8 @@ const Index = ({ props }) => {
               </InputLabel>
               <Input
                 type="number"
-                defaultValue={props.criteria.bidAsk}
-                name="bidAsk"
+                defaultValue={props.analysis.criteria.bidAskRate}
+                name="bidAskRate"
                 readOnly
                 startAdornment={
                   <InputAdornment position="start">%</InputAdornment>
@@ -389,10 +381,10 @@ const Index = ({ props }) => {
           <Grid item xs={3}>
             <FormControl variant="standard" className="w-100">
               <InputLabel>
-                <FormattedMessage {...messages.entryBrokerFee} />
+                <FormattedMessage {...messages.entryBrokerRate} />
                 <Tooltip
                   title={props.intl.formatMessage({
-                    ...messages.entryBrokerFeeInfo,
+                    ...messages.entryBrokerRateInfo,
                   })}
                 >
                   <IconButton className={classes.iconMr}>
@@ -402,8 +394,8 @@ const Index = ({ props }) => {
               </InputLabel>
               <Input
                 type="number"
-                defaultValue={props.criteria.entrBrokerFee}
-                name="entryBrokerFee"
+                defaultValue={props.analysis.criteria.entrBrokerFee}
+                name="entryBrokerRate"
                 readOnly
                 startAdornment={
                   <InputAdornment position="start">&#8364;</InputAdornment>
@@ -442,7 +434,7 @@ const Index = ({ props }) => {
               </InputLabel>
               <Input
                 type="number"
-                defaultValue={props.criteria.transferTax}
+                defaultValue={props.analysis.criteria.transferTax}
                 name="transferTax"
                 readOnly
                 startAdornment={
@@ -467,7 +459,7 @@ const Index = ({ props }) => {
               </InputLabel>
               <Input
                 type="number"
-                defaultValue={props.criteria.acquisitionStampDuty}
+                defaultValue={props.analysis.criteria.acquisitionStampDuty}
                 name="usefulArea"
                 readOnly
                 startAdornment={
@@ -492,7 +484,7 @@ const Index = ({ props }) => {
               </InputLabel>
               <Input
                 type="number"
-                defaultValue={props.criteria.mortgageStampDuty}
+                defaultValue={props.analysis.criteria.mortgageStampDuty}
                 name="mortgageStampDuty"
                 readOnly
                 startAdornment={
@@ -517,7 +509,7 @@ const Index = ({ props }) => {
               </InputLabel>
               <Input
                 type="number"
-                defaultValue={props.criteria.interestStampDuty}
+                defaultValue={props.analysis.criteria.interestStampDuty}
                 name="interestStampDuty"
                 readOnly
                 startAdornment={
@@ -529,10 +521,12 @@ const Index = ({ props }) => {
           <Grid item xs={4}>
             <FormControl variant="standard" className="w-100">
               <InputLabel>
-                <FormattedMessage {...messages.landRegistryWithMortgage} />
+                <FormattedMessage
+                  {...messages.landRegistryInscriptionWithMortgage}
+                />
                 <Tooltip
                   title={props.intl.formatMessage({
-                    ...messages.landRegistryWithMortgageInfo,
+                    ...messages.landRegistryInscriptionWithMortgageInfo,
                   })}
                 >
                   <IconButton className={classes.iconMr}>
@@ -542,8 +536,10 @@ const Index = ({ props }) => {
               </InputLabel>
               <Input
                 type="number"
-                defaultValue={props.criteria.landRegistryWithMortgage}
-                name="landRegistryWithMortgage"
+                defaultValue={
+                  props.analysis.criteria.landRegistryInscriptionWithMortgage
+                }
+                name="landRegistryInscriptionWithMortgage"
                 readOnly
                 startAdornment={
                   <InputAdornment position="start">&#8364;</InputAdornment>
@@ -554,10 +550,12 @@ const Index = ({ props }) => {
           <Grid item xs={4}>
             <FormControl variant="standard" className="w-100">
               <InputLabel>
-                <FormattedMessage {...messages.landRegistryWithoutMortgage} />
+                <FormattedMessage
+                  {...messages.landRegistryInscriptionWithoutMortgage}
+                />
                 <Tooltip
                   title={props.intl.formatMessage({
-                    ...messages.landRegistryWithoutMortgageInfo,
+                    ...messages.landRegistryInscriptionWithoutMortgageInfo,
                   })}
                 >
                   <IconButton className={classes.iconMr}>
@@ -567,8 +565,10 @@ const Index = ({ props }) => {
               </InputLabel>
               <Input
                 type="number"
-                defaultValue={props.criteria.landRegistryWithoutMortgage}
-                name="landRegistryWithoutMortgage"
+                defaultValue={
+                  props.analysis.criteria.landRegistryInscriptionWithoutMortgage
+                }
+                name="landRegistryInscriptionWithoutMortgage"
                 readOnly
                 startAdornment={
                   <InputAdornment position="start">&#8364;</InputAdornment>
@@ -592,7 +592,7 @@ const Index = ({ props }) => {
               </InputLabel>
               <Input
                 type="number"
-                defaultValue={props.criteria.IRS}
+                defaultValue={props.analysis.criteria.IRS}
                 name="IRS"
                 readOnly
                 startAdornment={
@@ -604,10 +604,10 @@ const Index = ({ props }) => {
           <Grid item xs={3}>
             <FormControl variant="standard" className="w-100">
               <InputLabel>
-                <FormattedMessage {...messages.capitalGainsTaxBase} />
+                <FormattedMessage {...messages.capitalGainsTaxRate} />
                 <Tooltip
                   title={props.intl.formatMessage({
-                    ...messages.capitalGainsTaxBaseInfo,
+                    ...messages.capitalGainsTaxRateInfo,
                   })}
                 >
                   <IconButton className={classes.iconMr}>
@@ -617,8 +617,8 @@ const Index = ({ props }) => {
               </InputLabel>
               <Input
                 type="number"
-                defaultValue={props.criteria.capitalGainsTaxBase}
-                name="capitalGainsTaxBase"
+                defaultValue={props.analysis.criteria.capitalGainsTaxRate}
+                name="capitalGainsTaxRate"
                 readOnly
                 startAdornment={
                   <InputAdornment position="start">%</InputAdornment>
@@ -657,7 +657,7 @@ const Index = ({ props }) => {
               </InputLabel>
               <Input
                 type="number"
-                defaultValue={props.criteria.type}
+                defaultValue={props.analysis.criteria.type}
                 name="type"
                 readOnly
                 startAdornment={
@@ -682,7 +682,7 @@ const Index = ({ props }) => {
               </InputLabel>
               <Input
                 type="number"
-                defaultValue={props.criteria.condition}
+                defaultValue={props.analysis.criteria.condition}
                 name="condition"
                 readOnly
                 startAdornment={
@@ -707,7 +707,7 @@ const Index = ({ props }) => {
               </InputLabel>
               <Input
                 type="number"
-                defaultValue={props.criteria.percentile}
+                defaultValue={props.analysis.criteria.percentile}
                 name="percentile"
                 readOnly
                 startAdornment={
@@ -719,10 +719,10 @@ const Index = ({ props }) => {
           <Grid item xs={3}>
             <FormControl variant="standard" className="w-100">
               <InputLabel>
-                <FormattedMessage {...messages.cap} />
+                <FormattedMessage {...messages.capRate} />
                 <Tooltip
                   title={props.intl.formatMessage({
-                    ...messages.capInfo,
+                    ...messages.capRateInfo,
                   })}
                 >
                   <IconButton className={classes.iconMr}>
@@ -732,7 +732,7 @@ const Index = ({ props }) => {
               </InputLabel>
               <Input
                 type="number"
-                defaultValue={props.criteria.cap}
+                defaultValue={props.analysis.criteria.capRate}
                 name="cap"
                 readOnly
                 startAdornment={
@@ -744,10 +744,10 @@ const Index = ({ props }) => {
           <Grid item xs={3}>
             <FormControl variant="standard" className="w-100">
               <InputLabel>
-                <FormattedMessage {...messages.floor} />
+                <FormattedMessage {...messages.floorRate} />
                 <Tooltip
                   title={props.intl.formatMessage({
-                    ...messages.floorInfo,
+                    ...messages.floorRateInfo,
                   })}
                 >
                   <IconButton className={classes.iconMr}>
@@ -757,8 +757,8 @@ const Index = ({ props }) => {
               </InputLabel>
               <Input
                 type="number"
-                defaultValue={props.criteria.floor}
-                name="floor"
+                defaultValue={props.analysis.criteria.floorRate}
+                name="floorRate"
                 readOnly
                 startAdornment={
                   <InputAdornment position="start">%</InputAdornment>
@@ -782,7 +782,7 @@ const Index = ({ props }) => {
               </InputLabel>
               <Input
                 type="number"
-                defaultValue={props.criteria.hpi}
+                defaultValue={props.analysis.criteria.hpi}
                 name="hpi"
                 readOnly
                 startAdornment={
@@ -807,7 +807,7 @@ const Index = ({ props }) => {
               </InputLabel>
               <Input
                 type="number"
-                defaultValue={props.criteria.timeToSell}
+                defaultValue={props.analysis.criteria.timeToSell}
                 name="timeToSale"
                 readOnly
                 startAdornment={
@@ -832,7 +832,7 @@ const Index = ({ props }) => {
               </InputLabel>
               <Input
                 type="number"
-                defaultValue={props.criteria.exitValueOverride}
+                defaultValue={props.analysis.criteria.exitValueOverride}
                 name="exitValueOverride"
                 readOnly
                 startAdornment={
@@ -844,10 +844,10 @@ const Index = ({ props }) => {
           <Grid item xs={3}>
             <FormControl variant="standard" className="w-100">
               <InputLabel>
-                <FormattedMessage {...messages.exitBrokerFee} />
+                <FormattedMessage {...messages.exitBrokerRate} />
                 <Tooltip
                   title={props.intl.formatMessage({
-                    ...messages.exitBrokerFeeInfo,
+                    ...messages.exitBrokerRateInfo,
                   })}
                 >
                   <IconButton className={classes.iconMr}>
@@ -857,8 +857,8 @@ const Index = ({ props }) => {
               </InputLabel>
               <Input
                 type="number"
-                defaultValue={props.criteria.exitBrokerFee}
-                name="exitBrokerFee"
+                defaultValue={props.analysis.criteria.exitBrokerRate}
+                name="exitBrokerRate"
                 readOnly
                 startAdornment={
                   <InputAdornment position="start">&#8364;</InputAdornment>
@@ -882,7 +882,7 @@ const Index = ({ props }) => {
         </Grid>
         <Grid item container spacing={4}>
           <Grid item xs={3}>
-            <FormControl variant="standard" className="w-100">
+            {/*  <FormControl variant="standard" className="w-100">
               <InputLabel>
                 {props.intl.formatMessage({
                   ...messages.location,
@@ -891,7 +891,7 @@ const Index = ({ props }) => {
               <Select
                 value="test"
                 name="type"
-                renderValue={() => props.inputs.location}
+                renderValue={() => props.analyis.property.location}
                 onChange={handleChange}
                 readOnly
               >
@@ -901,7 +901,7 @@ const Index = ({ props }) => {
                   </MenuItem>
                 ))}
               </Select>
-            </FormControl>
+            </FormControl> */}
           </Grid>
         </Grid>
       </Grid>
@@ -954,4 +954,4 @@ const Index = ({ props }) => {
   );
 };
 
-export default Index;
+export default Criteria;

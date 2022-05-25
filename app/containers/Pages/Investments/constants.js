@@ -1,18 +1,21 @@
-export const GET_LOCATIONS = 'app/Investments/GET_LOCATIONS';
-export const GET_LOCATIONS_SUCCESS = 'app/Investments/GET_LOCATIONS_SUCCESS';
-export const SET_LOCATION = 'app/Investments/SET_LOCATION';
+export const GET_PROPERTY_LOCATIONS = 'app/Investments/GET_PROPERTY_LOCATIONS';
+export const GET_PROPERTY_LOCATIONS_SUCCESS =
+  'app/Investments/GET_PROPERTY_LOCATIONS_SUCCESS';
+export const SET_PROPERTY_LOCATION = 'app/Investments/SET_PROPERTY_LOCATION';
 
-export const GET_TYPES = 'app/Investments/GET_TYPES';
-export const GET_TYPES_SUCCESS = 'app/Investments/GET_TYPES_SUCCESS';
+export const GET_PROPERTY_TYPES = 'app/Investments/GET_PROPERTY_TYPES';
+export const GET_PROPERTY_TYPES_SUCCESS =
+  'app/Investments/GET_PROPERTY_TYPES_SUCCESS';
 
-export const GET_TYPOLOGIES = 'app/Investments/GET_TYPOLOGIES';
-export const GET_TYPOLOGIES_SUCCESS = 'app/Investments/GET_TYPOLOGIES_SUCCESS';
+export const GET_PROPERTY_TYPOLOGIES =
+  'app/Investments/GET_PROPERTY_TYPOLOGIES';
+export const GET_PROPERTY_TYPOLOGIES_SUCCESS =
+  'app/Investments/GET_PROPERTY_TYPOLOGIES_SUCCESS';
 
-export const GET_CONDITIONS = 'app/Investments/GET_CONDITIONS';
-export const GET_CONDITIONS_SUCCESS = 'app/Investments/GET_CONDITIONS_SUCCESS';
-
-export const GET_STATUS = 'app/Investments/GET_STATUS';
-export const GET_STATUS_SUCCESS = 'app/Investments/GET_STATUS_SUCCESS';
+export const GET_PROPERTY_CONDITIONS =
+  'app/Investments/GET_PROPERTY_CONDITIONS';
+export const GET_PROPERTY_CONDITIONS_SUCCESS =
+  'app/Investments/GET_PROPERTY_CONDITIONS_SUCCESS';
 
 export const GET_ACQUISITION_TYPES = 'app/Investments/GET_ACQUISITION_TYPES';
 export const GET_ACQUISITION_TYPES_SUCCESS =
@@ -31,3 +34,5 @@ export const SET_ANALYZE_BUTTON_DISABLED =
 export const GET_ANALYSIS_DATA = 'app/Investments/GET_ANALYSIS_DATA';
 export const GET_ANALYSIS_DATA_SUCCESS =
   'app/Investments/GET_ANALYSIS_DATA_SUCCESS';
+export const GET_ANALYSIS_DATA_ERROR =
+  'app/Investments/GET_ANALYSIS_DATA_ERROR';

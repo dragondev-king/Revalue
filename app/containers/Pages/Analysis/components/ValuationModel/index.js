@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import messages from '../../messages';
 
 const ValuationModel = ({ props }) => {
+  console.log(props);
   return (
     <Grid item container spacing={4} className="mt-10 p-10">
       {!props.isGettingAnalysisById ? (
@@ -20,7 +21,7 @@ const ValuationModel = ({ props }) => {
           <Grid item xs={3} className="mb-5 mt-5">
             <Typography variant="p">
               {props.intl.formatMessage({
-                ...messages.floor,
+                ...messages.floorRate,
               })}
             </Typography>
           </Grid>

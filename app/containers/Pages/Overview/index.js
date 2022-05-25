@@ -12,7 +12,7 @@ import { Tab, Tabs, Typography } from '@material-ui/core';
 import { Skeleton } from '@material-ui/lab';
 import Paper from '@material-ui/core/Paper';
 import PaperChartLineSimple from 'components/PaperChartLineSimple';
-import { makeSelectLocation } from 'containers/Pages/Investments/selectors';
+import { makeSelectPropertyLocation } from 'containers/Pages/Investments/selectors';
 import PaperChartLine from 'components/PaperChartLine';
 import PaperChartLineComplex from 'components/PaperChartLineComplex';
 import PaperChartBar from 'components/PaperChartBar';
@@ -373,7 +373,7 @@ export function Overview(props) {
 }
 
 const mapStateToProps = createStructuredSelector({
-  location: makeSelectLocation(),
+  location: makeSelectPropertyLocation(),
   charts: makeSelectCharts(),
   isGettingCharts: makeSelectIsGettingCharts(),
   customCharts: makeSelectCustomCharts(),

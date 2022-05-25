@@ -14,37 +14,28 @@ import IconButton from '@material-ui/core/IconButton';
 import InfoIcon from '@material-ui/icons/Info';
 import { useInjectReducer } from 'utils/injectReducer';
 import { FormControl } from '@material-ui/core';
-
 import Skeleton from 'react-loading-skeleton';
-import Table from 'containers/Pages/Analysis/components/Table';
+import BreakdownTable from 'containers/Pages/Analysis/components/BreakdownTable';
 import Criteria from 'containers/Pages/Analysis/components/Criteria';
+import EstimatedProfitTable from 'containers/Pages/Analysis/components/EstimatedProfitTable';
+import ValuationModal from 'containers/Pages/Analysis/components/ValuationModel';
 import messages from './messages';
 import {
   makeSelectAnalysis,
-  makeSelectSkelton,
-  makeSelectColumns,
-  makeSelectRows,
-  makeSelectCriteria,
-  makeSelectInputs,
-  makeSelectEstimatedTableColumns,
-  makeSelectEstimatedTableRows,
+  makeSelectIsGettingAnalysisById,
 } from './selectors';
 import reducer from './reducer';
 import {
   getAnalysisDataById,
-  setLocation,
-  getLocations,
-  getTypes,
-  getTypologies,
-  getConditions,
+  getPropertyLocations,
+  getPropertyTypes,
+  getPropertyTypologies,
+  getPropertyConditions,
   getAcquisitionTypes,
   getCIPs,
-  getStatus,
 } from './actions';
 import 'react-loading-skeleton/dist/skeleton.css';
 import { useStyles } from './style';
-import DisplayEstimatedProfit from './components/EstimatedProfit';
-import ValuationModal from './components/ValuationModel';
 
 export function Analysis(props) {
   const classes = useStyles();
@@ -57,16 +48,16 @@ export function Analysis(props) {
   }, []);
 
   useEffect(() => {
-    props.getLocations();
-    props.getTypes();
-    props.getTypologies();
-    props.getStatus();
-    props.getConditions();
+    props.getPropertyLocations();
+    props.getPropertyTypes();
+    props.getPropertyTypologies();
+    props.getPropertyConditions();
     props.getAcquisitionTypes();
     props.getCIPs();
   }, []);
 
   function displayProperty() {
+    console.log(props);
     return (
       <Grid item container spacing={4} className="mb-10 p-10">
         <Grid item xs={12}>
@@ -82,7 +73,7 @@ export function Analysis(props) {
               <InputLabel
                 classes={{
                   root: classes.label,
-                  shrink: classes.labelShrinked,
+                  shrink: classes.labelShrunk,
                 }}
               >
                 <FormattedMessage {...messages.location} />
@@ -109,7 +100,7 @@ export function Analysis(props) {
               <InputLabel
                 classes={{
                   root: classes.label,
-                  shrink: classes.labelShrinked,
+                  shrink: classes.labelShrunk,
                 }}
               >
                 <FormattedMessage {...messages.grossArea} />
@@ -125,7 +116,7 @@ export function Analysis(props) {
               </InputLabel>
               <Input
                 type="number"
-                defaultValue={props.analysis.grossArea}
+                defaultValue={props.analysis.property.grossArea}
                 name="location"
                 readOnly
                 startAdornment={
@@ -139,7 +130,7 @@ export function Analysis(props) {
               <InputLabel
                 classes={{
                   root: classes.label,
-                  shrink: classes.labelShrinked,
+                  shrink: classes.labelShrunk,
                 }}
               >
                 <FormattedMessage {...messages.usefulArea} />
@@ -169,7 +160,7 @@ export function Analysis(props) {
               <InputLabel
                 classes={{
                   root: classes.label,
-                  shrink: classes.labelShrinked,
+                  shrink: classes.labelShrunk,
                 }}
               >
                 <FormattedMessage {...messages.bedrooms} />
@@ -214,7 +205,7 @@ export function Analysis(props) {
               <InputLabel
                 classes={{
                   root: classes.label,
-                  shrink: classes.labelShrinked,
+                  shrink: classes.labelShrunk,
                 }}
               >
                 <FormattedMessage {...messages.askingPrice} />
@@ -244,7 +235,7 @@ export function Analysis(props) {
               <InputLabel
                 classes={{
                   root: classes.label,
-                  shrink: classes.labelShrinked,
+                  shrink: classes.labelShrunk,
                 }}
               >
                 <FormattedMessage {...messages.proposedEntryPrice} />
@@ -274,7 +265,7 @@ export function Analysis(props) {
               <InputLabel
                 classes={{
                   root: classes.label,
-                  shrink: classes.labelShrinked,
+                  shrink: classes.labelShrunk,
                 }}
               >
                 <FormattedMessage {...messages.estimatedExitPrice} />
@@ -304,7 +295,7 @@ export function Analysis(props) {
               <InputLabel
                 classes={{
                   root: classes.label,
-                  shrink: classes.labelShrinked,
+                  shrink: classes.labelShrunk,
                 }}
               >
                 <FormattedMessage {...messages.timeForSale} />
@@ -349,7 +340,7 @@ export function Analysis(props) {
               <InputLabel
                 classes={{
                   root: classes.label,
-                  shrink: classes.labelShrinked,
+                  shrink: classes.labelShrunk,
                 }}
               >
                 <FormattedMessage {...messages.requiredEntryCapital} />
@@ -379,7 +370,7 @@ export function Analysis(props) {
               <InputLabel
                 classes={{
                   root: classes.label,
-                  shrink: classes.labelShrinked,
+                  shrink: classes.labelShrunk,
                 }}
               >
                 <FormattedMessage {...messages.requiredCapitalInvestment} />
@@ -409,7 +400,7 @@ export function Analysis(props) {
               <InputLabel
                 classes={{
                   root: classes.label,
-                  shrink: classes.labelShrinked,
+                  shrink: classes.labelShrunk,
                 }}
               >
                 <FormattedMessage {...messages.totalRequired} />
@@ -454,7 +445,7 @@ export function Analysis(props) {
               <InputLabel
                 classes={{
                   root: classes.label,
-                  shrink: classes.labelShrinked,
+                  shrink: classes.labelShrunk,
                 }}
               >
                 <FormattedMessage {...messages.moic} />
@@ -481,7 +472,7 @@ export function Analysis(props) {
               <InputLabel
                 classes={{
                   root: classes.label,
-                  shrink: classes.labelShrinked,
+                  shrink: classes.labelShrunk,
                 }}
               >
                 <FormattedMessage {...messages.requiredInitialInvestment} />
@@ -508,7 +499,7 @@ export function Analysis(props) {
               <InputLabel
                 classes={{
                   root: classes.label,
-                  shrink: classes.labelShrinked,
+                  shrink: classes.labelShrunk,
                 }}
               >
                 <FormattedMessage {...messages.profit} />
@@ -538,7 +529,7 @@ export function Analysis(props) {
               <InputLabel
                 classes={{
                   root: classes.label,
-                  shrink: classes.labelShrinked,
+                  shrink: classes.labelShrunk,
                 }}
               >
                 <FormattedMessage {...messages.irr} />
@@ -567,7 +558,6 @@ export function Analysis(props) {
       </Grid>
     );
   }
-
   return (
     <div>
       <Helmet>
@@ -584,8 +574,8 @@ export function Analysis(props) {
       ) : (
         <Skeleton count={6} height={100} />
       )}
-      <DisplayEstimatedProfit props={props} />
-      <Table props={props} />
+      <EstimatedProfitTable props={props} />
+      <BreakdownTable props={props} />
       <ValuationModal props={props} />
       <Criteria props={props} />
     </div>
@@ -594,24 +584,16 @@ export function Analysis(props) {
 
 const mapStateToProps = createStructuredSelector({
   analysis: makeSelectAnalysis(),
-  isGettingAnalysisById: makeSelectSkelton(),
-  columns: makeSelectColumns(),
-  rows: makeSelectRows(),
-  criteria: makeSelectCriteria(),
-  inputs: makeSelectInputs(),
-  estimatedTableColumns: makeSelectEstimatedTableColumns(),
-  estimatedTableRows: makeSelectEstimatedTableRows(),
+  isGettingAnalysisById: makeSelectIsGettingAnalysisById(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
     getAnalysisDataById: id => dispatch(getAnalysisDataById(id)),
-    setLocation: location => dispatch(setLocation(location)),
-    getLocations: () => dispatch(getLocations()),
-    getTypes: () => dispatch(getTypes()),
-    getTypologies: () => dispatch(getTypologies()),
-    getConditions: () => dispatch(getConditions()),
-    getStatus: () => dispatch(getStatus()),
+    getPropertyLocations: () => dispatch(getPropertyLocations()),
+    getPropertyTypes: () => dispatch(getPropertyTypes()),
+    getPropertyTypologies: () => dispatch(getPropertyTypologies()),
+    getPropertyConditions: () => dispatch(getPropertyConditions()),
     getAcquisitionTypes: () => dispatch(getAcquisitionTypes()),
     getCIPs: () => dispatch(getCIPs()),
     dispatch,

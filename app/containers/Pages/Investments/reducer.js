@@ -1,14 +1,14 @@
 import produce from 'immer';
 import {
-  GET_LOCATIONS,
-  SET_LOCATION,
-  GET_LOCATIONS_SUCCESS,
-  GET_TYPES,
-  GET_TYPES_SUCCESS,
-  GET_TYPOLOGIES,
-  GET_TYPOLOGIES_SUCCESS,
-  GET_CONDITIONS,
-  GET_CONDITIONS_SUCCESS,
+  GET_PROPERTY_LOCATIONS,
+  SET_PROPERTY_LOCATION,
+  GET_PROPERTY_LOCATIONS_SUCCESS,
+  GET_PROPERTY_TYPES,
+  GET_PROPERTY_TYPES_SUCCESS,
+  GET_PROPERTY_TYPOLOGIES,
+  GET_PROPERTY_TYPOLOGIES_SUCCESS,
+  GET_PROPERTY_CONDITIONS,
+  GET_PROPERTY_CONDITIONS_SUCCESS,
   GET_ACQUISITION_TYPES,
   GET_ACQUISITION_TYPES_SUCCESS,
   GET_CI_PERCENTILES,
@@ -16,10 +16,9 @@ import {
   GET_ANALYSIS_DATA,
   GET_ANALYSIS_DATA_SUCCESS,
   SET_ANALYZE_BUTTON_DISABLED,
-  GET_STATUS_SUCCESS,
-  GET_STATUS,
   SET_INPUT_ERROR,
   SET_INPUT_VALUE,
+  GET_ANALYSIS_DATA_ERROR,
 } from './constants';
 
 export function setValueOrEmptyArray(value) {
@@ -39,22 +38,22 @@ export function extractInputValueFromLocalStorage(value, defaultValue) {
 export const initialState = {
   analyzeButtonDisabled: false,
   // Property Information
-  locations: setValueOrEmptyArray(
-    JSON.parse(localStorage.getItem('locations')),
+  propertyLocations: setValueOrEmptyArray(
+    JSON.parse(localStorage.getItem('propertyLocations')),
   ),
-  isGettingLocations: false,
-  types: setValueOrEmptyArray(JSON.parse(localStorage.getItem('types'))),
-  isGettingTypes: false,
-  typologies: setValueOrEmptyArray(
-    JSON.parse(localStorage.getItem('typologies')),
+  isGettingPropertyLocations: false,
+  propertyTypes: setValueOrEmptyArray(
+    JSON.parse(localStorage.getItem('propertyTypes')),
   ),
-  isGettingTypologies: false,
-  conditions: setValueOrEmptyArray(
-    JSON.parse(localStorage.getItem('conditions')),
+  isGettingPropertyTypes: false,
+  propertyTypologies: setValueOrEmptyArray(
+    JSON.parse(localStorage.getItem('propertyTypologies')),
   ),
-  isGettingConditions: false,
-  status: setValueOrEmptyArray(JSON.parse(localStorage.getItem('status'))),
-  isGettingStatus: false,
+  isGettingPropertyTypologies: false,
+  propertyConditions: setValueOrEmptyArray(
+    JSON.parse(localStorage.getItem('propertyConditions')),
+  ),
+  isGettingPropertyConditions: false,
   // Other Investment Information
   // Acquisition Assumptions
   acquisitionTypes: setValueOrEmptyArray(
@@ -75,36 +74,44 @@ export const initialState = {
     maxUsefulArea: '',
     minCapital: '',
     maxCapital: '',
-    bidAsk: '',
+    bidAskRate: '',
     financingRate: '',
-    entryFee: '',
-    stampDuty: '',
-    landRegistryWithMortgage: '',
-    landRegistryWithoutMortgage: '',
+    entryBrokerRate: '',
+    stampDutyRate: '',
+    landRegistryInscriptionWithMortgage: '',
+    landRegistryInscriptionWithoutMortgage: '',
     interestRate: '',
     bankCommission: '',
     amortization: '',
-    stampDutyMortgage: '',
-    stampDutyInterests: '',
+    stampDutyMortgageRate: '',
+    stampDutyInterestRate: '',
     condominiumCosts: '',
     propertyTaxRate: '',
     timeToSale: '',
     irsRate: '',
-    exitBrokerFee: '',
-    loanEarlyRepaymentFee: '',
-    capitalGainsTaxBase: '',
-    grossAreaToUsefulArea: '',
-    floor: '',
-    cap: '',
-    mop: '',
+    exitBrokerRate: '',
+    earlyRepaymentRate: '',
+    capitalGainsTaxRate: '',
+    grossAreaToUsefulAreaRate: '',
+    floorRate: '',
+    capRate: '',
+    //  minObservationsForPercentile: '',
   },
   inputs: {
     // Property Information
-    location: extractInputValueFromLocalStorage('location', 'Lisboa, Portugal'),
-    type: extractInputValueFromLocalStorage('type', 'All'),
-    typology: extractInputValueFromLocalStorage('typology', 'All'),
-    status: extractInputValueFromLocalStorage('status', 'All'),
-    condition: extractInputValueFromLocalStorage('condition', 'All'),
+    propertyLocation: extractInputValueFromLocalStorage(
+      'propertyLocation',
+      'Arroios, Lisboa, Lisboa, Portugal',
+    ),
+    propertyType: extractInputValueFromLocalStorage('propertyType', 'all'),
+    propertyTypology: extractInputValueFromLocalStorage(
+      'propertyTypology',
+      'all',
+    ),
+    propertyCondition: extractInputValueFromLocalStorage(
+      'propertyCondition',
+      'all',
+    ),
     minAskingPrice: extractInputValueFromLocalStorage('minAskingPrice', null),
     maxAskingPrice: extractInputValueFromLocalStorage('maxAskingPrice', null),
     minUsefulArea: extractInputValueFromLocalStorage('minUsefulArea', null),
@@ -112,67 +119,75 @@ export const initialState = {
     // Investment Information
     minCapital: extractInputValueFromLocalStorage('minCapital', null),
     maxCapital: extractInputValueFromLocalStorage('maxCapital', null),
-    bidAsk: extractInputValueFromLocalStorage('bidAsk', 5),
+    bidAskRate: extractInputValueFromLocalStorage('bidAskRate', 5),
     financingRate: extractInputValueFromLocalStorage('financingRate', 80),
-    housePriceIndex: extractInputValueFromLocalStorage('housePriceIndex', 2),
+    housePriceIndexRate: extractInputValueFromLocalStorage(
+      'housePriceIndexRate',
+      2,
+    ),
     minProfit: extractInputValueFromLocalStorage('minProfit', null),
     // Other Investment Information
     // Acquisition Assumptions
     acquisitionType: extractInputValueFromLocalStorage(
       'acquisitionType',
-      'Investment',
+      'acquisition.type.permanent.housing',
     ),
-    entryFee: extractInputValueFromLocalStorage('entryFee', 0),
-    stampDuty: extractInputValueFromLocalStorage('stampDuty', 0.8),
-    landRegistryWithMortgage: extractInputValueFromLocalStorage(
-      'landRegistryWithMortgage',
+    entryBrokerRate: extractInputValueFromLocalStorage('entryBrokerRate', 0),
+    stampDutyRate: extractInputValueFromLocalStorage('stampDutyRate', 0.6),
+    landRegistryInscriptionWithMortgage: extractInputValueFromLocalStorage(
+      'landRegistryInscriptionWithMortgage',
       350,
     ),
-    landRegistryWithoutMortgage: extractInputValueFromLocalStorage(
-      'landRegistryWithoutMortgage',
+    landRegistryInscriptionWithoutMortgage: extractInputValueFromLocalStorage(
+      'landRegistryInscriptionWithoutMortgage',
       700,
     ),
     // Finance Assumptions
     interestRate: extractInputValueFromLocalStorage('interestRate', 1),
     bankCommission: extractInputValueFromLocalStorage('bankCommission', 1000),
     amortization: extractInputValueFromLocalStorage('amortization', 30),
-    capexFinancing: extractInputValueFromLocalStorage('capexFinancing', 85),
-    capex: extractInputValueFromLocalStorage('capex', 86),
-    stampDutyMortgage: extractInputValueFromLocalStorage(
-      'stampDutyMortgage',
+    capexFinancingRate: extractInputValueFromLocalStorage(
+      'capexFinancingRate',
+      80,
+    ),
+    capex: extractInputValueFromLocalStorage('capex', 5000),
+    stampDutyMortgageRate: extractInputValueFromLocalStorage(
+      'stampDutyMortgageRate',
       0.6,
     ),
-    stampDutyInterests: extractInputValueFromLocalStorage(
-      'stampDutyInterests',
+    stampDutyInterestRate: extractInputValueFromLocalStorage(
+      'stampDutyInterestRate',
       0.04,
     ),
     // Operating Assumptions
     condominiumCosts: extractInputValueFromLocalStorage('condominiumCosts', 30),
     propertyTaxRate: extractInputValueFromLocalStorage('propertyTaxRate', 0.3),
+    multiRiskInsurance: extractInputValueFromLocalStorage(
+      'multiRiskInsurance',
+      0,
+    ),
+    lifeInsurance: extractInputValueFromLocalStorage('lifeInsurance', 0),
     // Exit Assumptions
-    timeToSale: extractInputValueFromLocalStorage('timeToSale', 12),
+    timeToSale: extractInputValueFromLocalStorage('timeToSale', 6),
     irsRate: extractInputValueFromLocalStorage('irsRate', 30),
-    exitBrokerFee: extractInputValueFromLocalStorage('exitBrokerFee', 5),
-    loanEarlyRepaymentFee: extractInputValueFromLocalStorage(
-      'loanEarlyRepaymentFee',
+    exitBrokerRate: extractInputValueFromLocalStorage('exitBrokerRate', 5),
+    earlyRepaymentRate: extractInputValueFromLocalStorage(
+      'earlyRepaymentRate',
       0.5,
     ),
-    capitalGainsTaxBase: extractInputValueFromLocalStorage(
-      'capitalGainsTaxBase',
+    capitalGainsTaxRate: extractInputValueFromLocalStorage(
+      'capitalGainsTaxRate',
       50,
     ),
     // Valuation Model Configuration
-    grossAreaToUsefulArea: extractInputValueFromLocalStorage(
-      'grossAreaToUsefulArea',
-      80,
+    grossAreaToUsefulAreaRate: extractInputValueFromLocalStorage(
+      'grossAreaToUsefulAreaRate',
+      10,
     ),
-    floor: extractInputValueFromLocalStorage('floor', 10),
-    cap: extractInputValueFromLocalStorage('cap', 10),
-    ciPercentile: extractInputValueFromLocalStorage(
-      'ciPercentile',
-      'Case by Case',
-    ),
-    mop: extractInputValueFromLocalStorage('mop', 100),
+    floorRate: extractInputValueFromLocalStorage('floorRate', 100),
+    capRate: extractInputValueFromLocalStorage('capRate', 100),
+    ciPercentile: extractInputValueFromLocalStorage('ciPercentile', '95'),
+    // minObservationsForPercentile: extractInputValueFromLocalStorage('minObservationsForPercentile', 100),
   },
 };
 
@@ -181,43 +196,36 @@ const investmentReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
       // Property Information
-      case GET_LOCATIONS:
-        draft.isGettingLocations = true;
+      case GET_PROPERTY_LOCATIONS:
+        draft.isGettingPropertyLocations = true;
         break;
-      case SET_LOCATION:
-        draft.inputs.location = action.payload;
+      case SET_PROPERTY_LOCATION:
+        draft.inputs.propertyLocation = action.payload;
         break;
-      case GET_LOCATIONS_SUCCESS:
-        draft.locations = action.payload;
-        draft.isGettingLocations = false;
+      case GET_PROPERTY_LOCATIONS_SUCCESS:
+        draft.propertyLocations = action.payload;
+        draft.isGettingPropertyLocations = false;
         break;
-      case GET_TYPES:
-        draft.isGettingTypes = true;
+      case GET_PROPERTY_TYPES:
+        draft.isGettingPropertyTypes = true;
         break;
-      case GET_TYPES_SUCCESS:
-        draft.types = action.payload;
-        draft.isGettingTypes = false;
+      case GET_PROPERTY_TYPES_SUCCESS:
+        draft.propertyTypes = action.payload;
+        draft.isGettingPropertyTypes = false;
         break;
-      case GET_TYPOLOGIES:
-        draft.isGettingTypologies = true;
+      case GET_PROPERTY_TYPOLOGIES:
+        draft.isGettingPropertyTypologies = true;
         break;
-      case GET_TYPOLOGIES_SUCCESS:
-        draft.typologies = action.payload;
-        draft.isGettingTypologies = false;
+      case GET_PROPERTY_TYPOLOGIES_SUCCESS:
+        draft.propertyTypologies = action.payload;
+        draft.isGettingPropertyTypologies = false;
         break;
-      case GET_CONDITIONS:
-        draft.isGettingConditions = true;
+      case GET_PROPERTY_CONDITIONS:
+        draft.isGettingPropertyConditions = true;
         break;
-      case GET_CONDITIONS_SUCCESS:
-        draft.conditions = action.payload;
-        draft.isGettingConditions = false;
-        break;
-      case GET_STATUS:
-        draft.isGettingStatus = true;
-        break;
-      case GET_STATUS_SUCCESS:
-        draft.status = action.payload;
-        draft.isGettingStatus = false;
+      case GET_PROPERTY_CONDITIONS_SUCCESS:
+        draft.propertyConditions = action.payload;
+        draft.isGettingPropertyConditions = false;
         break;
       // Other Investment Information
       // Acquisition Assumptions
@@ -247,6 +255,9 @@ const investmentReducer = (state = initialState, action) =>
         break;
       case GET_ANALYSIS_DATA_SUCCESS:
         draft.analysisData = action.payload;
+        draft.isGettingAnalysisData = false;
+        break;
+      case GET_ANALYSIS_DATA_ERROR:
         draft.isGettingAnalysisData = false;
         break;
       case SET_ANALYZE_BUTTON_DISABLED:
