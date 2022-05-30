@@ -9,23 +9,15 @@ import { compose } from 'redux';
 import { useInjectReducer } from 'utils/injectReducer';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
-import Select from '@material-ui/core/Select';
-import Input from '@material-ui/core/Input';
-import InputAdornment from '@material-ui/core/InputAdornment';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import Tooltip from '@material-ui/core/Tooltip';
-import IconButton from '@material-ui/core/IconButton';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import InfoIcon from '@material-ui/icons/Info';
 import { DataGrid } from '@material-ui/data-grid';
 import parse from 'autosuggest-highlight/parse';
 import match from 'autosuggest-highlight/match';
@@ -34,6 +26,8 @@ import SearchIcon from '@material-ui/icons/Search';
 import { Link } from 'react-router-dom';
 import PaperMap from 'components/PaperMap';
 import messages from './messages';
+import CustomSelect from '../../../components/CustomSelect';
+import CustomInput from '../../../components/CustomInput';
 import {
   makeSelectPropertyTypes,
   makeSelectPropertyTypologies,
@@ -142,6 +136,10 @@ const useStyles = makeStyles(theme => ({
   },
   validation: {
     color: '#bf1650',
+  },
+  searchIcon: {
+    marginRight: '10px',
+    color: '#0083FC',
   },
 }));
 
@@ -420,7 +418,7 @@ export function Investments(props) {
                   label={props.intl.formatMessage({
                     ...messages.propertyLocation,
                   })}
-                  popupIcon={<SearchIcon />}
+                  popupIcon={<SearchIcon className={classes.searchIcon} />}
                   renderOption={(option, value) => {
                     const matches = match(option, value.inputValue);
                     const parts = parse(option, matches);
@@ -444,175 +442,115 @@ export function Investments(props) {
           </Grid>
           <Grid item container spacing={6}>
             <Grid item xs={3}>
-              <FormControl
-                variant="standard"
-                className="w-100"
+              <CustomSelect
                 error={props.errors.propertyType}
-              >
-                <InputLabel>
-                  {props.intl.formatMessage({
-                    ...messages.propertyType,
-                  })}
-                </InputLabel>
-                <Select
-                  defaultValue={props.inputs.propertyType}
-                  name="propertyType"
-                  onChange={handleChange}
-                >
-                  {props.propertyTypes.map(value => (
-                    <MenuItem key={value.name} value={value.name}>
-                      {value.label}
-                    </MenuItem>
-                  ))}
-                </Select>
-                <FormHelperText>{props.errors.propertyType}</FormHelperText>
-              </FormControl>
+                defaultValue={props.inputs.propertyType}
+                handleChange={handleChange}
+                data={props.propertyTypes}
+                name="propertyType"
+                tooltipText={props.intl.formatMessage({
+                  ...messages.propertyType,
+                })}
+                labelText={props.intl.formatMessage({
+                  ...messages.propertyType,
+                })}
+              />
             </Grid>
             <Grid item xs={3}>
-              <FormControl
-                variant="standard"
-                className="w-100"
+              <CustomSelect
                 error={props.errors.propertyTypology}
-              >
-                <InputLabel>
-                  {props.intl.formatMessage({
-                    ...messages.propertyTypology,
-                  })}
-                </InputLabel>
-                <Select
-                  defaultValue={props.inputs.propertyTypology}
-                  name="propertyTypology"
-                  onChange={handleChange}
-                >
-                  {props.propertyTypologies.map(value => (
-                    <MenuItem key={value.name} value={value.name}>
-                      {value.label}
-                    </MenuItem>
-                  ))}
-                </Select>
-                <FormHelperText>{props.errors.propertyTypology}</FormHelperText>
-              </FormControl>
+                defaultValue={props.inputs.propertyTypology}
+                handleChange={handleChange}
+                data={props.propertyTypologies}
+                name="propertyTypology"
+                tooltipText={props.intl.formatMessage({
+                  ...messages.propertyTypology,
+                })}
+                labelText={props.intl.formatMessage({
+                  ...messages.propertyTypology,
+                })}
+              />
             </Grid>
             <Grid item xs={3}>
-              <FormControl
-                variant="standard"
-                className="w-100"
+              <CustomSelect
                 error={props.errors.propertyCondition}
-              >
-                <InputLabel>
-                  {props.intl.formatMessage({
-                    ...messages.propertyCondition,
-                  })}
-                </InputLabel>
-                <Select
-                  defaultValue={props.inputs.propertyCondition}
-                  name="propertyCondition"
-                  onChange={handleChange}
-                >
-                  {props.propertyConditions.map(value => (
-                    <MenuItem key={value.name} value={value.name}>
-                      {value.label}
-                    </MenuItem>
-                  ))}
-                </Select>
-                <FormHelperText>
-                  {props.errors.propertyCondition}
-                </FormHelperText>
-              </FormControl>
+                defaultValue={props.inputs.propertyCondition}
+                handleChange={handleChange}
+                data={props.propertyConditions}
+                name="propertyCondition"
+                tooltipText={props.intl.formatMessage({
+                  ...messages.propertyCondition,
+                })}
+                labelText={props.intl.formatMessage({
+                  ...messages.propertyCondition,
+                })}
+              />
             </Grid>
           </Grid>
           <Grid item container spacing={6}>
             <Grid item xs={3}>
-              <FormControl
-                variant="standard"
-                className="w-100"
+              <CustomInput
                 error={props.errors.minAskingPrice}
-              >
-                <InputLabel>
-                  {props.intl.formatMessage({
-                    ...messages.minAskingPrice,
-                  })}
-                </InputLabel>
-                <Input
-                  onChange={handleChange}
-                  type="number"
-                  defaultValue={props.inputs.minAskingPrice}
-                  name="minAskingPrice"
-                  startAdornment={
-                    <InputAdornment position="start">€</InputAdornment>
-                  }
-                />
-                <FormHelperText>{props.errors.minAskingPrice}</FormHelperText>
-              </FormControl>
+                name="minAskingPrice"
+                type="number"
+                handleChange={handleChange}
+                defaultValue={props.inputs.minAskingPrice}
+                symbol={<span>&#8364;</span>}
+                labelText={props.intl.formatMessage({
+                  ...messages.minAskingPrice,
+                })}
+                tooltipText={props.intl.formatMessage({
+                  ...messages.minAskingPrice,
+                })}
+              />
             </Grid>
             <Grid item xs={3}>
-              <FormControl
-                variant="standard"
-                className="w-100"
+              <CustomInput
                 error={props.errors.maxAskingPrice}
-              >
-                <InputLabel>
-                  {props.intl.formatMessage({
-                    ...messages.maxAskingPrice,
-                  })}
-                </InputLabel>
-                <Input
-                  onChange={handleChange}
-                  type="number"
-                  defaultValue={props.inputs.maxAskingPrice}
-                  name="maxAskingPrice"
-                  startAdornment={
-                    <InputAdornment position="start">€</InputAdornment>
-                  }
-                />
-                <FormHelperText>{props.errors.maxAskingPrice}</FormHelperText>
-              </FormControl>
+                name="maxAskingPrice"
+                type="number"
+                handleChange={handleChange}
+                defaultValue={props.inputs.maxAskingPrice}
+                symbol={<span>&#8364;</span>}
+                labelText={props.intl.formatMessage({
+                  ...messages.maxAskingPrice,
+                })}
+                tooltipText={props.intl.formatMessage({
+                  ...messages.maxAskingPrice,
+                })}
+              />
             </Grid>
             <Grid item xs={3}>
-              <FormControl
-                variant="standard"
-                className="w-100"
+              <CustomInput
                 error={props.errors.minUsefulArea}
-              >
-                <InputLabel>
-                  {props.intl.formatMessage({
-                    ...messages.minUsefulArea,
-                  })}
-                </InputLabel>
-                <Input
-                  onChange={handleChange}
-                  type="number"
-                  defaultValue={props.inputs.minUsefulArea}
-                  name="minUsefulArea"
-                  startAdornment={
-                    <InputAdornment position="start">m²</InputAdornment>
-                  }
-                />
-                <FormHelperText>{props.errors.minUsefulArea}</FormHelperText>
-              </FormControl>
+                name="minUsefulArea"
+                type="number"
+                handleChange={handleChange}
+                defaultValue={props.inputs.minUsefulArea}
+                symbol={<span>m²</span>}
+                labelText={props.intl.formatMessage({
+                  ...messages.minUsefulArea,
+                })}
+                tooltipText={props.intl.formatMessage({
+                  ...messages.minUsefulArea,
+                })}
+              />
             </Grid>
             <Grid item xs={3}>
-              <FormControl
-                variant="standard"
-                className="w-100"
+              <CustomInput
                 error={props.errors.maxUsefulArea}
-              >
-                <InputLabel>
-                  {props.intl.formatMessage({
-                    ...messages.maxUsefulArea,
-                  })}
-                </InputLabel>
-                <Input
-                  onChange={handleChange}
-                  type="number"
-                  defaultValue={props.inputs.maxUsefulArea}
-                  name="maxUsefulArea"
-                  startAdornment={
-                    <InputAdornment position="start">m²</InputAdornment>
-                  }
-                />
-                <FormHelperText>{props.errors.maxUsefulArea}</FormHelperText>
-              </FormControl>
+                name="maxUsefulArea"
+                type="number"
+                handleChange={handleChange}
+                defaultValue={props.inputs.maxUsefulArea}
+                symbol={<span>m²</span>}
+                labelText={props.intl.formatMessage({
+                  ...messages.maxUsefulArea,
+                })}
+                tooltipText={props.intl.formatMessage({
+                  ...messages.maxUsefulArea,
+                })}
+              />
             </Grid>
           </Grid>
         </Grid>
@@ -673,197 +611,101 @@ export function Investments(props) {
     return (
       <Grid item container spacing={6} className="mb-10">
         <Grid item xs={3}>
-          <FormControl
-            variant="standard"
-            className="w-100"
+          <CustomInput
             error={props.errors.minCapital}
-          >
-            <InputLabel>
-              {props.intl.formatMessage({
-                ...messages.minCapital,
-              })}
-              <Tooltip
-                title={props.intl.formatMessage({
-                  ...messages.minCapitalInfo,
-                })}
-              >
-                <IconButton className={classes.iconMr}>
-                  <InfoIcon className={classes.iconSize} color="primary" />
-                </IconButton>
-              </Tooltip>
-            </InputLabel>
-            <Input
-              onChange={handleChange}
-              type="number"
-              defaultValue={props.inputs.minCapital}
-              name="minCapital"
-              startAdornment={
-                <InputAdornment position="start">&#8364;</InputAdornment>
-              }
-            />
-            <FormHelperText>{props.errors.minCapital}</FormHelperText>
-          </FormControl>
+            name="minCapital"
+            type="number"
+            handleChange={handleChange}
+            defaultValue={props.inputs.minCapital}
+            symbol={<span>m²</span>}
+            labelText={props.intl.formatMessage({
+              ...messages.minCapital,
+            })}
+            tooltipText={props.intl.formatMessage({
+              ...messages.minCapitalInfo,
+            })}
+          />
         </Grid>
         <Grid item xs={3}>
-          <FormControl
-            variant="standard"
-            className="w-100"
+          <CustomInput
             error={props.errors.maxCapital}
-          >
-            <InputLabel>
-              {props.intl.formatMessage({
-                ...messages.maxCapital,
-              })}
-              <Tooltip
-                title={props.intl.formatMessage({
-                  ...messages.maxCapitalInfo,
-                })}
-              >
-                <IconButton className={classes.iconMr}>
-                  <InfoIcon className={classes.iconSize} color="primary" />
-                </IconButton>
-              </Tooltip>
-            </InputLabel>
-            <Input
-              onChange={handleChange}
-              type="number"
-              defaultValue={props.inputs.maxCapital}
-              name="maxCapital"
-              startAdornment={
-                <InputAdornment position="start">&#8364;</InputAdornment>
-              }
-            />
-            <FormHelperText>{props.errors.maxCapital}</FormHelperText>
-          </FormControl>
+            name="maxCapital"
+            type="number"
+            handleChange={handleChange}
+            defaultValue={props.inputs.maxCapital}
+            symbol={<span>&#8364;</span>}
+            labelText={props.intl.formatMessage({
+              ...messages.maxCapital,
+            })}
+            tooltipText={props.intl.formatMessage({
+              ...messages.maxCapitalInfo,
+            })}
+          />
         </Grid>
         <Grid item xs={3}>
-          <FormControl
-            variant="standard"
-            className="w-100"
+          <CustomInput
             error={props.errors.bidAskRate}
-          >
-            <InputLabel>
-              {props.intl.formatMessage({
-                ...messages.bidAskRate,
-              })}
-              <Tooltip
-                title={props.intl.formatMessage({
-                  ...messages.bidAskRateInfo,
-                })}
-              >
-                <IconButton className={classes.iconMr}>
-                  <InfoIcon className={classes.iconSize} color="primary" />
-                </IconButton>
-              </Tooltip>
-            </InputLabel>
-            <Input
-              onChange={handleChange}
-              type="number"
-              defaultValue={props.inputs.bidAskRate}
-              name="bidAskRate"
-              startAdornment={
-                <InputAdornment position="start">%</InputAdornment>
-              }
-            />
-            <FormHelperText>{props.errors.bidAskRate}</FormHelperText>
-          </FormControl>
+            name="bidAskRate"
+            type="number"
+            handleChange={handleChange}
+            defaultValue={props.inputs.bidAskRate}
+            symbol={<span>%</span>}
+            labelText={props.intl.formatMessage({
+              ...messages.bidAskRate,
+            })}
+            tooltipText={props.intl.formatMessage({
+              ...messages.bidAskRateInfo,
+            })}
+          />
         </Grid>
         <Grid item container spacing={6}>
           <Grid item xs={3}>
-            <FormControl
-              variant="standard"
-              className="w-100"
+            <CustomInput
               error={props.errors.housePriceIndexRate}
-            >
-              <InputLabel>
-                {props.intl.formatMessage({
-                  ...messages.housePriceIndexRate,
-                })}
-                <Tooltip
-                  title={props.intl.formatMessage({
-                    ...messages.housePriceIndexRateInfo,
-                  })}
-                >
-                  <IconButton className={classes.iconMr}>
-                    <InfoIcon className={classes.iconSize} color="primary" />
-                  </IconButton>
-                </Tooltip>
-              </InputLabel>
-              <Input
-                onChange={handleChange}
-                type="number"
-                defaultValue={props.inputs.housePriceIndexRate}
-                name="housePriceIndexRate"
-                startAdornment={
-                  <InputAdornment position="start">%</InputAdornment>
-                }
-              />
-              <FormHelperText>{props.errors.minCapital}</FormHelperText>
-            </FormControl>
+              name="housePriceIndexRate"
+              type="number"
+              handleChange={handleChange}
+              defaultValue={props.inputs.housePriceIndexRate}
+              symbol={<span>%</span>}
+              labelText={props.intl.formatMessage({
+                ...messages.housePriceIndexRate,
+              })}
+              tooltipText={props.intl.formatMessage({
+                ...messages.housePriceIndexRateInfo,
+              })}
+            />
           </Grid>
           <Grid item xs={3}>
-            <FormControl
-              variant="standard"
-              className="w-100"
+            <CustomInput
               error={props.errors.financingRate}
-            >
-              <InputLabel>
-                {props.intl.formatMessage({
-                  ...messages.financingRate,
-                })}
-                <Tooltip
-                  title={props.intl.formatMessage({
-                    ...messages.financingRateInfo,
-                  })}
-                >
-                  <IconButton className={classes.iconMr}>
-                    <InfoIcon className={classes.iconSize} color="primary" />
-                  </IconButton>
-                </Tooltip>
-              </InputLabel>
-              <Input
-                onChange={handleChange}
-                type="number"
-                defaultValue={props.inputs.financingRate}
-                name="financingRate"
-                startAdornment={
-                  <InputAdornment position="start">%</InputAdornment>
-                }
-              />
-              <FormHelperText>{props.errors.financingRate}</FormHelperText>
-            </FormControl>
+              name="financingRate"
+              type="number"
+              handleChange={handleChange}
+              defaultValue={props.inputs.financingRate}
+              symbol={<span>%</span>}
+              labelText={props.intl.formatMessage({
+                ...messages.financingRate,
+              })}
+              tooltipText={props.intl.formatMessage({
+                ...messages.financingRateInfo,
+              })}
+            />
           </Grid>
           <Grid item xs={3}>
-            <FormControl
-              variant="standard"
-              className="w-100"
+            <CustomInput
               error={props.errors.minProfit}
-            >
-              <InputLabel>
-                {props.intl.formatMessage({
-                  ...messages.minProfit,
-                })}
-                <Tooltip
-                  title={props.intl.formatMessage({
-                    ...messages.minProfitInfo,
-                  })}
-                >
-                  <IconButton className={classes.iconMr}>
-                    <InfoIcon className={classes.iconSize} color="primary" />
-                  </IconButton>
-                </Tooltip>
-              </InputLabel>
-              <Input
-                onChange={handleChange}
-                type="number"
-                defaultValue={props.inputs.minProfit}
-                name="minProfit"
-                startAdornment={
-                  <InputAdornment position="start">&#8364;</InputAdornment>
-                }
-              />
-              <FormHelperText>{props.errors.minProfit}</FormHelperText>
-            </FormControl>
+              name="minProfit"
+              type="number"
+              handleChange={handleChange}
+              defaultValue={props.inputs.minProfit}
+              symbol={<span>&#8364;</span>}
+              labelText={props.intl.formatMessage({
+                ...messages.minProfit,
+              })}
+              tooltipText={props.intl.formatMessage({
+                ...messages.minProfitInfo,
+              })}
+            />
           </Grid>
         </Grid>
       </Grid>
@@ -898,169 +740,85 @@ export function Investments(props) {
         </Grid>
         <Grid item container spacing={6}>
           <Grid item xs={3}>
-            <FormControl variant="standard" className="w-100">
-              <InputLabel>
-                {props.intl.formatMessage({
-                  ...messages.acquisitionType,
-                })}
-                <Tooltip
-                  title={props.intl.formatMessage({
-                    ...messages.acquisitionTypeInfo,
-                  })}
-                >
-                  <IconButton className={classes.iconMr}>
-                    <InfoIcon className={classes.iconSize} color="primary" />
-                  </IconButton>
-                </Tooltip>
-              </InputLabel>
-              <Select
-                defaultValue={props.inputs.acquisitionType}
-                name="acquisitionType"
-                onChange={handleChange}
-              >
-                {props.acquisitionTypes.map(value => (
-                  <MenuItem key={value.name} value={value.name}>
-                    {value.label}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
+            <CustomSelect
+              error={null}
+              defaultValue={props.inputs.acquisitionType}
+              handleChange={handleChange}
+              data={props.acquisitionTypes}
+              name="acquisitionType"
+              labelText={props.intl.formatMessage({
+                ...messages.acquisitionType,
+              })}
+              tooltipText={props.intl.formatMessage({
+                ...messages.acquisitionTypeInfo,
+              })}
+            />
           </Grid>
           <Grid item xs={3}>
-            <FormControl
-              variant="standard"
-              className="w-100"
+            <CustomInput
               error={props.errors.entryBrokerRate}
-            >
-              <InputLabel>
-                {props.intl.formatMessage({
-                  ...messages.entryBrokerRate,
-                })}
-                <Tooltip
-                  title={props.intl.formatMessage({
-                    ...messages.entryBrokerRateInfo,
-                  })}
-                >
-                  <IconButton className={classes.iconMr}>
-                    <InfoIcon className={classes.iconSize} color="primary" />
-                  </IconButton>
-                </Tooltip>
-              </InputLabel>
-              <Input
-                onChange={handleChange}
-                type="number"
-                defaultValue={props.inputs.entryBrokerRate}
-                name="entryBrokerRate"
-                startAdornment={
-                  <InputAdornment position="start">%</InputAdornment>
-                }
-              />
-              <FormHelperText>{props.errors.entryBrokerRate}</FormHelperText>
-            </FormControl>
+              name="entryBrokerRate"
+              type="number"
+              handleChange={handleChange}
+              defaultValue={props.inputs.entryBrokerRate}
+              symbol={<span>%</span>}
+              labelText={props.intl.formatMessage({
+                ...messages.entryBrokerRate,
+              })}
+              tooltipText={props.intl.formatMessage({
+                ...messages.entryBrokerRateInfo,
+              })}
+            />
           </Grid>
           <Grid item xs={3}>
-            <FormControl
-              variant="standard"
-              className="w-100"
+            <CustomInput
               error={props.errors.stampDutyRate}
-            >
-              <InputLabel>
-                {props.intl.formatMessage({
-                  ...messages.stampDutyRate,
-                })}
-                <Tooltip
-                  title={props.intl.formatMessage({
-                    ...messages.stampDutyRateInfo,
-                  })}
-                >
-                  <IconButton className={classes.iconMr}>
-                    <InfoIcon className={classes.iconSize} color="primary" />
-                  </IconButton>
-                </Tooltip>
-              </InputLabel>
-              <Input
-                onChange={handleChange}
-                type="number"
-                defaultValue={props.inputs.stampDutyRate}
-                name="stampDutyRate"
-                startAdornment={
-                  <InputAdornment position="start">%</InputAdornment>
-                }
-              />
-              <FormHelperText>{props.errors.stampDutyRate}</FormHelperText>
-            </FormControl>
+              name="stampDutyRate"
+              type="number"
+              handleChange={handleChange}
+              defaultValue={props.inputs.stampDutyRate}
+              symbol={<span>%</span>}
+              labelText={props.intl.formatMessage({
+                ...messages.stampDutyRate,
+              })}
+              tooltipText={props.intl.formatMessage({
+                ...messages.stampDutyRateInfo,
+              })}
+            />
           </Grid>
         </Grid>
         <Grid item container spacing={6} className="mt-20">
           <Grid item xs={4}>
-            <FormControl
-              variant="standard"
-              className="w-100"
+            <CustomInput
               error={props.errors.landRegistryInscriptionWithMortgage}
-            >
-              <InputLabel>
-                {props.intl.formatMessage({
-                  ...messages.landRegistryInscriptionWithMortgage,
-                })}
-                <Tooltip
-                  title={props.intl.formatMessage({
-                    ...messages.landRegistryInscriptionWithMortgageInfo,
-                  })}
-                >
-                  <IconButton className={classes.iconMr}>
-                    <InfoIcon className={classes.iconSize} color="primary" />
-                  </IconButton>
-                </Tooltip>
-              </InputLabel>
-              <Input
-                onChange={handleChange}
-                type="number"
-                defaultValue={props.inputs.landRegistryInscriptionWithMortgage}
-                name="landRegistryInscriptionWithMortgage"
-                startAdornment={
-                  <InputAdornment position="start">&#8364;</InputAdornment>
-                }
-              />
-              <FormHelperText>
-                {props.errors.landRegistryInscriptionWithMortgage}
-              </FormHelperText>
-            </FormControl>
+              name="landRegistryInscriptionWithMortgage"
+              type="number"
+              handleChange={handleChange}
+              defaultValue={props.inputs.landRegistryInscriptionWithMortgage}
+              symbol={<span>&#8364;</span>}
+              labelText={props.intl.formatMessage({
+                ...messages.landRegistryInscriptionWithMortgage,
+              })}
+              tooltipText={props.intl.formatMessage({
+                ...messages.landRegistryInscriptionWithMortgageInfo,
+              })}
+            />
           </Grid>
           <Grid item xs={4}>
-            <FormControl
-              variant="standard"
-              className="w-100"
+            <CustomInput
               error={props.errors.landRegistryInscriptionWithoutMortgage}
-            >
-              <InputLabel>
-                {props.intl.formatMessage({
-                  ...messages.landRegistryInscriptionWithoutMortgage,
-                })}
-                <Tooltip
-                  title={props.intl.formatMessage({
-                    ...messages.landRegistryInscriptionWithoutMortgageInfo,
-                  })}
-                >
-                  <IconButton className={classes.iconMr}>
-                    <InfoIcon className={classes.iconSize} color="primary" />
-                  </IconButton>
-                </Tooltip>
-              </InputLabel>
-              <Input
-                onChange={handleChange}
-                type="number"
-                defaultValue={
-                  props.inputs.landRegistryInscriptionWithoutMortgage
-                }
-                name="landRegistryInscriptionWithoutMortgage"
-                startAdornment={
-                  <InputAdornment position="start">&#8364;</InputAdornment>
-                }
-              />
-              <FormHelperText>
-                {props.errors.landRegistryInscriptionWithoutMortgage}
-              </FormHelperText>
-            </FormControl>
+              name="landRegistryInscriptionWithoutMortgage"
+              type="number"
+              handleChange={handleChange}
+              defaultValue={props.inputs.landRegistryInscriptionWithoutMortgage}
+              symbol={<span>&#8364;</span>}
+              labelText={props.intl.formatMessage({
+                ...messages.landRegistryInscriptionWithoutMortgage,
+              })}
+              tooltipText={props.intl.formatMessage({
+                ...messages.landRegistryInscriptionWithoutMortgageInfo,
+              })}
+            />
           </Grid>
         </Grid>
       </Grid>
@@ -1079,202 +837,102 @@ export function Investments(props) {
         </Grid>
         <Grid item container spacing={6}>
           <Grid item xs={3}>
-            <FormControl
-              variant="standard"
-              className="w-100"
+            <CustomInput
               error={props.errors.interestRate}
-            >
-              <InputLabel>
-                {props.intl.formatMessage({
-                  ...messages.interestRate,
-                })}
-                <Tooltip
-                  title={props.intl.formatMessage({
-                    ...messages.interestRateInfo,
-                  })}
-                >
-                  <IconButton className={classes.iconMr}>
-                    <InfoIcon className={classes.iconSize} color="primary" />
-                  </IconButton>
-                </Tooltip>
-              </InputLabel>
-              <Input
-                onChange={handleChange}
-                type="number"
-                defaultValue={props.inputs.interestRate}
-                name="interestRate"
-                startAdornment={
-                  <InputAdornment position="start">%</InputAdornment>
-                }
-              />
-              <FormHelperText>{props.errors.interestRate}</FormHelperText>
-            </FormControl>
+              name="interestRate"
+              type="number"
+              handleChange={handleChange}
+              defaultValue={props.inputs.interestRate}
+              symbol={<span>%</span>}
+              labelText={props.intl.formatMessage({
+                ...messages.interestRate,
+              })}
+              tooltipText={props.intl.formatMessage({
+                ...messages.interestRateInfo,
+              })}
+            />
           </Grid>
           <Grid item xs={3}>
-            <FormControl
-              variant="standard"
-              className="w-100"
+            <CustomInput
               error={props.errors.bankCommission}
-            >
-              <InputLabel>
-                {props.intl.formatMessage({
-                  ...messages.bankCommission,
-                })}
-                <Tooltip
-                  title={props.intl.formatMessage({
-                    ...messages.bankCommissionInfo,
-                  })}
-                >
-                  <IconButton className={classes.iconMr}>
-                    <InfoIcon className={classes.iconSize} color="primary" />
-                  </IconButton>
-                </Tooltip>
-              </InputLabel>
-              <Input
-                onChange={handleChange}
-                type="number"
-                defaultValue={props.inputs.bankCommission}
-                name="bankCommission"
-                startAdornment={
-                  <InputAdornment position="start">&#8364;</InputAdornment>
-                }
-              />
-              <FormHelperText>{props.errors.bankCommission}</FormHelperText>
-            </FormControl>
+              name="bankCommission"
+              type="number"
+              handleChange={handleChange}
+              defaultValue={props.inputs.bankCommission}
+              symbol={<span>&#8364;</span>}
+              labelText={props.intl.formatMessage({
+                ...messages.bankCommission,
+              })}
+              tooltipText={props.intl.formatMessage({
+                ...messages.bankCommissionInfo,
+              })}
+            />
           </Grid>
           <Grid item xs={3}>
-            <FormControl
-              variant="standard"
-              className="w-100"
+            <CustomInput
               error={props.errors.amortization}
-            >
-              <InputLabel>
-                {props.intl.formatMessage({
-                  ...messages.amortization,
-                })}
-                <Tooltip
-                  title={props.intl.formatMessage({
-                    ...messages.amortizationInfo,
-                  })}
-                >
-                  <IconButton className={classes.iconMr}>
-                    <InfoIcon className={classes.iconSize} color="primary" />
-                  </IconButton>
-                </Tooltip>
-              </InputLabel>
-              <Input
-                onChange={handleChange}
-                type="number"
-                defaultValue={props.inputs.amortization}
-                name="amortization"
-                startAdornment={
-                  <InputAdornment position="start">Years</InputAdornment>
-                }
-              />
-              <FormHelperText>{props.errors.amortization}</FormHelperText>
-            </FormControl>
+              name="amortization"
+              type="number"
+              handleChange={handleChange}
+              defaultValue={props.inputs.amortization}
+              symbol={<span>Years</span>}
+              labelText={props.intl.formatMessage({
+                ...messages.amortization,
+              })}
+              tooltipText={props.intl.formatMessage({
+                ...messages.amortizationInfo,
+              })}
+            />
           </Grid>
         </Grid>
         <Grid item container spacing={6} className="mt-20">
           <Grid item xs={3}>
-            <FormControl
-              variant="standard"
-              className="w-100"
+            <CustomInput
               error={props.errors.stampDutyMortgageRate}
-            >
-              <InputLabel>
-                {props.intl.formatMessage({
-                  ...messages.stampDutyMortgageRate,
-                })}
-                <Tooltip
-                  title={props.intl.formatMessage({
-                    ...messages.stampDutyMortgageRateInfo,
-                  })}
-                >
-                  <IconButton className={classes.iconMr}>
-                    <InfoIcon className={classes.iconSize} color="primary" />
-                  </IconButton>
-                </Tooltip>
-              </InputLabel>
-              <Input
-                onChange={handleChange}
-                type="number"
-                defaultValue={props.inputs.stampDutyMortgageRate}
-                name="stampDutyMortgageRate"
-                startAdornment={
-                  <InputAdornment position="start">%</InputAdornment>
-                }
-              />
-              <FormHelperText>
-                {props.errors.stampDutyMortgageRate}
-              </FormHelperText>
-            </FormControl>
+              name="stampDutyMortgageRate"
+              type="number"
+              handleChange={handleChange}
+              defaultValue={props.inputs.stampDutyMortgageRate}
+              symbol={<span>%</span>}
+              labelText={props.intl.formatMessage({
+                ...messages.stampDutyMortgageRate,
+              })}
+              tooltipText={props.intl.formatMessage({
+                ...messages.stampDutyMortgageRateInfo,
+              })}
+            />
           </Grid>
           <Grid item xs={3}>
-            <FormControl
-              variant="standard"
-              className="w-100"
+            <CustomInput
               error={props.errors.stampDutyInterestRate}
-            >
-              <InputLabel>
-                {props.intl.formatMessage({
-                  ...messages.stampDutyInterestRate,
-                })}
-                <Tooltip
-                  title={props.intl.formatMessage({
-                    ...messages.stampDutyInterestRateInfo,
-                  })}
-                >
-                  <IconButton className={classes.iconMr}>
-                    <InfoIcon className={classes.iconSize} color="primary" />
-                  </IconButton>
-                </Tooltip>
-              </InputLabel>
-              <Input
-                onChange={handleChange}
-                type="number"
-                defaultValue={props.inputs.stampDutyInterestRate}
-                name="stampDutyInterestRate"
-                startAdornment={
-                  <InputAdornment position="start">%</InputAdornment>
-                }
-              />
-              <FormHelperText>
-                {props.errors.stampDutyInterestRate}
-              </FormHelperText>
-            </FormControl>
+              name="stampDutyInterestRate"
+              type="number"
+              handleChange={handleChange}
+              defaultValue={props.inputs.stampDutyInterestRate}
+              symbol={<span>%</span>}
+              labelText={props.intl.formatMessage({
+                ...messages.stampDutyInterestRate,
+              })}
+              tooltipText={props.intl.formatMessage({
+                ...messages.stampDutyInterestRateInfo,
+              })}
+            />
           </Grid>
           <Grid item xs={3}>
-            <FormControl
-              variant="standard"
-              className="w-100"
+            <CustomInput
               error={props.errors.capexFinancingRate}
-            >
-              <InputLabel>
-                {props.intl.formatMessage({
-                  ...messages.capexFinancingRate,
-                })}
-                <Tooltip
-                  title={props.intl.formatMessage({
-                    ...messages.capexFinancingRate,
-                  })}
-                >
-                  <IconButton className={classes.iconMr}>
-                    <InfoIcon className={classes.iconSize} color="primary" />
-                  </IconButton>
-                </Tooltip>
-              </InputLabel>
-              <Input
-                onChange={handleChange}
-                type="number"
-                defaultValue={props.inputs.capexFinancingRate}
-                name="capexFinancingRate"
-                startAdornment={
-                  <InputAdornment position="start">%</InputAdornment>
-                }
-              />
-              <FormHelperText>{props.errors.capexFinancingRate}</FormHelperText>
-            </FormControl>
+              name="capexFinancingRate"
+              type="number"
+              handleChange={handleChange}
+              defaultValue={props.inputs.capexFinancingRate}
+              symbol={<span>%</span>}
+              labelText={props.intl.formatMessage({
+                ...messages.capexFinancingRate,
+              })}
+              tooltipText={props.intl.formatMessage({
+                ...messages.capexFinancingRate,
+              })}
+            />
           </Grid>
         </Grid>
       </Grid>
@@ -1293,164 +951,84 @@ export function Investments(props) {
         </Grid>
         <Grid item container spacing={6}>
           <Grid item xs={3}>
-            <FormControl
-              variant="standard"
-              className="w-100"
+            <CustomInput
               error={props.errors.condominiumCosts}
-            >
-              <InputLabel>
-                {props.intl.formatMessage({
-                  ...messages.condominiumCosts,
-                })}
-                <Tooltip
-                  title={props.intl.formatMessage({
-                    ...messages.condominiumCostsInfo,
-                  })}
-                >
-                  <IconButton className={classes.iconMr}>
-                    <InfoIcon className={classes.iconSize} color="primary" />
-                  </IconButton>
-                </Tooltip>
-              </InputLabel>
-              <Input
-                onChange={handleChange}
-                type="number"
-                defaultValue={props.inputs.condominiumCosts}
-                name="condominiumCosts"
-                startAdornment={
-                  <InputAdornment position="start">&#8364;</InputAdornment>
-                }
-              />
-              <FormHelperText>{props.errors.condominiumCosts}</FormHelperText>
-            </FormControl>
+              name="condominiumCosts"
+              type="number"
+              handleChange={handleChange}
+              defaultValue={props.inputs.condominiumCosts}
+              symbol={<span>&#8364;</span>}
+              labelText={props.intl.formatMessage({
+                ...messages.condominiumCosts,
+              })}
+              tooltipText={props.intl.formatMessage({
+                ...messages.condominiumCostsInfo,
+              })}
+            />
           </Grid>
           <Grid item xs={3}>
-            <FormControl
-              variant="standard"
-              className="w-100"
+            <CustomInput
               error={props.errors.propertyTaxRate}
-            >
-              <InputLabel>
-                {props.intl.formatMessage({
-                  ...messages.propertyTaxRate,
-                })}
-                <Tooltip
-                  title={props.intl.formatMessage({
-                    ...messages.propertyTaxRateInfo,
-                  })}
-                >
-                  <IconButton className={classes.iconMr}>
-                    <InfoIcon className={classes.iconSize} color="primary" />
-                  </IconButton>
-                </Tooltip>
-              </InputLabel>
-              <Input
-                onChange={handleChange}
-                type="number"
-                defaultValue={props.inputs.propertyTaxRate}
-                name="propertyTaxRate"
-                startAdornment={
-                  <InputAdornment position="start">%</InputAdornment>
-                }
-              />
-              <FormHelperText>{props.errors.propertyTaxRate}</FormHelperText>
-            </FormControl>
+              name="propertyTaxRate"
+              type="number"
+              handleChange={handleChange}
+              defaultValue={props.inputs.propertyTaxRate}
+              symbol={<span>%</span>}
+              labelText={props.intl.formatMessage({
+                ...messages.propertyTaxRate,
+              })}
+              tooltipText={props.intl.formatMessage({
+                ...messages.propertyTaxRateInfo,
+              })}
+            />
           </Grid>
           <Grid item xs={3}>
-            <FormControl
-              variant="standard"
-              className="w-100"
+            <CustomInput
               error={props.errors.capex}
-            >
-              <InputLabel>
-                {props.intl.formatMessage({
-                  ...messages.capex,
-                })}
-                <Tooltip
-                  title={props.intl.formatMessage({
-                    ...messages.capex,
-                  })}
-                >
-                  <IconButton className={classes.iconMr}>
-                    <InfoIcon className={classes.iconSize} color="primary" />
-                  </IconButton>
-                </Tooltip>
-              </InputLabel>
-              <Input
-                onChange={handleChange}
-                type="number"
-                defaultValue={props.inputs.capex}
-                name="capex"
-                startAdornment={
-                  <InputAdornment position="start">&#8364;</InputAdornment>
-                }
-              />
-              <FormHelperText>{props.errors.capex}</FormHelperText>
-            </FormControl>
+              name="capex"
+              type="number"
+              handleChange={handleChange}
+              defaultValue={props.inputs.capex}
+              symbol={<span>&#8364;</span>}
+              labelText={props.intl.formatMessage({
+                ...messages.capex,
+              })}
+              tooltipText={props.intl.formatMessage({
+                ...messages.capex,
+              })}
+            />
           </Grid>
           <Grid item xs={3}>
-            <FormControl
-              variant="standard"
-              className="w-100"
+            <CustomInput
               error={props.errors.multiRiskInsurance}
-            >
-              <InputLabel>
-                {props.intl.formatMessage({
-                  ...messages.multiRiskInsurance,
-                })}
-                <Tooltip
-                  title={props.intl.formatMessage({
-                    ...messages.multiRiskInsurance,
-                  })}
-                >
-                  <IconButton className={classes.iconMr}>
-                    <InfoIcon className={classes.iconSize} color="primary" />
-                  </IconButton>
-                </Tooltip>
-              </InputLabel>
-              <Input
-                onChange={handleChange}
-                type="number"
-                defaultValue={props.inputs.multiRiskInsurance}
-                name="capex"
-                startAdornment={
-                  <InputAdornment position="start">&#8364;</InputAdornment>
-                }
-              />
-              <FormHelperText>{props.errors.multiRiskInsurance}</FormHelperText>
-            </FormControl>
+              name="capex"
+              type="number"
+              handleChange={handleChange}
+              defaultValue={props.inputs.multiRiskInsurance}
+              symbol={<span>&#8364;</span>}
+              labelText={props.intl.formatMessage({
+                ...messages.multiRiskInsurance,
+              })}
+              tooltipText={props.intl.formatMessage({
+                ...messages.multiRiskInsurance,
+              })}
+            />
           </Grid>
           <Grid item xs={3}>
-            <FormControl
-              variant="standard"
-              className="w-100"
+            <CustomInput
               error={props.errors.lifeInsurance}
-            >
-              <InputLabel>
-                {props.intl.formatMessage({
-                  ...messages.lifeInsurance,
-                })}
-                <Tooltip
-                  title={props.intl.formatMessage({
-                    ...messages.lifeInsurance,
-                  })}
-                >
-                  <IconButton className={classes.iconMr}>
-                    <InfoIcon className={classes.iconSize} color="primary" />
-                  </IconButton>
-                </Tooltip>
-              </InputLabel>
-              <Input
-                onChange={handleChange}
-                type="number"
-                defaultValue={props.inputs.lifeInsurance}
-                name="capex"
-                startAdornment={
-                  <InputAdornment position="start">&#8364;</InputAdornment>
-                }
-              />
-              <FormHelperText>{props.errors.lifeInsurance}</FormHelperText>
-            </FormControl>
+              name="capex"
+              type="number"
+              handleChange={handleChange}
+              defaultValue={props.inputs.lifeInsurance}
+              symbol={<span>&#8364;</span>}
+              labelText={props.intl.formatMessage({
+                ...messages.lifeInsurance,
+              })}
+              tooltipText={props.intl.formatMessage({
+                ...messages.lifeInsurance,
+              })}
+            />
           </Grid>
         </Grid>
       </Grid>
@@ -1469,168 +1047,86 @@ export function Investments(props) {
         </Grid>
         <Grid item container spacing={6}>
           <Grid item xs={3}>
-            <FormControl
-              variant="standard"
-              className="w-100"
+            <CustomInput
               error={props.errors.timeToSale}
-            >
-              <InputLabel>
-                {props.intl.formatMessage({
-                  ...messages.timeToSale,
-                })}
-                <Tooltip
-                  title={props.intl.formatMessage({
-                    ...messages.timeToSaleInfo,
-                  })}
-                >
-                  <IconButton className={classes.iconMr}>
-                    <InfoIcon className={classes.iconSize} color="primary" />
-                  </IconButton>
-                </Tooltip>
-              </InputLabel>
-              <Input
-                onChange={handleChange}
-                type="number"
-                defaultValue={props.inputs.timeToSale}
-                name="timeToSale"
-                startAdornment={
-                  <InputAdornment position="start">Month</InputAdornment>
-                }
-              />
-              <FormHelperText>{props.errors.timeToSale}</FormHelperText>
-            </FormControl>
+              name="timeToSale"
+              type="number"
+              handleChange={handleChange}
+              defaultValue={props.inputs.timeToSale}
+              symbol={<span>Month</span>}
+              labelText={props.intl.formatMessage({
+                ...messages.timeToSale,
+              })}
+              tooltipText={props.intl.formatMessage({
+                ...messages.timeToSaleInfo,
+              })}
+            />
           </Grid>
           <Grid item xs={3}>
-            <FormControl
-              variant="standard"
-              className="w-100"
+            <CustomInput
               error={props.errors.earlyRepaymentRate}
-            >
-              <InputLabel>
-                {props.intl.formatMessage({
-                  ...messages.earlyRepaymentRate,
-                })}
-                <Tooltip
-                  title={props.intl.formatMessage({
-                    ...messages.earlyRepaymentRateInfo,
-                  })}
-                >
-                  <IconButton className={classes.iconMr}>
-                    <InfoIcon className={classes.iconSize} color="primary" />
-                  </IconButton>
-                </Tooltip>
-              </InputLabel>
-              <Input
-                onChange={handleChange}
-                type="number"
-                defaultValue={props.inputs.earlyRepaymentRate}
-                name="earlyRepaymentRate"
-                startAdornment={
-                  <InputAdornment position="start">%</InputAdornment>
-                }
-              />
-              <FormHelperText>{props.errors.earlyRepaymentRate}</FormHelperText>
-            </FormControl>
+              name="earlyRepaymentRate"
+              type="number"
+              handleChange={handleChange}
+              defaultValue={props.inputs.earlyRepaymentRate}
+              symbol={<span>%</span>}
+              labelText={props.intl.formatMessage({
+                ...messages.earlyRepaymentRate,
+              })}
+              tooltipText={props.intl.formatMessage({
+                ...messages.earlyRepaymentRateInfo,
+              })}
+            />
           </Grid>
           <Grid item xs={3}>
-            <FormControl
-              variant="standard"
-              className="w-100"
+            <CustomInput
               error={props.errors.exitBrokerRate}
-            >
-              <InputLabel>
-                {props.intl.formatMessage({
-                  ...messages.exitBrokerRate,
-                })}
-                <Tooltip
-                  title={props.intl.formatMessage({
-                    ...messages.exitBrokerRateInfo,
-                  })}
-                >
-                  <IconButton className={classes.iconMr}>
-                    <InfoIcon className={classes.iconSize} color="primary" />
-                  </IconButton>
-                </Tooltip>
-              </InputLabel>
-              <Input
-                onChange={handleChange}
-                type="number"
-                defaultValue={props.inputs.exitBrokerRate}
-                name="exitBrokerRate"
-                startAdornment={
-                  <InputAdornment position="start">%</InputAdornment>
-                }
-              />
-              <FormHelperText>{props.errors.exitBrokerRate}</FormHelperText>
-            </FormControl>
+              name="exitBrokerRate"
+              type="number"
+              handleChange={handleChange}
+              defaultValue={props.inputs.exitBrokerRate}
+              symbol={<span>%</span>}
+              labelText={props.intl.formatMessage({
+                ...messages.exitBrokerRate,
+              })}
+              tooltipText={props.intl.formatMessage({
+                ...messages.exitBrokerRateInfo,
+              })}
+            />
           </Grid>
         </Grid>
         <Grid item container spacing={6} className="mt-20">
           <Grid item xs={3}>
-            <FormControl
-              variant="standard"
-              className="w-100"
+            <CustomInput
               error={props.errors.irsRate}
-            >
-              <InputLabel>
-                {props.intl.formatMessage({
-                  ...messages.irsRate,
-                })}
-                <Tooltip
-                  title={props.intl.formatMessage({
-                    ...messages.irsRateInfo,
-                  })}
-                >
-                  <IconButton className={classes.iconMr}>
-                    <InfoIcon className={classes.iconSize} color="primary" />
-                  </IconButton>
-                </Tooltip>
-              </InputLabel>
-              <Input
-                onChange={handleChange}
-                type="number"
-                defaultValue={props.inputs.irsRate}
-                name="irsRate"
-                startAdornment={
-                  <InputAdornment position="start">%</InputAdornment>
-                }
-              />
-              <FormHelperText>{props.errors.irsRate}</FormHelperText>
-            </FormControl>
+              name="irsRate"
+              type="number"
+              handleChange={handleChange}
+              defaultValue={props.inputs.irsRate}
+              symbol={<span>%</span>}
+              labelText={props.intl.formatMessage({
+                ...messages.irsRate,
+              })}
+              tooltipText={props.intl.formatMessage({
+                ...messages.irsRateInfo,
+              })}
+            />
           </Grid>
           <Grid item xs={3}>
-            <FormControl
-              variant="standard"
-              className="w-100"
+            <CustomInput
               error={props.errors.capitalGainsTaxRate}
-            >
-              <InputLabel>
-                {props.intl.formatMessage({
-                  ...messages.capitalGainsTaxRate,
-                })}
-                <Tooltip
-                  title={props.intl.formatMessage({
-                    ...messages.capitalGainsTaxRateInfo,
-                  })}
-                >
-                  <IconButton className={classes.iconMr}>
-                    <InfoIcon className={classes.iconSize} color="primary" />
-                  </IconButton>
-                </Tooltip>
-              </InputLabel>
-              <Input
-                onChange={handleChange}
-                type="number"
-                defaultValue={props.inputs.capitalGainsTaxRate}
-                name="capitalGainsTaxRate"
-                startAdornment={
-                  <InputAdornment position="start">%</InputAdornment>
-                }
-              />
-              <FormHelperText>
-                {props.errors.capitalGainsTaxRate}
-              </FormHelperText>
-            </FormControl>
+              name="capitalGainsTaxRate"
+              type="number"
+              handleChange={handleChange}
+              defaultValue={props.inputs.capitalGainsTaxRate}
+              symbol={<span>%</span>}
+              labelText={props.intl.formatMessage({
+                ...messages.capitalGainsTaxRate,
+              })}
+              tooltipText={props.intl.formatMessage({
+                ...messages.capitalGainsTaxRateInfo,
+              })}
+            />
           </Grid>
         </Grid>
       </Grid>
@@ -1647,128 +1143,68 @@ export function Investments(props) {
         error={props.errors.grossAreaToUsefulAreaRate}
       >
         <Grid item xs={3}>
-          <FormControl variant="standard" className="w-100">
-            <InputLabel>
-              {props.intl.formatMessage({
-                ...messages.grossAreaToUsefulAreaRate,
-              })}
-              <Tooltip
-                title={props.intl.formatMessage({
-                  ...messages.grossAreaToUsefulAreaRateInfo,
-                })}
-              >
-                <IconButton className={classes.iconMr}>
-                  <InfoIcon className={classes.iconSize} color="primary" />
-                </IconButton>
-              </Tooltip>
-            </InputLabel>
-            <Input
-              onChange={handleChange}
-              type="number"
-              defaultValue={props.inputs.grossAreaToUsefulAreaRate}
-              name="grossAreaToUsefulAreaRate"
-              startAdornment={
-                <InputAdornment position="start">%</InputAdornment>
-              }
-            />
-            <FormHelperText>
-              {props.errors.grossAreaToUsefulAreaRate}
-            </FormHelperText>
-          </FormControl>
+          <CustomInput
+            error={props.errors.grossAreaToUsefulAreaRate}
+            name="grossAreaToUsefulAreaRate"
+            type="number"
+            handleChange={handleChange}
+            defaultValue={props.inputs.grossAreaToUsefulAreaRate}
+            symbol={<span>%</span>}
+            labelText={props.intl.formatMessage({
+              ...messages.grossAreaToUsefulAreaRate,
+            })}
+            tooltipText={props.intl.formatMessage({
+              ...messages.grossAreaToUsefulAreaRateInfo,
+            })}
+          />
         </Grid>
         <Grid item xs={3}>
-          <FormControl
-            variant="standard"
-            className="w-100"
+          <CustomInput
             error={props.errors.floorRate}
-          >
-            <InputLabel>
-              {props.intl.formatMessage({
-                ...messages.floorRate,
-              })}
-              <Tooltip
-                title={props.intl.formatMessage({
-                  ...messages.floorRateInfo,
-                })}
-              >
-                <IconButton className={classes.iconMr}>
-                  <InfoIcon className={classes.iconSize} color="primary" />
-                </IconButton>
-              </Tooltip>
-            </InputLabel>
-            <Input
-              onChange={handleChange}
-              type="number"
-              defaultValue={props.inputs.floorRate}
-              name="floorRate"
-              startAdornment={
-                <InputAdornment position="start">%</InputAdornment>
-              }
-            />
-            <FormHelperText>{props.errors.floorRate}</FormHelperText>
-          </FormControl>
+            name="floorRate"
+            type="number"
+            handleChange={handleChange}
+            defaultValue={props.inputs.floorRate}
+            symbol={<span>%</span>}
+            labelText={props.intl.formatMessage({
+              ...messages.floorRate,
+            })}
+            tooltipText={props.intl.formatMessage({
+              ...messages.floorRateInfo,
+            })}
+          />
         </Grid>
         <Grid item xs={3}>
-          <FormControl
-            variant="standard"
-            className="w-100"
+          <CustomInput
             error={props.errors.capRate}
-          >
-            <InputLabel>
-              {props.intl.formatMessage({
-                ...messages.capRate,
-              })}
-              <Tooltip
-                title={props.intl.formatMessage({
-                  ...messages.capRateInfo,
-                })}
-              >
-                <IconButton className={classes.iconMr}>
-                  <InfoIcon className={classes.iconSize} color="primary" />
-                </IconButton>
-              </Tooltip>
-            </InputLabel>
-            <Input
-              onChange={handleChange}
-              type="number"
-              defaultValue={props.inputs.capRate}
-              name="capRate"
-              startAdornment={
-                <InputAdornment position="start">%</InputAdornment>
-              }
-            />
-            <FormHelperText>{props.errors.capRate}</FormHelperText>
-          </FormControl>
+            name="capRate"
+            type="number"
+            handleChange={handleChange}
+            defaultValue={props.inputs.capRate}
+            symbol={<span>%</span>}
+            labelText={props.intl.formatMessage({
+              ...messages.capRate,
+            })}
+            tooltipText={props.intl.formatMessage({
+              ...messages.capRateInfo,
+            })}
+          />
         </Grid>
         <Grid item container spacing={6}>
           <Grid item xs={3}>
-            <FormControl variant="standard" className="w-100">
-              <InputLabel>
-                {props.intl.formatMessage({
-                  ...messages.confidencialImobiliarioPercentile,
-                })}
-                <Tooltip
-                  title={props.intl.formatMessage({
-                    ...messages.confidencialImobiliarioPercentileInfo,
-                  })}
-                >
-                  <IconButton className={classes.iconMr}>
-                    <InfoIcon className={classes.iconSize} color="primary" />
-                  </IconButton>
-                </Tooltip>
-              </InputLabel>
-              <Select
-                defaultValue={props.inputs.ciPercentile}
-                name="ciPercentile"
-                onChange={handleChange}
-              >
-                {props.ciPercentiles.map(value => (
-                  <MenuItem key={value.name} value={value.label}>
-                    {value.name}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
+            <CustomSelect
+              error={null}
+              defaultValue={props.inputs.ciPercentile}
+              handleChange={handleChange}
+              data={props.ciPercentiles}
+              name="ciPercentile"
+              tooltipText={props.intl.formatMessage({
+                ...messages.confidencialImobiliarioPercentileInfo,
+              })}
+              labelText={props.intl.formatMessage({
+                ...messages.confidencialImobiliarioPercentile,
+              })}
+            />
           </Grid>
           {/*  <Grid item xs={3}>
             <FormControl
