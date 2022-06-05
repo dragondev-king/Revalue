@@ -34,6 +34,18 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center',
     display: 'flex',
   },
+  langSelectControl: {
+    marginTop: '14px',
+  },
+  langSelect: {
+    textTransform: 'uppercase',
+    fontSize: '13px',
+    fontWeight: '700',
+    color: '#31342B',
+    '& svg': {
+      display: 'none',
+    },
+  },
 }));
 
 export function TopBar(props) {
@@ -75,12 +87,14 @@ export function TopBar(props) {
           spacing={4}
           justifyContent="flex-end"
         >
-          <Grid item xs={3} className="mt-5">
-            <FormControl variant="standard" className="w-100">
+          <Grid item xs={3}>
+            <FormControl className={classes.langSelectControl}>
               <Select
                 name="type"
                 defaultValue={props.language}
                 onChange={handleChange}
+                disableUnderline
+                className={classes.langSelect}
               >
                 {language.map(value => (
                   <MenuItem key={value} value={value.name}>

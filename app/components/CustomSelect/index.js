@@ -20,6 +20,17 @@ const useStyles = makeStyles({
     borderRadius: '4px',
     padding: '0 10px',
     color: '#7C7C7C',
+    background: '#FFFFFF',
+  },
+  label: {
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
+    right: '22px !important',
+    bottom: '0px',
+  },
+  labelShrunk: {
+    right: 'unset',
   },
 });
 
@@ -39,7 +50,14 @@ const CustomSelect = ({
       className={`${styles.formControl} w-100`}
       error={error}
     >
-      <InputLabel shrink className={styles.inputLabel}>
+      <InputLabel
+        shrink
+        className={styles.inputLabel}
+        classes={{
+          root: styles.label,
+          shrink: styles.labelShrunk,
+        }}
+      >
         {labelText}
         <Tooltip title={tooltipText}>
           <IconButton>

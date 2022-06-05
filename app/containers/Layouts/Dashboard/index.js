@@ -79,7 +79,9 @@ class Dashboard extends Component {
           />
           <Scrollbar className="scrollable-content">
             <div className="content">
-              <div className="m-sm-30">{this.props.children}</div>
+              <div className="p-sm-30" style={{ background: '#E9F2FB' }}>
+                {this.props.children}
+              </div>
             </div>
             <div className="my-auto" />
             <Footer />

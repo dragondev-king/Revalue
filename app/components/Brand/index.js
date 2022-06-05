@@ -9,7 +9,7 @@ function Brand(props) {
           src={require('../../images/icon-512x512.png')}
           alt="company-logo"
         /> */}
-        <Icon className="mr-20">apartment</Icon>
+        <Icon className="mr-20 brand_icon">apartment</Icon>
         <span className="brand__text">{props.name}</span>
       </div>
     </div>

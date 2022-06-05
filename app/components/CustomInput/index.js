@@ -20,6 +20,7 @@ const useStyles = makeStyles({
     borderRadius: '4px',
     color: '#7C7C7C',
     paddingRight: '5px',
+    background: '#FFFFFF',
   },
   inputAdornment: {
     background: '#C3E3FF',
@@ -31,6 +32,16 @@ const useStyles = makeStyles({
       color: '#31342B',
       fontSize: '16px',
     },
+  },
+  label: {
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
+    right: '22px !important',
+    bottom: '0px',
+  },
+  labelShrunk: {
+    right: 'unset',
   },
 });
 
@@ -47,7 +58,13 @@ const CustomInput = ({
   const styles = useStyles();
   return (
     <FormControl variant="standard" className="w-100" error={error}>
-      <InputLabel className={styles.inputLabel}>
+      <InputLabel
+        className={styles.inputLabel}
+        classes={{
+          root: styles.label,
+          shrink: styles.labelShrunk,
+        }}
+      >
         {labelText}
         <Tooltip title={tooltipText}>
           <IconButton>

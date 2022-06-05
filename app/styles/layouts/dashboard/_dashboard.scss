@@ -9,20 +9,20 @@
 }
 
 .tooltip:before {
-  opacity:0;
-  transition:.3s opacity;
+  opacity: 0;
+  transition: 0.3s opacity;
 }
 
 .tooltip:hover:before {
-  opacity:1;
+  opacity: 1;
 }
 
 .tooltip:after {
-  opacity:0;
-  transition:.3s;
+  opacity: 0;
+  transition: 0.3s;
 }
 .tooltip:hover:after {
-  opacity:1;
+  opacity: 1;
 }
 
 .dashboard {
@@ -55,7 +55,6 @@
       .content {
         position: relative;
       }
-
     }
   }
   &.sidenav-compact {
@@ -148,7 +147,7 @@
   // closed sidenav
   &.sidenav-close {
     .sidenav {
-      left: -#{$sidenav-width}
+      left: -#{$sidenav-width};
     }
     .content-wrap {
       width: 100%;
@@ -202,9 +201,10 @@
       padding-bottom: 120px;
     }
     &::after {
-      content: "";
+      content: '';
       position: absolute;
-      background: white;
+      background: #1a2434;
+      box-shadow: 2px 0px 20px rgba(0, 0, 0, 0.05);
       opacity: 1;
       left: 0;
       top: 0;
@@ -220,9 +220,13 @@
           height: 24px;
           margin-right: 12px;
         }
+        .brand_icon {
+          color: $gray;
+        }
         .brand__text {
           font-weight: bold;
           font-size: 1rem;
+          color: $gray;
         }
       }
     }
@@ -234,7 +238,7 @@
     }
     .navigation .nav-item.active,
     .navigation .nav-item.active:hover {
-      background: $primary;
+      background: #141a23;
     }
   }
 }
@@ -262,16 +266,19 @@
     display: flex;
     height: 44px;
     border-radius: 4px;
-    margin-bottom: .5rem;
+    margin-bottom: 0.5rem;
     justify-content: space-between;
+    color: $gray !important;
     button {
       padding: 0 16px;
     }
-    &.active, &.active:hover {
+    &.active,
+    &.active:hover {
       color: $white !important;
       box-shadow: $elevation-z3;
     }
-    &.has-submenu.open, &:hover {
+    &.has-submenu.open,
+    &:hover {
       background-color: rgba(0, 0, 0, 0.05);
     }
     > button {
@@ -281,7 +288,7 @@
       font-size: 18px;
     }
     .item-text {
-      font-size: 0.875rem;
+      font-size: 16px;
     }
     .icon-text {
       position: relative;
@@ -294,7 +301,7 @@
       text-indent: -1000000px;
       &::after {
         position: absolute;
-        content: "";
+        content: '';
         top: 0;
         left: 0;
         height: 100%;
@@ -324,11 +331,22 @@
   border-radius: 12px;
   line-height: 20px;
   font-weight: 500;
-  &.bg-primary, &.bg-error {
+  &.bg-primary,
+  &.bg-error {
     color: $white !important;
   }
 }
 
 .footer {
   min-height: $footer-height;
+}
+
+.MuiDataGrid-columnSeparator {
+  display: none !important;
+}
+.MuiDataGrid-columnHeaderTitle {
+  font-weight: bold !important;
+}
+.MuiDataGrid-columnsContainer {
+  border-bottom: 1px solid #0083fc !important;
 }

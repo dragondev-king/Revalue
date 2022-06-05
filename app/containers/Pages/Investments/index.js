@@ -91,14 +91,27 @@ const useStyles = makeStyles(theme => ({
     marginTop: '24px',
     marginBottom: '18px',
   },
-  customizeBtn: {
-    color: 'white',
-    marginTop: '48px',
-    marginBottom: '48px',
+  customizeButton: {
+    color: '#FFFFFF',
+    margin: '30px 0 50px',
+    background: '#0085FF !important',
+    borderRadius: '7px',
+    width: '286px',
+    height: '44px',
+    textTransform: 'capitalize',
+    fontWeight: '700',
+    fontSize: '16px',
   },
-  tableHead: {
-    color: 'white',
-    fontSize: '14px',
+  tableContainer: {
+    background: '#FFFFFF',
+    padding: '30px 25px',
+    width: '100%',
+  },
+  tableHeading: {
+    color: '#31342B !important',
+    fontSize: '24px',
+    textTransform: 'capitalize',
+    marginBottom: '24px',
   },
   tableBody: {
     fontSize: '14px',
@@ -108,6 +121,9 @@ const useStyles = makeStyles(theme => ({
     '&:last-child td, &:last-child th': {
       border: 0,
     },
+  },
+  gridRoot: {
+    border: 0,
   },
   fixHeight: {
     minHeight: '300px',
@@ -1255,29 +1271,35 @@ export function Investments(props) {
 
   function renderTable() {
     return (
-      <Grid container direction="column" className="w-100">
-        <Grid item className="pb-20">
-          <Typography variant="h6">
+      <Grid container direction="column" className={classes.tableContainer}>
+        <Grid item>
+          <Typography variant="h6" className={classes.tableHeading}>
             {props.intl.formatMessage({
               ...messages.investments,
             })}
           </Typography>
         </Grid>
-        <Grid item className="w-100 h-500">
+        <Grid item className="w-100">
           <DataGrid
+            // className={classes.root}
+            classes={{
+              root: classes.gridRoot,
+            }}
             rows={props.analysisData}
             columns={translateColumnLabel(columns)}
-            // checkboxSelection
+            checkboxSelection
             disableColumnFilter
             disableColumnMenu
             disableColumnSelector
             disableSelectionOnClick
             sortingMode="server"
-            hideFooterPagination
-            hideFooter
-            density="compact"
             autoHeight
-            autoPageSize
+            pageSize={5}
+            rowsPerPageOptions={[5]}
+            // hideFooterPagination
+            // hideFooter
+            // density="compact"
+            // autoPageSize
             // onCellClick={}
             // onRowClick={event => {
             //   props.history.push(`/analysis/${event.id}`);
@@ -1292,10 +1314,8 @@ export function Investments(props) {
     return (
       <Button
         type="submit"
-        color="primary"
-        variant="contained"
         onClick={onSubmit}
-        className={classes.customizeBtn}
+        className={classes.customizeButton}
         // disabled={props.analyzeButtonDisabled}
       >
         {props.isGettingAnalysisData && (
