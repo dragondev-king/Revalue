@@ -374,12 +374,10 @@ export function Investments(props) {
         abortEarly: false,
       })
       .then(() => {
-        console.log(props);
         props.getAnalysisData(props.inputs);
         props.setAnalyzeButtonDisabled(true);
       })
       .catch(error => {
-        console.log(error.inner);
         if (error.inner.length > 0) {
           error.inner.forEach(item => {
             props.setInputError(
@@ -1316,7 +1314,7 @@ export function Investments(props) {
         type="submit"
         onClick={onSubmit}
         className={classes.customizeButton}
-        // disabled={props.analyzeButtonDisabled}
+        disabled={props.analyzeButtonDisabled}
       >
         {props.isGettingAnalysisData && (
           <CircularProgress size={20} className={classes.loading} />

@@ -246,6 +246,7 @@ const investmentReducer = (state = initialState, action) =>
         break;
       case SET_INPUT_VALUE:
         draft.inputs[action.payload.input] = action.payload.value;
+        localStorage.setItem('inputs', JSON.stringify(draft.inputs));
         break;
       case SET_INPUT_ERROR:
         draft.errors[action.payload.input] = action.payload.error;
