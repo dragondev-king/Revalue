@@ -20,6 +20,10 @@ export default defineMessages({
     defaultMessage: 'Location',
   },
   // Property Information
+  MainInvestmentInformation: {
+    id: `${scope}.mainInvestmentInformation`,
+    defaultMessage: 'Main Investment Information',
+  },
   propertyInformation: {
     id: `${scope}.propertyInformation`,
     defaultMessage: 'Property Information',

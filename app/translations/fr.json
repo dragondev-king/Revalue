@@ -201,6 +201,7 @@
   "app.containers.Investments.price": "",
   "app.containers.Investments.profit": "",
   "app.containers.Investments.propertyCondition": "",
+  "app.containers.Investments.mainInvestmentInformation": "",
   "app.containers.Investments.propertyInformation": "",
   "app.containers.Investments.propertyLocation": "",
   "app.containers.Investments.propertyTaxRate": "",

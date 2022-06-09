@@ -201,6 +201,7 @@
   "app.containers.Investments.price": "Price",
   "app.containers.Investments.profit": "Profit",
   "app.containers.Investments.propertyCondition": "Property Condition",
+  "app.containers.Investments.mainInvestmentInformation": "Main Investment Information",
   "app.containers.Investments.propertyInformation": "Property Information",
   "app.containers.Investments.propertyLocation": "Property Location *",
   "app.containers.Investments.propertyTaxRate": "Property Tax Rate",
