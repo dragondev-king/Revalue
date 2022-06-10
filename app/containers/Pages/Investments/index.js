@@ -139,8 +139,8 @@ const useStyles = makeStyles(theme => ({
     border: 0,
   },
   fixHeight: {
-    minHeight: '300px',
-    maxHeight: '300px',
+    // minHeight: '300px',
+    // maxHeight: '300px',
   },
   iconMr: {
     marginLeft: '5px',
