@@ -368,6 +368,10 @@ export default defineMessages({
     id: `${scope}.capitalGainsTaxRateInfo`,
     defaultMessage: 'IRS Rate on base Profit',
   },
+  irs: {
+    id: `${scope}.irs`,
+    defaultMessage: 'IRS Rate',
+  },
   grossAreaToUsefulAreaRateInfo: {
     id: `${scope}.grossAreaToUsefulAreaRateInfo`,
     defaultMessage:

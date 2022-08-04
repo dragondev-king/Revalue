@@ -22,6 +22,13 @@ const useStyles = makeStyles({
     color: '#7C7C7C',
     background: '#FFFFFF',
   },
+  disabledSelect: {
+    border: '1px solid #7C7C7C',
+    borderRadius: '4px',
+    padding: '0 10px',
+    color: '#7C7C7C',
+    background: '#FFFFFF',
+  },
   label: {
     overflow: 'hidden',
     textOverflow: 'ellipsis',
@@ -42,6 +49,7 @@ const CustomSelect = ({
   labelText,
   tooltipText,
   name,
+  disabled = false,
 }) => {
   const styles = useStyles();
   return (
@@ -66,12 +74,13 @@ const CustomSelect = ({
         </Tooltip>
       </InputLabel>
       <Select
+        disabled={disabled}
         disableUnderline
         defaultValue={defaultValue}
         name={name}
         onChange={handleChange}
-        className={styles.select}
-        IconComponent={() => <DropdownIcon />}
+        className={disabled ? styles.disabledSelect : styles.select}
+        IconComponent={() => (disabled ? <></> : <DropdownIcon />)}
       >
         {data.map(value => (
           <MenuItem key={value.name} value={value.name}>

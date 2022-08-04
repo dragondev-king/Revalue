@@ -351,10 +351,11 @@
 .MuiDataGrid-columnsContainer {
   border-bottom: 1px solid #0083fc !important;
 }
+
 .MuiSwitch-thumb {
   background-color: #0083fc !important;
 }
-.MuiSwitch-track {
+.MuiSwitch-colorPrimary.Mui-checked + .MuiSwitch-track {
   background: #8dc8ff !important;
   mix-blend-mode: normal;
   opacity: 0.5;

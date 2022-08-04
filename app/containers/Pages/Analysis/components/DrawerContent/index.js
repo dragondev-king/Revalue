@@ -1,6 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 import React, { memo, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
+import CloseIcon from '@material-ui/icons/Close';
 import * as yup from 'yup';
 import { Helmet } from 'react-helmet';
 import { injectIntl } from 'react-intl';
@@ -19,16 +20,13 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { DataGrid } from '@material-ui/data-grid';
 import parse from 'autosuggest-highlight/parse';
 import match from 'autosuggest-highlight/match';
 import AutoComplete from 'components/AutoComplete';
 import SearchIcon from '@material-ui/icons/Search';
-import { Link } from 'react-router-dom';
-import PaperMap from 'components/PaperMap';
-import messages from './messages';
-import CustomSelect from '../../../components/CustomSelect';
-import CustomInput from '../../../components/CustomInput';
+import messages from '../../../Investments/messages';
+import CustomSelect from '../../../../../components/CustomSelect';
+import CustomInput from '../../../../../components/CustomInput';
 import {
   makeSelectPropertyTypes,
   makeSelectPropertyTypologies,
@@ -41,8 +39,8 @@ import {
   makeSelectIsGettingAnalysisData,
   makeSelectAcquisitionTypes,
   makeSelectAnalyzeButtonDisabled,
-} from './selectors';
-import reducer from './reducer';
+} from '../../../Investments/selectors';
+import reducer from '../../../Investments/reducer';
 import {
   getPropertyLocations,
   getPropertyTypes,
@@ -55,7 +53,7 @@ import {
   setInputError,
   setInputValue,
   setPropertyLocation,
-} from './actions';
+} from '../../../Investments/actions';
 
 const useStyles = makeStyles(theme => ({
   appBarSpacer: theme.mixins.toolbar,
@@ -171,62 +169,6 @@ const useStyles = makeStyles(theme => ({
     color: '#0083FC',
   },
 }));
-
-const columns = [
-  {
-    field: 'location',
-    label: 'location',
-    sortable: false,
-    width: 140,
-  },
-  {
-    field: 'asking',
-    label: 'asking',
-    sortable: false,
-    width: 130,
-  },
-  {
-    field: 'capital',
-    label: 'capital',
-    sortable: false,
-    width: 130,
-  },
-  {
-    field: 'costs',
-    label: 'costs',
-    sortable: false,
-    width: 130,
-  },
-  {
-    field: 'price',
-    label: 'price',
-    sortable: false,
-    width: 130,
-  },
-  {
-    field: 'irr',
-    label: 'irr',
-    sortable: false,
-    width: 130,
-  },
-  {
-    field: 'profit',
-    label: 'profit',
-    sortable: false,
-    width: 130,
-  },
-  {
-    field: 'report',
-    label: 'report',
-    width: 130,
-    sortable: false,
-    renderCell: cellValues => (
-      <Link to={`/analysis/${cellValues.row.id}`} style={{ color: '#7866f4' }}>
-        Report
-      </Link>
-    ),
-  },
-];
 
 export function Investments(props) {
   const [isSwitch, setIsSwitch] = useState(true);
@@ -417,14 +359,23 @@ export function Investments(props) {
   function renderPropertyForm() {
     return (
       <Grid container direction="column" justifyContent="flex-start">
-        <Grid item className="mb-15">
-          <Typography variant="h6">
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+          }}
+        >
+          <Typography variant="h5">
             {props.intl.formatMessage({
               ...messages.MainInvestmentInformation,
             })}
           </Typography>
-        </Grid>
-        <Grid item container spacing={6}>
+          <CloseIcon
+            onClick={() => props.setOpen(false)}
+            style={{ cursor: 'pointer' }}
+          />
+        </div>
+        <Grid item container spacing={2}>
           <Grid item xs={12}>
             <FormControl
               variant="standard"
@@ -467,7 +418,7 @@ export function Investments(props) {
             </FormControl>
           </Grid>
         </Grid>
-        <Grid item container spacing={3} className="mt-0">
+        <Grid item container spacing={2} className="mt-0">
           <Grid item xs={6}>
             <CustomInput
               error={props.errors.financingRate}
@@ -580,38 +531,6 @@ export function Investments(props) {
               })}
             />
           </Grid>
-          {/*  <Grid item xs={3}>
-            <FormControl
-              variant="standard"
-              className="w-100"
-              error={props.errors.minObservationsForPercentile}
-            >
-              <InputLabel>
-                {props.intl.formatMessage({
-                  ...messages.minObservationsForPercentile,
-                })}
-                <Tooltip
-                  title={props.intl.formatMessage({
-                    ...messages.minObservationsForPercentileInfo,
-                  })}
-                >
-                  <IconButton className={classes.iconMr}>
-                    <InfoIcon className={classes.iconSize} color="primary" />
-                  </IconButton>
-                </Tooltip>
-              </InputLabel>
-              <Input
-                onChange={handleChange}
-                type="number"
-                defaultValue={props.inputs.minObservationsForPercentile}
-                name="minObservationsForPercentile"
-                startAdornment={
-                  <InputAdornment position="start">#</InputAdornment>
-                }
-              />
-              <FormHelperText>{props.errors.minObservationsForPercentile}</FormHelperText>
-            </FormControl>
-          </Grid> */}
         </Grid>
       </Grid>
     );
@@ -720,9 +639,9 @@ export function Investments(props) {
 
   function renderPropertyInformationAccordion() {
     return (
-      <Grid item container spacing={6} className="mb-10">
-        <Grid item container spacing={6}>
-          <Grid item xs={4}>
+      <Grid item container spacing={2}>
+        <Grid item container spacing={2}>
+          <Grid item xs={6}>
             <CustomSelect
               error={props.errors.propertyType}
               defaultValue={props.inputs.propertyType}
@@ -737,7 +656,7 @@ export function Investments(props) {
               })}
             />
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={6}>
             <CustomSelect
               error={props.errors.propertyTypology}
               defaultValue={props.inputs.propertyTypology}
@@ -752,8 +671,7 @@ export function Investments(props) {
               })}
             />
           </Grid>
-          {/* This was not in the previous page but was in the figma - adding the field but content needs to be update */}
-          <Grid item xs={4}>
+          <Grid item xs={6}>
             <CustomSelect
               error={props.errors.propertyTypology}
               defaultValue={props.inputs.propertyTypology}
@@ -766,9 +684,7 @@ export function Investments(props) {
               })}
             />
           </Grid>
-        </Grid>
-        <Grid item container spacing={6}>
-          <Grid item xs={4}>
+          <Grid item xs={6}>
             <CustomSelect
               error={props.errors.propertyCondition}
               defaultValue={props.inputs.propertyCondition}
@@ -783,7 +699,7 @@ export function Investments(props) {
               })}
             />
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={6}>
             <CustomInput
               error={props.errors.minAskingPrice}
               name="minAskingPrice"
@@ -799,7 +715,7 @@ export function Investments(props) {
               })}
             />
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={6}>
             <CustomInput
               error={props.errors.maxAskingPrice}
               name="maxAskingPrice"
@@ -815,7 +731,7 @@ export function Investments(props) {
               })}
             />
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={6}>
             <CustomInput
               error={props.errors.minUsefulArea}
               name="minUsefulArea"
@@ -831,7 +747,7 @@ export function Investments(props) {
               })}
             />
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={6}>
             <CustomInput
               error={props.errors.maxUsefulArea}
               name="maxUsefulArea"
@@ -853,35 +769,35 @@ export function Investments(props) {
   }
   function renderAcquisitionAssumptionsAccordion() {
     return (
-      <Grid item container spacing={6} className="mb-10">
+      <Grid item container spacing={6}>
         {renderAcquisitionAssumptions()}
       </Grid>
     );
   }
   function renderFinancingAssumptionsAccordion() {
     return (
-      <Grid item container spacing={6} className="mb-10">
+      <Grid item container spacing={6}>
         {renderFinanceAssumptions()}
       </Grid>
     );
   }
   function renderOperatingAssumptionsAccordion() {
     return (
-      <Grid item container spacing={6} className="mb-10">
+      <Grid item container spacing={6}>
         {renderOperatingAssumptions()}
       </Grid>
     );
   }
   function renderTaxAssumptionsAccordion() {
     return (
-      <Grid item container spacing={6} className="mb-10">
+      <Grid item container spacing={6}>
         {renderTaxAssumptions()}
       </Grid>
     );
   }
   function renderExitAssumptionsAccordion() {
     return (
-      <Grid item container spacing={6} className="mb-10">
+      <Grid item container>
         {renderExitAssumptions()}
       </Grid>
     );
@@ -890,8 +806,8 @@ export function Investments(props) {
   function renderAcquisitionAssumptions() {
     return (
       <Grid container item>
-        <Grid item container spacing={6}>
-          <Grid item xs={4}>
+        <Grid item container spacing={2}>
+          <Grid item xs={6}>
             <CustomSelect
               error={null}
               defaultValue={props.inputs.acquisitionType}
@@ -906,7 +822,7 @@ export function Investments(props) {
               })}
             />
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={6}>
             <CustomInput
               error={props.errors.entryBrokerRate}
               name="entryBrokerRate"
@@ -922,8 +838,7 @@ export function Investments(props) {
               })}
             />
           </Grid>
-          {/* It was not in the previous page but was in the figma - adding this but content needs to be updated */}
-          <Grid item xs={4}>
+          <Grid item xs={6}>
             <CustomSelect
               error={null}
               defaultValue={props.inputs.acquisitionType}
@@ -936,9 +851,7 @@ export function Investments(props) {
               })}
             />
           </Grid>
-        </Grid>
-        <Grid item container spacing={6} className="mt-20">
-          <Grid item xs={4}>
+          <Grid item xs={6}>
             <CustomInput
               error={props.errors.stampDutyRate}
               name="stampDutyRate"
@@ -954,7 +867,7 @@ export function Investments(props) {
               })}
             />
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={6}>
             <CustomInput
               error={props.errors.landRegistryInscriptionWithMortgage}
               name="landRegistryInscriptionWithMortgage"
@@ -970,7 +883,7 @@ export function Investments(props) {
               })}
             />
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={6}>
             <CustomInput
               error={props.errors.landRegistryInscriptionWithoutMortgage}
               name="landRegistryInscriptionWithoutMortgage"
@@ -993,9 +906,9 @@ export function Investments(props) {
 
   function renderFinanceAssumptions() {
     return (
-      <Grid container item className="mt-20">
-        <Grid item container spacing={6}>
-          <Grid item xs={4}>
+      <Grid container item>
+        <Grid item container spacing={2}>
+          <Grid item xs={6}>
             <CustomInput
               error={props.errors.bankCommission}
               name="bankCommission"
@@ -1011,7 +924,7 @@ export function Investments(props) {
               })}
             />
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={6}>
             <CustomInput
               error={props.errors.stampDutyMortgageRate}
               name="stampDutyMortgageRate"
@@ -1027,7 +940,7 @@ export function Investments(props) {
               })}
             />
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={6}>
             <CustomInput
               error={props.errors.stampDutyInterestRate}
               name="stampDutyInterestRate"
@@ -1043,9 +956,7 @@ export function Investments(props) {
               })}
             />
           </Grid>
-        </Grid>
-        <Grid item container spacing={6} className="mt-20">
-          <Grid item xs={4}>
+          <Grid item xs={6}>
             <CustomInput
               error={props.errors.interestRate}
               name="interestRate"
@@ -1061,7 +972,7 @@ export function Investments(props) {
               })}
             />
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={6}>
             <CustomInput
               error={props.errors.capexFinancingRate}
               name="capexFinancingRate"
@@ -1077,7 +988,7 @@ export function Investments(props) {
               })}
             />
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={6}>
             <CustomInput
               error={props.errors.earlyRepaymentRate}
               name="earlyRepaymentRate"
@@ -1093,23 +1004,6 @@ export function Investments(props) {
               })}
             />
           </Grid>
-          {/* Hide this field as it was not in the figma */}
-          {/* <Grid item xs={4}>
-            <CustomInput
-              error={props.errors.amortization}
-              name="amortization"
-              type="number"
-              handleChange={handleChange}
-              defaultValue={props.inputs.amortization}
-              symbol={<span>Years</span>}
-              labelText={props.intl.formatMessage({
-                ...messages.amortization,
-              })}
-              tooltipText={props.intl.formatMessage({
-                ...messages.amortizationInfo,
-              })}
-            />
-          </Grid> */}
         </Grid>
       </Grid>
     );
@@ -1117,9 +1011,9 @@ export function Investments(props) {
 
   function renderOperatingAssumptions() {
     return (
-      <Grid container item className="mt-20">
-        <Grid item container spacing={6}>
-          <Grid item xs={4}>
+      <Grid container item>
+        <Grid item container spacing={2}>
+          <Grid item xs={6}>
             <CustomInput
               error={props.errors.condominiumCosts}
               name="condominiumCosts"
@@ -1135,7 +1029,7 @@ export function Investments(props) {
               })}
             />
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={6}>
             <CustomInput
               error={props.errors.propertyTaxRate}
               name="propertyTaxRate"
@@ -1151,7 +1045,7 @@ export function Investments(props) {
               })}
             />
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={6}>
             <CustomInput
               error={props.errors.capex}
               name="capex"
@@ -1167,7 +1061,7 @@ export function Investments(props) {
               })}
             />
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={6}>
             <CustomInput
               error={props.errors.multiRiskInsurance}
               name="capex"
@@ -1183,7 +1077,7 @@ export function Investments(props) {
               })}
             />
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={6}>
             <CustomInput
               error={props.errors.lifeInsurance}
               name="capex"
@@ -1206,9 +1100,8 @@ export function Investments(props) {
 
   function renderTaxAssumptions() {
     return (
-      <Grid container item className="mt-20">
-        <Grid item container spacing={6}>
-          {/* This was not in the previous page but was in the figma - adding the field but content needs to be update */}
+      <Grid container item>
+        <Grid item container spacing={2}>
           <Grid item xs={12} className="py-0">
             <Switch
               onChange={e => setIsSwitch(e.target.checked)}
@@ -1217,8 +1110,7 @@ export function Investments(props) {
               name="taxAssumptionCheck"
             />
           </Grid>
-          {/* This was not in the previous page but was in the figma - adding the field but content needs to be update */}
-          <Grid item xs={4}>
+          <Grid item xs={6}>
             <CustomSelect
               disabled={!isSwitch}
               error={props.errors.propertyTypology}
@@ -1232,8 +1124,7 @@ export function Investments(props) {
               })}
             />
           </Grid>
-          {/* This was not in the previous page but was in the figma - adding the field but content needs to be update */}
-          <Grid item xs={4}>
+          <Grid item xs={6}>
             <CustomSelect
               disabled={!isSwitch}
               error={props.errors.propertyTypology}
@@ -1247,8 +1138,7 @@ export function Investments(props) {
               })}
             />
           </Grid>
-          {/* This was not in the previous page but was in the figma - adding the field but content needs to be update */}
-          <Grid item xs={4}>
+          <Grid item xs={6}>
             <CustomInput
               disabled={!isSwitch}
               error={props.errors.irsRate}
@@ -1263,7 +1153,7 @@ export function Investments(props) {
               })}
             />
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={6}>
             <CustomInput
               disabled={!isSwitch}
               error={props.errors.irsRate}
@@ -1280,7 +1170,7 @@ export function Investments(props) {
               })}
             />
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={6}>
             <CustomInput
               disabled={!isSwitch}
               error={props.errors.capitalGainsTaxRate}
@@ -1298,7 +1188,7 @@ export function Investments(props) {
             />
           </Grid>
           {!isSwitch && (
-            <Grid item xs={4}>
+            <Grid item xs={6}>
               <CustomInput
                 error={props.errors.irs}
                 name="irs"
@@ -1322,9 +1212,9 @@ export function Investments(props) {
 
   function renderExitAssumptions() {
     return (
-      <Grid container item className="mt-20">
-        <Grid item container spacing={6}>
-          <Grid item xs={3}>
+      <Grid container item>
+        <Grid item container spacing={2}>
+          <Grid item xs={6}>
             <CustomInput
               error={props.errors.timeToSale}
               name="timeToSale"
@@ -1340,7 +1230,7 @@ export function Investments(props) {
               })}
             />
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={6}>
             <CustomInput
               error={props.errors.exitBrokerRate}
               name="exitBrokerRate"
@@ -1366,11 +1256,10 @@ export function Investments(props) {
       <Grid
         item
         container
-        spacing={6}
-        className="mb-10"
+        spacing={2}
         error={props.errors.grossAreaToUsefulAreaRate}
       >
-        <Grid item xs={3}>
+        <Grid item xs={6}>
           <CustomInput
             error={props.errors.grossAreaToUsefulAreaRate}
             name="grossAreaToUsefulAreaRate"
@@ -1386,7 +1275,7 @@ export function Investments(props) {
             })}
           />
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={6}>
           <CustomInput
             error={props.errors.floorRate}
             name="floorRate"
@@ -1402,7 +1291,7 @@ export function Investments(props) {
             })}
           />
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={6}>
           <CustomInput
             error={props.errors.capRate}
             name="capRate"
@@ -1422,87 +1311,25 @@ export function Investments(props) {
     );
   }
 
-  function translateColumnLabel(list) {
-    list.forEach(item => {
-      // eslint-disable-next-line no-param-reassign
-      item.headerName = props.intl.formatMessage({
-        ...messages[item.label],
-      });
-    });
-    return list;
-  }
-
-  function renderTable() {
-    return (
-      <Grid container direction="column" className={classes.tableContainer}>
-        <Grid item>
-          <Typography variant="h6" className={classes.tableHeading}>
-            {props.intl.formatMessage({
-              ...messages.investments,
-            })}
-          </Typography>
-        </Grid>
-        <Grid item className="w-100">
-          <DataGrid
-            // className={classes.root}
-            classes={{
-              root: classes.gridRoot,
-            }}
-            rows={props.analysisData}
-            columns={translateColumnLabel(columns)}
-            checkboxSelection
-            disableColumnFilter
-            disableColumnMenu
-            disableColumnSelector
-            disableSelectionOnClick
-            sortingMode="server"
-            autoHeight
-            pageSize={5}
-            rowsPerPageOptions={[5]}
-            // hideFooterPagination
-            // hideFooter
-            // density="compact"
-            // autoPageSize
-            // onCellClick={}
-            // onRowClick={event => {
-            //   props.history.push(`/analysis/${event.id}`);
-            // }}
-          />
-        </Grid>
-      </Grid>
-    );
-  }
-
   function renderButton() {
     return (
-      <Button
-        type="submit"
-        onClick={onSubmit}
-        className={
-          !props.analyzeButtonDisabled
-            ? classes.customizeButton
-            : classes.customizeDisabledButton
-        }
-        disabled={props.analyzeButtonDisabled}
-      >
-        {props.isGettingAnalysisData && (
-          <CircularProgress size={20} className={classes.loading} />
-        )}
-        {!props.isGettingAnalysisData && 'Analyze'}
-      </Button>
-    );
-  }
-
-  function renderPropertyInformationAndMap() {
-    return (
-      <Grid item container direction="row">
-        <Grid item container xs={8} className="pr-40">
-          {renderPropertyForm()}
-        </Grid>
-        <Grid item xs={4} className={classes.fixHeight}>
-          <PaperMap />
-        </Grid>
-      </Grid>
+      <div style={{ textAlign: 'center' }}>
+        <Button
+          type="submit"
+          onClick={onSubmit}
+          className={
+            !props.analyzeButtonDisabled
+              ? classes.customizeButton
+              : classes.customizeDisabledButton
+          }
+          disabled={props.analyzeButtonDisabled}
+        >
+          {props.isGettingAnalysisData && (
+            <CircularProgress size={20} className={classes.loading} />
+          )}
+          {!props.isGettingAnalysisData && 'Analyze'}
+        </Button>
+      </div>
     );
   }
 
@@ -1517,10 +1344,9 @@ export function Investments(props) {
         <meta name="description" content="Description of Analysis" />
       </Helmet>
       <Grid>
-        {renderPropertyInformationAndMap()}
+        {renderPropertyForm()}
         {renderAccordionGroup()}
         {renderButton()}
-        {renderTable()}
       </Grid>
     </>
   );

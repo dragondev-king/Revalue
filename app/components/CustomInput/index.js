@@ -16,7 +16,14 @@ const useStyles = makeStyles({
     top: '-16px',
   },
   input: {
-    border: '1px solid #0083FC',
+    border: '1px solid #0083FC', // #7C7C7C
+    borderRadius: '4px',
+    color: '#7C7C7C',
+    paddingRight: '5px',
+    background: '#FFFFFF',
+  },
+  disabledInput: {
+    border: '1px solid #7C7C7C',
     borderRadius: '4px',
     color: '#7C7C7C',
     paddingRight: '5px',
@@ -24,6 +31,17 @@ const useStyles = makeStyles({
   },
   inputAdornment: {
     background: '#C3E3FF',
+    height: '2.1em',
+    maxHeight: '2.1em',
+    borderRadius: '3px 0 0 3px',
+    padding: '0 10px',
+    '& p': {
+      color: '#31342B',
+      fontSize: '16px',
+    },
+  },
+  disabledAdornment: {
+    background: '#F1F1F1',
     height: '2.1em',
     maxHeight: '2.1em',
     borderRadius: '3px 0 0 3px',
@@ -54,6 +72,7 @@ const CustomInput = ({
   name,
   handleChange,
   symbol,
+  disabled = false,
 }) => {
   const styles = useStyles();
   return (
@@ -73,14 +92,20 @@ const CustomInput = ({
         </Tooltip>
       </InputLabel>
       <Input
+        disabled={disabled}
         disableUnderline
-        className={styles.input}
+        className={disabled ? styles.disabledInput : styles.input}
         onChange={handleChange}
         type={type}
         defaultValue={defaultValue}
         name={name}
         startAdornment={
-          <InputAdornment position="start" className={styles.inputAdornment}>
+          <InputAdornment
+            position="start"
+            className={
+              disabled ? styles.disabledAdornment : styles.inputAdornment
+            }
+          >
             {symbol}
           </InputAdornment>
         }
