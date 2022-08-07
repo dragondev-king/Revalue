@@ -1109,6 +1109,7 @@ export function Investments(props) {
               color="primary"
               name="taxAssumptionCheck"
             />
+            Resident in Portugal
           </Grid>
           <Grid item xs={6}>
             <CustomSelect
@@ -1162,9 +1163,10 @@ export function Investments(props) {
               handleChange={handleChange}
               defaultValue={props.inputs.irsRate}
               symbol={<span>%</span>}
-              labelText={props.intl.formatMessage({
-                ...messages.irsRate,
-              })}
+              labelText="Current IRS Rate"
+              // labelText={props.intl.formatMessage({
+              //   ...messages.irsRate,
+              // })}
               tooltipText={props.intl.formatMessage({
                 ...messages.irsRateInfo,
               })}

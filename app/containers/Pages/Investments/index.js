@@ -1216,6 +1216,7 @@ export function Investments(props) {
               color="primary"
               name="taxAssumptionCheck"
             />
+            Resident in Portugal
           </Grid>
           {/* This was not in the previous page but was in the figma - adding the field but content needs to be update */}
           <Grid item xs={4}>
@@ -1272,9 +1273,10 @@ export function Investments(props) {
               handleChange={handleChange}
               defaultValue={props.inputs.irsRate}
               symbol={<span>%</span>}
-              labelText={props.intl.formatMessage({
-                ...messages.irsRate,
-              })}
+              labelText="Current IRS Rate"
+              // labelText={props.intl.formatMessage({
+              //   ...messages.irsRate,
+              // })}
               tooltipText={props.intl.formatMessage({
                 ...messages.irsRateInfo,
               })}

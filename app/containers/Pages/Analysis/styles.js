@@ -92,16 +92,18 @@ const useStyles = makeStyles(theme => ({
 
   settingIconWrapper: {
     background: 'transparent',
-    // position: 'absolute',
-    // right: 0,
-    // bottom: 0,
     border: 0,
     cursor: 'pointer',
   },
   settingIconContainer: {
-    marginTop: '24px',
-    textAlign: 'right',
-    paddingRight: '10px',
+    position: 'fixed',
+    bottom: '10px',
+    right: '20px',
+  },
+  topSettingIconWrapper: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'flex-end',
   },
   acuisitionDepTableContainer: {
     marginTop: '40px',

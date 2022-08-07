@@ -469,4 +469,52 @@ export default defineMessages({
     id: `${scope}.forSale`,
     defaultMessage: 'For Sale',
   },
+  report: {
+    id: `${scope}.report`,
+    defaultMessage: 'Report',
+  },
+  analyticsOverview: {
+    id: `${scope}.analyticsOverview`,
+    defaultMessage: 'Analytics Overview',
+  },
+  entryPrice: {
+    id: `${scope}.entryPrice`,
+    defaultMessage: 'Entry Price',
+  },
+  profitAfterTax: {
+    id: `${scope}.profitAfterTax`,
+    defaultMessage: 'Profit After Tax',
+  },
+  typology: {
+    id: `${scope}.typology`,
+    defaultMessage: 'Typology',
+  },
+  type2: {
+    id: `${scope}.type2`,
+    defaultMessage: 'Type',
+  },
+  condition2: {
+    id: `${scope}.condition2`,
+    defaultMessage: 'Condition',
+  },
+  sensitivityTable: {
+    id: `${scope}.sensitivityTable`,
+    defaultMessage: 'Sensitivity Table',
+  },
+  forecast: {
+    id: `${scope}.forecast`,
+    defaultMessage: 'Forecast',
+  },
+  acuisition: {
+    id: `${scope}.acuisition`,
+    defaultMessage: 'Acuisition',
+  },
+  debt: {
+    id: `${scope}.debt`,
+    defaultMessage: 'Debt',
+  },
+  salesActivityHistory: {
+    id: `${scope}.salesActivityHistory`,
+    defaultMessage: 'Sales Activity History',
+  },
 });
