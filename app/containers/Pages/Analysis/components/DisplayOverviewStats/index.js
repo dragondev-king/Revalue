@@ -28,7 +28,11 @@ const DisplayOverviewStats = ({ props }) => {
             })}
           </Grid>
           <Grid item className={classes.overviewStatsPrice}>
-            € 84,000
+            €{' '}
+            {props &&
+              props.analysis &&
+              props.analysis.entryCapital &&
+              props.analysis.entryCapital}
           </Grid>
         </Grid>
         <Grid item>
@@ -72,7 +76,11 @@ const DisplayOverviewStats = ({ props }) => {
             })}
           </Grid>
           <Grid item className={classes.overviewStatsPrice}>
-            € 14,200
+            €{' '}
+            {props &&
+              props.analysis &&
+              props.analysis.profitAfterTax &&
+              props.analysis.profitAfterTax.toFixed(2)}
           </Grid>
         </Grid>
         <Grid item>

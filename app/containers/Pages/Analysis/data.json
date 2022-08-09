@@ -328,42 +328,6 @@
       }
     ]
   },
-  "investmentKpi": {
-    "rows": [
-      {
-        "name": "Asking Price",
-        "value": "€ 20.1k   €/sqm"
-      },
-      {
-        "name": "Acquisition Price",
-        "value": "€ 10.1k   €/sqm"
-      },
-      {
-        "name": "Selling Price",
-        "value": "€ 32.1k   €/sqm"
-      },
-      {
-        "name": "Time To Scale",
-        "value": "11 months"
-      }
-    ]
-  },
-  "captial": {
-    "rows": [
-      {
-        "name": "Entry Capital",
-        "value": "€ 25, 000"
-      },
-      {
-        "name": "Required Capital Over Period",
-        "value": "€ 102, 450"
-      },
-      {
-        "name": "Total Required Capital Over Period",
-        "value": "€ 200, 630"
-      }
-    ]
-  },
   "acuisitionDebt": {
     "columns": [
       {

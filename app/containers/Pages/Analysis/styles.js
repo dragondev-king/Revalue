@@ -100,11 +100,6 @@ const useStyles = makeStyles(theme => ({
     bottom: '10px',
     right: '20px',
   },
-  topSettingIconWrapper: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'flex-end',
-  },
   acuisitionDepTableContainer: {
     marginTop: '40px',
   },

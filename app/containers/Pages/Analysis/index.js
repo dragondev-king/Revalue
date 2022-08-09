@@ -588,22 +588,11 @@ export function Analysis(props) {
       </Helmet>
       <Grid item container spacing={4}>
         <Grid item xs={12}>
-          <div className={classes.topSettingIconWrapper}>
-            <Typography variant="h6" className={classes.pageTitle}>
-              {props.intl.formatMessage({
-                ...messages.report,
-              })}
-            </Typography>
-            <div>
-              <button
-                type="button"
-                className={classes.settingIconWrapper}
-                onClick={() => setOpen(true)}
-              >
-                <img src={SettingIcon} width={32} height={32} alt="setting" />
-              </button>
-            </div>
-          </div>
+          <Typography variant="h6" className={classes.pageTitle}>
+            {props.intl.formatMessage({
+              ...messages.report,
+            })}
+          </Typography>
           <Typography variant="h6" className={classes.pageBiggerTitle}>
             {props.intl.formatMessage({
               ...messages.analyticsOverview,

@@ -10,7 +10,6 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import messages from '../../messages';
-import { capitalRows } from '../../_helper';
 import { useStyles } from '../../styles';
 
 const PropertyInformationAndMap = ({ props }) => {
@@ -43,19 +42,58 @@ const PropertyInformationAndMap = ({ props }) => {
             >
               <Table className={classes.table} aria-label="simple table">
                 <TableBody>
-                  {props.analysis &&
-                    props.analysis.investmentKpi &&
-                    props.analysis.investmentKpi.rows &&
-                    props.analysis.investmentKpi.rows.map(row => (
-                      <TableRow key={row.name}>
-                        <TableCell component="th" scope="row">
-                          {row.name}
-                        </TableCell>
-                        <TableCell align="right" style={{ fontWeight: 'bold' }}>
-                          {row.value}
-                        </TableCell>
-                      </TableRow>
-                    ))}
+                  <TableRow>
+                    <TableCell component="th" scope="row">
+                      Asking Price
+                    </TableCell>
+                    <TableCell align="right" style={{ fontWeight: 'bold' }}>
+                      €{' '}
+                      {props &&
+                        props.analysis &&
+                        props.analysis.askingPricePerSquareMeter &&
+                        props.analysis.askingPricePerSquareMeter}{' '}
+                      €/sqm
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell component="th" scope="row">
+                      Acquisition Price
+                    </TableCell>
+                    <TableCell align="right" style={{ fontWeight: 'bold' }}>
+                      €{' '}
+                      {props &&
+                        props.analysis &&
+                        props.analysis.overrideTransactionPricePerSquareMeter &&
+                        props.analysis
+                          .overrideTransactionPricePerSquareMeter}{' '}
+                      €/sqm
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell component="th" scope="row">
+                      Selling Price
+                    </TableCell>
+                    <TableCell align="right" style={{ fontWeight: 'bold' }}>
+                      €{' '}
+                      {props &&
+                        props.analysis &&
+                        props.analysis.overrideTransactionPricePerSquareMeter &&
+                        props.analysis
+                          .overrideTransactionPricePerSquareMeter}{' '}
+                      €/sqm
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell component="th" scope="row">
+                      Time To Scales
+                    </TableCell>
+                    <TableCell align="right" style={{ fontWeight: 'bold' }}>
+                      {props &&
+                        props.analysis &&
+                        props.analysis.operatingCosts &&
+                        props.analysis.operatingCosts.toFixed(0)}
+                    </TableCell>
+                  </TableRow>
                 </TableBody>
               </Table>
             </TableContainer>
@@ -72,49 +110,67 @@ const PropertyInformationAndMap = ({ props }) => {
             >
               <Table className={classes.table} aria-label="simple table">
                 <TableBody>
-                  {props.analysis &&
-                    props.analysis.captial &&
-                    props.analysis.captial.rows &&
-                    props.analysis.captial.rows.map((row, index) => (
-                      <TableRow key={row.name}>
-                        <TableCell
-                          component="th"
-                          scope="row"
-                          variant="head"
-                          style={{
-                            fontWeight:
-                              index === capitalRows.length - 1
-                                ? 'bold'
-                                : 'normal',
-                            color:
-                              index === capitalRows.length - 1
-                                ? '#0083FC'
-                                : 'black',
-                            borderBottom:
-                              index === capitalRows.length - 2 &&
-                              '1px solid #0083FC',
-                          }}
-                        >
-                          {row.name}
-                        </TableCell>
-                        <TableCell
-                          align="right"
-                          variant="head"
-                          style={{
-                            fontWeight: 'bold',
-                            color:
-                              index === capitalRows.length - 1
-                                ? '#0083FC'
-                                : 'black',
-                            borderBottom:
-                              index === capitalRows.length - 2 &&
-                              '1px solid #0083FC',
-                          }}
-                        >
-                          {row.value}
-                        </TableCell>
-                      </TableRow>
-                    ))}
+                  <TableRow>
+                    <TableCell component="th" scope="row">
+                      Entry Capital
+                    </TableCell>
+                    <TableCell align="right" style={{ fontWeight: 'bold' }}>
+                      €{' '}
+                      {props &&
+                        props.analysis &&
+                        props.analysis.entryCapital &&
+                        props.analysis.entryCapital}{' '}
+                      €/sqm
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell
+                      component="th"
+                      scope="row"
+                      style={{
+                        borderBottom: '1px solid #0083FC',
+                      }}
+                    >
+                      Required Capital Over Period
+                    </TableCell>
+                    <TableCell
+                      align="right"
+                      style={{
+                        fontWeight: 'bold',
+                        color: '#0083FC',
+                        borderBottom: '1px solid #0083FC',
+                      }}
+                    >
+                      €{' '}
+                      {props &&
+                        props.analysis &&
+                        props.analysis.rett &&
+                        props.analysis.rett}{' '}
+                      €/sqm
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell
+                      component="th"
+                      scope="row"
+                      variant="head"
+                      style={{ fontWeight: 'bold', color: '#0083FC' }}
+                    >
+                      Total Required Capital Over Period
+                    </TableCell>
+                    <TableCell
+                      align="right"
+                      variant="head"
+                      style={{ fontWeight: 'bold', color: '#0083FC' }}
+                    >
+                      €{' '}
+                      {props &&
+                        props.analysis &&
+                        props.analysis.openingBalance &&
+                        props.analysis.openingBalance}{' '}
+                      €/sqm
+                    </TableCell>
+                  </TableRow>
                 </TableBody>
               </Table>
             </TableContainer>

@@ -678,7 +678,9 @@ export function Investments(props) {
               handleChange={handleChange}
               data={props.propertyTypologies}
               name="propertyTypology"
-              labelText="Status"
+              labelText={props.intl.formatMessage({
+                ...messages.status,
+              })}
               tooltipText={props.intl.formatMessage({
                 ...messages.propertyTypology,
               })}
@@ -845,7 +847,9 @@ export function Investments(props) {
               handleChange={handleChange}
               data={props.acquisitionTypes}
               name="acquisitionType"
-              labelText="Reet"
+              labelText={props.intl.formatMessage({
+                ...messages.reet,
+              })}
               tooltipText={props.intl.formatMessage({
                 ...messages.acquisitionTypeInfo,
               })}
@@ -1119,9 +1123,11 @@ export function Investments(props) {
               handleChange={handleChange}
               data={props.propertyTypologies}
               name="propertyTypology"
-              labelText="IRS Category"
+              labelText={props.intl.formatMessage({
+                ...messages.iRSCategory,
+              })}
               tooltipText={props.intl.formatMessage({
-                ...messages.propertyTypology,
+                ...messages.iRSCategory,
               })}
             />
           </Grid>
@@ -1133,9 +1139,11 @@ export function Investments(props) {
               handleChange={handleChange}
               data={props.propertyTypologies}
               name="propertyTypology"
-              labelText="Number of dependents"
+              labelText={props.intl.formatMessage({
+                ...messages.numberOfDependents,
+              })}
               tooltipText={props.intl.formatMessage({
-                ...messages.propertyTypology,
+                ...messages.numberOfDependents,
               })}
             />
           </Grid>
@@ -1148,9 +1156,11 @@ export function Investments(props) {
               handleChange={handleChange}
               defaultValue={props.inputs.irsRate}
               symbol={<span>€</span>}
-              labelText="Current Monthly salary"
+              labelText={props.intl.formatMessage({
+                ...messages.currentMonthlySalary,
+              })}
               tooltipText={props.intl.formatMessage({
-                ...messages.irsRateInfo,
+                ...messages.currentMonthlySalary,
               })}
             />
           </Grid>
@@ -1163,12 +1173,11 @@ export function Investments(props) {
               handleChange={handleChange}
               defaultValue={props.inputs.irsRate}
               symbol={<span>%</span>}
-              labelText="Current IRS Rate"
-              // labelText={props.intl.formatMessage({
-              //   ...messages.irsRate,
-              // })}
+              labelText={props.intl.formatMessage({
+                ...messages.currentIRSRate,
+              })}
               tooltipText={props.intl.formatMessage({
-                ...messages.irsRateInfo,
+                ...messages.currentIRSRate,
               })}
             />
           </Grid>

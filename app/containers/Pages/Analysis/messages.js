@@ -517,4 +517,28 @@ export default defineMessages({
     id: `${scope}.salesActivityHistory`,
     defaultMessage: 'Sales Activity History',
   },
+  currentMonthlySalary: {
+    id: `${scope}.currentMonthlySalary`,
+    defaultMessage: 'Current Monthly salary',
+  },
+  status: {
+    id: `${scope}.status`,
+    defaultMessage: 'Status',
+  },
+  reet: {
+    id: `${scope}.reet`,
+    defaultMessage: 'Reet',
+  },
+  iRSCategory: {
+    id: `${scope}.iRSCategory`,
+    defaultMessage: 'IRS Category',
+  },
+  numberOfDependents: {
+    id: `${scope}.numberOfDependents`,
+    defaultMessage: 'Number of dependents',
+  },
+  currentIRSRate: {
+    id: `${scope}.currentIRSRate`,
+    defaultMessage: 'Current IRS Rate',
+  },
 });
