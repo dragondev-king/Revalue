@@ -541,4 +541,12 @@ export default defineMessages({
     id: `${scope}.currentIRSRate`,
     defaultMessage: 'Current IRS Rate',
   },
+  timeToScales: {
+    id: `${scope}.timeToScales`,
+    defaultMessage: 'Time To Scales',
+  },
+  acquistionPrice: {
+    id: `${scope}.timeToScales`,
+    defaultMessage: 'Acquistion Price',
+  },
 });

@@ -45,10 +45,10 @@ import 'react-loading-skeleton/dist/skeleton.css';
 import DisplayOverviewStats from './components/DisplayOverviewStats';
 import PropertyInformationAndCarousel from './components/PropertyInformationAndCarousel';
 import PropertyInformationAndMap from './components/PropertyInformationAndMap';
-import SensitivityTable from './components/SensitivityTable';
+// import SensitivityTable from './components/SensitivityTable';
 import SalesActivityHistory from './components/SalesActivityHistory';
 import ForcastGraph from './components/ForcastGraph';
-import AcuisitionDepTable from './components/AcuisitionDepTable';
+// import AcuisitionDepTable from './components/AcuisitionDepTable';
 import { useStyles } from './styles';
 
 export function Analysis(props) {
@@ -603,12 +603,12 @@ export function Analysis(props) {
       <DisplayOverviewStats props={props} />
       <PropertyInformationAndCarousel props={props} />
       <PropertyInformationAndMap props={props} />
-      <SensitivityTable props={props} />
+      {/* <SensitivityTable props={props} /> */}
       <EstimatedProfitTable props={props} />
       <SalesActivityHistory props={props} />
       <ForcastGraph props={props} />
       <BreakdownTable props={props} />
-      <AcuisitionDepTable props={props} />
+      {/* <AcuisitionDepTable props={props} /> */}
       {open && <SettingDrawer open={open} setOpen={setOpen} />}
 
       {/* {!props.isGettingAnalysisById ? (

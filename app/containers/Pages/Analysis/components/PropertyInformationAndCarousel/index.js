@@ -21,7 +21,11 @@ const PropertyInformationAndCarousel = ({ props }) => {
               })}
             </Typography>
             <Typography className={classes.sectionTitle}>
-              Oeiras, Lisbon, Portugal
+              {props &&
+                props.analysis &&
+                props.analysis.property &&
+                props.analysis.property.country &&
+                props.analysis.property.country}
             </Typography>
           </Box>
           <Box className={classes.areaWrapper}>
@@ -30,9 +34,17 @@ const PropertyInformationAndCarousel = ({ props }) => {
                 <img src={GrossareaIcon} width={40} alt="gross area" />
               </Box>
               <Box className={classes.areaDetail}>
-                <Typography style={{ fontWeight: 'bold' }}>500 M2</Typography>
+                <Typography style={{ fontWeight: 'bold' }}>
+                  {props &&
+                    props.analysis &&
+                    props.analysis.area &&
+                    props.analysis.area}{' '}
+                  M2
+                </Typography>
                 <Typography style={{ fontSize: '14px', color: '#565853' }}>
-                  Gross area
+                  {props.intl.formatMessage({
+                    ...messages.grossArea,
+                  })}
                 </Typography>
               </Box>
             </Box>
@@ -41,9 +53,17 @@ const PropertyInformationAndCarousel = ({ props }) => {
                 <img src={UsefulareaIcon} width={40} alt="useful area" />
               </Box>
               <Box className={classes.areaDetail}>
-                <Typography style={{ fontWeight: 'bold' }}>280 M2</Typography>
+                <Typography style={{ fontWeight: 'bold' }}>
+                  {props &&
+                    props.analysis &&
+                    props.analysis.area &&
+                    props.analysis.area}{' '}
+                  M2
+                </Typography>
                 <Typography style={{ fontSize: '14px', color: '#565853' }}>
-                  Useful area
+                  {props.intl.formatMessage({
+                    ...messages.usefulArea,
+                  })}
                 </Typography>
               </Box>
             </Box>
@@ -55,7 +75,11 @@ const PropertyInformationAndCarousel = ({ props }) => {
               })}
               :{' '}
               <Box className={classes.typeItemColored} component="span">
-                Appartment
+                {props &&
+                  props.analysis &&
+                  props.analysis.property &&
+                  props.analysis.property.type &&
+                  props.analysis.property.type}
               </Box>
             </Box>
             <Box className={classes.typeItem}>
@@ -64,7 +88,11 @@ const PropertyInformationAndCarousel = ({ props }) => {
               })}
               :{' '}
               <Box className={classes.typeItemColored} component="span">
-                New
+                {props &&
+                  props.analysis &&
+                  props.analysis.property &&
+                  props.analysis.property.condition &&
+                  props.analysis.property.condition}
               </Box>
             </Box>
             <Box className={classes.typeItem}>
@@ -73,23 +101,20 @@ const PropertyInformationAndCarousel = ({ props }) => {
               })}
               :{' '}
               <Box className={classes.typeItemColored} component="span">
-                T2
+                {props &&
+                  props.analysis &&
+                  props.analysis.property &&
+                  props.analysis.property.typology &&
+                  props.analysis.property.typology}
               </Box>
             </Box>
           </Box>
           <Box className={classes.propertyDescription}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum. Excepteur
-            sint occaecat cupidatat non proident, sunt in culpa qui officia
-            deserunt mollit anim id est laborum. Excepteur sint occaecat
-            cupidatat non proident, sunt in culpa qui officia deserunt mollit
-            anim id est laborum. Excepteur sint occaecat cupidatat non proident,
-            sunt in culpa qui officia deserunt mollit anim id est laborum.
+            {props &&
+              props.analysis &&
+              props.analysis.property &&
+              props.analysis.property.country &&
+              props.analysis.property.country}
           </Box>
         </Box>
       </Grid>

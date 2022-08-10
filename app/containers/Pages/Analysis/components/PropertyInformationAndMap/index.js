@@ -13,7 +13,6 @@ import messages from '../../messages';
 import { useStyles } from '../../styles';
 
 const PropertyInformationAndMap = ({ props }) => {
-  console.log('props ===', props);
   const classes = useStyles();
   return (
     <Grid
@@ -44,7 +43,9 @@ const PropertyInformationAndMap = ({ props }) => {
                 <TableBody>
                   <TableRow>
                     <TableCell component="th" scope="row">
-                      Asking Price
+                      {props.intl.formatMessage({
+                        ...messages.bidAskRateInfo,
+                      })}
                     </TableCell>
                     <TableCell align="right" style={{ fontWeight: 'bold' }}>
                       €{' '}
@@ -57,7 +58,9 @@ const PropertyInformationAndMap = ({ props }) => {
                   </TableRow>
                   <TableRow>
                     <TableCell component="th" scope="row">
-                      Acquisition Price
+                      {props.intl.formatMessage({
+                        ...messages.proposedEntryPrice,
+                      })}
                     </TableCell>
                     <TableCell align="right" style={{ fontWeight: 'bold' }}>
                       €{' '}
@@ -71,7 +74,9 @@ const PropertyInformationAndMap = ({ props }) => {
                   </TableRow>
                   <TableRow>
                     <TableCell component="th" scope="row">
-                      Selling Price
+                      {props.intl.formatMessage({
+                        ...messages.estimatedExitPrice,
+                      })}
                     </TableCell>
                     <TableCell align="right" style={{ fontWeight: 'bold' }}>
                       €{' '}
@@ -85,7 +90,9 @@ const PropertyInformationAndMap = ({ props }) => {
                   </TableRow>
                   <TableRow>
                     <TableCell component="th" scope="row">
-                      Time To Scales
+                      {props.intl.formatMessage({
+                        ...messages.timeToScales,
+                      })}
                     </TableCell>
                     <TableCell align="right" style={{ fontWeight: 'bold' }}>
                       {props &&
@@ -112,7 +119,9 @@ const PropertyInformationAndMap = ({ props }) => {
                 <TableBody>
                   <TableRow>
                     <TableCell component="th" scope="row">
-                      Entry Capital
+                      {props.intl.formatMessage({
+                        ...messages.requiredEntryCapital,
+                      })}
                     </TableCell>
                     <TableCell align="right" style={{ fontWeight: 'bold' }}>
                       €{' '}
@@ -131,7 +140,9 @@ const PropertyInformationAndMap = ({ props }) => {
                         borderBottom: '1px solid #0083FC',
                       }}
                     >
-                      Required Capital Over Period
+                      {props.intl.formatMessage({
+                        ...messages.requiredCapitalInvestment,
+                      })}
                     </TableCell>
                     <TableCell
                       align="right"
@@ -156,7 +167,9 @@ const PropertyInformationAndMap = ({ props }) => {
                       variant="head"
                       style={{ fontWeight: 'bold', color: '#0083FC' }}
                     >
-                      Total Required Capital Over Period
+                      {props.intl.formatMessage({
+                        ...messages.totalRequiredInfo,
+                      })}
                     </TableCell>
                     <TableCell
                       align="right"
@@ -168,7 +181,7 @@ const PropertyInformationAndMap = ({ props }) => {
                         props.analysis &&
                         props.analysis.openingBalance &&
                         props.analysis.openingBalance}{' '}
-                      €/sqm
+                      €/sqmm
                     </TableCell>
                   </TableRow>
                 </TableBody>
