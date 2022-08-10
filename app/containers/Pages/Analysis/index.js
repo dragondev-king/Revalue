@@ -18,13 +18,13 @@ import Typography from '@material-ui/core/Typography';
 import { useInjectReducer } from 'utils/injectReducer';
 // import { FormControl } from '@material-ui/core';
 // import Skeleton from 'react-loading-skeleton';
-// import BreakdownTable from 'containers/Pages/Analysis/components/BreakdownTable';
+import SettingIcon from 'images/settingIcon.png';
+import BreakdownTable from './components/BreakdownTable';
 // import Criteria from 'containers/Pages/Analysis/components/Criteria';
-// import EstimatedProfitTable from 'containers/Pages/Analysis/components/EstimatedProfitTable';
+import EstimatedProfitTable from './components/EstimatedProfitTable';
 // import ValuationModal from 'containers/Pages/Analysis/components/ValuationModel';
 // import PriceStat from 'images/price.png';
 // import Investment from 'images/investment.png';
-import SettingIcon from 'images/settingIcon.png';
 import messages from './messages';
 import SettingDrawer from './components/Drawer';
 import {
@@ -604,8 +604,10 @@ export function Analysis(props) {
       <PropertyInformationAndCarousel props={props} />
       <PropertyInformationAndMap props={props} />
       <SensitivityTable props={props} />
+      <EstimatedProfitTable props={props} />
       <SalesActivityHistory props={props} />
       <ForcastGraph props={props} />
+      <BreakdownTable props={props} />
       <AcuisitionDepTable props={props} />
       {open && <SettingDrawer open={open} setOpen={setOpen} />}
 

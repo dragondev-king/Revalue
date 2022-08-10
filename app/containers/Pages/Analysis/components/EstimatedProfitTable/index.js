@@ -30,10 +30,10 @@ const EstimatedProfitTable = ({ props }) => {
             <Table className={classes.table} aria-label="simple table">
               <TableHead>
                 <TableRow>
-                  {props.anaylsis &&
-                    props.anaylsis.estimatedProfitTable &&
-                    props.anaylsis.estimatedProfitTable.columns &&
-                    props.anaylsis.estimatedProfitTable.columns.map(
+                  {props.analysis &&
+                    props.analysis.estimatedProfitTable &&
+                    props.analysis.estimatedProfitTable.columns &&
+                    props.analysis.estimatedProfitTable.columns.map(
                       (column, index) => (
                         <TableCell
                           align="center"
@@ -47,10 +47,10 @@ const EstimatedProfitTable = ({ props }) => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {props.anaylsis &&
-                  props.anaylsis.estimatedProfitTable &&
-                  props.anaylsis.estimatedProfitTable.rows &&
-                  props.anaylsis.estimatedProfitTable.rows.map(row => (
+                {props.analysis &&
+                  props.analysis.estimatedProfitTable &&
+                  props.analysis.estimatedProfitTable.rows &&
+                  props.analysis.estimatedProfitTable.rows.map(row => (
                     <TableRow>
                       {Object.entries(row).map((rowInfo, index) => (
                         <TableCell
