@@ -454,4 +454,8 @@ export default defineMessages({
     id: `${scope}.currentIRSRate`,
     defaultMessage: 'Current IRS Rate',
   },
+  preferencesFor: {
+    id: `${scope}.preferencesFor`,
+    defaultMessage: 'Preferences For',
+  },
 });

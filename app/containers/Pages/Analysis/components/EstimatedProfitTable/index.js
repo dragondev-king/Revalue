@@ -32,9 +32,9 @@ const colors = [
   },
   {
     0: '#F1F1F1',
-    1: '#8DC8FF',
+    1: '#CDE7FF',
     2: '#8DC8FF',
-    3: '#8DC8FF',
+    3: '#FFFFFF',
     4: '#8DC8FF',
     5: '#41A4FF',
   },
@@ -90,14 +90,10 @@ const EstimatedProfitTable = ({ props }) => {
                 </TableRow>
                 <TableRow>
                   <TableCell
-                    align="right"
+                    align="center"
                     variant="head"
                     style={{
-                      background: '#F1F1F1',
-                      border: '2px solid #E9F2FB',
-                      fontWeight: 'bold',
-                      fontSize: '14.5px',
-                      color: '#565853',
+                      borderLeft: '2px solid #E9F2FB',
                     }}
                   />
                   {props.analysis &&
@@ -110,8 +106,10 @@ const EstimatedProfitTable = ({ props }) => {
                           variant="head"
                           key={index}
                           style={{
-                            background: '#F1F1F1',
-                            border: '2px solid #E9F2FB',
+                            background: column.label
+                              ? '#F1F1F1'
+                              : 'transparent',
+                            border: index > 0 && '2px solid #E9F2FB',
                             fontWeight: 'bold',
                             fontSize: '14.5px',
                             color: '#565853',
@@ -156,7 +154,9 @@ const EstimatedProfitTable = ({ props }) => {
                           style={{
                             background: colors[ind][index],
                             border: '2px solid #E9F2FB',
-                            fontWeight: index === 0 && 'bold',
+                            fontWeight:
+                              index === 0 ||
+                              (colors[ind][index] === '#FFFFFF' && 'bold'),
                             fontSize: '14.5px',
                             color:
                               colors[ind][index] === '#0062BC' ||

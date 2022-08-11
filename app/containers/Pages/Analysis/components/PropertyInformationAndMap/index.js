@@ -53,7 +53,9 @@ const PropertyInformationAndMap = ({ props }) => {
                         props.analysis &&
                         props.analysis.askingPricePerSquareMeter &&
                         props.analysis.askingPricePerSquareMeter}{' '}
-                      €/sqm
+                      <span style={{ fontWeight: 'normal', color: '#565853' }}>
+                        € /Sqm
+                      </span>
                     </TableCell>
                   </TableRow>
                   <TableRow>
@@ -69,7 +71,9 @@ const PropertyInformationAndMap = ({ props }) => {
                         props.analysis.overrideTransactionPricePerSquareMeter &&
                         props.analysis
                           .overrideTransactionPricePerSquareMeter}{' '}
-                      €/sqm
+                      <span style={{ fontWeight: 'normal', color: '#565853' }}>
+                        € /Sqm
+                      </span>
                     </TableCell>
                   </TableRow>
                   <TableRow>
@@ -85,7 +89,9 @@ const PropertyInformationAndMap = ({ props }) => {
                         props.analysis.overrideTransactionPricePerSquareMeter &&
                         props.analysis
                           .overrideTransactionPricePerSquareMeter}{' '}
-                      €/sqm
+                      <span style={{ fontWeight: 'normal', color: '#565853' }}>
+                        € /Sqm
+                      </span>
                     </TableCell>
                   </TableRow>
                   <TableRow>
@@ -98,7 +104,8 @@ const PropertyInformationAndMap = ({ props }) => {
                       {props &&
                         props.analysis &&
                         props.analysis.operatingCosts &&
-                        props.analysis.operatingCosts.toFixed(0)}
+                        props.analysis.operatingCosts.toFixed(0)}{' '}
+                      Months
                     </TableCell>
                   </TableRow>
                 </TableBody>
@@ -128,8 +135,7 @@ const PropertyInformationAndMap = ({ props }) => {
                       {props &&
                         props.analysis &&
                         props.analysis.entryCapital &&
-                        props.analysis.entryCapital}{' '}
-                      €/sqm
+                        props.analysis.entryCapital}
                     </TableCell>
                   </TableRow>
                   <TableRow>
@@ -156,8 +162,7 @@ const PropertyInformationAndMap = ({ props }) => {
                       {props &&
                         props.analysis &&
                         props.analysis.rett &&
-                        props.analysis.rett}{' '}
-                      €/sqm
+                        props.analysis.rett}
                     </TableCell>
                   </TableRow>
                   <TableRow>
@@ -181,7 +186,6 @@ const PropertyInformationAndMap = ({ props }) => {
                         props.analysis &&
                         props.analysis.openingBalance &&
                         props.analysis.openingBalance}{' '}
-                      €/sqmm
                     </TableCell>
                   </TableRow>
                 </TableBody>

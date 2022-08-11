@@ -17,6 +17,7 @@ import Switch from '@material-ui/core/Switch';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -167,6 +168,13 @@ const useStyles = makeStyles(theme => ({
   searchIcon: {
     marginRight: '10px',
     color: '#0083FC',
+  },
+  prefrences: {
+    fontWeight: 'bold !important',
+  },
+  investment: {
+    marginTop: '5px',
+    fontSize: '18px',
   },
 }));
 
@@ -365,11 +373,18 @@ export function Investments(props) {
             justifyContent: 'space-between',
           }}
         >
-          <Typography variant="h5">
-            {props.intl.formatMessage({
-              ...messages.MainInvestmentInformation,
-            })}
-          </Typography>
+          <Box>
+            <Typography variant="h5" className={classes.prefrences}>
+              {props.intl.formatMessage({
+                ...messages.preferencesFor,
+              })}
+            </Typography>
+            <Typography variant="h4" className={classes.investment}>
+              {props.intl.formatMessage({
+                ...messages.MainInvestmentInformation,
+              })}
+            </Typography>
+          </Box>
           <CloseIcon
             onClick={() => props.setOpen(false)}
             style={{ cursor: 'pointer' }}
