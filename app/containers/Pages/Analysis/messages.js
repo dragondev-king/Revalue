@@ -549,4 +549,8 @@ export default defineMessages({
     id: `${scope}.timeToScales`,
     defaultMessage: 'Acquistion Price',
   },
+  exitPrice: {
+    id: `${scope}.exitPrice`,
+    defaultMessage: 'Exit Price',
+  },
 });

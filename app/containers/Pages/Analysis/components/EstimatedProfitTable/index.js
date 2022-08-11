@@ -13,6 +13,49 @@ import Skeleton from 'react-loading-skeleton';
 import { useStyles } from '../../styles';
 import messages from '../../messages';
 
+const colors = [
+  {
+    0: '#F1F1F1',
+    1: '#CDE7FF',
+    2: '#CDE7FF',
+    3: '#CDE7FF',
+    4: '#8DC8FF',
+    5: '#8DC8FF',
+  },
+  {
+    0: '#F1F1F1',
+    1: '#CDE7FF',
+    2: '#CDE7FF',
+    3: '#CDE7FF',
+    4: '#8DC8FF',
+    5: '#8DC8FF',
+  },
+  {
+    0: '#F1F1F1',
+    1: '#8DC8FF',
+    2: '#8DC8FF',
+    3: '#8DC8FF',
+    4: '#8DC8FF',
+    5: '#41A4FF',
+  },
+  {
+    0: '#F1F1F1',
+    1: '#8DC8FF',
+    2: '#8DC8FF',
+    3: '#8DC8FF',
+    4: '#41A4FF',
+    5: '#0062BC',
+  },
+  {
+    0: '#F1F1F1',
+    1: '#8DC8FF',
+    2: '#8DC8FF',
+    3: '#41A4FF',
+    4: '#0062BC',
+    5: '#0062BC',
+  },
+];
+
 const EstimatedProfitTable = ({ props }) => {
   const classes = useStyles();
   return (
@@ -33,7 +76,7 @@ const EstimatedProfitTable = ({ props }) => {
                 <TableRow>
                   <TableCell
                     align="center"
-                    colSpan={6}
+                    colSpan={7}
                     style={{
                       border: '2px solid #E9F2FB',
                       fontWeight: 'bold',
@@ -46,13 +89,23 @@ const EstimatedProfitTable = ({ props }) => {
                   </TableCell>
                 </TableRow>
                 <TableRow>
+                  <TableCell
+                    align="right"
+                    variant="head"
+                    style={{
+                      background: '#F1F1F1',
+                      border: '2px solid #E9F2FB',
+                      fontWeight: 'bold',
+                      fontSize: '14.5px',
+                      color: '#565853',
+                    }}
+                  />
                   {props.analysis &&
                     props.analysis.estimatedProfitTable &&
                     props.analysis.estimatedProfitTable.columns &&
                     props.analysis.estimatedProfitTable.columns.map(
                       (column, index) => (
                         <TableCell
-                          rowSpan={2}
                           align="right"
                           variant="head"
                           key={index}
@@ -71,22 +124,45 @@ const EstimatedProfitTable = ({ props }) => {
                 </TableRow>
               </TableHead>
               <TableBody>
+                <TableRow>
+                  <TableCell
+                    align="center"
+                    component="th"
+                    scope="row"
+                    rowSpan={6}
+                    style={{
+                      border: '2px solid #E9F2FB',
+                      fontWeight: 'bold',
+                      // verticalAlign: 'initial',
+                      fontSize: '16px',
+                    }}
+                  >
+                    {props.intl.formatMessage({
+                      ...messages.exitPrice,
+                    })}
+                  </TableCell>
+                </TableRow>
                 {props.analysis &&
                   props.analysis.estimatedProfitTable &&
                   props.analysis.estimatedProfitTable.rows &&
-                  props.analysis.estimatedProfitTable.rows.map(row => (
+                  props.analysis.estimatedProfitTable.rows.map((row, ind) => (
                     <TableRow>
                       {Object.entries(row).map((rowInfo, index) => (
                         <TableCell
                           align="right"
                           component="th"
                           scope="row"
+                          variant="head"
                           style={{
-                            background: index === 0 && '#F1F1F1',
+                            background: colors[ind][index],
                             border: '2px solid #E9F2FB',
                             fontWeight: index === 0 && 'bold',
                             fontSize: '14.5px',
-                            color: '#565853',
+                            color:
+                              colors[ind][index] === '#0062BC' ||
+                              colors[ind][index] === '#41A4FF'
+                                ? 'white'
+                                : 'black',
                           }}
                         >
                           {row[`v${index}`].toFixed(2)}
