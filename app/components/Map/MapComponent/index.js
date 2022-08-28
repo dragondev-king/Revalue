@@ -105,6 +105,7 @@ class MapComponent extends Component {
       this.props.boundaries,
       this.props.propertyLocation,
       this.props.setPropertyLocation,
+      this.props.disabled,
     );
   }
 

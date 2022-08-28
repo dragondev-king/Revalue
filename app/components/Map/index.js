@@ -8,6 +8,7 @@ const Map = ({
   center,
   propertyLocation,
   errorGettingBoundaries,
+  disabled,
   boundaries,
   setPropertyLocation,
 }) => (
@@ -45,6 +46,7 @@ const Map = ({
             {!isGettingBoundaries && (
               <MapComponent
                 center={center}
+                disabled={disabled}
                 propertyLocation={propertyLocation}
                 boundaries={boundaries}
                 setPropertyLocation={setPropertyLocation}

@@ -24,7 +24,7 @@ import match from 'autosuggest-highlight/match';
 import SearchIcon from '@material-ui/icons/Search';
 import { Link } from 'react-router-dom';
 import AutoComplete from 'components/AutoComplete';
-import PaperMap from 'components/PaperMap';
+import Map from 'containers/Map';
 import CustomSelect from 'components/CustomSelect';
 import CustomInput from 'components/CustomInput';
 import CustomSwitch from 'components/CustomSwitch';
@@ -1453,7 +1453,7 @@ export function Investments(props) {
           {renderPropertyForm()}
         </Grid>
         <Grid item xs={4} className={classes.fixHeight}>
-          <PaperMap />
+          <Map propertyLocation={props.inputs.propertyLocation} />
         </Grid>
       </Grid>
     );

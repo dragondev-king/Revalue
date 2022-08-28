@@ -253,7 +253,6 @@ export const getAnalysis = inputs => async dispatch => {
 };
 
 export const setPropertyLocation = propertyLocation => dispatch => {
-  localStorage.setItem('propertyLocation', JSON.stringify(propertyLocation));
   dispatch({
     type: SET_PROPERTY_LOCATION,
     payload: propertyLocation,

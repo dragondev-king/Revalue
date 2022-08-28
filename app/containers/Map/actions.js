@@ -6,10 +6,10 @@ import {
 import { ApiClient } from '../ApiClient';
 
 export const getLocationBoundariesByLocation = location => async dispatch => {
-  const propertyManagerClient = new ApiClient('PROPERTY_MANAGER');
   dispatch({
     type: GET_LOCATION_BOUNDARIES,
   });
+  const propertyManagerClient = new ApiClient('PROPERTY_MANAGER');
   await propertyManagerClient
     .get(`/locations/${location}/boundaries`)
     .then(response => {

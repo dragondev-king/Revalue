@@ -24,7 +24,7 @@ const getPosition = (boundaries, location) => {
 
 export const initialState = {
   center: {
-    zoom: 10,
+    zoom: 13,
     position: {
       lat: 38.722603473238365,
       lng: -9.139389231324786,

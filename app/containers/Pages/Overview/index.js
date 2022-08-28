@@ -16,7 +16,7 @@ import { makeSelectPropertyLocation } from 'containers/Pages/Investments/selecto
 import PaperChartLine from 'components/PaperChartLine';
 import PaperChartLineComplex from 'components/PaperChartLineComplex';
 import PaperChartBar from 'components/PaperChartBar';
-import PaperMap from 'components/PaperMap';
+import Map from 'containers/Map';
 import PaperChartPie from 'components/PaperChartPie';
 import reducer from './reducer';
 import { getChartsByLocation } from './actions';
@@ -326,7 +326,7 @@ export function Overview(props) {
             </Grid>
           </Grid>
           <Grid key="third-row-map" item xs={6} className={classes.gridMap}>
-            <PaperMap />
+            <Map />
           </Grid>
         </Grid>
         <Grid key="fourth-row" item container spacing={2} direction="row">

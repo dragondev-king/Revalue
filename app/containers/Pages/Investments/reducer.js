@@ -80,7 +80,7 @@ export const initialState = {
     JSON.parse(localStorage.getItem('ciPercentiles')),
   ),
   isGettingCiPercentiles: false,
-  analysis: [],
+  analysis: setValueOrEmptyArray(JSON.parse(localStorage.getItem('analysis'))),
   isGettingAnalysis: false,
   errors: {
     acquisitionType: '',
@@ -232,6 +232,10 @@ const investmentReducer = (state = initialState, action) =>
         draft.isGettingPropertyLocations = true;
         break;
       case SET_PROPERTY_LOCATION:
+        localStorage.setItem(
+          'inputs',
+          JSON.stringify({ ...draft.inputs, propertyLocation: action.payload }),
+        );
         draft.inputs.propertyLocation = action.payload;
         break;
       case GET_PROPERTY_LOCATIONS_SUCCESS:
@@ -320,6 +324,10 @@ const investmentReducer = (state = initialState, action) =>
             formattedActionPayload[index] = formattedItem;
           });
         }
+        localStorage.setItem(
+          'analysis',
+          JSON.stringify(formattedActionPayload),
+        );
         draft.analysis = formattedActionPayload;
         draft.isGettingAnalysis = false;
         break;

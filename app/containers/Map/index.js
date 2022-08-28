@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
+import Paper from '@material-ui/core/Paper';
 import MapComponent from '../../components/Map';
 import { makeSelectIsVendorScriptsLoaded } from '../Layouts/Dashboard/selectors';
 import {
@@ -15,28 +16,35 @@ import { getLocationBoundariesByLocation } from './actions';
 import { makeSelectAuthenticated } from '../Authentication/selectors';
 import reducer from './reducer';
 import { useInjectReducer } from '../../utils/injectReducer';
-import { makeSelectPropertyLocation } from '../Pages/Investments/selectors';
-import { setLocation } from '../Pages/Investments/actions';
+import { setPropertyLocation } from '../Pages/Investments/actions';
 
 export function Map(props) {
   useInjectReducer({ key: 'map', reducer });
 
   useEffect(() => {
-    if (props.authenticated && props.location) {
-      props.getLocationBoundariesByLocation(props.location);
+    if (props.propertyLocation) {
+      props.getLocationBoundariesByLocation(props.propertyLocation);
     }
-  }, [props.location]);
+  }, [props.propertyLocation]);
 
   return (
-    <MapComponent
-      center={props.center}
-      location={props.location}
-      boundaries={props.boundaries}
-      setLocation={props.setLocation}
-      isGettingBoundaries={props.isGettingBoundaries}
-      errorGettingBoundaries={props.errorGettingBoundaries}
-      isVendorScriptsLoaded={props.isVendorScriptsLoaded}
-    />
+    <Paper
+      style={{
+        width: '100%',
+        height: '100%',
+      }}
+    >
+      <MapComponent
+        center={props.center}
+        propertyLocation={props.propertyLocation}
+        boundaries={props.boundaries}
+        disabled={props.disabled}
+        setPropertyLocation={props.setPropertyLocation}
+        isGettingBoundaries={props.isGettingBoundaries}
+        errorGettingBoundaries={props.errorGettingBoundaries}
+        isVendorScriptsLoaded={props.isVendorScriptsLoaded}
+      />
+    </Paper>
   );
 }
 
@@ -44,7 +52,6 @@ const mapStateToProps = createStructuredSelector({
   authenticated: makeSelectAuthenticated(),
   center: makeSelectCenter(),
   boundaries: makeSelectBoundaries(),
-  location: makeSelectPropertyLocation(),
   errorGettingBoundaries: makeSelectErrorGettingBoundaries(),
   isGettingBoundaries: makeSelectIsGettingBoundaries(),
   isVendorScriptsLoaded: makeSelectIsVendorScriptsLoaded(),
@@ -54,7 +61,7 @@ function mapDispatchToProps(dispatch) {
   return {
     getLocationBoundariesByLocation: location =>
       dispatch(getLocationBoundariesByLocation(location)),
-    setLocation: location => dispatch(setLocation(location)),
+    setPropertyLocation: location => dispatch(setPropertyLocation(location)),
     dispatch,
   };
 }

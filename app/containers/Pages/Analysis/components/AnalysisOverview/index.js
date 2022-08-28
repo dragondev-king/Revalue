@@ -22,7 +22,7 @@ const AnalysisOverview = ({ props }) => {
             item
             container
             justifyContent="space-between"
-            className={classes.overviewStatsGrid}
+            style={{ margin: '30px 0px 0px 0px' }}
           >
             <Grid
               item
@@ -156,7 +156,7 @@ const AnalysisOverview = ({ props }) => {
             item
             container
             justifyContent="space-between"
-            className={classes.overviewStatsGrid}
+            style={{ margin: '15px 0px 30px 0px' }}
           >
             <Grid
               item

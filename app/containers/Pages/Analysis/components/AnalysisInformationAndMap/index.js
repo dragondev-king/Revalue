@@ -1,5 +1,5 @@
 import React from 'react';
-import PaperMap from 'components/PaperMap';
+import Map from 'containers/Map';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Table from '@material-ui/core/Table';
@@ -25,7 +25,7 @@ const AnalysisInformationAndMap = ({ props }) => {
           className={classes.propertyInformationAndMapContainer}
         >
           <Grid item xs={6} className="pr-40">
-            <PaperMap />
+            <Map propertyLocation={props.analysis.location} disabled />
           </Grid>
           <Grid item container xs={6}>
             <Grid style={{ width: '100%' }}>
