@@ -14,12 +14,12 @@ export default function SettingDrawer({ open, setOpen }) {
   const classes = useStyles();
 
   return (
-    <div className={classes.DrawerContainer}>
+    <>
       <Drawer anchor="right" open={open} onClose={() => setOpen(false)}>
         <div className={classes.drawerContent}>
           <DrawerComponent setOpen={setOpen} />
         </div>
       </Drawer>
-    </div>
+    </>
   );
 }

@@ -2,7 +2,6 @@
 import React from 'react';
 import Table from '@material-ui/core/Table';
 import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
@@ -10,58 +9,60 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Skeleton from 'react-loading-skeleton';
+import { formatNumber } from 'utils/formatNumber';
+import { Grid } from '@material-ui/core';
 import { useStyles } from '../../styles';
-import messages from '../../messages';
+import messages from '../../../Investments/messages';
 
 const colors = [
   {
     0: '#F1F1F1',
-    1: '#CDE7FF',
-    2: '#CDE7FF',
+    5: '#CDE7FF',
+    4: '#CDE7FF',
     3: '#CDE7FF',
-    4: '#8DC8FF',
-    5: '#8DC8FF',
-  },
-  {
-    0: '#F1F1F1',
-    1: '#CDE7FF',
-    2: '#CDE7FF',
-    3: '#CDE7FF',
-    4: '#8DC8FF',
-    5: '#8DC8FF',
-  },
-  {
-    0: '#F1F1F1',
-    1: '#CDE7FF',
     2: '#8DC8FF',
+    1: '#8DC8FF',
+  },
+  {
+    0: '#F1F1F1',
+    5: '#CDE7FF',
+    4: '#CDE7FF',
+    3: '#CDE7FF',
+    2: '#8DC8FF',
+    1: '#8DC8FF',
+  },
+  {
+    0: '#F1F1F1',
+    5: '#CDE7FF',
+    4: '#8DC8FF',
     3: '#FFFFFF',
+    2: '#8DC8FF',
+    1: '#41A4FF',
+  },
+  {
+    0: '#F1F1F1',
+    5: '#8DC8FF',
     4: '#8DC8FF',
-    5: '#41A4FF',
-  },
-  {
-    0: '#F1F1F1',
-    1: '#8DC8FF',
-    2: '#8DC8FF',
     3: '#8DC8FF',
-    4: '#41A4FF',
-    5: '#0062BC',
+    2: '#41A4FF',
+    1: '#0062BC',
   },
   {
     0: '#F1F1F1',
-    1: '#8DC8FF',
-    2: '#8DC8FF',
+    5: '#8DC8FF',
+    4: '#8DC8FF',
     3: '#41A4FF',
-    4: '#0062BC',
-    5: '#0062BC',
+    2: '#0062BC',
+    1: '#0062BC',
   },
 ];
 
 const EstimatedProfitTable = ({ props }) => {
   const classes = useStyles();
   return (
-    <Box className={classes.sensitivityTableContainer}>
+    <>
       {!props.isGettingAnalysisById ? (
-        <>
+        <Grid>
           <Typography className={classes.sectionTitle}>
             {props.intl.formatMessage({
               ...messages.sensitivityTable,
@@ -71,20 +72,21 @@ const EstimatedProfitTable = ({ props }) => {
             component={Paper}
             style={{ marginTop: '16px', padding: '16px 16px' }}
           >
-            <Table className={classes.table} aria-label="simple table">
+            <Table>
               <TableHead>
                 <TableRow>
                   <TableCell
                     align="center"
                     colSpan={7}
                     style={{
-                      border: '2px solid #E9F2FB',
                       fontWeight: 'bold',
                       fontSize: '16px',
+                      borderBottom: '0px',
+                      paddingLeft: '375px',
                     }}
                   >
                     {props.intl.formatMessage({
-                      ...messages.acquistionPrice,
+                      ...messages.acquisitionPrice,
                     })}
                   </TableCell>
                 </TableRow>
@@ -92,9 +94,7 @@ const EstimatedProfitTable = ({ props }) => {
                   <TableCell
                     align="center"
                     variant="head"
-                    style={{
-                      borderLeft: '2px solid #E9F2FB',
-                    }}
+                    style={{ borderBottom: '0px' }}
                   />
                   {props.analysis &&
                     props.analysis.estimatedProfitTable &&
@@ -109,34 +109,31 @@ const EstimatedProfitTable = ({ props }) => {
                             background: column.label
                               ? '#F1F1F1'
                               : 'transparent',
-                            border: index > 0 && '2px solid #E9F2FB',
                             fontWeight: 'bold',
                             fontSize: '14.5px',
                             color: '#565853',
+                            borderBottom: '0px',
                           }}
                         >
-                          {column.label}
+                          {formatNumber(column.label)}
                         </TableCell>
                       ),
                     )}
                 </TableRow>
               </TableHead>
-              <TableBody>
-                <TableRow>
+              <TableBody key="estimatedProfitTableBody">
+                <TableRow key="estimatedProfitTableRowTransactionPrice">
                   <TableCell
                     align="center"
-                    component="th"
-                    scope="row"
                     rowSpan={6}
                     style={{
-                      border: '2px solid #E9F2FB',
                       fontWeight: 'bold',
-                      // verticalAlign: 'initial',
                       fontSize: '16px',
+                      borderBottom: '0px',
                     }}
                   >
                     {props.intl.formatMessage({
-                      ...messages.exitPrice,
+                      ...messages.transactionPrice,
                     })}
                   </TableCell>
                 </TableRow>
@@ -144,16 +141,14 @@ const EstimatedProfitTable = ({ props }) => {
                   props.analysis.estimatedProfitTable &&
                   props.analysis.estimatedProfitTable.rows &&
                   props.analysis.estimatedProfitTable.rows.map((row, ind) => (
-                    <TableRow>
+                    <TableRow key={ind}>
                       {Object.entries(row).map((rowInfo, index) => (
                         <TableCell
                           align="right"
-                          component="th"
-                          scope="row"
+                          key={index}
                           variant="head"
                           style={{
                             background: colors[ind][index],
-                            border: '2px solid #E9F2FB',
                             fontWeight:
                               index === 0 ||
                               (colors[ind][index] === '#FFFFFF' && 'bold'),
@@ -163,9 +158,10 @@ const EstimatedProfitTable = ({ props }) => {
                               colors[ind][index] === '#41A4FF'
                                 ? 'white'
                                 : 'black',
+                            borderBottom: '0px',
                           }}
                         >
-                          {row[`v${index}`].toFixed(2)}
+                          {formatNumber(row[`v${index}`])}
                         </TableCell>
                       ))}
                     </TableRow>
@@ -173,11 +169,11 @@ const EstimatedProfitTable = ({ props }) => {
               </TableBody>
             </Table>
           </TableContainer>
-        </>
+        </Grid>
       ) : (
         <Skeleton count={1} height={400} />
       )}
-    </Box>
+    </>
   );
 };
 export default EstimatedProfitTable;

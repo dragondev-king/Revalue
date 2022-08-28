@@ -2,6 +2,7 @@ import { createSelector } from 'reselect';
 import { initialState } from './reducer';
 
 const selectInvestmentDomain = state => state.investment || initialState;
+
 const makeSelectInvestment = () =>
   createSelector(
     selectInvestmentDomain,
@@ -38,28 +39,34 @@ const makeSelectPropertyConditions = () =>
     substate => substate.propertyConditions,
   );
 
-const makeSelectStatus = () =>
-  createSelector(
-    selectInvestmentDomain,
-    substate => substate.status,
-  );
-
 const makeSelectAcquisitionTypes = () =>
   createSelector(
     selectInvestmentDomain,
     substate => substate.acquisitionTypes,
   );
 
+const makeSelectIrsCategories = () =>
+  createSelector(
+    selectInvestmentDomain,
+    substate => substate.irsCategories,
+  );
+
+const makeSelectIrsCategoryRegions = () =>
+  createSelector(
+    selectInvestmentDomain,
+    substate => substate.irsCategoryRegions,
+  );
+
+const makeSelectIrsDependentsList = () =>
+  createSelector(
+    selectInvestmentDomain,
+    substate => substate.irsDependentsList,
+  );
+
 const makeSelectCIPs = () =>
   createSelector(
     selectInvestmentDomain,
     substate => substate.ciPercentiles,
-  );
-
-const makeSelectCIP = () =>
-  createSelector(
-    selectInvestmentDomain,
-    substate => substate.ciPercentile,
   );
 
 const makeSelectInputs = () =>
@@ -74,16 +81,16 @@ const makeSelectErrors = () =>
     substate => substate.errors,
   );
 
-const makeSelectAnalysisData = () =>
+const makeSelectAnalysis = () =>
   createSelector(
     selectInvestmentDomain,
-    substate => substate.analysisData,
+    substate => substate.analysis,
   );
 
-const makeSelectIsGettingAnalysisData = () =>
+const makeSelectIsGettingAnalysis = () =>
   createSelector(
     selectInvestmentDomain,
-    substate => substate.isGettingAnalysisData,
+    substate => substate.isGettingAnalysis,
   );
 
 const makeSelectAnalyzeButtonDisabled = () =>
@@ -97,15 +104,16 @@ export {
   makeSelectPropertyLocations,
   makeSelectPropertyLocation,
   makeSelectPropertyTypes,
-  makeSelectStatus,
   makeSelectPropertyTypologies,
   makeSelectPropertyConditions,
   makeSelectAcquisitionTypes,
+  makeSelectIrsCategories,
+  makeSelectIrsCategoryRegions,
+  makeSelectIrsDependentsList,
   makeSelectInputs,
   makeSelectErrors,
-  makeSelectAnalysisData,
   makeSelectCIPs,
-  makeSelectCIP,
-  makeSelectIsGettingAnalysisData,
+  makeSelectAnalysis,
+  makeSelectIsGettingAnalysis,
   makeSelectAnalyzeButtonDisabled,
 };

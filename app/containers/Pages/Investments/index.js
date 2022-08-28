@@ -1,5 +1,5 @@
 /* eslint-disable react/no-array-index-key */
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo, useEffect } from 'react';
 import { connect } from 'react-redux';
 import * as yup from 'yup';
 import { Helmet } from 'react-helmet';
@@ -12,7 +12,6 @@ import Grid from '@material-ui/core/Grid';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Accordion from '@material-ui/core/Accordion';
-import Switch from '@material-ui/core/Switch';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
@@ -22,25 +21,29 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { DataGrid } from '@material-ui/data-grid';
 import parse from 'autosuggest-highlight/parse';
 import match from 'autosuggest-highlight/match';
-import AutoComplete from 'components/AutoComplete';
 import SearchIcon from '@material-ui/icons/Search';
 import { Link } from 'react-router-dom';
+import AutoComplete from 'components/AutoComplete';
 import PaperMap from 'components/PaperMap';
+import CustomSelect from 'components/CustomSelect';
+import CustomInput from 'components/CustomInput';
+import CustomSwitch from 'components/CustomSwitch';
 import messages from './messages';
-import CustomSelect from '../../../components/CustomSelect';
-import CustomInput from '../../../components/CustomInput';
 import {
   makeSelectPropertyTypes,
+  makeSelectIrsCategories,
   makeSelectPropertyTypologies,
   makeSelectPropertyConditions,
   makeSelectPropertyLocations,
   makeSelectCIPs,
   makeSelectInputs,
   makeSelectErrors,
-  makeSelectAnalysisData,
-  makeSelectIsGettingAnalysisData,
+  makeSelectAnalysis,
+  makeSelectIsGettingAnalysis,
   makeSelectAcquisitionTypes,
   makeSelectAnalyzeButtonDisabled,
+  makeSelectIrsCategoryRegions,
+  makeSelectIrsDependentsList,
 } from './selectors';
 import reducer from './reducer';
 import {
@@ -49,44 +52,18 @@ import {
   getPropertyTypologies,
   getPropertyConditions,
   getAcquisitionTypes,
-  getAnalysisData,
+  getAnalysis,
   getCIPs,
   setAnalyzeButtonDisabled,
   setInputError,
   setInputValue,
   setPropertyLocation,
+  /* TODO IRS getIrsCategories,
+  getIrsCategoryRegions,
+  getIrsDependentsList, */
 } from './actions';
 
-const useStyles = makeStyles(theme => ({
-  appBarSpacer: theme.mixins.toolbar,
-  ctrlWidth: {
-    minWidth: '110px',
-    marginRight: theme.spacing(6),
-  },
-  ctrlEndWidth: {
-    minWidth: '110px',
-  },
-  doubleWidth: {
-    minWidth: '270px',
-    marginRight: theme.spacing(6),
-  },
-  inputWidth: {
-    maxWidth: '110px',
-    marginRight: theme.spacing(6),
-  },
-  inputLgWidth: {
-    minWidth: '270px',
-    marginRight: theme.spacing(6),
-  },
-  inputEndWidth: {
-    maxWidth: '110px',
-  },
-  inputEndLgWidth: {
-    minWidth: '270px',
-  },
-  rowSpacing: {
-    marginTop: '32px',
-  },
+const useStyles = makeStyles(() => ({
   title: {
     fontWeight: 'Bold',
     marginTop: '24px',
@@ -126,32 +103,8 @@ const useStyles = makeStyles(theme => ({
     textTransform: 'capitalize',
     marginBottom: '24px',
   },
-  tableBody: {
-    fontSize: '14px',
-    '&:nth-of-type(odd)': {
-      backgroundColor: '#CDD4EA',
-    },
-    '&:last-child td, &:last-child th': {
-      border: 0,
-    },
-  },
   gridRoot: {
     border: 0,
-  },
-  fixHeight: {
-    // minHeight: '300px',
-    // maxHeight: '300px',
-  },
-  iconMr: {
-    marginLeft: '5px',
-    marginBottom: '1px',
-    padding: '0px',
-  },
-  iconSize: {
-    width: '16px',
-  },
-  labelWidth: {
-    minWidth: '170px',
   },
   loading: {
     marginTop: '2px',
@@ -170,56 +123,53 @@ const useStyles = makeStyles(theme => ({
     marginRight: '10px',
     color: '#0083FC',
   },
+  orText: {
+    fontSize: '20px',
+  },
 }));
 
 const columns = [
   {
-    field: 'location',
+    field: 'propertyLocation',
     label: 'location',
     sortable: false,
-    width: 140,
+    flex: 1,
   },
   {
-    field: 'asking',
-    label: 'asking',
+    field: 'propertyAskingPrice',
+    label: 'askingPrice',
     sortable: false,
-    width: 130,
+    flex: 1,
   },
   {
-    field: 'capital',
-    label: 'capital',
+    field: 'entryCapital',
+    label: 'entryCapital',
     sortable: false,
-    width: 130,
+    flex: 1,
   },
   {
-    field: 'costs',
-    label: 'costs',
+    field: 'transactionPrice',
+    label: 'transactionPrice',
     sortable: false,
-    width: 130,
+    flex: 1,
   },
   {
-    field: 'price',
-    label: 'price',
+    field: 'internalRateOfReturn',
+    label: 'internalRateOfReturn',
     sortable: false,
-    width: 130,
+    minWidth: 200,
   },
   {
-    field: 'irr',
-    label: 'irr',
+    field: 'profitAfterTax',
+    label: 'profitAfterTax',
     sortable: false,
-    width: 130,
-  },
-  {
-    field: 'profit',
-    label: 'profit',
-    sortable: false,
-    width: 130,
+    minWidth: 130,
   },
   {
     field: 'report',
     label: 'report',
-    width: 130,
     sortable: false,
+    minWidth: 70,
     renderCell: cellValues => (
       <Link to={`/analysis/${cellValues.row.id}`} style={{ color: '#7866f4' }}>
         Report
@@ -229,18 +179,21 @@ const columns = [
 ];
 
 export function Investments(props) {
-  const [isSwitch, setIsSwitch] = useState(true);
   useInjectReducer({ key: 'investment', reducer });
 
   useEffect(() => {
     props.getPropertyLocations();
     props.getPropertyTypes();
+    /*  TODO IRS  props.getIrsCategories();
+    props.getIrsDependentsList();
+    props.getIrsCategoryRegions(); */
     props.getPropertyTypologies();
     props.getPropertyConditions();
     props.getAcquisitionTypes();
     props.getCIPs();
   }, []);
 
+  // TODO check all inputs
   const validationSchema = yup.object().shape({
     propertyLocation: yup
       .string()
@@ -290,12 +243,7 @@ export function Investments(props) {
       .transform(v => (v === '' || Number.isNaN(v) ? null : v))
       .nullable()
       .required('inputRequired'),
-    landRegistryInscriptionWithMortgage: yup
-      .number()
-      .transform(v => (v === '' || Number.isNaN(v) ? null : v))
-      .nullable()
-      .required('inputRequired'),
-    landRegistryInscriptionWithoutMortgage: yup
+    landRegistryInscription: yup
       .number()
       .transform(v => (v === '' || Number.isNaN(v) ? null : v))
       .nullable()
@@ -305,11 +253,29 @@ export function Investments(props) {
       .transform(v => (v === '' || Number.isNaN(v) ? null : v))
       .nullable()
       .required('inputRequired'),
-    bankCommission: yup
+    bankCommissionRate: yup
       .number()
       .transform(v => (v === '' || Number.isNaN(v) ? null : v))
       .nullable()
       .required('inputRequired'),
+    taxResidentInPortugal: yup
+      .boolean()
+      .nullable()
+      .required('inputRequired'),
+    currentIrsRate: yup
+      .number()
+      .transform(v => (v === '' || Number.isNaN(v) ? null : v))
+      .nullable()
+      // eslint-disable-next-line consistent-return
+      .when(['taxResidentInPortugal'], taxResidentInPortugal => {
+        if (taxResidentInPortugal) {
+          return yup
+            .number()
+            .transform(v => (v === '' || Number.isNaN(v) ? null : v))
+            .nullable()
+            .required('inputRequired');
+        }
+      }),
     amortization: yup
       .number()
       .transform(v => (v === '' || Number.isNaN(v) ? null : v))
@@ -336,11 +302,6 @@ export function Investments(props) {
       .nullable()
       .required('inputRequired'),
     timeToSale: yup
-      .number()
-      .transform(v => (v === '' || Number.isNaN(v) ? null : v))
-      .nullable()
-      .required('inputRequired'),
-    irsRate: yup
       .number()
       .transform(v => (v === '' || Number.isNaN(v) ? null : v))
       .nullable()
@@ -375,11 +336,6 @@ export function Investments(props) {
       .transform(v => (v === '' || Number.isNaN(v) ? null : v))
       .nullable()
       .required('inputRequired'),
-    /* minObservationsForPercentile: yup
-      .number()
-      .transform(v => (v === '' || Number.isNaN(v) ? null : v))
-      .nullable()
-      .required('inputRequired'), */
   });
 
   const onSubmit = () => {
@@ -388,11 +344,11 @@ export function Investments(props) {
         abortEarly: false,
       })
       .then(() => {
-        props.getAnalysisData(props.inputs);
+        props.getAnalysis(props.inputs);
         props.setAnalyzeButtonDisabled(true);
       })
       .catch(error => {
-        if (error.inner.length > 0) {
+        if (error.inner && error.inner.length > 0) {
           error.inner.forEach(item => {
             props.setInputError(
               item.path,
@@ -409,6 +365,16 @@ export function Investments(props) {
     const { name, value } = event.target;
     props.setInputValue(name, value);
     props.setInputError(name, '');
+    props.setAnalyzeButtonDisabled(false);
+  }
+
+  function handleChangeSwitch(event) {
+    const { name, checked } = event.target;
+    if (checked) {
+      props.setInputValue(name, true);
+    } else {
+      props.setInputValue(name, false);
+    }
     props.setAnalyzeButtonDisabled(false);
   }
 
@@ -429,7 +395,7 @@ export function Investments(props) {
             <FormControl
               variant="standard"
               className="w-100"
-              error={props.errors.propertyLocation}
+              error={!!props.errors.propertyLocation}
             >
               <AutoComplete
                 value={props.inputs.propertyLocation}
@@ -438,7 +404,7 @@ export function Investments(props) {
                   props.setInputError('propertyLocation', '');
                   props.setAnalyzeButtonDisabled(false);
                 }}
-                error={props.errors.propertyLocation}
+                error={!!props.errors.propertyLocation}
                 name="propertyLocation"
                 defaultValue={props.inputs.propertyLocation}
                 options={props.propertyLocations}
@@ -508,9 +474,9 @@ export function Investments(props) {
               handleChange={handleChange}
               defaultValue={props.inputs.minProfit}
               symbol={<span>&#8364;</span>}
-              labelText={props.intl.formatMessage({
+              labelText={`${props.intl.formatMessage({
                 ...messages.minProfit,
-              })}
+              })} *`}
               tooltipText={props.intl.formatMessage({
                 ...messages.minProfitInfo,
               })}
@@ -524,9 +490,9 @@ export function Investments(props) {
               handleChange={handleChange}
               defaultValue={props.inputs.housePriceIndexRate}
               symbol={<span>%</span>}
-              labelText={props.intl.formatMessage({
+              labelText={`${props.intl.formatMessage({
                 ...messages.housePriceIndexRate,
-              })}
+              })} *`}
               tooltipText={props.intl.formatMessage({
                 ...messages.housePriceIndexRateInfo,
               })}
@@ -539,7 +505,7 @@ export function Investments(props) {
               type="number"
               handleChange={handleChange}
               defaultValue={props.inputs.minCapital}
-              symbol={<span>m²</span>}
+              symbol={<span>&#8364;</span>}
               labelText={props.intl.formatMessage({
                 ...messages.minCapital,
               })}
@@ -564,8 +530,7 @@ export function Investments(props) {
               })}
             />
           </Grid>
-
-          <Grid item xs={12}>
+          <Grid item xs={6}>
             <CustomSelect
               error={null}
               defaultValue={props.inputs.ciPercentile}
@@ -580,38 +545,21 @@ export function Investments(props) {
               })}
             />
           </Grid>
-          {/*  <Grid item xs={3}>
-            <FormControl
-              variant="standard"
-              className="w-100"
-              error={props.errors.minObservationsForPercentile}
-            >
-              <InputLabel>
-                {props.intl.formatMessage({
-                  ...messages.minObservationsForPercentile,
-                })}
-                <Tooltip
-                  title={props.intl.formatMessage({
-                    ...messages.minObservationsForPercentileInfo,
-                  })}
-                >
-                  <IconButton className={classes.iconMr}>
-                    <InfoIcon className={classes.iconSize} color="primary" />
-                  </IconButton>
-                </Tooltip>
-              </InputLabel>
-              <Input
-                onChange={handleChange}
-                type="number"
-                defaultValue={props.inputs.minObservationsForPercentile}
-                name="minObservationsForPercentile"
-                startAdornment={
-                  <InputAdornment position="start">#</InputAdornment>
-                }
-              />
-              <FormHelperText>{props.errors.minObservationsForPercentile}</FormHelperText>
-            </FormControl>
-          </Grid> */}
+          <Grid item xs={6}>
+            <CustomSelect
+              error={props.errors.propertyCondition}
+              defaultValue={props.inputs.propertyCondition}
+              handleChange={handleChange}
+              data={props.propertyConditions}
+              name="propertyCondition"
+              tooltipText={props.intl.formatMessage({
+                ...messages.propertyCondition,
+              })}
+              labelText={props.intl.formatMessage({
+                ...messages.propertyCondition,
+              })}
+            />
+          </Grid>
         </Grid>
       </Grid>
     );
@@ -752,39 +700,8 @@ export function Investments(props) {
               })}
             />
           </Grid>
-          {/* This was not in the previous page but was in the figma - adding the field but content needs to be update */}
-          <Grid item xs={4}>
-            <CustomSelect
-              error={props.errors.propertyTypology}
-              defaultValue={props.inputs.propertyTypology}
-              handleChange={handleChange}
-              data={props.propertyTypologies}
-              name="propertyTypology"
-              labelText={props.intl.formatMessage({
-                ...messages.status,
-              })}
-              tooltipText={props.intl.formatMessage({
-                ...messages.status,
-              })}
-            />
-          </Grid>
         </Grid>
         <Grid item container spacing={6}>
-          <Grid item xs={4}>
-            <CustomSelect
-              error={props.errors.propertyCondition}
-              defaultValue={props.inputs.propertyCondition}
-              handleChange={handleChange}
-              data={props.propertyConditions}
-              name="propertyCondition"
-              tooltipText={props.intl.formatMessage({
-                ...messages.propertyCondition,
-              })}
-              labelText={props.intl.formatMessage({
-                ...messages.propertyCondition,
-              })}
-            />
-          </Grid>
           <Grid item xs={4}>
             <CustomInput
               error={props.errors.minAskingPrice}
@@ -816,43 +733,46 @@ export function Investments(props) {
                 ...messages.maxAskingPrice,
               })}
             />
-          </Grid>
-          <Grid item xs={4}>
-            <CustomInput
-              error={props.errors.minUsefulArea}
-              name="minUsefulArea"
-              type="number"
-              handleChange={handleChange}
-              defaultValue={props.inputs.minUsefulArea}
-              symbol={<span>m²</span>}
-              labelText={props.intl.formatMessage({
-                ...messages.minUsefulArea,
-              })}
-              tooltipText={props.intl.formatMessage({
-                ...messages.minUsefulArea,
-              })}
-            />
-          </Grid>
-          <Grid item xs={4}>
-            <CustomInput
-              error={props.errors.maxUsefulArea}
-              name="maxUsefulArea"
-              type="number"
-              handleChange={handleChange}
-              defaultValue={props.inputs.maxUsefulArea}
-              symbol={<span>m²</span>}
-              labelText={props.intl.formatMessage({
-                ...messages.maxUsefulArea,
-              })}
-              tooltipText={props.intl.formatMessage({
-                ...messages.maxUsefulArea,
-              })}
-            />
+          </Grid>{' '}
+          <Grid item container spacing={6}>
+            <Grid item xs={4}>
+              <CustomInput
+                error={props.errors.minUsefulArea}
+                name="minUsefulArea"
+                type="number"
+                handleChange={handleChange}
+                defaultValue={props.inputs.minUsefulArea}
+                symbol={<span>m²</span>}
+                labelText={props.intl.formatMessage({
+                  ...messages.minUsefulArea,
+                })}
+                tooltipText={props.intl.formatMessage({
+                  ...messages.minUsefulArea,
+                })}
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <CustomInput
+                error={props.errors.maxUsefulArea}
+                name="maxUsefulArea"
+                type="number"
+                handleChange={handleChange}
+                defaultValue={props.inputs.maxUsefulArea}
+                symbol={<span>m²</span>}
+                labelText={props.intl.formatMessage({
+                  ...messages.maxUsefulArea,
+                })}
+                tooltipText={props.intl.formatMessage({
+                  ...messages.maxUsefulArea,
+                })}
+              />
+            </Grid>
           </Grid>
         </Grid>
       </Grid>
     );
   }
+
   function renderAcquisitionAssumptionsAccordion() {
     return (
       <Grid item container spacing={6} className="mb-10">
@@ -860,6 +780,7 @@ export function Investments(props) {
       </Grid>
     );
   }
+
   function renderFinancingAssumptionsAccordion() {
     return (
       <Grid item container spacing={6} className="mb-10">
@@ -867,6 +788,7 @@ export function Investments(props) {
       </Grid>
     );
   }
+
   function renderOperatingAssumptionsAccordion() {
     return (
       <Grid item container spacing={6} className="mb-10">
@@ -874,6 +796,7 @@ export function Investments(props) {
       </Grid>
     );
   }
+
   function renderTaxAssumptionsAccordion() {
     return (
       <Grid item container spacing={6} className="mb-10">
@@ -881,6 +804,7 @@ export function Investments(props) {
       </Grid>
     );
   }
+
   function renderExitAssumptionsAccordion() {
     return (
       <Grid item container spacing={6} className="mb-10">
@@ -924,22 +848,6 @@ export function Investments(props) {
               })}
             />
           </Grid>
-          {/* It was not in the previous page but was in the figma - adding this but content needs to be updated */}
-          <Grid item xs={4}>
-            <CustomSelect
-              error={null}
-              defaultValue={props.inputs.acquisitionType}
-              handleChange={handleChange}
-              data={props.acquisitionTypes}
-              name="acquisitionType"
-              labelText={props.intl.formatMessage({
-                ...messages.reet,
-              })}
-              tooltipText={props.intl.formatMessage({
-                ...messages.reet,
-              })}
-            />
-          </Grid>
         </Grid>
         <Grid item container spacing={6} className="mt-20">
           <Grid item xs={4}>
@@ -960,33 +868,32 @@ export function Investments(props) {
           </Grid>
           <Grid item xs={4}>
             <CustomInput
-              error={props.errors.landRegistryInscriptionWithMortgage}
-              name="landRegistryInscriptionWithMortgage"
+              error={props.errors.landRegistryInscription}
+              name="landRegistryInscription"
               type="number"
               handleChange={handleChange}
-              defaultValue={props.inputs.landRegistryInscriptionWithMortgage}
+              defaultValue={props.inputs.landRegistryInscription}
               symbol={<span>&#8364;</span>}
               labelText={props.intl.formatMessage({
-                ...messages.landRegistryInscriptionWithMortgage,
+                ...messages.landRegistryInscription,
               })}
               tooltipText={props.intl.formatMessage({
-                ...messages.landRegistryInscriptionWithMortgageInfo,
+                ...messages.landRegistryInscriptionInfo,
               })}
             />
           </Grid>
           <Grid item xs={4}>
-            <CustomInput
-              error={props.errors.landRegistryInscriptionWithoutMortgage}
-              name="landRegistryInscriptionWithoutMortgage"
-              type="number"
-              handleChange={handleChange}
-              defaultValue={props.inputs.landRegistryInscriptionWithoutMortgage}
-              symbol={<span>&#8364;</span>}
+            <CustomSwitch
+              defaultValue={props.inputs.realEstateTransferTax}
+              handleChange={handleChangeSwitch}
+              checked={props.inputs.realEstateTransferTax}
+              color="primary"
+              name="realEstateTransferTax"
               labelText={props.intl.formatMessage({
-                ...messages.landRegistryInscriptionWithoutMortgage,
+                ...messages.realEstateTransferTax,
               })}
               tooltipText={props.intl.formatMessage({
-                ...messages.landRegistryInscriptionWithoutMortgageInfo,
+                ...messages.realEstateTransferTax,
               })}
             />
           </Grid>
@@ -1001,17 +908,17 @@ export function Investments(props) {
         <Grid item container spacing={6}>
           <Grid item xs={4}>
             <CustomInput
-              error={props.errors.bankCommission}
-              name="bankCommission"
+              error={props.errors.bankCommissionRate}
+              name="bankCommissionRate"
               type="number"
               handleChange={handleChange}
-              defaultValue={props.inputs.bankCommission}
-              symbol={<span>&#8364;</span>}
+              defaultValue={props.inputs.bankCommissionRate}
+              symbol={<span>%</span>}
               labelText={props.intl.formatMessage({
-                ...messages.bankCommission,
+                ...messages.bankCommissionRate,
               })}
               tooltipText={props.intl.formatMessage({
-                ...messages.bankCommissionInfo,
+                ...messages.bankCommissionRateInfo,
               })}
             />
           </Grid>
@@ -1097,15 +1004,16 @@ export function Investments(props) {
               })}
             />
           </Grid>
-          {/* Hide this field as it was not in the figma */}
-          {/* <Grid item xs={4}>
+          <Grid item xs={4}>
             <CustomInput
               error={props.errors.amortization}
               name="amortization"
               type="number"
               handleChange={handleChange}
               defaultValue={props.inputs.amortization}
-              symbol={<span>Years</span>}
+              symbol={
+                <span>{props.intl.formatMessage({ ...messages.year })}</span>
+              }
               labelText={props.intl.formatMessage({
                 ...messages.amortization,
               })}
@@ -1113,7 +1021,7 @@ export function Investments(props) {
                 ...messages.amortizationInfo,
               })}
             />
-          </Grid> */}
+          </Grid>
         </Grid>
       </Grid>
     );
@@ -1157,24 +1065,24 @@ export function Investments(props) {
           </Grid>
           <Grid item xs={4}>
             <CustomInput
-              error={props.errors.capex}
-              name="capex"
+              error={props.errors.capexPerSquareMeter}
+              name="capexPerSquareMeter"
               type="number"
               handleChange={handleChange}
-              defaultValue={props.inputs.capex}
-              symbol={<span>&#8364;</span>}
+              defaultValue={props.inputs.capexPerSquareMeter}
+              symbol={<span>€ / m²</span>}
               labelText={props.intl.formatMessage({
-                ...messages.capex,
+                ...messages.capexPerSquareMeter,
               })}
               tooltipText={props.intl.formatMessage({
-                ...messages.capex,
+                ...messages.capexPerSquareMeterInfo,
               })}
             />
           </Grid>
           <Grid item xs={4}>
             <CustomInput
               error={props.errors.multiRiskInsurance}
-              name="capex"
+              name="multiRiskInsurance"
               type="number"
               handleChange={handleChange}
               defaultValue={props.inputs.multiRiskInsurance}
@@ -1190,7 +1098,7 @@ export function Investments(props) {
           <Grid item xs={4}>
             <CustomInput
               error={props.errors.lifeInsurance}
-              name="capex"
+              name="lifeInsurance"
               type="number"
               handleChange={handleChange}
               defaultValue={props.inputs.lifeInsurance}
@@ -1212,119 +1120,135 @@ export function Investments(props) {
     return (
       <Grid container item className="mt-20">
         <Grid item container spacing={6}>
-          {/* This was not in the previous page but was in the figma - adding the field but content needs to be update */}
-          <Grid item xs={12} className="py-0">
-            <Switch
-              onChange={e => setIsSwitch(e.target.checked)}
-              checked={isSwitch}
-              color="primary"
-              name="taxAssumptionCheck"
-            />
-            Resident in Portugal
-          </Grid>
-          {/* This was not in the previous page but was in the figma - adding the field but content needs to be update */}
-          <Grid item xs={4}>
-            <CustomSelect
-              disabled={!isSwitch}
-              error={props.errors.propertyTypology}
-              defaultValue={props.inputs.propertyTypology}
-              handleChange={handleChange}
-              data={props.propertyTypologies}
-              name="propertyTypology"
+          <Grid
+            item
+            xs={!props.inputs.taxResidentInPortugal ? 4 : 12}
+            className="py-0"
+          >
+            <CustomSwitch
+              handleChange={handleChangeSwitch}
+              checked={props.inputs.taxResidentInPortugal}
+              name="taxResidentInPortugal"
               labelText={props.intl.formatMessage({
-                ...messages.iRSCategory,
+                ...messages.taxResidentInPortugal,
               })}
               tooltipText={props.intl.formatMessage({
-                ...messages.iRSCategory,
+                ...messages.taxResidentInPortugal,
               })}
             />
           </Grid>
-          {/* This was not in the previous page but was in the figma - adding the field but content needs to be update */}
-          <Grid item xs={4}>
-            <CustomSelect
-              disabled={!isSwitch}
-              error={props.errors.propertyTypology}
-              defaultValue={props.inputs.propertyTypology}
-              handleChange={handleChange}
-              data={props.propertyTypologies}
-              name="propertyTypology"
-              labelText={props.intl.formatMessage({
-                ...messages.numberOfDependents,
-              })}
-              tooltipText={props.intl.formatMessage({
-                ...messages.propertyTypology,
-              })}
-            />
-          </Grid>
-          {/* This was not in the previous page but was in the figma - adding the field but content needs to be update */}
-          <Grid item xs={4}>
-            <CustomInput
-              disabled={!isSwitch}
-              error={props.errors.irsRate}
-              name="irsRate"
-              type="number"
-              handleChange={handleChange}
-              defaultValue={props.inputs.irsRate}
-              symbol={<span>€</span>}
-              labelText={props.intl.formatMessage({
-                ...messages.currentMonthlySalary,
-              })}
-              tooltipText={props.intl.formatMessage({
-                ...messages.currentMonthlySalary,
-              })}
-            />
-          </Grid>
-          <Grid item xs={4}>
-            <CustomInput
-              disabled={!isSwitch}
-              error={props.errors.irsRate}
-              name="irsRate"
-              type="number"
-              handleChange={handleChange}
-              defaultValue={props.inputs.irsRate}
-              symbol={<span>%</span>}
-              labelText={props.intl.formatMessage({
-                ...messages.currentIRSRate,
-              })}
-              tooltipText={props.intl.formatMessage({
-                ...messages.currentIRSRate,
-              })}
-            />
-          </Grid>
-          <Grid item xs={4}>
-            <CustomInput
-              disabled={!isSwitch}
-              error={props.errors.capitalGainsTaxRate}
-              name="capitalGainsTaxRate"
-              type="number"
-              handleChange={handleChange}
-              defaultValue={props.inputs.capitalGainsTaxRate}
-              symbol={<span>%</span>}
-              labelText={props.intl.formatMessage({
-                ...messages.capitalGainsTaxRate,
-              })}
-              tooltipText={props.intl.formatMessage({
-                ...messages.capitalGainsTaxRateInfo,
-              })}
-            />
-          </Grid>
-          {!isSwitch && (
-            <Grid item xs={4}>
-              <CustomInput
-                error={props.errors.irs}
-                name="irs"
-                type="number"
-                handleChange={handleChange}
-                defaultValue={28}
-                symbol={<span>%</span>}
-                labelText={props.intl.formatMessage({
-                  ...messages.irs,
+          {!props.inputs.taxResidentInPortugal && (
+            <>
+              <Grid item xs={4}>
+                <CustomInput
+                  name="irsRate"
+                  type="number"
+                  readOnly
+                  defaultValue={28}
+                  symbol={<span>%</span>}
+                  labelText={props.intl.formatMessage({
+                    ...messages.irsRate,
+                  })}
+                  tooltipText={props.intl.formatMessage({
+                    ...messages.irsRate,
+                  })}
+                />
+              </Grid>
+              <Grid item xs={4}>
+                <></>
+              </Grid>
+            </>
+          )}
+          {props.inputs.taxResidentInPortugal && (
+            <>
+              {/*  TODO IRS   <Grid item xs={4}>
+                <CustomSelect
+                  disabled={!props.inputs.taxResidentInPortugal}
+                  error={props.errors.irsCategory}
+                  defaultValue={props.inputs.irsCategory}
+                  handleChange={handleChange}
+                  data={props.irsCategories}
+                  name="irsCategory"
+                  labelText={props.intl.formatMessage({
+                    ...messages.irsCategory,
+                  })}
+                  tooltipText={props.intl.formatMessage({
+                    ...messages.irsCategory,
+                  })}
+                />
+              </Grid>
+              <Grid item xs={4}>
+                <CustomSelect
+                  disabled={!props.inputs.taxResidentInPortugal}
+                  error={props.errors.irsCategoryRegion}
+                  defaultValue={props.inputs.irsCategoryRegion}
+                  name="irsCategoryRegion"
+                  handleChange={handleChange}
+                  data={props.irsCategoryRegions}
+                  labelText={props.intl.formatMessage({
+                    ...messages.irsCategoryRegion,
+                  })}
+                  tooltipText={props.intl.formatMessage({
+                    ...messages.irsCategoryRegion,
+                  })}
+                />
+              </Grid>
+              <Grid item xs={4}>
+                <CustomSelect
+                  disabled={!props.inputs.taxResidentInPortugal}
+                  error={props.errors.irsDependents}
+                  name="irsDependents"
+                  defaultValue={props.inputs.irsDependents}
+                  handleChange={handleChange}
+                  data={props.irsDependentsList}
+                  labelText={props.intl.formatMessage({
+                    ...messages.irsDependents,
+                  })}
+                  tooltipText={props.intl.formatMessage({
+                    ...messages.irsDependents,
+                  })}
+                />
+              </Grid>
+              <Grid item xs={4}>
+                <CustomInput
+                  disabled={!props.inputs.taxResidentInPortugal}
+                  error={props.errors.grossSalary}
+                  name="grossSalary"
+                  type="number"
+                  handleChange={handleChange}
+                  defaultValue={props.inputs.grossSalary}
+                  symbol={<span>€</span>}
+                  labelText={props.intl.formatMessage({
+                    ...messages.grossSalary,
+                  })}
+                  tooltipText={props.intl.formatMessage({
+                    ...messages.grossSalary,
+                  })}
+                />
+              </Grid>
+              <Grid item xs={4} className={classes.orText}>
+                {props.intl.formatMessage({
+                  ...messages.or,
                 })}
-                tooltipText={props.intl.formatMessage({
-                  ...messages.irs,
-                })}
-              />
-            </Grid>
+              </Grid> */}
+              <Grid item xs={4}>
+                <CustomInput
+                  disabled={!props.inputs.taxResidentInPortugal}
+                  error={props.errors.currentIrsRate}
+                  name="currentIrsRate"
+                  type="number"
+                  handleChange={handleChange}
+                  defaultValue={props.inputs.currentIrsRate}
+                  symbol={<span>%</span>}
+                  labelText={props.intl.formatMessage({
+                    ...messages.currentIrsRate,
+                  })}
+                  tooltipText={props.intl.formatMessage({
+                    ...messages.currentIrsRate,
+                  })}
+                />
+              </Grid>
+            </>
           )}
         </Grid>
       </Grid>
@@ -1335,7 +1259,7 @@ export function Investments(props) {
     return (
       <Grid container item className="mt-20">
         <Grid item container spacing={6}>
-          <Grid item xs={3}>
+          <Grid item xs={4}>
             <CustomInput
               error={props.errors.timeToSale}
               name="timeToSale"
@@ -1351,7 +1275,7 @@ export function Investments(props) {
               })}
             />
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={4}>
             <CustomInput
               error={props.errors.exitBrokerRate}
               name="exitBrokerRate"
@@ -1364,6 +1288,22 @@ export function Investments(props) {
               })}
               tooltipText={props.intl.formatMessage({
                 ...messages.exitBrokerRateInfo,
+              })}
+            />
+          </Grid>
+          <Grid item xs={4}>
+            <CustomInput
+              error={props.errors.capitalGainsTaxRate}
+              name="capitalGainsTaxRate"
+              type="number"
+              handleChange={handleChange}
+              defaultValue={props.inputs.capitalGainsTaxRate}
+              symbol={<span>%</span>}
+              labelText={props.intl.formatMessage({
+                ...messages.capitalGainsTaxRate,
+              })}
+              tooltipText={props.intl.formatMessage({
+                ...messages.capitalGainsTaxRateInfo,
               })}
             />
           </Grid>
@@ -1381,7 +1321,7 @@ export function Investments(props) {
         className="mb-10"
         error={props.errors.grossAreaToUsefulAreaRate}
       >
-        <Grid item xs={3}>
+        <Grid item xs={4}>
           <CustomInput
             error={props.errors.grossAreaToUsefulAreaRate}
             name="grossAreaToUsefulAreaRate"
@@ -1397,7 +1337,7 @@ export function Investments(props) {
             })}
           />
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={4}>
           <CustomInput
             error={props.errors.floorRate}
             name="floorRate"
@@ -1413,7 +1353,7 @@ export function Investments(props) {
             })}
           />
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={4}>
           <CustomInput
             error={props.errors.capRate}
             name="capRate"
@@ -1455,22 +1395,21 @@ export function Investments(props) {
         </Grid>
         <Grid item className="w-100">
           <DataGrid
-            // className={classes.root}
             classes={{
               root: classes.gridRoot,
             }}
-            rows={props.analysisData}
+            rows={props.analysis}
             columns={translateColumnLabel(columns)}
-            checkboxSelection
             disableColumnFilter
             disableColumnMenu
-            disableColumnSelector
             disableSelectionOnClick
             sortingMode="server"
+            width="auto"
             autoHeight
-            pageSize={5}
-            rowsPerPageOptions={[5]}
-            // hideFooterPagination
+            hideFooterPagination
+            // checkboxSelection
+            // pageSize={5}
+            // rowsPerPageOptions={[5]}
             // hideFooter
             // density="compact"
             // autoPageSize
@@ -1496,15 +1435,18 @@ export function Investments(props) {
         }
         disabled={props.analyzeButtonDisabled}
       >
-        {props.isGettingAnalysisData && (
+        {props.isGettingAnalysis && (
           <CircularProgress size={20} className={classes.loading} />
         )}
-        {!props.isGettingAnalysisData && 'Analyze'}
+        {!props.isGettingAnalysis &&
+          props.intl.formatMessage({
+            ...messages.analyze,
+          })}
       </Button>
     );
   }
 
-  function renderPropertyInformationAndMap() {
+  function renderAnalysisInformationAndMap() {
     return (
       <Grid item container direction="row">
         <Grid item container xs={8} className="pr-40">
@@ -1522,13 +1464,13 @@ export function Investments(props) {
       <Helmet>
         <title>
           {props.intl.formatMessage({
-            ...messages.title,
+            ...messages.investmentsTitle,
           })}
         </title>
         <meta name="description" content="Description of Analysis" />
       </Helmet>
       <Grid>
-        {renderPropertyInformationAndMap()}
+        {renderAnalysisInformationAndMap()}
         {renderAccordionGroup()}
         {renderButton()}
         {renderTable()}
@@ -1540,14 +1482,17 @@ export function Investments(props) {
 const mapStateToProps = createStructuredSelector({
   inputs: makeSelectInputs(),
   errors: makeSelectErrors(),
+  analysis: makeSelectAnalysis(),
   propertyLocations: makeSelectPropertyLocations(),
   propertyTypes: makeSelectPropertyTypes(),
   propertyTypologies: makeSelectPropertyTypologies(),
   propertyConditions: makeSelectPropertyConditions(),
   acquisitionTypes: makeSelectAcquisitionTypes(),
+  irsCategories: makeSelectIrsCategories(),
+  irsCategoryRegions: makeSelectIrsCategoryRegions(),
+  irsDependentsList: makeSelectIrsDependentsList(),
   ciPercentiles: makeSelectCIPs(),
-  analysisData: makeSelectAnalysisData(),
-  isGettingAnalysisData: makeSelectIsGettingAnalysisData(),
+  isGettingAnalysis: makeSelectIsGettingAnalysis(),
   analyzeButtonDisabled: makeSelectAnalyzeButtonDisabled(),
 });
 
@@ -1558,8 +1503,11 @@ function mapDispatchToProps(dispatch) {
     getPropertyTypologies: () => dispatch(getPropertyTypologies()),
     getPropertyConditions: () => dispatch(getPropertyConditions()),
     getAcquisitionTypes: () => dispatch(getAcquisitionTypes()),
+    /* TODO IRS getIrsCategories: () => dispatch(getIrsCategories()),
+    getIrsCategoryRegions: () => dispatch(getIrsCategoryRegions()),
+    getIrsDependentsList: () => dispatch(getIrsDependentsList()), */
     getCIPs: () => dispatch(getCIPs()),
-    getAnalysisData: inputs => dispatch(getAnalysisData(inputs)),
+    getAnalysis: inputs => dispatch(getAnalysis(inputs)),
     setPropertyLocation: propertyLocation =>
       dispatch(setPropertyLocation(propertyLocation)),
     setInputValue: (input, value) => dispatch(setInputValue(input, value)),

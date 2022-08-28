@@ -1,13 +1,12 @@
 import React from 'react';
-import Select from '@material-ui/core/Select';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
-import { DropdownIcon, InfoIcon } from '../SvgIconComponents';
+import Switch from '@material-ui/core/Switch';
+import { InfoIcon } from '../SvgIconComponents';
 
 const useStyles = makeStyles({
   inputLabel: {
@@ -39,24 +38,26 @@ const useStyles = makeStyles({
   labelShrunk: {
     right: 'unset',
   },
+  switch: {
+    marginTop: '15px',
+  },
 });
 
-const CustomSelect = ({
+const CustomSwitch = ({
   error,
-  defaultValue,
-  data,
-  handleChange,
   labelText,
   tooltipText,
+  defaultValue,
   name,
-  disabled = false,
+  handleChange,
+  checked,
 }) => {
   const styles = useStyles();
   return (
     <FormControl
       variant="standard"
       className={`${styles.formControl} w-100`}
-      error={!!error}
+      error={error}
     >
       <InputLabel
         shrink
@@ -73,24 +74,17 @@ const CustomSelect = ({
           </IconButton>
         </Tooltip>
       </InputLabel>
-      <Select
-        disabled={disabled}
-        disableUnderline
+      <Switch
+        className={styles.switch}
         defaultValue={defaultValue}
-        name={name}
         onChange={handleChange}
-        className={disabled ? styles.disabledSelect : styles.select}
-        IconComponent={() => (disabled ? <></> : <DropdownIcon />)}
-      >
-        {data.map(value => (
-          <MenuItem key={value.name} value={value.name}>
-            {value.label}
-          </MenuItem>
-        ))}
-      </Select>
+        checked={checked}
+        color="primary"
+        name={name}
+      />
       <FormHelperText>{error}</FormHelperText>
     </FormControl>
   );
 };
 
-export default CustomSelect;
+export default CustomSwitch;

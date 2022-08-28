@@ -3,7 +3,7 @@ import React from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { Typography } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
-import messages from '../../messages';
+import messages from '../../../Investments/messages';
 
 const ValuationModel = ({ props }) => (
   <Grid item container spacing={4} className="mt-10 p-10">

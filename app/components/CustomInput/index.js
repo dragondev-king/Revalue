@@ -68,6 +68,7 @@ const CustomInput = ({
   labelText,
   tooltipText,
   defaultValue,
+  readOnly,
   type,
   name,
   handleChange,
@@ -76,7 +77,7 @@ const CustomInput = ({
 }) => {
   const styles = useStyles();
   return (
-    <FormControl variant="standard" className="w-100" error={error}>
+    <FormControl variant="standard" className="w-100" error={!!error}>
       <InputLabel
         className={styles.inputLabel}
         classes={{
@@ -92,8 +93,10 @@ const CustomInput = ({
         </Tooltip>
       </InputLabel>
       <Input
+        id={name}
         disabled={disabled}
         disableUnderline
+        readOnly={readOnly}
         className={disabled ? styles.disabledInput : styles.input}
         onChange={handleChange}
         type={type}

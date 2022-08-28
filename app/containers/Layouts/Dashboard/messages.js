@@ -49,7 +49,7 @@ export default defineMessages({
   },
   website: {
     id: `${scope}.website`,
-    defaultMessage: 'Real Estate Analytics',
+    defaultMessage: 'Revalue',
   },
   copyright: {
     id: `${scope}.copyright`,
@@ -57,6 +57,6 @@ export default defineMessages({
   },
   brand: {
     id: `${scope}.brand`,
-    defaultMessage: 'Real Estate Analytics',
+    defaultMessage: 'Revalue',
   },
 });

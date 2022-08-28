@@ -1,16 +1,18 @@
 import React from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import MobileStepper from '@material-ui/core/MobileStepper';
+import { Grid } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import SwipeableViews from 'react-swipeable-views';
 import { autoPlay } from 'react-swipeable-views-utils';
+import { Skeleton } from '@material-ui/lab';
 import Property1 from '../../../../../images/property1.jpg';
 import Property2 from '../../../../../images/property2.jpg';
 import Property3 from '../../../../../images/property3.jpg';
 
-const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
+const AutoPlaySwappableViews = autoPlay(SwipeableViews);
 
 const tutorialSteps = [
   {
@@ -43,7 +45,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function SwipeableTextMobileStepper() {
+function SwappableTextMobileStepper({ props }) {
   const classes = useStyles();
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
@@ -62,55 +64,68 @@ function SwipeableTextMobileStepper() {
   };
 
   return (
-    <div className={classes.root}>
-      <AutoPlaySwipeableViews
-        axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-        index={activeStep}
-        onChangeIndex={handleStepChange}
-        enableMouseEvents
-      >
-        {tutorialSteps.map((step, index) => (
-          <div key={step.label}>
-            {Math.abs(activeStep - index) <= 2 ? (
-              <img
-                className={classes.img}
-                src={step.imgPath}
-                alt={step.label}
-              />
-            ) : null}
-          </div>
-        ))}
-      </AutoPlaySwipeableViews>
-      <MobileStepper
-        steps={maxSteps}
-        position="static"
-        variant="dots"
-        activeStep={activeStep}
-        nextButton={
-          <Button
-            size="small"
-            onClick={handleNext}
-            disabled={activeStep === maxSteps - 1}
+    <>
+      {!props.isGettingAnalysisById ? (
+        <Grid className={classes.root}>
+          <AutoPlaySwappableViews
+            key="autoPlaySwappableViews"
+            axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+            index={activeStep}
+            onChangeIndex={handleStepChange}
+            enableMouseEvents
           >
-            {theme.direction === 'rtl' ? (
-              <KeyboardArrowLeft />
-            ) : (
-              <KeyboardArrowRight />
-            )}
-          </Button>
-        }
-        backButton={
-          <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
-            {theme.direction === 'rtl' ? (
-              <KeyboardArrowRight />
-            ) : (
-              <KeyboardArrowLeft />
-            )}
-          </Button>
-        }
-      />
-    </div>
+            {tutorialSteps.map((step, index) => (
+              <Grid key={step.label}>
+                {Math.abs(activeStep - index) <= 2 ? (
+                  <img
+                    key={step.label}
+                    className={classes.img}
+                    src={step.imgPath}
+                    alt={step.label}
+                  />
+                ) : null}
+              </Grid>
+            ))}
+          </AutoPlaySwappableViews>
+          <MobileStepper
+            key="mobileStepper"
+            steps={maxSteps}
+            position="static"
+            variant="dots"
+            activeStep={activeStep}
+            nextButton={
+              <Button
+                size="small"
+                onClick={handleNext}
+                disabled={activeStep === maxSteps - 1}
+              >
+                {theme.direction === 'rtl' ? (
+                  <KeyboardArrowLeft />
+                ) : (
+                  <KeyboardArrowRight />
+                )}
+              </Button>
+            }
+            backButton={
+              <Button
+                size="small"
+                onClick={handleBack}
+                disabled={activeStep === 0}
+              >
+                {theme.direction === 'rtl' ? (
+                  <KeyboardArrowRight />
+                ) : (
+                  <KeyboardArrowLeft />
+                )}
+              </Button>
+            }
+          />
+        </Grid>
+      ) : (
+        <Skeleton count={6} height={100} />
+      )}
+    </>
   );
 }
 
-export default SwipeableTextMobileStepper;
+export default SwappableTextMobileStepper;

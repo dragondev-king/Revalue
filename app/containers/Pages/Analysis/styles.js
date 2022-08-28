@@ -20,19 +20,19 @@ const useStyles = makeStyles(theme => ({
     borderBottom: '1px solid lightblue',
   },
   overviewStatsGrid: {
-    margin: '40px 0',
-    justifyContent: 'space-between',
+    margin: '30px 0px 30px 0px',
     flexWrap: 'wrap',
   },
   overviewStatsCard: {
     background: 'white',
     padding: '16px',
     borderRadius: '4px',
-    maxWidth: '24% !important',
+    maxWidth: '32.5% !important',
+    minWidth: '220px',
   },
   overviewStatsTitle: {
     color: '#31342B !important',
-    fontSize: 16,
+    fontSize: 14,
   },
   overviewStatsPrice: {
     color: '#31342B',
@@ -89,7 +89,6 @@ const useStyles = makeStyles(theme => ({
   salesActivityHistoryContainer: {
     margin: '40px 0',
   },
-
   settingIconWrapper: {
     background: 'transparent',
     border: 0,
@@ -99,9 +98,18 @@ const useStyles = makeStyles(theme => ({
     position: 'fixed',
     bottom: '10px',
     right: '20px',
+    zIndex: '10',
   },
-  acuisitionDepTableContainer: {
-    marginTop: '40px',
+  iconButton: {
+    width: '38px',
+  },
+  breakdownTableContainer: {
+    maxHeight: 470,
+  },
+  breakdownTablePaper: {
+    width: '100%',
+    height: '100%',
+    marginTop: '16px',
   },
 }));
 

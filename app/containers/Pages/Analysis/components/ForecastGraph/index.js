@@ -1,33 +1,25 @@
 import React from 'react';
-import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import { Skeleton } from '@material-ui/lab';
+import Skeleton from 'react-loading-skeleton';
 import messages from '../../../Investments/messages';
 import { useStyles } from '../../styles';
 
-const SalesActivityHistory = ({ props }) => {
+const ForecastGraph = ({ props }) => {
   const classes = useStyles();
   return (
     <>
       {!props.isGettingAnalysisById ? (
-        <Grid className={classes.salesActivityHistoryContainer}>
+        <Grid className={classes.forecastGraphContainer}>
           <Typography className={classes.sectionTitle}>
             {props.intl.formatMessage({
-              ...messages.salesActivityHistory,
+              ...messages.forecast,
             })}
           </Typography>
-          <Paper className="mt-20">
+          <Paper className="mt-20 p-20">
             <Grid container direction="row">
-              <Grid item xs={6} className="p-20" style={{ height: '400px' }}>
-                <Paper
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                  }}
-                />
-              </Grid>
-              <Grid item xs={6} className="p-20" style={{ height: '400px' }}>
+              <Grid item xs={12} style={{ height: '400px' }}>
                 <Paper
                   style={{
                     width: '100%',
@@ -39,10 +31,10 @@ const SalesActivityHistory = ({ props }) => {
           </Paper>
         </Grid>
       ) : (
-        <Skeleton count={6} height={100} />
+        <Skeleton count={1} height={400} />
       )}
     </>
   );
 };
 
-export default SalesActivityHistory;
+export default ForecastGraph;
