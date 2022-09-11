@@ -7,7 +7,7 @@ import { push } from 'connected-react-router';
 import { makeSelectPathname } from 'containers/App/selectors';
 import { makeSelectAuthenticated } from 'containers/Authentication/selectors';
 import { getUserDetails } from 'containers/Authentication/actions';
-import PerfectScrollbar from 'react-perfect-scrollbar';
+import Scrollbar from 'react-perfect-scrollbar';
 import { classList } from 'utils/classList';
 import { isMdScreen } from 'utils/isMdScreen';
 import scriptLoader from 'react-async-script-loader';
@@ -78,7 +78,7 @@ class Dashboard extends Component {
             push={this.props.push}
             setMode={this.setMode}
           />
-          <PerfectScrollbar className="scrollable-content">
+          <Scrollbar className="scrollable-content">
             <div className="content">
               <div className="p-sm-30" style={{ background: '#E9F2FB' }}>
                 {this.props.children}
@@ -86,7 +86,7 @@ class Dashboard extends Component {
             </div>
             <div className="my-auto" />
             <Footer />
-          </PerfectScrollbar>
+          </Scrollbar>
         </div>
       </div>
     );

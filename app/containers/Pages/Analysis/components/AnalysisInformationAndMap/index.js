@@ -35,7 +35,7 @@ const AnalysisInformationAndMap = ({ props }) => {
               >
                 <Typography className={classes.sectionTitle}>
                   {props.intl.formatMessage({
-                    ...messages.investmentKpi,
+                    ...messages.investmentMetrics,
                   })}
                 </Typography>
                 <TableContainer
@@ -124,7 +124,7 @@ const AnalysisInformationAndMap = ({ props }) => {
               <Grid className={classes.sectionTableWrapper}>
                 <Typography className={classes.sectionTitle}>
                   {props.intl.formatMessage({
-                    ...messages.entryCapital,
+                    ...messages.capitalStructure,
                   })}
                 </Typography>
                 <TableContainer
@@ -136,11 +136,12 @@ const AnalysisInformationAndMap = ({ props }) => {
                       <TableRow>
                         <TableCell component="th" scope="row">
                           {props.intl.formatMessage({
-                            ...messages.entryCapital,
+                            ...messages.requiredInitialCapital,
                           })}
                         </TableCell>
                         <TableCell align="right" style={{ fontWeight: 'bold' }}>
-                          € {formatNumber(props.analysis.entryCapital)}
+                          €{' '}
+                          {formatNumber(props.analysis.requiredInitialCapital)}
                         </TableCell>
                       </TableRow>
                       <TableRow>

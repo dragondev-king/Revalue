@@ -1,7 +1,7 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import EntryPrice from 'images/entryPrice.png';
-import RequiredInitialInvestment from 'images/requiredInitialInvestment.png';
+import RequiredInitialCapital from 'images/requiredInitialCapital.png';
 import ProfitAfterTax from 'images/profitAfterTax.png';
 import InternalRateOfReturn from 'images/internalRateOfReturn.png';
 import { Skeleton } from '@material-ui/lab';
@@ -42,13 +42,13 @@ const AnalysisOverview = ({ props }) => {
                 >
                   <Grid item>
                     {props.intl.formatMessage({
-                      ...messages.entryPrice,
+                      ...messages.acquisitionPrice,
                     })}
                   </Grid>
                   <Grid item>
                     <Tooltip
                       title={props.intl.formatMessage({
-                        ...messages.entryPriceInfo,
+                        ...messages.acquisitionPriceInfo,
                       })}
                     >
                       <IconButton className={classes.iconButton}>
@@ -58,7 +58,7 @@ const AnalysisOverview = ({ props }) => {
                   </Grid>
                 </Grid>
                 <Grid item className={classes.overviewStatsPrice}>
-                  € {formatNumber(props.analysis.entryPrice)}
+                  € {formatNumber(props.analysis.acquisitionPrice)}
                 </Grid>
               </Grid>
               <Grid item>
@@ -83,13 +83,13 @@ const AnalysisOverview = ({ props }) => {
                 >
                   <Grid item>
                     {props.intl.formatMessage({
-                      ...messages.requiredInitialInvestment,
+                      ...messages.requiredInitialCapital,
                     })}
                   </Grid>
                   <Grid item>
                     <Tooltip
                       title={props.intl.formatMessage({
-                        ...messages.requiredInitialInvestmentInfo,
+                        ...messages.requiredInitialCapitalInfo,
                       })}
                     >
                       <IconButton className={classes.iconButton}>
@@ -99,14 +99,14 @@ const AnalysisOverview = ({ props }) => {
                   </Grid>
                 </Grid>
                 <Grid item className={classes.overviewStatsPrice}>
-                  € {formatNumber(props.analysis.entryCapital)}
+                  € {formatNumber(props.analysis.requiredInitialCapital)}
                 </Grid>
               </Grid>
               <Grid item>
                 <img
-                  src={RequiredInitialInvestment}
+                  src={RequiredInitialCapital}
                   width={40}
-                  alt="requiredInitialInvestment"
+                  alt="requiredInitialCapital"
                 />
               </Grid>
             </Grid>
@@ -242,9 +242,9 @@ const AnalysisOverview = ({ props }) => {
               </Grid>
               <Grid item>
                 <img
-                  src={RequiredInitialInvestment}
+                  src={RequiredInitialCapital}
                   width={40}
-                  alt="requiredInitialInvestment"
+                  alt="requiredInitialCapital"
                 />
               </Grid>
             </Grid>
@@ -266,13 +266,13 @@ const AnalysisOverview = ({ props }) => {
                 >
                   <Grid item>
                     {props.intl.formatMessage({
-                      ...messages.capitalValueGrowth,
+                      ...messages.capitalGain,
                     })}
                   </Grid>
                   <Grid item>
                     <Tooltip
                       title={props.intl.formatMessage({
-                        ...messages.capitalValueGrowthInfo,
+                        ...messages.capitalGainInfo,
                       })}
                     >
                       <IconButton className={classes.iconButton}>
@@ -282,7 +282,7 @@ const AnalysisOverview = ({ props }) => {
                   </Grid>
                 </Grid>
                 <Grid item className={classes.overviewStatsPrice}>
-                  € {formatNumber(props.analysis.capitalValueGrowth)}
+                  € {formatNumber(props.analysis.capitalGain)}
                 </Grid>
               </Grid>
               <Grid item>

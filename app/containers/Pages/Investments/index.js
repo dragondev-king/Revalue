@@ -142,8 +142,8 @@ const columns = [
     flex: 1,
   },
   {
-    field: 'entryCapital',
-    label: 'entryCapital',
+    field: 'requiredInitialCapital',
+    label: 'requiredInitialCapital',
     sortable: false,
     flex: 1,
   },
@@ -233,12 +233,12 @@ export function Investments(props) {
       .transform(v => (v === '' || Number.isNaN(v) ? null : v))
       .nullable()
       .required('inputRequired'),
-    entryBrokerRate: yup
+    acquisitionBrokerRate: yup
       .number()
       .transform(v => (v === '' || Number.isNaN(v) ? null : v))
       .nullable()
       .required('inputRequired'),
-    stampDutyRate: yup
+    acquisitionStampDutyRate: yup
       .number()
       .transform(v => (v === '' || Number.isNaN(v) ? null : v))
       .nullable()
@@ -538,10 +538,10 @@ export function Investments(props) {
               data={props.ciPercentiles}
               name="ciPercentile"
               tooltipText={props.intl.formatMessage({
-                ...messages.confidencialImobiliarioPercentileInfo,
+                ...messages.percentileInfo,
               })}
               labelText={props.intl.formatMessage({
-                ...messages.confidencialImobiliarioPercentile,
+                ...messages.percentile,
               })}
             />
           </Grid>
@@ -834,17 +834,17 @@ export function Investments(props) {
           </Grid>
           <Grid item xs={4}>
             <CustomInput
-              error={props.errors.entryBrokerRate}
-              name="entryBrokerRate"
+              error={props.errors.acquisitionBrokerRate}
+              name="acquisitionBrokerRate"
               type="number"
               handleChange={handleChange}
-              defaultValue={props.inputs.entryBrokerRate}
+              defaultValue={props.inputs.acquisitionBrokerRate}
               symbol={<span>%</span>}
               labelText={props.intl.formatMessage({
-                ...messages.entryBrokerRate,
+                ...messages.acquisitionBrokerRate,
               })}
               tooltipText={props.intl.formatMessage({
-                ...messages.entryBrokerRateInfo,
+                ...messages.acquisitionBrokerRateInfo,
               })}
             />
           </Grid>
@@ -852,17 +852,17 @@ export function Investments(props) {
         <Grid item container spacing={6} className="mt-20">
           <Grid item xs={4}>
             <CustomInput
-              error={props.errors.stampDutyRate}
-              name="stampDutyRate"
+              error={props.errors.acquisitionStampDutyRate}
+              name="acquisitionStampDutyRate"
               type="number"
               handleChange={handleChange}
-              defaultValue={props.inputs.stampDutyRate}
+              defaultValue={props.inputs.acquisitionStampDutyRate}
               symbol={<span>%</span>}
               labelText={props.intl.formatMessage({
-                ...messages.stampDutyRate,
+                ...messages.acquisitionStampDutyRate,
               })}
               tooltipText={props.intl.formatMessage({
-                ...messages.stampDutyRateInfo,
+                ...messages.acquisitionStampDutyRateInfo,
               })}
             />
           </Grid>
@@ -1040,7 +1040,7 @@ export function Investments(props) {
               defaultValue={props.inputs.condominiumCosts}
               symbol={<span>&#8364;</span>}
               labelText={props.intl.formatMessage({
-                ...messages.condominiumCosts,
+                ...messages.condominiumCostsMonthly,
               })}
               tooltipText={props.intl.formatMessage({
                 ...messages.condominiumCostsInfo,
@@ -1088,10 +1088,10 @@ export function Investments(props) {
               defaultValue={props.inputs.multiRiskInsurance}
               symbol={<span>&#8364;</span>}
               labelText={props.intl.formatMessage({
-                ...messages.multiRiskInsurance,
+                ...messages.multiRiskInsuranceMonthly,
               })}
               tooltipText={props.intl.formatMessage({
-                ...messages.multiRiskInsurance,
+                ...messages.multiRiskInsuranceInfo,
               })}
             />
           </Grid>
@@ -1104,10 +1104,10 @@ export function Investments(props) {
               defaultValue={props.inputs.lifeInsurance}
               symbol={<span>&#8364;</span>}
               labelText={props.intl.formatMessage({
-                ...messages.lifeInsurance,
+                ...messages.lifeInsuranceMonthly,
               })}
               tooltipText={props.intl.formatMessage({
-                ...messages.lifeInsurance,
+                ...messages.lifeInsuranceInfo,
               })}
             />
           </Grid>
@@ -1130,9 +1130,6 @@ export function Investments(props) {
               checked={props.inputs.taxResidentInPortugal}
               name="taxResidentInPortugal"
               labelText={props.intl.formatMessage({
-                ...messages.taxResidentInPortugal,
-              })}
-              tooltipText={props.intl.formatMessage({
                 ...messages.taxResidentInPortugal,
               })}
             />

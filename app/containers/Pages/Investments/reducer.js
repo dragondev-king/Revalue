@@ -95,7 +95,7 @@ export const initialState = {
     condominiumCosts: '',
     currentIrsRate: '',
     earlyRepaymentRate: '',
-    entryBrokerRate: '',
+    acquisitionBrokerRate: '',
     exitBrokerRate: '',
     financingRate: '',
     floorRate: '',
@@ -123,7 +123,7 @@ export const initialState = {
     propertyTypology: '',
     stampDutyInterestRate: '',
     stampDutyMortgageRate: '',
-    stampDutyRate: '',
+    acquisitionStampDutyRate: '',
     taxResidentInPortugal: '',
   },
   inputs: {
@@ -157,8 +157,14 @@ export const initialState = {
       'acquisitionType',
       'acquisition.type.permanent.housing',
     ),
-    entryBrokerRate: extractInputValueFromLocalStorage('entryBrokerRate', 0),
-    stampDutyRate: extractInputValueFromLocalStorage('stampDutyRate', 0.6),
+    acquisitionBrokerRate: extractInputValueFromLocalStorage(
+      'acquisitionBrokerRate',
+      0,
+    ),
+    acquisitionStampDutyRate: extractInputValueFromLocalStorage(
+      'acquisitionStampDutyRate',
+      0.6,
+    ),
     landRegistryInscription: extractInputValueFromLocalStorage(
       'landRegistryInscription',
       700,

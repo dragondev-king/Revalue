@@ -193,12 +193,12 @@ export function DrawerContent(props) {
       .transform(v => (v === '' || Number.isNaN(v) ? null : v))
       .nullable()
       .required('inputRequired'),
-    entryBrokerRate: yup
+    acquisitionBrokerRate: yup
       .number()
       .transform(v => (v === '' || Number.isNaN(v) ? null : v))
       .nullable()
       .required('inputRequired'),
-    stampDutyRate: yup
+    acquisitionStampDutyRate: yup
       .number()
       .transform(v => (v === '' || Number.isNaN(v) ? null : v))
       .nullable()
@@ -423,10 +423,10 @@ export function DrawerContent(props) {
               data={props.ciPercentiles}
               name="ciPercentile"
               tooltipText={props.intl.formatMessage({
-                ...messages.confidencialImobiliarioPercentileInfo,
+                ...messages.percentileInfo,
               })}
               labelText={props.intl.formatMessage({
-                ...messages.confidencialImobiliarioPercentile,
+                ...messages.percentile,
               })}
             />
           </Grid>
@@ -497,7 +497,12 @@ export function DrawerContent(props) {
         <Grid item className="pt-30">
           <Accordion>
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography>Tax Assumptions</Typography>
+              <Typography>
+                {' '}
+                {props.intl.formatMessage({
+                  ...messages.taxAssumptions,
+                })}
+              </Typography>
             </AccordionSummary>
             <AccordionDetails>
               {renderTaxAssumptionsAccordion()}
@@ -667,33 +672,33 @@ export function DrawerContent(props) {
           </Grid>
           <Grid item xs={6}>
             <CustomInput
-              error={props.errors.entryBrokerRate}
-              name="entryBrokerRate"
+              error={props.errors.acquisitionBrokerRate}
+              name="acquisitionBrokerRate"
               type="number"
               handleChange={handleChange}
-              defaultValue={props.inputs.entryBrokerRate}
+              defaultValue={props.inputs.acquisitionBrokerRate}
               symbol={<span>%</span>}
               labelText={props.intl.formatMessage({
-                ...messages.entryBrokerRate,
+                ...messages.acquisitionBrokerRate,
               })}
               tooltipText={props.intl.formatMessage({
-                ...messages.entryBrokerRateInfo,
+                ...messages.acquisitionBrokerRateInfo,
               })}
             />
           </Grid>
           <Grid item xs={6}>
             <CustomInput
-              error={props.errors.stampDutyRate}
-              name="stampDutyRate"
+              error={props.errors.acquisitionStampDutyRate}
+              name="acquisitionStampDutyRate"
               type="number"
               handleChange={handleChange}
-              defaultValue={props.inputs.stampDutyRate}
+              defaultValue={props.inputs.acquisitionStampDutyRate}
               symbol={<span>%</span>}
               labelText={props.intl.formatMessage({
-                ...messages.stampDutyRate,
+                ...messages.acquisitionStampDutyRate,
               })}
               tooltipText={props.intl.formatMessage({
-                ...messages.stampDutyRateInfo,
+                ...messages.acquisitionStampDutyRateInfo,
               })}
             />
           </Grid>
@@ -813,7 +818,7 @@ export function DrawerContent(props) {
                 ...messages.capexFinancingRate,
               })}
               tooltipText={props.intl.formatMessage({
-                ...messages.capexFinancingRate,
+                ...messages.capexFinancingRateInfo,
               })}
             />
           </Grid>
@@ -920,7 +925,7 @@ export function DrawerContent(props) {
                 ...messages.multiRiskInsurance,
               })}
               tooltipText={props.intl.formatMessage({
-                ...messages.multiRiskInsurance,
+                ...messages.multiRiskInsuranceInfo,
               })}
             />
           </Grid>
@@ -936,7 +941,7 @@ export function DrawerContent(props) {
                 ...messages.lifeInsurance,
               })}
               tooltipText={props.intl.formatMessage({
-                ...messages.lifeInsurance,
+                ...messages.lifeInsuranceInfo,
               })}
             />
           </Grid>
@@ -959,9 +964,6 @@ export function DrawerContent(props) {
               checked={props.inputs.taxResidentInPortugal}
               name="taxResidentInPortugal"
               labelText={props.intl.formatMessage({
-                ...messages.taxResidentInPortugal,
-              })}
-              tooltipText={props.intl.formatMessage({
                 ...messages.taxResidentInPortugal,
               })}
             />
