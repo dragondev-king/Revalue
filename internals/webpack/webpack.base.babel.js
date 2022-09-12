@@ -126,14 +126,8 @@ module.exports = options => ({
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV),
-        BASE_URL: JSON.stringify(process.env.BASE_URL),
-        CLIENT_ID: JSON.stringify(process.env.CLIENT_ID),
-        CLIENT_SECRET: JSON.stringify(process.env.CLIENT_SECRET),
-        AUTHENTICATOR: JSON.stringify(process.env.AUTHENTICATOR),
-        ACCOUNT_MANAGER: JSON.stringify(process.env.ACCOUNT_MANAGER),
         PROPERTY_MANAGER: JSON.stringify(process.env.PROPERTY_MANAGER),
         GOOGLE_MAPS_API_KEY: JSON.stringify(process.env.GOOGLE_MAPS_API_KEY),
-        STRIPE_API_KEY: JSON.stringify(process.env.STRIPE_API_KEY),
       },
     }),
   ]),
