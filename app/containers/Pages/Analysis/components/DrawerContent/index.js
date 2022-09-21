@@ -656,22 +656,6 @@ export function DrawerContent(props) {
           </Grid>
           <Grid item xs={6}>
             <CustomInput
-              error={props.errors.capitalGainsTaxRate}
-              name="capitalGainsTaxRate"
-              type="number"
-              handleChange={handleChange}
-              defaultValue={props.inputs.capitalGainsTaxRate}
-              symbol={<span>%</span>}
-              labelText={props.intl.formatMessage({
-                ...messages.capitalGainsTaxRate,
-              })}
-              tooltipText={props.intl.formatMessage({
-                ...messages.capitalGainsTaxRateInfo,
-              })}
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <CustomInput
               error={props.errors.acquisitionBrokerRate}
               name="acquisitionBrokerRate"
               type="number"
@@ -1107,6 +1091,22 @@ export function DrawerContent(props) {
               })}
               tooltipText={props.intl.formatMessage({
                 ...messages.exitBrokerRateInfo,
+              })}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <CustomInput
+              error={props.errors.capitalGainsTaxRate}
+              name="capitalGainsTaxRate"
+              type="number"
+              handleChange={handleChange}
+              defaultValue={props.inputs.capitalGainsTaxRate}
+              symbol={<span>%</span>}
+              labelText={props.intl.formatMessage({
+                ...messages.capitalGainsTaxRate,
+              })}
+              tooltipText={props.intl.formatMessage({
+                ...messages.capitalGainsTaxRateInfo,
               })}
             />
           </Grid>
