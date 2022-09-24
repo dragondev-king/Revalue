@@ -10,7 +10,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import { InfoIcon } from 'components/SvgIconComponents';
 import { useStyles } from '../../styles';
-import messages from '../../../Investments/messages';
+import messages from '../../messages';
 
 const AnalysisOverview = ({ props }) => {
   const classes = useStyles();
@@ -292,7 +292,7 @@ const AnalysisOverview = ({ props }) => {
           </Grid>
         </Grid>
       ) : (
-        <Skeleton count={6} height={100} />
+        <Skeleton animation="wave" count={6} height={100} />
       )}
     </>
   );

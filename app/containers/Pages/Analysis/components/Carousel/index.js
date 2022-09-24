@@ -122,7 +122,7 @@ function SwappableTextMobileStepper({ props }) {
           />
         </Grid>
       ) : (
-        <Skeleton count={6} height={100} />
+        <Skeleton animation="wave" count={6} height={100} />
       )}
     </>
   );

@@ -8,11 +8,11 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import Skeleton from 'react-loading-skeleton';
+import { Skeleton } from '@material-ui/lab';
 import { formatNumber } from 'utils/formatNumber';
 import { Grid } from '@material-ui/core';
 import { useStyles } from '../../styles';
-import messages from '../../../Investments/messages';
+import messages from '../../messages';
 
 const colors = [
   {
@@ -171,7 +171,7 @@ const EstimatedProfitTable = ({ props }) => {
           </TableContainer>
         </Grid>
       ) : (
-        <Skeleton count={1} height={400} />
+        <Skeleton animation="wave" count={1} height={600} />
       )}
     </>
   );

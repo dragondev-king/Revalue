@@ -10,7 +10,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { Skeleton } from '@material-ui/lab';
 import { formatNumber } from 'utils/formatNumber';
-import messages from '../../../Investments/messages';
+import messages from '../../messages';
 import { useStyles } from '../../styles';
 
 const AnalysisInformationAndMap = ({ props }) => {

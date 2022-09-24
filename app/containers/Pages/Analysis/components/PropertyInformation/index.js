@@ -5,7 +5,7 @@ import UsefulAreaIcon from 'images/usefulAreaIcon.png';
 import GrossAreaIcon from 'images/grossAreaIcon.png';
 import { Skeleton } from '@material-ui/lab';
 import { formatNumber } from 'utils/formatNumber';
-import messages from '../../../Investments/messages';
+import messages from '../../messages';
 import Carousel from '../Carousel';
 import { useStyles } from '../../styles';
 
@@ -102,7 +102,7 @@ const PropertyInformation = ({ props }) => {
           </Grid>
         </Grid>
       ) : (
-        <Skeleton count={6} height={100} />
+        <Skeleton animation="wave" count={6} height={100} />
       )}
     </>
   );

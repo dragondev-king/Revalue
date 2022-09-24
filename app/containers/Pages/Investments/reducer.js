@@ -210,7 +210,7 @@ export const initialState = {
     ),
     taxResidentInPortugal: extractInputValueFromLocalStorage(
       'taxResidentInPortugal',
-      false,
+      true,
     ),
     /* TODO IRS irsCategory: extractInputValueFromLocalStorage('irsCategory', null),
     irsCategoryRegion: extractInputValueFromLocalStorage(

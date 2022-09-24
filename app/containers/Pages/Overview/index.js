@@ -172,11 +172,7 @@ export function Overview(props) {
           {array.map(index => (
             <Grid item className={classes.gridPaper} xs={xs} key={index}>
               <Paper className={classes.height}>
-                <Skeleton
-                  variant="rect"
-                  animation="wave"
-                  className={classes.height}
-                />
+                <Skeleton animation="wave" className={classes.height} />
               </Paper>
             </Grid>
           ))}
@@ -185,7 +181,7 @@ export function Overview(props) {
     }
     return (
       <Grid item className={classes.gridPaper} xs={xs}>
-        <Skeleton variant="rect" animation="wave" className={classes.height} />
+        <Skeleton animation="wave" className={classes.height} />
       </Grid>
     );
   }

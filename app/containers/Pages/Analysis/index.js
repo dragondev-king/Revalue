@@ -10,7 +10,7 @@ import { useInjectReducer } from 'utils/injectReducer';
 import SettingIcon from 'images/settingIcon.png';
 import BreakdownTable from './components/BreakdownTable';
 import EstimatedProfitTable from './components/EstimatedProfitTable';
-import messages from '../Investments/messages';
+import messages from './messages';
 import SettingDrawer from './components/Drawer';
 import {
   makeSelectIsGettingAnalysisById,

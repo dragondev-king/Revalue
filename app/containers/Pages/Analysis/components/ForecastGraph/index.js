@@ -2,7 +2,7 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import Skeleton from 'react-loading-skeleton';
+import { Skeleton } from '@material-ui/lab';
 import messages from '../../../Investments/messages';
 import { useStyles } from '../../styles';
 
@@ -31,7 +31,7 @@ const ForecastGraph = ({ props }) => {
           </Paper>
         </Grid>
       ) : (
-        <Skeleton count={1} height={400} />
+        <Skeleton animation="wave" count={1} height={400} />
       )}
     </>
   );

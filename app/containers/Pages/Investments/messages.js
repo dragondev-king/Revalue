@@ -7,10 +7,6 @@ export default defineMessages({
     id: `${scope}.investmentsTitle`,
     defaultMessage: 'Investments',
   },
-  analysisTitle: {
-    id: `${scope}.analysisTitle`,
-    defaultMessage: 'Analysis',
-  },
   MainInvestmentInformation: {
     id: `${scope}.mainInvestmentInformation`,
     defaultMessage: 'Main Investment Information',
@@ -268,7 +264,7 @@ export default defineMessages({
     id: `${scope}.operatingAssumptions`,
     defaultMessage: 'Operating Assumptions',
   },
-  condominiumCostsMonthly: {
+  condominiumCosts: {
     id: `${scope}.condominiumCosts`,
     defaultMessage: 'Condominium Costs (Monthly)',
   },
@@ -296,7 +292,7 @@ export default defineMessages({
       'Capex is capital expenditures - This is the estimated remodel/works to be done on the property. ' +
       'This input is per square meeter and is calculated according with the gross construction area of the property',
   },
-  multiRiskInsuranceMonthly: {
+  multiRiskInsurance: {
     id: `${scope}.multiRiskInsurance`,
     defaultMessage: 'Multi Risk Insurance (Monthly)',
   },
@@ -304,7 +300,7 @@ export default defineMessages({
     id: `${scope}.multiRiskInsuranceInfo`,
     defaultMessage: 'This insurance is mandatory for real estate',
   },
-  lifeInsuranceMonthly: {
+  lifeInsurance: {
     id: `${scope}.lifeInsurance`,
     defaultMessage: 'Life Insurance (Monthly)',
   },
@@ -432,12 +428,25 @@ export default defineMessages({
     id: `${scope}.askingPrice`,
     defaultMessage: 'Asking Price',
   },
-  capitalStructure: {
-    id: `${scope}.capitalStructure`,
-    defaultMessage: 'Capital Structure',
+  askingPriceInfo: {
+    id: `${scope}.askingPriceInfo`,
+    defaultMessage: 'Asking Price',
+  },
+  requiredInitialCapital: {
+    id: `${scope}.requiredInitialCapital`,
+    defaultMessage: 'Required Initial Capital',
+  },
+  requiredInitialCapitalInfo: {
+    id: `${scope}.requiredInitialCapitalInfo`,
+    defaultMessage:
+      'Required capital for investment acquisition after acquisition costs and debt.',
   },
   transactionPrice: {
     id: `${scope}.transactionPrice`,
+    defaultMessage: 'Selling Price',
+  },
+  transactionPriceInfo: {
+    id: `${scope}.transactionPriceInfo`,
     defaultMessage: 'Selling Price',
   },
   internalRateOfReturn: {
@@ -454,339 +463,17 @@ export default defineMessages({
     id: `${scope}.profitAfterTax`,
     defaultMessage: 'Profit After Tax',
   },
+  profitAfterTaxInfo: {
+    id: `${scope}.profitAfterTaxInfo`,
+    defaultMessage: 'Investment Profit after taxes and costs assumptions',
+  },
   report: {
     id: `${scope}.report`,
     defaultMessage: 'Report',
   },
-  // #####################
-  acquisitionPrice: {
-    id: `${scope}.acquisitionPrice`,
-    defaultMessage: 'Acquisition Price',
-  },
-  acquisitionPriceInfo: {
-    id: `${scope}.acquisitionPriceInfo`,
-    defaultMessage:
-      'Investor proposed acquisition Price. Value was calculated by multiplying the bid ask discount on the asking price',
-  },
-  profitAfterTaxInfo: {
-    id: `${scope}.profitAfterTaxInfo`,
-    defaultMessage: 'Profit after tax',
-  },
-  requiredInitialCapital: {
-    id: `${scope}.requiredInitialCapital`,
-    defaultMessage: 'Required Initial Capital',
-  },
-  requiredInitialCapitalInfo: {
-    id: `${scope}.requiredInitialCapitalInfo`,
-    defaultMessage: 'Required Initial Capital',
-  },
-  entryPriceInfo: {
-    id: `${scope}.entryPriceInfo`,
-    defaultMessage: 'entryPriceInfo',
-  },
-  bankCommission: {
-    id: `${scope}.bankCommission`,
-    defaultMessage: 'Bank Commission',
-  },
-  multipleOnInvestedCapital: {
-    id: `${scope}.multipleOnInvestedCapital`,
-    defaultMessage: 'Multiple On Invested Capital',
-  },
-  multipleOnInvestedCapitalInfo: {
-    id: `${scope}.multipleOnInvestedCapitalInfo`,
-    defaultMessage:
-      'Multiple on invested Capital) measures how much value an investment generates. ' +
-      'If the multiple is 1.5x the investment generate 50 cents per every euro invested',
-  },
-  entryPrice: {
-    id: `${scope}.entryPrice`,
-    defaultMessage: 'Entry Price',
-  },
-  capitalGain: {
-    id: `${scope}.capitalGain`,
-    defaultMessage: 'Capital Gain',
-  },
-  condominiumCosts: {
-    id: `${scope}.condominiumCosts`,
-    defaultMessage: 'Condominium Costs',
-  },
-  lifeInsurance: {
-    id: `${scope}.lifeInsurance`,
-    defaultMessage: 'Life Insurance',
-  },
-  multiRiskInsurance: {
-    id: `${scope}.multiRiskInsurance`,
-    defaultMessage: 'Multi Risk Insurance',
-  },
-  capitalGainInfo: {
-    id: `${scope}.capitalGainInfo`,
-    defaultMessage: '',
-  },
-  preferencesFor: {
-    id: `${scope}.preferencesFor`,
-    defaultMessage: 'Preferences For',
-  },
-  property: {
-    id: `${scope}.property`,
-    defaultMessage: 'Property',
-  },
-  investmentMetrics: {
-    id: `${scope}.investmentMetrics`,
-    defaultMessage: 'Investment Metrics',
-  },
-  capital: {
-    id: `${scope}.capital`,
-    defaultMessage: 'Capital',
-  },
-  returns: {
-    id: `${scope}.return`,
-    defaultMessage: 'Returns',
-  },
-  bedrooms: {
-    id: `${scope}.bedrooms`,
-    defaultMessage: 'Bedrooms',
-  },
-  bedroomsInfo: {
-    id: `${scope}.bedroomsInfo`,
-    defaultMessage: 'Number of bedrooms In the property',
-  },
-  askingPriceInfo: {
-    id: `${scope}.askingPriceInfo`,
-    defaultMessage: 'Seller asking price for the property',
-  },
-  timeForSale: {
-    id: `${scope}.TimeForSale`,
-    defaultMessage: 'Time to Sale',
-  },
-  timeForSaleInfo: {
-    id: `${scope}.TimeForSaleInfo`,
-    defaultMessage:
-      'Holding Period in months between Entry and Exit of Investment',
-  },
-  requiredrequiredInitialCapital: {
-    id: `${scope}.requiredrequiredInitialCapital`,
-    defaultMessage: 'Entry Capital',
-  },
-  requiredrequiredInitialCapitalInfo: {
-    id: `${scope}.requiredrequiredInitialCapitalInfo`,
-    defaultMessage:
-      'Required Capital for Investment. Acquisition Value - Acquisition Debt + Transfer Tax + Acquisition Stamp Duty + Registries + Bank Costs + Acquisition Stamp Duty',
-  },
-  requiredCapitalInvestment: {
-    id: `${scope}.requiredCapitalInvestment`,
-    defaultMessage: 'Required Capital over Period',
-  },
-  requiredCapitalInvestmentInfo: {
-    id: `${scope}.requiredCapitalInvestmentInfo`,
-    defaultMessage: 'Required Capital over Period',
-  },
-  totalRequired: {
-    id: `${scope}.totalRequired`,
-    defaultMessage: 'Total Required Capital over Period',
-  },
-  totalRequiredInfo: {
-    id: `${scope}.totalRequiredInfo`,
-    defaultMessage: 'Total Required Capital over Period',
-  },
-  profitInfo: {
-    id: `${scope}.profitInfo`,
-    defaultMessage: 'Investment estimated Profit After Tax',
-  },
-  criteria: {
-    id: `${scope}.criteria`,
-    defaultMessage: 'Criteria',
-  },
-  financingAssumptions: {
-    id: `${scope}.financingAssumptions`,
-    defaultMessage: 'Financing Assumptions',
-  },
-  capexFinanced: {
-    id: `${scope}.capexFinanced`,
-    defaultMessage: 'Capital expenditures Financed',
-  },
-  capex: {
-    id: `${scope}.capex`,
-    defaultMessage: 'Capital expenditures',
-  },
-  area: {
-    id: `${scope}.area`,
-    defaultMessage: 'Area',
-  },
-  grossArea: {
-    id: `${scope}.grossArea`,
-    defaultMessage: 'Gross Area',
-  },
-  acquisition: {
-    id: `${scope}.acquisition`,
-    defaultMessage: 'Acquisition',
-  },
-  operationAssumptions: {
-    id: `${scope}.operationAssumptions`,
-    defaultMessage: 'Operation Assumptions',
-  },
-  taxes: {
-    id: `${scope}.taxes`,
-    defaultMessage: 'Taxes',
-  },
-  transferTax: {
-    id: `${scope}.transferTax`,
-    defaultMessage: 'Transfer Tax',
-  },
-  acquisitionStampDuty: {
-    id: `${scope}.acquisitionStampDuty`,
-    defaultMessage: 'Acquisition Stamp Duty',
-  },
-  mortgageStampDuty: {
-    id: `${scope}.mortgageStampDuty`,
-    defaultMessage: 'Mortgage Stamp Duty',
-  },
-  interestStampDuty: {
-    id: `${scope}.interestStampDuty`,
-    defaultMessage: 'Interest Stamp Duty ',
-  },
-  type: {
-    id: `${scope}.type`,
-    defaultMessage: 'Type',
-  },
-  condition: {
-    id: `${scope}.condition`,
-    defaultMessage: 'Condition',
-  },
-  propertyStatus: {
-    id: `${scope}.propertyStatus`,
-    defaultMessage: 'Property Status',
-  },
-  analysisOverview: {
-    id: `${scope}.analysisOverview`,
-    defaultMessage: 'Analysis Overview',
-  },
-  typology: {
-    id: `${scope}.typology`,
-    defaultMessage: 'Typology',
-  },
-  sensitivityTable: {
-    id: `${scope}.sensitivityTable`,
-    defaultMessage: 'Estimated Profit Sensitivity Table',
-  },
-  forecast: {
-    id: `${scope}.forecast`,
-    defaultMessage: 'Forecast',
-  },
-  debt: {
-    id: `${scope}.debt`,
-    defaultMessage: 'Debt',
-  },
-  salesActivityHistory: {
-    id: `${scope}.salesActivityHistory`,
-    defaultMessage: 'Sales Activity History',
-  },
-  months: {
-    id: `${scope}.months`,
-    defaultMessage: 'Months',
-  },
-  totalRequiredCapitalOverPeriod: {
-    id: `${scope}.totalRequiredCapitalOverPeriod`,
-    defaultMessage: 'Total Required Capital Over Period',
-  },
-  requiredCapitalOverPeriod: {
-    id: `${scope}.requiredCapitalOverPeriod`,
-    defaultMessage: 'Required Capital Over Period',
-  },
-  or: {
-    id: `${scope}.or`,
-    defaultMessage: 'or',
-  },
-  acquisitionStampDutyFee: {
-    id: `${scope}.acquisitionStampDutyFee`,
-    defaultMessage: 'Acquisition Stamp Duty Fee',
-  },
-  acquisitionBrokerFee: {
-    id: `${scope}.acquisitionBrokerFee`,
-    defaultMessage: 'Acquisition Broker Fee',
-  },
-  mortgageStampDutyFee: {
-    id: `${scope}.mortgageStampDutyFee`,
-    defaultMessage: 'Mortgage Stamp Duty Fee',
-  },
-  acquisitionDebt: {
-    id: `${scope}.acquisitionDebt`,
-    defaultMessage: 'Acquisition Debt',
-  },
-  bopDebt: {
-    id: `${scope}.bopDebt`,
-    defaultMessage: 'Beginning of Period Debt',
-  },
-  capexDebt: {
-    id: `${scope}.capexDebt`,
-    defaultMessage: ' Capital Expenditures Debt',
-  },
-  interests: {
-    id: `${scope}.interests`,
-    defaultMessage: 'Interests',
-  },
-  eopDebt: {
-    id: `${scope}.eopDebt`,
-    defaultMessage: 'End of Period Debt',
-  },
-  operating: {
-    id: `${scope}.operating`,
-    defaultMessage: 'Operating',
-  },
-  propertyTax: {
-    id: `${scope}.propertyTax`,
-    defaultMessage: 'Property Tax',
-  },
-  marketValue: {
-    id: `${scope}.marketValue`,
-    defaultMessage: 'Market Value',
-  },
-  loanEarlyRepaymentFee: {
-    id: `${scope}.loanEarlyRepaymentFee`,
-    defaultMessage: 'Loan Early Repayment Fee',
-  },
-  exitBrokerFee: {
-    id: `${scope}.exitBrokerFee`,
-    defaultMessage: 'Exit Broker Fee',
-  },
-  capitalGainsTax: {
-    id: `${scope}.capitalGainsTax`,
-    defaultMessage: 'Capital Gains Tax',
-  },
-  profitBeforeTax: {
-    id: `${scope}.profitBeforeTax`,
-    defaultMessage: 'Profit Before Tax',
-  },
-  totalAcquisition: {
-    id: `${scope}.totalAcquisition`,
-    defaultMessage: 'Total Acquisition',
-  },
-  notary: {
-    id: `${scope}.notary`,
-    defaultMessage: 'Notary',
-  },
-  asking: {
-    id: `${scope}.asking`,
-    defaultMessage: 'Asking',
-  },
   month: {
     id: `${scope}.month`,
     defaultMessage: 'Month',
-  },
-  totalOperatingCosts: {
-    id: `${scope}.totalOperatingCosts`,
-    defaultMessage: 'Total Operating Costs',
-  },
-  netExit: {
-    id: `${scope}.netExit`,
-    defaultMessage: 'Net Exit',
-  },
-  exit: {
-    id: `${scope}.exit`,
-    defaultMessage: 'Exit',
-  },
-  empty: {
-    id: `${scope}.empty`,
-    defaultMessage: ' ',
   },
   inputNumber: {
     id: `${scope}.inputNumber`,
@@ -795,5 +482,9 @@ export default defineMessages({
   inputRequired: {
     id: `${scope}.inputRequired`,
     defaultMessage: 'Input is required.',
+  },
+  preferencesFor: {
+    id: `${scope}.preferencesFor`,
+    defaultMessage: 'Preferences For',
   },
 });

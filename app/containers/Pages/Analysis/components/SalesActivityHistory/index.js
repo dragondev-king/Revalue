@@ -3,7 +3,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import { Skeleton } from '@material-ui/lab';
-import messages from '../../../Investments/messages';
+import messages from '../../messages';
 import { useStyles } from '../../styles';
 
 const SalesActivityHistory = ({ props }) => {
@@ -39,7 +39,7 @@ const SalesActivityHistory = ({ props }) => {
           </Paper>
         </Grid>
       ) : (
-        <Skeleton count={6} height={100} />
+        <Skeleton count={6} animation="wave" height={100} />
       )}
     </>
   );

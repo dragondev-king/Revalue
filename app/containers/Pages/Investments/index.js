@@ -1040,7 +1040,7 @@ export function Investments(props) {
               defaultValue={props.inputs.condominiumCosts}
               symbol={<span>&#8364;</span>}
               labelText={props.intl.formatMessage({
-                ...messages.condominiumCostsMonthly,
+                ...messages.condominiumCosts,
               })}
               tooltipText={props.intl.formatMessage({
                 ...messages.condominiumCostsInfo,
@@ -1088,7 +1088,7 @@ export function Investments(props) {
               defaultValue={props.inputs.multiRiskInsurance}
               symbol={<span>&#8364;</span>}
               labelText={props.intl.formatMessage({
-                ...messages.multiRiskInsuranceMonthly,
+                ...messages.multiRiskInsurance,
               })}
               tooltipText={props.intl.formatMessage({
                 ...messages.multiRiskInsuranceInfo,
@@ -1104,7 +1104,7 @@ export function Investments(props) {
               defaultValue={props.inputs.lifeInsurance}
               symbol={<span>&#8364;</span>}
               labelText={props.intl.formatMessage({
-                ...messages.lifeInsuranceMonthly,
+                ...messages.lifeInsurance,
               })}
               tooltipText={props.intl.formatMessage({
                 ...messages.lifeInsuranceInfo,
@@ -1230,6 +1230,22 @@ export function Investments(props) {
               </Grid> */}
               <Grid item xs={4}>
                 <CustomInput
+                  error={props.errors.capitalGainsTaxRate}
+                  name="capitalGainsTaxRate"
+                  type="number"
+                  handleChange={handleChange}
+                  defaultValue={props.inputs.capitalGainsTaxRate}
+                  symbol={<span>%</span>}
+                  labelText={props.intl.formatMessage({
+                    ...messages.capitalGainsTaxRate,
+                  })}
+                  tooltipText={props.intl.formatMessage({
+                    ...messages.capitalGainsTaxRateInfo,
+                  })}
+                />
+              </Grid>
+              <Grid item xs={4}>
+                <CustomInput
                   disabled={!props.inputs.taxResidentInPortugal}
                   error={props.errors.currentIrsRate}
                   name="currentIrsRate"
@@ -1285,22 +1301,6 @@ export function Investments(props) {
               })}
               tooltipText={props.intl.formatMessage({
                 ...messages.exitBrokerRateInfo,
-              })}
-            />
-          </Grid>
-          <Grid item xs={4}>
-            <CustomInput
-              error={props.errors.capitalGainsTaxRate}
-              name="capitalGainsTaxRate"
-              type="number"
-              handleChange={handleChange}
-              defaultValue={props.inputs.capitalGainsTaxRate}
-              symbol={<span>%</span>}
-              labelText={props.intl.formatMessage({
-                ...messages.capitalGainsTaxRate,
-              })}
-              tooltipText={props.intl.formatMessage({
-                ...messages.capitalGainsTaxRateInfo,
               })}
             />
           </Grid>

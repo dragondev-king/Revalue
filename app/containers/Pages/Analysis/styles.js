@@ -103,9 +103,6 @@ const useStyles = makeStyles(theme => ({
   iconButton: {
     width: '38px',
   },
-  breakdownTableContainer: {
-    maxHeight: 470,
-  },
   breakdownTablePaper: {
     width: '100%',
     height: '100%',
