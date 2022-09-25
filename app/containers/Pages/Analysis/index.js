@@ -25,7 +25,6 @@ import {
   getAcquisitionTypes,
   getCIPs,
 } from './actions';
-import 'react-loading-skeleton/dist/skeleton.css';
 import AnalysisOverview from './components/AnalysisOverview';
 import PropertyInformation from './components/PropertyInformation';
 import AnalysisInformationAndMap from './components/AnalysisInformationAndMap';
