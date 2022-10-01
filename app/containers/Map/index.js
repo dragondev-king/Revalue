@@ -16,7 +16,7 @@ import { getLocationBoundariesByLocation } from './actions';
 import { makeSelectAuthenticated } from '../Authentication/selectors';
 import reducer from './reducer';
 import { useInjectReducer } from '../../utils/injectReducer';
-import { setPropertyLocation } from '../Pages/Investments/actions';
+import { setPropertyLocation } from '../Pages/FixAndFlip/actions';
 
 export function Map(props) {
   useInjectReducer({ key: 'map', reducer });

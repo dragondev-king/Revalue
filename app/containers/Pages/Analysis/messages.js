@@ -57,12 +57,12 @@ export default defineMessages({
       'Multiple on invested Capital) measures how much value an investment generates. ' +
       'If the multiple is 1.5x the investment generate 50 cents per every euro invested',
   },
-  capitalGain: {
-    id: `${scope}.capitalGain`,
+  capitalGains: {
+    id: `${scope}.capitalGains`,
     defaultMessage: 'Capital Gain',
   },
-  capitalGainInfo: {
-    id: `${scope}.capitalGainInfo`,
+  capitalGainsInfo: {
+    id: `${scope}.capitalGainsInfo`,
     defaultMessage:
       'Capital gain base, this rate will be applied to the capital gain tax base and then to irs Rate in order to calculate capital gain taxCapital gain base, this rate will be applied to the capital gain tax base and then to irs rate in order to calculate capital gain tax',
   },

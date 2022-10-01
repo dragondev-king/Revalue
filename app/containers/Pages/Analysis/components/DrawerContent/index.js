@@ -20,7 +20,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import CustomSwitch from 'components/CustomSwitch';
 import CustomSelect from 'components/CustomSelect';
 import CustomInput from 'components/CustomInput';
-import messages from '../../../Investments/messages';
+import messages from '../../../FixAndFlip/messages';
 import {
   makeSelectPropertyTypes,
   makeSelectPropertyTypologies,
@@ -733,7 +733,7 @@ export function DrawerContent(props) {
               type="number"
               handleChange={handleChange}
               defaultValue={props.inputs.bankCommissionRate}
-              symbol={<span>&#8364;</span>}
+              symbol={<span>%</span>}
               labelText={props.intl.formatMessage({
                 ...messages.bankCommissionRate,
               })}
@@ -888,7 +888,7 @@ export function DrawerContent(props) {
               type="number"
               handleChange={handleChange}
               defaultValue={props.inputs.capexPerSquareMeter}
-              symbol={<span>&#8364;</span>}
+              symbol={<span>€ / m²</span>}
               labelText={props.intl.formatMessage({
                 ...messages.capexPerSquareMeter,
               })}

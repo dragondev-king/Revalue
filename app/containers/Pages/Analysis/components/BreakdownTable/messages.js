@@ -283,6 +283,10 @@ export default defineMessages({
       'Tax Rate: If resident considers current tax rate and estimates new IRS Rate based on investment estimated profit. If non resident rate is 28%' +
       'Capital Gain Tax Based: Differ if property acquisition was for permanent housing or investment and if the capital gain will be reinvested.',
   },
+  profit: {
+    id: `${scope}.profit`,
+    defaultMessage: 'Profit',
+  },
   profitAfterTax: {
     id: `${scope}.profitAfterTax`,
     defaultMessage: 'Profit After Tax',

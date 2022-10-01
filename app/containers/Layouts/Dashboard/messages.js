@@ -35,9 +35,21 @@ export default defineMessages({
     id: `${scope}.analysis`,
     defaultMessage: 'Analysis',
   },
-  investments: {
-    id: `${scope}.investments`,
-    defaultMessage: 'Investments',
+  fixandflip: {
+    id: `${scope}.fixandflip`,
+    defaultMessage: 'FixAndFlip',
+  },
+  fixAndFlip: {
+    id: `${scope}.fixAndFlip`,
+    defaultMessage: 'Fix And Flip',
+  },
+  propertyWholesaling: {
+    id: `${scope}.propertyWholesaling`,
+    defaultMessage: 'Property Wholesaling (Soon)',
+  },
+  rentalProperty: {
+    id: `${scope}.rentalProperty`,
+    defaultMessage: 'Rental Property (Soon)',
   },
   administration: {
     id: `${scope}.administration`,

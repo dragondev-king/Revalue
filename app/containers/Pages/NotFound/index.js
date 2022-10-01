@@ -8,7 +8,7 @@ import messages from './messages';
 
 export function NotFound(props) {
   useEffect(() => {
-    props.push('/investments');
+    props.push('/fixandflip');
   }, []);
 
   return (

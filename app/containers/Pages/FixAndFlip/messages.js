@@ -1,11 +1,11 @@
 import { defineMessages } from 'react-intl';
 
-export const scope = 'app.containers.Investments';
+export const scope = 'app.containers.FixAndFlip';
 
 export default defineMessages({
-  investmentsTitle: {
-    id: `${scope}.investmentsTitle`,
-    defaultMessage: 'Investments',
+  fixAndFlipTitle: {
+    id: `${scope}.fixAndFlipTitle`,
+    defaultMessage: 'Fix And Flip',
   },
   MainInvestmentInformation: {
     id: `${scope}.mainInvestmentInformation`,
@@ -367,7 +367,7 @@ export default defineMessages({
   },
   capitalGainsTaxRate: {
     id: `${scope}.capitalGainsTaxRate`,
-    defaultMessage: 'Capital Gains Tax Rate',
+    defaultMessage: 'Capital Gains Tax Base Rate',
   },
   capitalGainsTaxRateInfo: {
     id: `${scope}.capitalGainsTaxRate`,
@@ -414,7 +414,7 @@ export default defineMessages({
   },
   investments: {
     id: `${scope}.investments`,
-    defaultMessage: 'investments',
+    defaultMessage: 'Investments',
   },
   location: {
     id: `${scope}.location`,

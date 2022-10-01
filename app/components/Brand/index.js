@@ -1,16 +1,15 @@
+/* eslint-disable global-require */
 import React from 'react';
-import Icon from '@material-ui/core/Icon';
 
 function Brand(props) {
   return (
     <div className="flex flex-middle flex-space-between brand-area">
       <div className="flex flex-middle brand">
-        {/*   <img
+        <img
           src={require('../../images/icon-512x512.png')}
           alt="company-logo"
-        /> */}
-        <Icon className="mr-20 brand_icon">apartment</Icon>
-        <span className="brand__text">{props.name}</span>
+        />
+        <span className="brand__text pl-20">{props.name}</span>
       </div>
     </div>
   );

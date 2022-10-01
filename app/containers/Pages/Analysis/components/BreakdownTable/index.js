@@ -25,7 +25,7 @@ const BreakdownTable = ({ props }) => {
         <Paper className={classes.breakdownTablePaper}>
           <Scrollbar
             className="scrollable position-relative"
-            style={{ maxHeight: '470px', minWidth: '400px' }}
+            style={{ maxHeight: '800px', minWidth: '400px' }}
           >
             <TableContainer style={{ overflow: 'unset' }}>
               <Table stickyHeader aria-label="sticky table">

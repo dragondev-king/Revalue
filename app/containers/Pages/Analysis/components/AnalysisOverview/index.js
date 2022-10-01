@@ -1,9 +1,8 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
-import EntryPrice from 'images/entryPrice.png';
-import RequiredInitialCapital from 'images/requiredInitialCapital.png';
-import ProfitAfterTax from 'images/profitAfterTax.png';
-import InternalRateOfReturn from 'images/internalRateOfReturn.png';
+import Money from 'images/money.png';
+import MoneyUp from 'images/moneyUp.png';
+import MoneyCircular from 'images/moneyCircular.png';
 import { Skeleton } from '@material-ui/lab';
 import { formatNumber } from 'utils/formatNumber';
 import IconButton from '@material-ui/core/IconButton';
@@ -62,7 +61,7 @@ const AnalysisOverview = ({ props }) => {
                 </Grid>
               </Grid>
               <Grid item>
-                <img src={EntryPrice} width={40} alt="entryPrice" />
+                <img src={Money} width={40} alt="Money" />
               </Grid>
             </Grid>
             <Grid
@@ -103,11 +102,7 @@ const AnalysisOverview = ({ props }) => {
                 </Grid>
               </Grid>
               <Grid item>
-                <img
-                  src={RequiredInitialCapital}
-                  width={40}
-                  alt="requiredInitialCapital"
-                />
+                <img src={Money} width={40} alt="Money" />
               </Grid>
             </Grid>
             <Grid
@@ -148,7 +143,7 @@ const AnalysisOverview = ({ props }) => {
                 </Grid>
               </Grid>
               <Grid item>
-                <img src={ProfitAfterTax} width={40} alt="profitAfterTax" />
+                <img src={Money} width={40} alt="Money" />
               </Grid>
             </Grid>
           </Grid>
@@ -196,11 +191,7 @@ const AnalysisOverview = ({ props }) => {
                 </Grid>
               </Grid>
               <Grid item>
-                <img
-                  src={InternalRateOfReturn}
-                  width={40}
-                  alt="internalRateOfReturn"
-                />
+                <img src={MoneyCircular} width={40} alt="MoneyCircular" />
               </Grid>
             </Grid>
             <Grid
@@ -241,11 +232,7 @@ const AnalysisOverview = ({ props }) => {
                 </Grid>
               </Grid>
               <Grid item>
-                <img
-                  src={RequiredInitialCapital}
-                  width={40}
-                  alt="requiredInitialCapital"
-                />
+                <img src={MoneyUp} width={40} alt="MoneyUp" />
               </Grid>
             </Grid>
             <Grid
@@ -266,13 +253,13 @@ const AnalysisOverview = ({ props }) => {
                 >
                   <Grid item>
                     {props.intl.formatMessage({
-                      ...messages.capitalGain,
+                      ...messages.capitalGains,
                     })}
                   </Grid>
                   <Grid item>
                     <Tooltip
                       title={props.intl.formatMessage({
-                        ...messages.capitalGainInfo,
+                        ...messages.capitalGainsInfo,
                       })}
                     >
                       <IconButton className={classes.iconButton}>
@@ -282,11 +269,11 @@ const AnalysisOverview = ({ props }) => {
                   </Grid>
                 </Grid>
                 <Grid item className={classes.overviewStatsPrice}>
-                  € {formatNumber(props.analysis.capitalGain)}
+                  € {formatNumber(props.analysis.capitalGains)}
                 </Grid>
               </Grid>
               <Grid item>
-                <img src={ProfitAfterTax} width={40} alt="profitAfterTax" />
+                <img src={Money} width={40} alt="Money" />
               </Grid>
             </Grid>
           </Grid>

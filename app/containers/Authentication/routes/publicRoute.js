@@ -18,7 +18,7 @@ export function PublicRoute({
 }) {
   useInjectReducer({ key, reducer });
   if (authenticated && restricted) {
-    rest.push('/investments');
+    rest.push('/fixandflip');
   } else {
     return <Route {...rest} render={props => <Component {...props} />} />;
   }

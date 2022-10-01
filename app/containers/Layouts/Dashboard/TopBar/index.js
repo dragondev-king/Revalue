@@ -87,22 +87,24 @@ export function TopBar(props) {
           spacing={4}
           justifyContent="flex-end"
         >
-          <Grid item xs={3}>
-            <FormControl className={classes.langSelectControl}>
-              <Select
-                name="type"
-                defaultValue={props.language}
-                onChange={handleChange}
-                disableUnderline
-                className={classes.langSelect}
-              >
-                {language.map(value => (
-                  <MenuItem key={value} value={value.name}>
-                    {value.name}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
+          <Grid item container justifyContent="flex-end" xs={3}>
+            <Grid item>
+              <FormControl className={classes.langSelectControl}>
+                <Select
+                  name="type"
+                  defaultValue={props.language}
+                  onChange={handleChange}
+                  disableUnderline
+                  className={classes.langSelect}
+                >
+                  {language.map(value => (
+                    <MenuItem key={value} value={value.name}>
+                      {value.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Grid>
           </Grid>
         </Grid>
         {/*   <Grid container alignContent="space-between" alignItems="center">

@@ -178,7 +178,7 @@ const columns = [
   },
 ];
 
-export function Investments(props) {
+export function FixAndFlip(props) {
   useInjectReducer({ key: 'investment', reducer });
 
   useEffect(() => {
@@ -1461,7 +1461,7 @@ export function Investments(props) {
       <Helmet>
         <title>
           {props.intl.formatMessage({
-            ...messages.investmentsTitle,
+            ...messages.fixAndFlipTitle,
           })}
         </title>
         <meta name="description" content="Description of Analysis" />
@@ -1524,4 +1524,4 @@ export default compose(
   withConnect,
   memo,
   injectIntl,
-)(Investments);
+)(FixAndFlip);

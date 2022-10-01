@@ -150,9 +150,9 @@ export const initialState = {
     financingRate: extractInputValueFromLocalStorage('financingRate', 80),
     housePriceIndexRate: extractInputValueFromLocalStorage(
       'housePriceIndexRate',
-      2,
+      1,
     ),
-    minProfit: extractInputValueFromLocalStorage('minProfit', null),
+    minProfit: extractInputValueFromLocalStorage('minProfit', 10000),
     acquisitionType: extractInputValueFromLocalStorage(
       'acquisitionType',
       'acquisition.type.permanent.housing',
@@ -163,16 +163,16 @@ export const initialState = {
     ),
     acquisitionStampDutyRate: extractInputValueFromLocalStorage(
       'acquisitionStampDutyRate',
-      0.6,
+      0.8,
     ),
     landRegistryInscription: extractInputValueFromLocalStorage(
       'landRegistryInscription',
       700,
     ),
-    interestRate: extractInputValueFromLocalStorage('interestRate', 1),
+    interestRate: extractInputValueFromLocalStorage('interestRate', 2.5),
     bankCommissionRate: extractInputValueFromLocalStorage(
       'bankCommissionRate',
-      10,
+      1,
     ),
     amortization: extractInputValueFromLocalStorage('amortization', 30),
     capexFinancingRate: extractInputValueFromLocalStorage(
@@ -181,7 +181,7 @@ export const initialState = {
     ),
     capexPerSquareMeter: extractInputValueFromLocalStorage(
       'capexPerSquareMeter',
-      10,
+      100,
     ),
     stampDutyMortgageRate: extractInputValueFromLocalStorage(
       'stampDutyMortgageRate',
@@ -189,15 +189,15 @@ export const initialState = {
     ),
     stampDutyInterestRate: extractInputValueFromLocalStorage(
       'stampDutyInterestRate',
-      0.04,
+      4,
     ),
     condominiumCosts: extractInputValueFromLocalStorage('condominiumCosts', 30),
     propertyTaxRate: extractInputValueFromLocalStorage('propertyTaxRate', 0.3),
     multiRiskInsurance: extractInputValueFromLocalStorage(
       'multiRiskInsurance',
-      0,
+      15,
     ),
-    lifeInsurance: extractInputValueFromLocalStorage('lifeInsurance', 0),
+    lifeInsurance: extractInputValueFromLocalStorage('lifeInsurance', 15),
     timeToSale: extractInputValueFromLocalStorage('timeToSale', 6),
     exitBrokerRate: extractInputValueFromLocalStorage('exitBrokerRate', 5),
     earlyRepaymentRate: extractInputValueFromLocalStorage(
@@ -219,14 +219,17 @@ export const initialState = {
     ),
     irsDependents: extractInputValueFromLocalStorage('irsDependents', null),
     grossSalary: extractInputValueFromLocalStorage('grossSalary', null), */
-    currentIrsRate: extractInputValueFromLocalStorage('currentIrsRate', null),
+    currentIrsRate: extractInputValueFromLocalStorage('currentIrsRate', 20),
     grossAreaToUsefulAreaRate: extractInputValueFromLocalStorage(
       'grossAreaToUsefulAreaRate',
       10,
     ),
-    floorRate: extractInputValueFromLocalStorage('floorRate', 100),
-    capRate: extractInputValueFromLocalStorage('capRate', 100),
-    ciPercentile: extractInputValueFromLocalStorage('ciPercentile', '95'),
+    floorRate: extractInputValueFromLocalStorage('floorRate', 20),
+    capRate: extractInputValueFromLocalStorage('capRate', 20),
+    ciPercentile: extractInputValueFromLocalStorage(
+      'ciPercentile',
+      'percentile.p95',
+    ),
   },
 };
 
