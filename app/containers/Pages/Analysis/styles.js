@@ -55,6 +55,7 @@ const useStyles = makeStyles(theme => ({
     fontSize: '16px',
     color: '#7C7C7C',
     textAlign: 'justify',
+    maxHeight: '220px',
   },
   locationLabel: {
     color: '#7C7C7C',

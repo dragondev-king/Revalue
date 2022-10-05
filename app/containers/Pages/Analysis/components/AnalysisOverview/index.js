@@ -8,6 +8,7 @@ import { formatNumber } from 'utils/formatNumber';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import { InfoIcon } from 'components/SvgIconComponents';
+import { Typography } from '@material-ui/core';
 import { useStyles } from '../../styles';
 import messages from '../../messages';
 
@@ -46,9 +47,13 @@ const AnalysisOverview = ({ props }) => {
                   </Grid>
                   <Grid item>
                     <Tooltip
-                      title={props.intl.formatMessage({
-                        ...messages.acquisitionPriceInfo,
-                      })}
+                      title={
+                        <Typography>
+                          {props.intl.formatMessage({
+                            ...messages.acquisitionPriceInfo,
+                          })}
+                        </Typography>
+                      }
                     >
                       <IconButton className={classes.iconButton}>
                         <InfoIcon />

@@ -8,21 +8,31 @@ import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import SwipeableViews from 'react-swipeable-views';
 import { autoPlay } from 'react-swipeable-views-utils';
 import { Skeleton } from '@material-ui/lab';
-import Property1 from '../../../../../images/property1.jpg';
-import Property2 from '../../../../../images/property2.jpg';
-import Property3 from '../../../../../images/property3.jpg';
+import ComingSoon from 'images/soon.jpg';
 
 const AutoPlaySwappableViews = autoPlay(SwipeableViews);
 
 const tutorialSteps = [
   {
-    imgPath: Property3,
+    imgPath: ComingSoon,
   },
   {
-    imgPath: Property2,
+    imgPath: ComingSoon,
   },
   {
-    imgPath: Property1,
+    imgPath: ComingSoon,
+  },
+  {
+    imgPath: ComingSoon,
+  },
+  {
+    imgPath: ComingSoon,
+  },
+  {
+    imgPath: ComingSoon,
+  },
+  {
+    imgPath: ComingSoon,
   },
 ];
 

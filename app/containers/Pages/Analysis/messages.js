@@ -78,6 +78,10 @@ export default defineMessages({
     id: `${scope}.grossArea`,
     defaultMessage: 'Gross Area',
   },
+  usefulArea: {
+    id: `${scope}.usefulArea`,
+    defaultMessage: 'Useful Area',
+  },
   type: {
     id: `${scope}.type`,
     defaultMessage: 'Type',
@@ -90,7 +94,10 @@ export default defineMessages({
     id: `${scope}.typology`,
     defaultMessage: 'Typology',
   },
-
+  source: {
+    id: `${scope}.source`,
+    defaultMessage: 'Source',
+  },
   forecast: {
     id: `${scope}.forecast`,
     defaultMessage: 'Forecast',

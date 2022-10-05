@@ -5,6 +5,7 @@ import UsefulAreaIcon from 'images/usefulAreaIcon.png';
 import GrossAreaIcon from 'images/grossAreaIcon.png';
 import { Skeleton } from '@material-ui/lab';
 import { formatNumber } from 'utils/formatNumber';
+import Scrollbar from 'react-perfect-scrollbar';
 import messages from '../../messages';
 import Carousel from '../Carousel';
 import { useStyles } from '../../styles';
@@ -38,7 +39,7 @@ const PropertyInformation = ({ props }) => {
                     </Typography>
                     <Typography style={{ fontSize: '14px', color: '#565853' }}>
                       {props.intl.formatMessage({
-                        ...messages.area,
+                        ...messages.usefulArea,
                       })}
                     </Typography>
                   </Grid>
@@ -92,9 +93,23 @@ const PropertyInformation = ({ props }) => {
                   </Grid>
                 </Grid>
               </Grid>
-              <Grid className={classes.propertyDescription}>
-                {props.analysis.property.description}
-              </Grid>
+              <Scrollbar>
+                <Grid className={classes.propertyDescription}>
+                  {props.analysis.property.description}
+                  <p />{' '}
+                  {props.intl.formatMessage({
+                    ...messages.source,
+                  })}
+                  :{' '}
+                  <a
+                    href={props.analysis.property.sourceUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {props.analysis.property.sourceUrl}
+                  </a>
+                </Grid>
+              </Scrollbar>
             </Grid>
           </Grid>
           <Grid item xs={6} className={classes.fixHeight}>
