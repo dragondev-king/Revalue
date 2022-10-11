@@ -2,30 +2,23 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
   appBarSpacer: theme.mixins.toolbar,
-  analysisWrapper: {
-    padding: '0 25px',
-  },
   pageTitle: {
     color: '#565853 !important',
     fontStyle: 'normal',
     fontWeight: 400,
-    fontSize: 16,
+    fontSize: 14,
   },
   pageBiggerTitle: {
     fontStyle: 'normal',
     fontWeight: 500,
-    fontSize: 24,
+    fontSize: 18,
     textTransform: 'capitalize',
     color: '#31342B !important',
     borderBottom: '1px solid lightblue',
   },
-  overviewStatsGrid: {
-    margin: '30px 0px 30px 0px',
-    flexWrap: 'wrap',
-  },
   overviewStatsCard: {
     background: 'white',
-    padding: '16px',
+    padding: '10px 15px',
     borderRadius: '4px',
     maxWidth: '32.5% !important',
     minWidth: '220px',
@@ -37,7 +30,7 @@ const useStyles = makeStyles(theme => ({
   overviewStatsPrice: {
     color: '#31342B',
     fontWeight: 700,
-    fontSize: 24,
+    fontSize: 18,
   },
   typeWrapper: {
     display: 'flex',
@@ -45,7 +38,6 @@ const useStyles = makeStyles(theme => ({
     gap: '30px',
     margin: '20px 0',
   },
-  typeItem: {},
   typeItemColored: {
     color: '#0083FC',
     fontSize: '14px',
@@ -59,12 +51,12 @@ const useStyles = makeStyles(theme => ({
   },
   locationLabel: {
     color: '#7C7C7C',
-    fontSize: '16px',
+    fontSize: '14px',
     fontWeight: '600',
   },
   sectionTitle: {
     color: '#31342B',
-    fontSize: '20px',
+    fontSize: '18px',
     fontWeight: '600',
   },
   areaWrapper: {
@@ -78,17 +70,14 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center',
     gap: '20px',
   },
-  areaIcon: {},
-  areaDetail: {},
   propertyInformationAndMapContainer: {
-    margin: '40px 0',
+    margin: '20px 0',
   },
   sectionTableWrapper: {
     width: '100%',
   },
-
   salesActivityHistoryContainer: {
-    margin: '40px 0',
+    margin: '30px 0',
   },
   settingIconWrapper: {
     background: 'transparent',

@@ -3,8 +3,8 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import { Skeleton } from '@material-ui/lab';
-import messages from '../../messages';
-import { useStyles } from '../../styles';
+import messages from 'containers/Pages/Analysis/messages';
+import { useStyles } from 'containers/Pages/Analysis/styles';
 
 const SalesActivityHistory = ({ props }) => {
   const classes = useStyles();

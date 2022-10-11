@@ -169,7 +169,7 @@ const columns = [
     label: 'profitAfterTax',
     sortable: false,
     unit: '€',
-    minWidth: 130,
+    minWidth: 150,
   },
   {
     field: 'report',
@@ -1469,7 +1469,7 @@ export function FixAndFlip(props) {
         <Grid item container xs={8} className="pr-40">
           {renderPropertyForm()}
         </Grid>
-        <Grid item xs={4} className={classes.fixHeight}>
+        <Grid item xs={4}>
           <Map propertyLocation={props.inputs.propertyLocation} />
         </Grid>
       </Grid>

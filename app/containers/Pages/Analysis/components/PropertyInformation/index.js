@@ -6,9 +6,9 @@ import GrossAreaIcon from 'images/grossAreaIcon.png';
 import { Skeleton } from '@material-ui/lab';
 import { formatNumber } from 'utils/formatNumber';
 import Scrollbar from 'react-perfect-scrollbar';
-import messages from '../../messages';
-import Carousel from '../Carousel';
-import { useStyles } from '../../styles';
+import messages from 'containers/Pages/Analysis/messages';
+import { useStyles } from 'containers/Pages/Analysis/styles';
+import Carousel from './Carousel';
 
 const PropertyInformation = ({ props }) => {
   const classes = useStyles();
@@ -65,7 +65,7 @@ const PropertyInformation = ({ props }) => {
                 )}
               </Grid>
               <Grid className={classes.typeWrapper}>
-                <Grid className={classes.typeItem}>
+                <Grid>
                   {props.intl.formatMessage({
                     ...messages.type,
                   })}
@@ -74,7 +74,7 @@ const PropertyInformation = ({ props }) => {
                     {props.analysis.property.type}
                   </Grid>
                 </Grid>
-                <Grid className={classes.typeItem}>
+                <Grid>
                   {props.intl.formatMessage({
                     ...messages.condition,
                   })}
@@ -83,7 +83,7 @@ const PropertyInformation = ({ props }) => {
                     {props.analysis.property.condition}
                   </Grid>
                 </Grid>
-                <Grid className={classes.typeItem}>
+                <Grid>
                   {props.intl.formatMessage({
                     ...messages.typology,
                   })}
@@ -112,7 +112,7 @@ const PropertyInformation = ({ props }) => {
               </Scrollbar>
             </Grid>
           </Grid>
-          <Grid item xs={6} className={classes.fixHeight}>
+          <Grid item xs={6}>
             <Carousel key="carousel" props={props} />
           </Grid>
         </Grid>

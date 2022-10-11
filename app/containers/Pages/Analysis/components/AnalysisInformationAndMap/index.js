@@ -29,10 +29,7 @@ const AnalysisInformationAndMap = ({ props }) => {
           </Grid>
           <Grid item container xs={6}>
             <Grid style={{ width: '100%' }}>
-              <Grid
-                className={classes.sectionTableWrapper}
-                style={{ marginBottom: '50px' }}
-              >
+              <Grid className={classes.sectionTableWrapper}>
                 <Typography className={classes.sectionTitle}>
                   {props.intl.formatMessage({
                     ...messages.investmentMetrics,
@@ -121,7 +118,10 @@ const AnalysisInformationAndMap = ({ props }) => {
                   </Table>
                 </TableContainer>
               </Grid>
-              <Grid className={classes.sectionTableWrapper}>
+              <Grid
+                className={classes.sectionTableWrapper}
+                style={{ marginTop: '15px' }}
+              >
                 <Typography className={classes.sectionTitle}>
                   {props.intl.formatMessage({
                     ...messages.capitalStructure,

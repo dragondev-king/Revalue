@@ -11,8 +11,8 @@ import Paper from '@material-ui/core/Paper';
 import { Skeleton } from '@material-ui/lab';
 import { formatNumber } from 'utils/formatNumber';
 import { Grid } from '@material-ui/core';
-import { useStyles } from '../../styles';
-import messages from '../../messages';
+import { useStyles } from 'containers/Pages/Analysis/styles';
+import messages from 'containers/Pages/Analysis/messages';
 
 const colors = [
   {
@@ -70,9 +70,9 @@ const EstimatedProfitTable = ({ props }) => {
           </Typography>
           <TableContainer
             component={Paper}
-            style={{ marginTop: '16px', padding: '16px 16px' }}
+            style={{ marginTop: '15px', padding: '16px 16px' }}
           >
-            <Table>
+            <Table size="small">
               <TableHead>
                 <TableRow>
                   <TableCell
@@ -80,8 +80,9 @@ const EstimatedProfitTable = ({ props }) => {
                     colSpan={7}
                     style={{
                       fontWeight: 'bold',
-                      fontSize: '16px',
+                      fontSize: '14px',
                       borderBottom: '0px',
+                      paddingBottom: '10px',
                       paddingLeft: '375px',
                     }}
                   >
@@ -110,8 +111,7 @@ const EstimatedProfitTable = ({ props }) => {
                               ? '#F1F1F1'
                               : 'transparent',
                             fontWeight: 'bold',
-                            fontSize: '14.5px',
-                            color: '#565853',
+                            fontSize: '14px',
                             borderBottom: '0px',
                           }}
                         >
@@ -128,7 +128,7 @@ const EstimatedProfitTable = ({ props }) => {
                     rowSpan={6}
                     style={{
                       fontWeight: 'bold',
-                      fontSize: '16px',
+                      fontSize: '14px',
                       borderBottom: '0px',
                     }}
                   >
@@ -152,7 +152,7 @@ const EstimatedProfitTable = ({ props }) => {
                             fontWeight:
                               index === 0 ||
                               (colors[ind][index] === '#FFFFFF' && 'bold'),
-                            fontSize: '14.5px',
+                            fontSize: '14px',
                             color:
                               colors[ind][index] === '#0062BC' ||
                               colors[ind][index] === '#41A4FF'
@@ -171,7 +171,7 @@ const EstimatedProfitTable = ({ props }) => {
           </TableContainer>
         </Grid>
       ) : (
-        <Skeleton animation="wave" count={1} height={600} />
+        <Skeleton animation="wave" count={1} height={100} />
       )}
     </>
   );

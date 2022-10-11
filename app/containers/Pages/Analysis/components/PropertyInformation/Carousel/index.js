@@ -36,16 +36,9 @@ const tutorialSteps = [
   },
 ];
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
   root: {
     width: '100%',
-  },
-  header: {
-    display: 'flex',
-    alignItems: 'center',
-    height: 50,
-    paddingLeft: theme.spacing(4),
-    backgroundColor: theme.palette.background.default,
   },
   img: {
     height: '350px',

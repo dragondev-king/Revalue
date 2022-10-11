@@ -311,4 +311,8 @@ export default defineMessages({
     id: `${scope}.emptyInfo`,
     defaultMessage: ' ',
   },
+  total: {
+    id: `${scope}.total`,
+    defaultMessage: 'Total',
+  },
 });

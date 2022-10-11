@@ -20,7 +20,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import CustomSwitch from 'components/CustomSwitch';
 import CustomSelect from 'components/CustomSelect';
 import CustomInput from 'components/CustomInput';
-import messages from '../../../FixAndFlip/messages';
+import messages from 'containers/Pages/FixAndFlip/messages';
 import {
   makeSelectPropertyTypes,
   makeSelectPropertyTypologies,
@@ -36,8 +36,8 @@ import {
   /* TODO IRS makeSelectIrsCategories,
   makeSelectIrsCategoryRegions,
   makeSelectIrsDependentsList, */
-} from '../../selectors';
-import reducer from '../../reducer';
+} from 'containers/Pages/Analysis/selectors';
+import reducer from 'containers/Pages/Analysis/reducer';
 import {
   getPropertyAnalysisById,
   setAnalyzeButtonDisabled,
@@ -47,7 +47,7 @@ import {
   /* TODO IRS getIrsCategories,
   getIrsCategoryRegions,
   getIrsDependentsList, */
-} from '../../actions';
+} from 'containers/Pages/Analysis/actions';
 
 const useStyles = makeStyles(theme => ({
   appBarSpacer: theme.mixins.toolbar,

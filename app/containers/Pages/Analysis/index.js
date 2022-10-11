@@ -57,7 +57,7 @@ export function Analysis(props) {
   }, []);
 
   return (
-    <div className={classes.analysisWrapper}>
+    <div>
       <Helmet>
         <title>
           {props.intl.formatMessage({
