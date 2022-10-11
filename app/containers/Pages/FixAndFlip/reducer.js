@@ -212,6 +212,10 @@ export const initialState = {
       'taxResidentInPortugal',
       true,
     ),
+    realEstateTransferTax: extractInputValueFromLocalStorage(
+      'realEstateTransferTax',
+      true,
+    ),
     /* TODO IRS irsCategory: extractInputValueFromLocalStorage('irsCategory', null),
     irsCategoryRegion: extractInputValueFromLocalStorage(
       'irsCategoryRegion',
@@ -309,6 +313,7 @@ const investmentReducer = (state = initialState, action) =>
         break;
       case SET_INPUT_VALUE:
         draft.inputs[action.payload.input] = action.payload.value;
+        console.log(action.payload);
         localStorage.setItem('inputs', JSON.stringify(draft.inputs));
         break;
       case SET_INPUT_ERROR:

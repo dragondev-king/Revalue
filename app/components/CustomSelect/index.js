@@ -46,6 +46,7 @@ const CustomSelect = ({
   defaultValue,
   data,
   handleChange,
+  value,
   labelText,
   tooltipText,
   name,
@@ -78,13 +79,14 @@ const CustomSelect = ({
         disableUnderline
         defaultValue={defaultValue}
         name={name}
+        value={value}
         onChange={handleChange}
         className={disabled ? styles.disabledSelect : styles.select}
         IconComponent={() => (disabled ? <></> : <DropdownIcon />)}
       >
-        {data.map(value => (
-          <MenuItem key={value.name} value={value.name}>
-            {value.label}
+        {data.map(item => (
+          <MenuItem key={item.name} value={item.name}>
+            {item.label}
           </MenuItem>
         ))}
       </Select>

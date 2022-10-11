@@ -96,6 +96,7 @@ const BreakdownTable = ({ props }) => {
                                     </IconButton>
                                   </Tooltip>
                                 )}
+                                {row.v0Rate && <>{formatNumber(row.v0Rate)} </>}
                               </>
                             ) : (
                               formatNumber(row[`v${index}`])

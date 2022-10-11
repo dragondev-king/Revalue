@@ -314,11 +314,11 @@ export default defineMessages({
   },
   currentIrsRate: {
     id: `${scope}.currentIrsRate`,
-    defaultMessage: 'Current Irs Rate',
+    defaultMessage: 'Irs Rate',
   },
   currentIrsRateInfo: {
     id: `${scope}.currentIrsRateInfo`,
-    defaultMessage: 'Capital gains tax',
+    defaultMessage: 'Irs Rate',
   },
   taxResidentInPortugal: {
     id: `${scope}.taxResidentInPortugal`,

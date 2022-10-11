@@ -133,42 +133,49 @@ const columns = [
     field: 'propertyLocation',
     label: 'location',
     sortable: false,
+    unit: '',
     flex: 1,
   },
   {
     field: 'propertyAskingPrice',
     label: 'askingPrice',
     sortable: false,
+    unit: '€',
     flex: 1,
   },
   {
     field: 'requiredInitialCapital',
     label: 'requiredInitialCapital',
     sortable: false,
+    unit: '€',
     flex: 1,
   },
   {
     field: 'transactionPrice',
     label: 'transactionPrice',
     sortable: false,
+    unit: '€',
     flex: 1,
   },
   {
     field: 'internalRateOfReturn',
     label: 'internalRateOfReturn',
     sortable: false,
+    unit: '%',
     minWidth: 200,
   },
   {
     field: 'profitAfterTax',
     label: 'profitAfterTax',
     sortable: false,
+    unit: '€',
     minWidth: 130,
   },
   {
     field: 'report',
     label: 'report',
     sortable: false,
+    unit: '',
     minWidth: 70,
     renderCell: cellValues => (
       <Link to={`/analysis/${cellValues.row.id}`} style={{ color: '#7866f4' }}>
@@ -366,6 +373,16 @@ export function FixAndFlip(props) {
     props.setInputValue(name, value);
     props.setInputError(name, '');
     props.setAnalyzeButtonDisabled(false);
+
+    if (name === 'acquisitionType') {
+      if (value === 'acquisition.type.permanent.housing') {
+        props.setInputValue('capitalGainsTaxRate', 50);
+        props.setInputError('capitalGainsTaxRate', '');
+      } else if (value === 'acquisition.type.investment') {
+        props.setInputValue('capitalGainsTaxRate', 100);
+        props.setInputError('capitalGainsTaxRate', '');
+      }
+    }
   }
 
   function handleChangeSwitch(event) {
@@ -1233,6 +1250,7 @@ export function FixAndFlip(props) {
                   error={props.errors.capitalGainsTaxRate}
                   name="capitalGainsTaxRate"
                   type="number"
+                  value={props.inputs.capitalGainsTaxRate}
                   handleChange={handleChange}
                   defaultValue={props.inputs.capitalGainsTaxRate}
                   symbol={<span>%</span>}
@@ -1372,10 +1390,12 @@ export function FixAndFlip(props) {
 
   function translateColumnLabel(list) {
     list.forEach(item => {
+      const unit = item.unit ? ` (${item.unit})` : '';
       // eslint-disable-next-line no-param-reassign
-      item.headerName = props.intl.formatMessage({
-        ...messages[item.label],
-      });
+      item.headerName =
+        props.intl.formatMessage({
+          ...messages[item.label],
+        }) + unit;
     });
     return list;
   }

@@ -326,6 +326,16 @@ export function DrawerContent(props) {
     props.setInputValue(name, value);
     props.setInputError(name, '');
     props.setAnalyzeButtonDisabled(false);
+
+    if (name === 'acquisitionType') {
+      if (value === 'acquisition.type.permanent.housing') {
+        props.setInputValue('capitalGainsTaxRate', 50);
+        props.setInputError('capitalGainsTaxRate', '');
+      } else if (value === 'acquisition.type.investment') {
+        props.setInputValue('capitalGainsTaxRate', 100);
+        props.setInputError('capitalGainsTaxRate', '');
+      }
+    }
   }
 
   function handleChangeSwitch(event) {
@@ -420,6 +430,7 @@ export function DrawerContent(props) {
               error={null}
               defaultValue={props.inputs.ciPercentile}
               handleChange={handleChange}
+              value={props.inputs.ciPercentile}
               data={props.ciPercentiles}
               name="ciPercentile"
               tooltipText={props.intl.formatMessage({
@@ -1039,6 +1050,7 @@ export function DrawerContent(props) {
                   error={props.errors.capitalGainsTaxRate}
                   name="capitalGainsTaxRate"
                   type="number"
+                  value={props.inputs.capitalGainsTaxRate}
                   handleChange={handleChange}
                   defaultValue={props.inputs.capitalGainsTaxRate}
                   symbol={<span>%</span>}

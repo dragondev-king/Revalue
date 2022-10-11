@@ -66,6 +66,7 @@ const useStyles = makeStyles({
 const CustomInput = ({
   error,
   labelText,
+  value,
   tooltipText,
   defaultValue,
   readOnly,
@@ -97,6 +98,7 @@ const CustomInput = ({
         disabled={disabled}
         disableUnderline
         readOnly={readOnly}
+        value={value}
         className={disabled ? styles.disabledInput : styles.input}
         onChange={handleChange}
         type={type}

@@ -14,7 +14,7 @@ export default defineMessages({
   acquisitionInfo: {
     id: `${scope}.acquisitionInfo`,
     defaultMessage:
-      'Proposed acquisition value based on Bid Ask discount input',
+      'Proposed acquisition value based on bid ask discount input',
   },
   acquisitionPrice: {
     id: `${scope}.acquisitionPrice`,
@@ -279,9 +279,9 @@ export default defineMessages({
   capitalGainsTaxInfo: {
     id: `${scope}.capitalGainsTaxInfo`,
     defaultMessage:
-      'Capital Gain  x  Tax Rate x Capital Gain Tax Base' +
-      'Tax Rate: If resident considers current tax rate and estimates new IRS Rate based on investment estimated profit. If non resident rate is 28%' +
-      'Capital Gain Tax Based: Differ if property acquisition was for permanent housing or investment and if the capital gain will be reinvested.',
+      'Tax rate: If resident considers tax rate and estimates new irs rate based on investment estimated profit. ' +
+      'If non Resident, the rate is 28%. Capital gain tax based differs if property acquisition was for permanent housing or investment and if the capital gain will be reinvested. ' +
+      'Capital gain  *  Tax rate * Capital gain tax base',
   },
   profit: {
     id: `${scope}.profit`,
@@ -293,7 +293,15 @@ export default defineMessages({
   },
   profitAfterTaxInfo: {
     id: `${scope}.profitAfterTaxInfo`,
-    defaultMessage: 'Profit after capital gain tax',
+    defaultMessage: 'Profit after capital gains tax',
+  },
+  accumulatedProfit: {
+    id: `${scope}.accumulatedProfit`,
+    defaultMessage: 'Accumulated Profit',
+  },
+  accumulatedProfitInfo: {
+    id: `${scope}.accumulatedProfitInfo`,
+    defaultMessage: 'Accumulated Profit',
   },
   empty: {
     id: `${scope}.empty`,
