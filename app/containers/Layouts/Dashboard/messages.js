@@ -35,10 +35,6 @@ export default defineMessages({
     id: `${scope}.analysis`,
     defaultMessage: 'Analysis',
   },
-  fixandflip: {
-    id: `${scope}.fixandflip`,
-    defaultMessage: 'FixAndFlip',
-  },
   fixAndFlip: {
     id: `${scope}.fixAndFlip`,
     defaultMessage: 'Fix And Flip',

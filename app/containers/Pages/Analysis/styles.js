@@ -96,7 +96,7 @@ const useStyles = makeStyles(theme => ({
   breakdownTablePaper: {
     width: '100%',
     height: '100%',
-    marginTop: '16px',
+    marginTop: '30px',
   },
 }));
 

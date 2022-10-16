@@ -183,12 +183,17 @@ export function DrawerContent(props) {
   }, props.newPropertyAnalysisPageReady);
 
   const validationSchema = yup.object().shape({
+    financingRate: yup
+      .number()
+      .transform(v => (v === '' || Number.isNaN(v) ? null : v))
+      .nullable()
+      .required('inputRequired'),
     bidAskRate: yup
       .number()
       .transform(v => (v === '' || Number.isNaN(v) ? null : v))
       .nullable()
       .required('inputRequired'),
-    financingRate: yup
+    housePriceIndexRate: yup
       .number()
       .transform(v => (v === '' || Number.isNaN(v) ? null : v))
       .nullable()
@@ -208,18 +213,69 @@ export function DrawerContent(props) {
       .transform(v => (v === '' || Number.isNaN(v) ? null : v))
       .nullable()
       .required('inputRequired'),
-    interestRate: yup
-      .number()
-      .transform(v => (v === '' || Number.isNaN(v) ? null : v))
-      .nullable()
-      .required('inputRequired'),
     bankCommissionRate: yup
       .number()
       .transform(v => (v === '' || Number.isNaN(v) ? null : v))
       .nullable()
       .required('inputRequired'),
+    stampDutyMortgageRate: yup
+      .number()
+      .transform(v => (v === '' || Number.isNaN(v) ? null : v))
+      .nullable()
+      .required('inputRequired'),
+    stampDutyInterestRate: yup
+      .number()
+      .transform(v => (v === '' || Number.isNaN(v) ? null : v))
+      .nullable()
+      .required('inputRequired'),
+    interestRate: yup
+      .number()
+      .transform(v => (v === '' || Number.isNaN(v) ? null : v))
+      .nullable()
+      .required('inputRequired'),
+    capexFinancingRate: yup
+      .number()
+      .transform(v => (v === '' || Number.isNaN(v) ? null : v))
+      .nullable(),
+    earlyRepaymentRate: yup
+      .number()
+      .transform(v => (v === '' || Number.isNaN(v) ? null : v))
+      .nullable()
+      .required('inputRequired'),
+    amortization: yup
+      .number()
+      .transform(v => (v === '' || Number.isNaN(v) ? null : v))
+      .nullable()
+      .required('inputRequired'),
+    condominiumCosts: yup
+      .number()
+      .transform(v => (v === '' || Number.isNaN(v) ? null : v))
+      .nullable()
+      .required('inputRequired'),
+    propertyTaxRate: yup
+      .number()
+      .transform(v => (v === '' || Number.isNaN(v) ? null : v))
+      .nullable()
+      .required('inputRequired'),
+    capexPerSquareMeter: yup
+      .number()
+      .transform(v => (v === '' || Number.isNaN(v) ? null : v))
+      .nullable(),
+    multiRiskInsurance: yup
+      .number()
+      .transform(v => (v === '' || Number.isNaN(v) ? null : v))
+      .nullable(),
+    lifeInsurance: yup
+      .number()
+      .transform(v => (v === '' || Number.isNaN(v) ? null : v))
+      .nullable(),
     taxResidentInPortugal: yup
       .boolean()
+      .nullable()
+      .required('inputRequired'),
+    capitalGainsTaxRate: yup
+      .number()
+      .transform(v => (v === '' || Number.isNaN(v) ? null : v))
       .nullable()
       .required('inputRequired'),
     currentIrsRate: yup
@@ -236,47 +292,12 @@ export function DrawerContent(props) {
             .required('inputRequired');
         }
       }),
-    amortization: yup
-      .number()
-      .transform(v => (v === '' || Number.isNaN(v) ? null : v))
-      .nullable()
-      .required('inputRequired'),
-    stampDutyMortgageRate: yup
-      .number()
-      .transform(v => (v === '' || Number.isNaN(v) ? null : v))
-      .nullable()
-      .required('inputRequired'),
-    stampDutyInterestRate: yup
-      .number()
-      .transform(v => (v === '' || Number.isNaN(v) ? null : v))
-      .nullable()
-      .required('inputRequired'),
-    condominiumCosts: yup
-      .number()
-      .transform(v => (v === '' || Number.isNaN(v) ? null : v))
-      .nullable()
-      .required('inputRequired'),
-    propertyTaxRate: yup
-      .number()
-      .transform(v => (v === '' || Number.isNaN(v) ? null : v))
-      .nullable()
-      .required('inputRequired'),
     timeToSale: yup
       .number()
       .transform(v => (v === '' || Number.isNaN(v) ? null : v))
       .nullable()
       .required('inputRequired'),
     exitBrokerRate: yup
-      .number()
-      .transform(v => (v === '' || Number.isNaN(v) ? null : v))
-      .nullable()
-      .required('inputRequired'),
-    earlyRepaymentRate: yup
-      .number()
-      .transform(v => (v === '' || Number.isNaN(v) ? null : v))
-      .nullable()
-      .required('inputRequired'),
-    capitalGainsTaxRate: yup
       .number()
       .transform(v => (v === '' || Number.isNaN(v) ? null : v))
       .nullable()
@@ -385,9 +406,9 @@ export function DrawerContent(props) {
               handleChange={handleChange}
               defaultValue={props.inputs.financingRate}
               symbol={<span>%</span>}
-              labelText={props.intl.formatMessage({
+              labelText={`${props.intl.formatMessage({
                 ...messages.financingRate,
-              })}
+              })} *`}
               tooltipText={props.intl.formatMessage({
                 ...messages.financingRateInfo,
               })}
@@ -401,9 +422,9 @@ export function DrawerContent(props) {
               handleChange={handleChange}
               defaultValue={props.inputs.bidAskRate}
               symbol={<span>%</span>}
-              labelText={props.intl.formatMessage({
+              labelText={`${props.intl.formatMessage({
                 ...messages.bidAskRate,
-              })}
+              })} *`}
               tooltipText={props.intl.formatMessage({
                 ...messages.bidAskRateInfo,
               })}
@@ -417,9 +438,9 @@ export function DrawerContent(props) {
               handleChange={handleChange}
               defaultValue={props.inputs.housePriceIndexRate}
               symbol={<span>%</span>}
-              labelText={props.intl.formatMessage({
+              labelText={`${props.intl.formatMessage({
                 ...messages.housePriceIndexRate,
-              })}
+              })} *`}
               tooltipText={props.intl.formatMessage({
                 ...messages.housePriceIndexRateInfo,
               })}
@@ -436,9 +457,9 @@ export function DrawerContent(props) {
               tooltipText={props.intl.formatMessage({
                 ...messages.percentileInfo,
               })}
-              labelText={props.intl.formatMessage({
+              labelText={`${props.intl.formatMessage({
                 ...messages.percentile,
-              })}
+              })} *`}
             />
           </Grid>
         </Grid>
@@ -564,11 +585,11 @@ export function DrawerContent(props) {
               data={props.propertyTypes}
               name="propertyType"
               tooltipText={props.intl.formatMessage({
-                ...messages.propertyType,
+                ...messages.propertyTypeInfo,
               })}
-              labelText={props.intl.formatMessage({
+              labelText={`${props.intl.formatMessage({
                 ...messages.propertyType,
-              })}
+              })} *`}
             />
           </Grid>
           <Grid item xs={6}>
@@ -579,11 +600,11 @@ export function DrawerContent(props) {
               data={props.propertyTypologies}
               name="propertyTypology"
               tooltipText={props.intl.formatMessage({
-                ...messages.propertyTypology,
+                ...messages.propertyTypologyInfo,
               })}
-              labelText={props.intl.formatMessage({
+              labelText={`${props.intl.formatMessage({
                 ...messages.propertyTypology,
-              })}
+              })} *`}
             />
           </Grid>
           <Grid item xs={6}>
@@ -594,11 +615,11 @@ export function DrawerContent(props) {
               data={props.propertyConditions}
               name="propertyCondition"
               tooltipText={props.intl.formatMessage({
-                ...messages.propertyCondition,
+                ...messages.propertyConditionInfo,
               })}
-              labelText={props.intl.formatMessage({
+              labelText={`${props.intl.formatMessage({
                 ...messages.propertyCondition,
-              })}
+              })} *`}
             />
           </Grid>
         </Grid>
@@ -657,9 +678,9 @@ export function DrawerContent(props) {
               handleChange={handleChange}
               data={props.acquisitionTypes}
               name="acquisitionType"
-              labelText={props.intl.formatMessage({
+              labelText={`${props.intl.formatMessage({
                 ...messages.acquisitionType,
-              })}
+              })} *`}
               tooltipText={props.intl.formatMessage({
                 ...messages.acquisitionTypeInfo,
               })}
@@ -673,9 +694,9 @@ export function DrawerContent(props) {
               handleChange={handleChange}
               defaultValue={props.inputs.acquisitionBrokerRate}
               symbol={<span>%</span>}
-              labelText={props.intl.formatMessage({
+              labelText={`${props.intl.formatMessage({
                 ...messages.acquisitionBrokerRate,
-              })}
+              })} *`}
               tooltipText={props.intl.formatMessage({
                 ...messages.acquisitionBrokerRateInfo,
               })}
@@ -689,9 +710,9 @@ export function DrawerContent(props) {
               handleChange={handleChange}
               defaultValue={props.inputs.acquisitionStampDutyRate}
               symbol={<span>%</span>}
-              labelText={props.intl.formatMessage({
+              labelText={`${props.intl.formatMessage({
                 ...messages.acquisitionStampDutyRate,
-              })}
+              })} *`}
               tooltipText={props.intl.formatMessage({
                 ...messages.acquisitionStampDutyRateInfo,
               })}
@@ -705,9 +726,9 @@ export function DrawerContent(props) {
               handleChange={handleChange}
               defaultValue={props.inputs.landRegistryInscription}
               symbol={<span>&#8364;</span>}
-              labelText={props.intl.formatMessage({
+              labelText={`${props.intl.formatMessage({
                 ...messages.landRegistryInscription,
-              })}
+              })} *`}
               tooltipText={props.intl.formatMessage({
                 ...messages.landRegistryInscriptionInfo,
               })}
@@ -720,9 +741,9 @@ export function DrawerContent(props) {
               checked={props.inputs.realEstateTransferTax}
               color="primary"
               name="realEstateTransferTax"
-              labelText={props.intl.formatMessage({
+              labelText={`${props.intl.formatMessage({
                 ...messages.realEstateTransferTax,
-              })}
+              })} *`}
               tooltipText={props.intl.formatMessage({
                 ...messages.realEstateTransferTax,
               })}
@@ -745,9 +766,9 @@ export function DrawerContent(props) {
               handleChange={handleChange}
               defaultValue={props.inputs.bankCommissionRate}
               symbol={<span>%</span>}
-              labelText={props.intl.formatMessage({
+              labelText={`${props.intl.formatMessage({
                 ...messages.bankCommissionRate,
-              })}
+              })} *`}
               tooltipText={props.intl.formatMessage({
                 ...messages.bankCommissionRateInfo,
               })}
@@ -761,9 +782,9 @@ export function DrawerContent(props) {
               handleChange={handleChange}
               defaultValue={props.inputs.stampDutyMortgageRate}
               symbol={<span>%</span>}
-              labelText={props.intl.formatMessage({
+              labelText={`${props.intl.formatMessage({
                 ...messages.stampDutyMortgageRate,
-              })}
+              })} *`}
               tooltipText={props.intl.formatMessage({
                 ...messages.stampDutyMortgageRateInfo,
               })}
@@ -777,9 +798,9 @@ export function DrawerContent(props) {
               handleChange={handleChange}
               defaultValue={props.inputs.stampDutyInterestRate}
               symbol={<span>%</span>}
-              labelText={props.intl.formatMessage({
+              labelText={`${props.intl.formatMessage({
                 ...messages.stampDutyInterestRate,
-              })}
+              })} *`}
               tooltipText={props.intl.formatMessage({
                 ...messages.stampDutyInterestRateInfo,
               })}
@@ -793,9 +814,9 @@ export function DrawerContent(props) {
               handleChange={handleChange}
               defaultValue={props.inputs.interestRate}
               symbol={<span>%</span>}
-              labelText={props.intl.formatMessage({
+              labelText={`${props.intl.formatMessage({
                 ...messages.interestRate,
-              })}
+              })} *`}
               tooltipText={props.intl.formatMessage({
                 ...messages.interestRateInfo,
               })}
@@ -809,9 +830,9 @@ export function DrawerContent(props) {
               handleChange={handleChange}
               defaultValue={props.inputs.capexFinancingRate}
               symbol={<span>%</span>}
-              labelText={props.intl.formatMessage({
+              labelText={`${props.intl.formatMessage({
                 ...messages.capexFinancingRate,
-              })}
+              })}`}
               tooltipText={props.intl.formatMessage({
                 ...messages.capexFinancingRateInfo,
               })}
@@ -825,9 +846,9 @@ export function DrawerContent(props) {
               handleChange={handleChange}
               defaultValue={props.inputs.earlyRepaymentRate}
               symbol={<span>%</span>}
-              labelText={props.intl.formatMessage({
+              labelText={`${props.intl.formatMessage({
                 ...messages.earlyRepaymentRate,
-              })}
+              })} *`}
               tooltipText={props.intl.formatMessage({
                 ...messages.earlyRepaymentRateInfo,
               })}
@@ -868,9 +889,9 @@ export function DrawerContent(props) {
               handleChange={handleChange}
               defaultValue={props.inputs.condominiumCosts}
               symbol={<span>&#8364;</span>}
-              labelText={props.intl.formatMessage({
+              labelText={`${props.intl.formatMessage({
                 ...messages.condominiumCosts,
-              })}
+              })} *`}
               tooltipText={props.intl.formatMessage({
                 ...messages.condominiumCostsInfo,
               })}
@@ -884,9 +905,9 @@ export function DrawerContent(props) {
               handleChange={handleChange}
               defaultValue={props.inputs.propertyTaxRate}
               symbol={<span>%</span>}
-              labelText={props.intl.formatMessage({
+              labelText={`${props.intl.formatMessage({
                 ...messages.propertyTaxRate,
-              })}
+              })} *`}
               tooltipText={props.intl.formatMessage({
                 ...messages.propertyTaxRateInfo,
               })}
@@ -958,9 +979,9 @@ export function DrawerContent(props) {
               handleChange={handleChangeSwitch}
               checked={props.inputs.taxResidentInPortugal}
               name="taxResidentInPortugal"
-              labelText={props.intl.formatMessage({
+              labelText={`${props.intl.formatMessage({
                 ...messages.taxResidentInPortugal,
-              })}
+              })} *`}
             />
           </Grid>
           {!props.inputs.taxResidentInPortugal && (
@@ -971,9 +992,9 @@ export function DrawerContent(props) {
                 readOnly
                 defaultValue={28}
                 symbol={<span>%</span>}
-                labelText={props.intl.formatMessage({
+                labelText={`${props.intl.formatMessage({
                   ...messages.irsRate,
-                })}
+                })} *`}
                 tooltipText={props.intl.formatMessage({
                   ...messages.irsRate,
                 })}
@@ -1054,9 +1075,9 @@ export function DrawerContent(props) {
                   handleChange={handleChange}
                   defaultValue={props.inputs.capitalGainsTaxRate}
                   symbol={<span>%</span>}
-                  labelText={props.intl.formatMessage({
+                  labelText={`${props.intl.formatMessage({
                     ...messages.capitalGainsTaxRate,
-                  })}
+                  })} *`}
                   tooltipText={props.intl.formatMessage({
                     ...messages.capitalGainsTaxRateInfo,
                   })}
@@ -1071,9 +1092,9 @@ export function DrawerContent(props) {
                   handleChange={handleChange}
                   defaultValue={props.inputs.currentIrsRate}
                   symbol={<span>%</span>}
-                  labelText={props.intl.formatMessage({
+                  labelText={`${props.intl.formatMessage({
                     ...messages.currentIrsRate,
-                  })}
+                  })} *`}
                   tooltipText={props.intl.formatMessage({
                     ...messages.currentIrsRate,
                   })}
@@ -1098,9 +1119,9 @@ export function DrawerContent(props) {
               handleChange={handleChange}
               defaultValue={props.inputs.timeToSale}
               symbol={<span>Month</span>}
-              labelText={props.intl.formatMessage({
+              labelText={`${props.intl.formatMessage({
                 ...messages.timeToSale,
-              })}
+              })} *`}
               tooltipText={props.intl.formatMessage({
                 ...messages.timeToSaleInfo,
               })}
@@ -1114,9 +1135,9 @@ export function DrawerContent(props) {
               handleChange={handleChange}
               defaultValue={props.inputs.exitBrokerRate}
               symbol={<span>%</span>}
-              labelText={props.intl.formatMessage({
+              labelText={`${props.intl.formatMessage({
                 ...messages.exitBrokerRate,
-              })}
+              })} *`}
               tooltipText={props.intl.formatMessage({
                 ...messages.exitBrokerRateInfo,
               })}
@@ -1143,9 +1164,9 @@ export function DrawerContent(props) {
             handleChange={handleChange}
             defaultValue={props.inputs.grossAreaToUsefulAreaRate}
             symbol={<span>%</span>}
-            labelText={props.intl.formatMessage({
+            labelText={`${props.intl.formatMessage({
               ...messages.grossAreaToUsefulAreaRate,
-            })}
+            })} *`}
             tooltipText={props.intl.formatMessage({
               ...messages.grossAreaToUsefulAreaRateInfo,
             })}
@@ -1159,9 +1180,9 @@ export function DrawerContent(props) {
             handleChange={handleChange}
             defaultValue={props.inputs.floorRate}
             symbol={<span>%</span>}
-            labelText={props.intl.formatMessage({
+            labelText={`${props.intl.formatMessage({
               ...messages.floorRate,
-            })}
+            })} *`}
             tooltipText={props.intl.formatMessage({
               ...messages.floorRateInfo,
             })}
@@ -1175,9 +1196,9 @@ export function DrawerContent(props) {
             handleChange={handleChange}
             defaultValue={props.inputs.capRate}
             symbol={<span>%</span>}
-            labelText={props.intl.formatMessage({
+            labelText={`${props.intl.formatMessage({
               ...messages.capRate,
-            })}
+            })} *`}
             tooltipText={props.intl.formatMessage({
               ...messages.capRateInfo,
             })}

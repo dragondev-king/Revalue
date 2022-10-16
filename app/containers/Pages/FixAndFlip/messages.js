@@ -22,8 +22,7 @@ export default defineMessages({
   financingRateInfo: {
     id: `${scope}.financingRateInfo`,
     defaultMessage:
-      'Financing rate to acquisition price. ' +
-      'Example: if the property acquisition price is 100.000€ and financing rate is 50%, financing will be 50.000€',
+      'Financing rate to acquisition price. Example: if the property acquisition price is 100.000€ and financing rate is 50%, financing will be 50.000€.',
   },
   bidAskRate: {
     id: `${scope}.bidAskRate`,
@@ -32,8 +31,7 @@ export default defineMessages({
   bidAskRateInfo: {
     id: `${scope}.bidAskRateInfo`,
     defaultMessage:
-      'Acquisition price will be this discount to seller asking price. ' +
-      'Example: If asking price is 100.000€ and bid ask is 5%, acquisition price will be 95.000€',
+      'The acquisition price will be the discount on the asking price. Example: If the asking price is 100.000€ and the bid ask is 5%, the acquisition price will be 95.000€.',
   },
   minProfit: {
     id: `${scope}.minProfit`,
@@ -42,8 +40,7 @@ export default defineMessages({
   minProfitInfo: {
     id: `${scope}.minProfitInfo`,
     defaultMessage:
-      'Minimum required profit to be filter in the analysis after tax. ' +
-      'Example: If the min profit is 10.000€, only investments opportunities with a return higher than 10.000€ will be presented',
+      'Minimum required profit to be filtered in all the analysis. Example: If the minimum profit is 10.000€, only investments opportunities with a return higher than 10.000€ will be presented.',
   },
   housePriceIndexRate: {
     id: `${scope}.housePriceIndexRate`,
@@ -52,8 +49,7 @@ export default defineMessages({
   housePriceIndexRateInfo: {
     id: `${scope}.housePriceIndexRateInfo`,
     defaultMessage:
-      'Property value grow per year. ' +
-      'Example: If house price index is 2% and the market value is 100.000€ at the moment of acquisition, one year after market value will be (100.000€ *(1 +2%)) = 102.000€ and in year 3 ((102.000*(1+2%)) = 104.040€',
+      'Property value grows per year. Example: If house price index is 2% and the market value is 100.000€ at the moment of the acquisition, one year after the market value will be 102.000€ and in year 3 104.040€.',
   },
   minCapital: {
     id: `${scope}.minCapital`,
@@ -62,8 +58,7 @@ export default defineMessages({
   minCapitalInfo: {
     id: `${scope}.minCapitalInfo`,
     defaultMessage:
-      'Minimum Required Capital for the Transaction to be filter in the analysis. ' +
-      'Example: If Min Capital is 25.000€ and the required capital after financing debt, Taxes and non financed Capital Expenditures is 15.000€, this investment opportunity would not be presented',
+      'Minimum required capital for the transaction to be filtered in all the analysis. Example: If minimum capital is 25.000€ and the required capital for an investment is 15.000€, this investment opportunity will not be presented.',
   },
   maxCapital: {
     id: `${scope}.maxCapital`,
@@ -72,7 +67,7 @@ export default defineMessages({
   maxCapitalInfo: {
     id: `${scope}.maxCapitalInfo`,
     defaultMessage:
-      'Maximum Required Capital for the Transaction to be filter in the analysis',
+      'Maximum required capital for the transaction to be filtered in all the analysis. Example: If maxumim capital is 50.000€ and the required capital for the investment is 60.000€, this investment opportunity will not be presented.',
   },
   percentile: {
     id: `${scope}.Percentile`,
@@ -81,12 +76,15 @@ export default defineMessages({
   percentileInfo: {
     id: `${scope}.percentileInfo`,
     defaultMessage:
-      'Property percentile for exit value calculation. ' +
-      'Properties with higher value should be compared with higher percentile properties per square meter on the database, considering property type, condition and location',
+      'Property percentile for the exit value calculation. Properties with higher value should be compared with higher percentile properties in the market.',
   },
   propertyCondition: {
     id: `${scope}.propertyCondition`,
     defaultMessage: 'Property Condition',
+  },
+  propertyConditionInfo: {
+    id: `${scope}.propertyConditionInfo`,
+    defaultMessage: 'Property condition',
   },
   propertyInformation: {
     id: `${scope}.propertyInformation`,
@@ -96,9 +94,17 @@ export default defineMessages({
     id: `${scope}.propertyType`,
     defaultMessage: 'Property Type',
   },
+  propertyTypeInfo: {
+    id: `${scope}.propertyTypeInfo`,
+    defaultMessage: 'Property type',
+  },
   propertyTypology: {
     id: `${scope}.propertyTypology`,
     defaultMessage: 'Property Typology',
+  },
+  propertyTypologyInfo: {
+    id: `${scope}.propertyTypologyInfo`,
+    defaultMessage: 'Property typology',
   },
   minAskingPrice: {
     id: `${scope}.minAskingPrice`,
@@ -107,8 +113,7 @@ export default defineMessages({
   minAskingPriceInfo: {
     id: `${scope}.minAskingPriceInfo`,
     defaultMessage:
-      'Minimum asking price to be filter in the analysis. ' +
-      'Example: If minimum price is 250.000€, investment opportunity with asking values bellow will not be presented',
+      'Minimum asking price to be filtered in all the analysis. Example: If minimum asking price is 250.000€, investment opportunities with asking values below will not be presented.',
   },
   maxAskingPrice: {
     id: `${scope}.maxAskingPrice`,
@@ -117,8 +122,7 @@ export default defineMessages({
   maxAskingPriceInfo: {
     id: `${scope}.maxAskingPriceInfo`,
     defaultMessage:
-      'Maximum asking price to be filter in the analysis. ' +
-      'Example: If max price is 250.000€, investment opportunity with asking values above will not be presented',
+      'Maximum asking price to be filtered in all the analysis. Example: If maximum asking price is 250.000€, investment opportunities with asking values above will not be presented.',
   },
   minUsefulArea: {
     id: `${scope}.minUsefulArea`,
@@ -126,7 +130,7 @@ export default defineMessages({
   },
   minUsefulAreaInfo: {
     id: `${scope}.minUsefulAreaInfo`,
-    defaultMessage: 'Minimum useful area to be filter in the analysis',
+    defaultMessage: 'Minimum useful area to be filtered in all the analysis.',
   },
   maxUsefulArea: {
     id: `${scope}.maxUsefulArea`,
@@ -134,7 +138,7 @@ export default defineMessages({
   },
   maxUsefulAreaInfo: {
     id: `${scope}.maxUsefulAreaInfo`,
-    defaultMessage: 'Maximum useful area to be filter in the analysis',
+    defaultMessage: 'Maximum useful area to be filtered in all the analysis.',
   },
   acquisitionAssumptions: {
     id: `${scope}.acquisitionAssumptions`,
@@ -147,8 +151,7 @@ export default defineMessages({
   acquisitionTypeInfo: {
     id: `${scope}.acquisitionTypeInfo`,
     defaultMessage:
-      'Property will be for investment or as a primary residence? ' +
-      'Acquisition real estate transfer tax and exit Capital gains differ with acquisition type',
+      'The property will be for Investment or as a primary residence? Acquisition real estate transfer tax and exit capital gains differ with acquisition type',
   },
   acquisitionBrokerRate: {
     id: `${scope}.acquisitionBrokerRate`,
@@ -157,8 +160,7 @@ export default defineMessages({
   acquisitionBrokerRateInfo: {
     id: `${scope}.acquisitionBrokerRateInfo`,
     defaultMessage:
-      'Is there a broker fee to be paid the buyer? ' +
-      'Typically this fee is paid by the seller however a broker can request a fee as buy side advisor',
+      'Is there a broker fee to be paid by the buyer? Typically this fee is paid by the seller however a broker can request a fee as buy side advisor.',
   },
   acquisitionStampDutyRate: {
     id: `${scope}.acquisitionStampDutyRate`,
@@ -167,7 +169,7 @@ export default defineMessages({
   acquisitionStampDutyRateInfo: {
     id: `${scope}.acquisitionStampDutyRateInfo`,
     defaultMessage:
-      'Stamp duty for acquisition is 0.8% of maximum value between acquisition and tax value',
+      'Stamp duty for acquisition is 0.8% of the maximum value between acquisition and tax value.',
   },
   landRegistryInscription: {
     id: `${scope}.landRegistryInscription`,
@@ -176,19 +178,17 @@ export default defineMessages({
   landRegistryInscriptionInfo: {
     id: `${scope}.landRegistryInscriptionInfo`,
     defaultMessage:
-      'The public deed contract, needs to be made by a recognized entity or person such as a public notary office, a lawyer or solicitor. ' +
-      'A popular choice are the “Casa Pronta” (Ready House) notary offices, where the process can be more streamlined and cheaper than normal.' +
-      'For this reason, the reference in terms of price are the Casa Pronta notary offices, where it normally costs 375,00 €, including both the preparation of the public deed contract and the registry. With Mortgage normally will be 700€',
+      'The public deed contract needs to be made by a recognized entity or person such as a public notary office, a lawyer or a solicitor. A popular choice is the “Casa Pronta” (Ready House) notary offices, where the process can be more streamlined and cheaper than normal.' +
+      ' For this reason, the reference in terms of price is the Casa Pronta notary offices, where it normally costs 375,00 €, including both the preparation of the public deed contract and the registry. With mortgage normally will be 700€.',
   },
   realEstateTransferTax: {
     id: `${scope}.realEstateTransferTax`,
     defaultMessage: 'Real Estate Transfer Tax',
   },
   realEstateTransferTaxInfo: {
-    id: `${scope}.realEstateTransferTax`,
+    id: `${scope}.realEstateTransferTaxInfo`,
     defaultMessage:
-      'Property Transfer Tax (Imposto Municipal sobre Transmissôes Onerosas de Imóveis – IMT) is paid by the buyer when there is a transfer of ownership of real estate in Portugal. ' +
-      'The percentage of tax charged can range from 1% to 8%, depending on the purchase price, the location of the property and whether it is first or second home in Portugal',
+      'Real estate transfer tax (Imposto Municipal Sobre Transmissôes Onerosas de Imóveis – IMT) is paid by the buyer when there is a transfer of ownership of the real estate in Portugal. The percentage of tax charged can range from 1% to 8%, depending on the purchase price, the location of the property and whether it is the first or second home in Portugal.',
   },
   financeAssumptions: {
     id: `${scope}.financeAssumptions`,
@@ -201,8 +201,7 @@ export default defineMessages({
   bankCommissionRateInfo: {
     id: `${scope}.bankCommissionRateInfo`,
     defaultMessage:
-      'Bank fees vary, depending on the lender and loan amount. ' +
-      'Details will be provided in the mortgage proposal document',
+      'Bank fees vary, depending on the lender and loan amount. Details will be provided in the mortgage proposal document.',
   },
   stampDutyMortgageRate: {
     id: `${scope}.stampDutyMortgageRate`,
@@ -211,7 +210,7 @@ export default defineMessages({
   stampDutyMortgageRateInfo: {
     id: `${scope}.stampDutyMortgageRateInfo`,
     defaultMessage:
-      'The mortgage stamp duty is 0.60% of the final loan amount if the loan if for more than 5 years',
+      'The mortgage stamp duty is 0.60% of the final loan amount if the loan is for more than 5 years.',
   },
   stampDutyInterestRate: {
     id: `${scope}.stampDutyInterestRate`,
@@ -220,7 +219,7 @@ export default defineMessages({
   stampDutyInterestRateInfo: {
     id: `${scope}.stampDutyInterestRateInfo`,
     defaultMessage:
-      'The interest stamp duty is 4% of the interest of the period',
+      'The interest stamp duty is 4% of the interest of the period.',
   },
   interestRate: {
     id: `${scope}.interestRate`,
@@ -228,7 +227,7 @@ export default defineMessages({
   },
   interestRateInfo: {
     id: `${scope}.interestRateInfo`,
-    defaultMessage: 'Mortgage Interest over Period',
+    defaultMessage: 'Mortgage interest over period. Euribor + Spread.',
   },
   capexFinancingRate: {
     id: `${scope}.capexFinancingRate`,
@@ -237,7 +236,7 @@ export default defineMessages({
   capexFinancingRateInfo: {
     id: `${scope}.capexFinancingRateInfo`,
     defaultMessage:
-      'Percentage of Capital Expenditure, remodel on the project, that will be financed',
+      'Percentage of capital expenditure/renovations on the project, that will be financed.',
   },
   earlyRepaymentRate: {
     id: `${scope}.earlyRepaymentRate`,
@@ -246,7 +245,7 @@ export default defineMessages({
   earlyRepaymentRateInfo: {
     id: `${scope}.earlyRepaymentRateInfo`,
     defaultMessage:
-      'An Early Redemption Penalty (also known as an Early Repayment Charge or ERC) is a fee you may be required to make to a lender if you pay off a loan or mortgage before the scheduled term of the credit facility, also sometimes referred to as a Redemption Penalty',
+      'An early redemption penalty (also known as an early repayment charge or ERC) is a fee you may be required to make to a lender if you pay off a loan or mortgage before the scheduled term of the credit facility.',
   },
   amortization: {
     id: `${scope}.amortization`,
@@ -254,7 +253,7 @@ export default defineMessages({
   },
   amortizationInfo: {
     id: `${scope}.amortizationInfo`,
-    defaultMessage: 'Amortization Period in years',
+    defaultMessage: 'Amortization period in years.',
   },
   year: {
     id: `${scope}.year`,
@@ -270,7 +269,7 @@ export default defineMessages({
   },
   condominiumCostsInfo: {
     id: `${scope}.condominiumCostsInfo`,
-    defaultMessage: 'Estimated Monthly Condominium Costs',
+    defaultMessage: 'Estimated monthly condominium costs.',
   },
   propertyTaxRate: {
     id: `${scope}.propertyTaxRate`,
@@ -279,8 +278,7 @@ export default defineMessages({
   propertyTaxRateInfo: {
     id: `${scope}.propertyTaxRateInfo`,
     defaultMessage:
-      'This tax value should be multiplied by a tax rate, differ by county, and paid annually. ' +
-      'Property Tax is being estimated being the tax value of the property 50% of the acquisition value.',
+      'This tax value should be multiplied by a tax rate, differ by county, and be paid annually. Property tax is being estimated to be the tax value of the property 50% of the acquisition value.',
   },
   capexPerSquareMeter: {
     id: `${scope}.capexPerSquareMeter`,
@@ -289,8 +287,7 @@ export default defineMessages({
   capexPerSquareMeterInfo: {
     id: `${scope}.capexPerSquareMeterInfo`,
     defaultMessage:
-      'Capex is capital expenditures - This is the estimated remodel/works to be done on the property. ' +
-      'This input is per square meeter and is calculated according with the gross construction area of the property',
+      'This is the estimated work/renovations to be done on the property. This input is per square meter and is calculated according to the gross construction area of the property.',
   },
   multiRiskInsurance: {
     id: `${scope}.multiRiskInsurance`,
@@ -298,7 +295,7 @@ export default defineMessages({
   },
   multiRiskInsuranceInfo: {
     id: `${scope}.multiRiskInsuranceInfo`,
-    defaultMessage: 'This insurance is mandatory for real estate',
+    defaultMessage: 'This insurance is mandatory for real estate.',
   },
   lifeInsurance: {
     id: `${scope}.lifeInsurance`,
@@ -306,7 +303,7 @@ export default defineMessages({
   },
   lifeInsuranceInfo: {
     id: `${scope}.lifeInsuranceInfo`,
-    defaultMessage: 'This insurance is mandatory if there is a mortgage',
+    defaultMessage: 'This insurance is mandatory if there is a mortgage.',
   },
   taxAssumptions: {
     id: `${scope}.taxAssumptions`,
@@ -318,7 +315,7 @@ export default defineMessages({
   },
   currentIrsRateInfo: {
     id: `${scope}.currentIrsRateInfo`,
-    defaultMessage: 'Irs Rate',
+    defaultMessage: 'Capital gains tax.',
   },
   taxResidentInPortugal: {
     id: `${scope}.taxResidentInPortugal`,
@@ -355,7 +352,7 @@ export default defineMessages({
   timeToSaleInfo: {
     id: `${scope}.timeToSaleInfo`,
     defaultMessage:
-      'Holding Period in months between entry and exit of investment',
+      'Holding Period in months between entry and exit of the investment.',
   },
   exitBrokerRate: {
     id: `${scope}.exitBrokerRate`,
@@ -370,7 +367,7 @@ export default defineMessages({
     defaultMessage: 'Capital Gains Tax Base Rate',
   },
   capitalGainsTaxRateInfo: {
-    id: `${scope}.capitalGainsTaxRate`,
+    id: `${scope}.capitalGainsTaxRateInfo`,
     defaultMessage: 'Taxable Base Rate',
   },
   valuationModelConfiguration: {
@@ -384,7 +381,7 @@ export default defineMessages({
   grossAreaToUsefulAreaRateInfo: {
     id: `${scope}.grossAreaToUsefulAreaRateInfo`,
     defaultMessage:
-      'If useful area not available this will be the base area discount to gross area for exit value calculation',
+      'If the useful area of the property is not available this will be the base area discount to the gross area to be used in the exit value calculation.',
   },
   floorRate: {
     id: `${scope}.floorRate`,
@@ -393,9 +390,7 @@ export default defineMessages({
   floorRateInfo: {
     id: `${scope}.floorRateInfo`,
     defaultMessage:
-      'Maximum delta between asking price and exit calculation for lower value. ' +
-      'Example: If asking price is 1.000€ per square meter and Revalue valuation is 800€ per square meter floor input will dictate how far can the Revalue valuation can be from asking. ' +
-      'Considering a floor of 10% the minimum value that Revalue will give to this property per square meter will be ((1.000 *(1-10%)) = 900€',
+      'Maximum delta between asking value and Revalue exit value calculation for a lower value. Example: If the asking price is 1.000€ per square meter and Revalue Valuation is 800€ per square meter, the floor rate input will dictate how far can the Revalue valuation can be from the asking price per square meter. Considering a floor rate of 10% the minimum value that Revalue will give to this property per square meter will be ((1.000 *(1-10%)) = 900€.',
   },
   capRate: {
     id: `${scope}.capRate`,
@@ -404,9 +399,7 @@ export default defineMessages({
   capRateInfo: {
     id: `${scope}.capRateInfo`,
     defaultMessage:
-      'Maximum delta between asking price and exit calculation for higher value. ' +
-      'Example: If asking is 1.000€ per square meter and Revalue valuation is 1.200€ per square meter cap input will dictate how far can the Revalue valuation can be from asking. ' +
-      'Considering a cap of 10% the maximum value that Revalue will give to this property per square meter will be ((1.000 *(1+10%)) = 1.100€',
+      'Maximum delta between the asking value and Revalue exit value calculation for a higher value.  Example: If the asking price is 1.000€ per square meter and Revalue valuation is 1.200€ per square meter, the cap rate input will dictate how far can the Revalue valuation can be from the asking price per square meter. Considering a cap rate of 10%, the maximum value that Revalue will give to this property per square meter will be ((1.000 *(1+10%)) = 1.100€',
   },
   analyze: {
     id: `${scope}.analyze`,
@@ -439,7 +432,7 @@ export default defineMessages({
   requiredInitialCapitalInfo: {
     id: `${scope}.requiredInitialCapitalInfo`,
     defaultMessage:
-      'Required capital for investment acquisition after acquisition costs and debt.',
+      'Required initial capital for the investment after all acquisition costs and debt.',
   },
   transactionPrice: {
     id: `${scope}.transactionPrice`,
@@ -456,8 +449,7 @@ export default defineMessages({
   internalRateOfReturnInfo: {
     id: `${scope}.internalRateOfReturnInfo`,
     defaultMessage:
-      'Is the expected compound annual rate of return that will be earned on a project or investment.' +
-      ' An investment with a 10% IRR (Internal Rate of Return) earned a 10% compound annual growth rate.',
+      'Is the expected compound annual rate of return that will be earned on a project or investment. An investment with a 10% IRR (Internal Rate of Return) earned a 10% compound annual growth rate.',
   },
   profitAfterTax: {
     id: `${scope}.profitAfterTax`,
@@ -465,7 +457,7 @@ export default defineMessages({
   },
   profitAfterTaxInfo: {
     id: `${scope}.profitAfterTaxInfo`,
-    defaultMessage: 'Investment Profit after taxes and costs assumptions',
+    defaultMessage: 'Investment profit after taxes and costs assumptions.',
   },
   report: {
     id: `${scope}.report`,

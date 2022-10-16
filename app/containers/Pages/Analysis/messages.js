@@ -98,10 +98,6 @@ export default defineMessages({
     id: `${scope}.source`,
     defaultMessage: 'Source',
   },
-  forecast: {
-    id: `${scope}.forecast`,
-    defaultMessage: 'Forecast',
-  },
   investmentMetrics: {
     id: `${scope}.investmentMetrics`,
     defaultMessage: 'Investment Metrics',

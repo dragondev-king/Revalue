@@ -7,6 +7,7 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
+import { Typography } from '@material-ui/core';
 import { InfoIcon } from '../SvgIconComponents';
 
 const useStyles = makeStyles({
@@ -87,7 +88,13 @@ const CustomInput = ({
         }}
       >
         {labelText}
-        <Tooltip title={tooltipText}>
+        <Tooltip
+          title={
+            <Typography variant="body1" className="text-white">
+              {tooltipText}
+            </Typography>
+          }
+        >
           <IconButton>
             <InfoIcon />
           </IconButton>

@@ -9,7 +9,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { Skeleton } from '@material-ui/lab';
 import { formatNumber } from 'utils/formatNumber';
-import { Grid } from '@material-ui/core';
+import { Grid, Typography } from '@material-ui/core';
 import Scrollbar from 'react-perfect-scrollbar';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -123,9 +123,16 @@ const BreakdownTable = ({ props }) => {
                                 })}
                                 {!row.title && (
                                   <Tooltip
-                                    title={props.intl.formatMessage({
-                                      ...messages[`${row.v0}Info`],
-                                    })}
+                                    title={
+                                      <Typography
+                                        variant="body1"
+                                        className="text-white"
+                                      >
+                                        {props.intl.formatMessage({
+                                          ...messages[`${row.v0}Info`],
+                                        })}
+                                      </Typography>
+                                    }
                                   >
                                     <IconButton className={classes.iconButton}>
                                       <InfoIcon />
@@ -167,7 +174,12 @@ const BreakdownTable = ({ props }) => {
                                   ? '.5px solid lightgray'
                                   : 0,
                                 borderTop: row.bold ? '0.5px solid #0083FC' : 0,
-                                color: row.bold ? '#0083FC' : 'black',
+                                // eslint-disable-next-line no-nested-ternary
+                                color: row.color
+                                  ? row[`v${index}`] < 0
+                                    ? '#ff0000'
+                                    : '#10793F'
+                                  : '',
                                 fontWeight: row.bold ? 'bold' : 'normal',
                                 fontSize: row.title && '20px',
                                 textTransform: 'capitalize',

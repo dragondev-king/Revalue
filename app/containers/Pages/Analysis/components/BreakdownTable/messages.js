@@ -13,8 +13,7 @@ export default defineMessages({
   },
   acquisitionInfo: {
     id: `${scope}.acquisitionInfo`,
-    defaultMessage:
-      'Proposed acquisition value based on bid ask discount input',
+    defaultMessage: 'Acquisition',
   },
   acquisitionPrice: {
     id: `${scope}.acquisitionPrice`,
@@ -22,8 +21,7 @@ export default defineMessages({
   },
   acquisitionPriceInfo: {
     id: `${scope}.acquisitionPriceInfo`,
-    defaultMessage:
-      'Investor proposed acquisition Price , this value was calculated by multiplying the bid ask discount on the asking price',
+    defaultMessage: 'Acquisition value based on bid ask rate input.',
   },
   acquisitionBrokerFee: {
     id: `${scope}.acquisitionBrokerFee`,
@@ -32,17 +30,16 @@ export default defineMessages({
   acquisitionBrokerFeeInfo: {
     id: `${scope}.acquisitionBrokerFeeInfo`,
     defaultMessage:
-      'Is there a broker fee to be paid the buyer? Typically this fee is paid by the seller however a broker can request a fee as buy side advisor',
+      'Is there a broker fee to be paid by the buyer? Typically this fee is paid by the seller however a broker can request a fee as buy side advisor.',
   },
   realEstateTransferTax: {
     id: `${scope}.realEstateTransferTax`,
     defaultMessage: 'Real Estate Transfer Tax',
   },
   realEstateTransferTaxInfo: {
-    id: `${scope}.realEstateTransferTax`,
+    id: `${scope}.realEstateTransferTaxInfo`,
     defaultMessage:
-      'Property Transfer Tax (Imposto Municipal sobre Transmissôes Onerosas de Imóveis – IMT) is paid by the buyer when there is a transfer of ownership of real estate in Portugal. ' +
-      'The percentage of tax charged can range from 1% to 8%, depending on the purchase price, the location of the property and whether it is first or second home in Portugal',
+      'Real estate transfer tax (Imposto Municipal Sobre Transmissôes Onerosas de Imóveis – IMT) is paid by the buyer when there is a transfer of ownership of the real estate in Portugal. The percentage of tax charged can range from 1% to 8%, depending on the purchase price, the location of the property and whether it is the first or second home in Portugal.',
   },
   acquisitionStampDutyFee: {
     id: `${scope}.acquisitionStampDutyFee`,
@@ -51,7 +48,7 @@ export default defineMessages({
   acquisitionStampDutyFeeInfo: {
     id: `${scope}.acquisitionStampDutyFeeInfo`,
     defaultMessage:
-      'Stamp duty for acquisition is 0.8% of maximum value between acquisition and tax value',
+      'Stamp duty for acquisition is 0.8% of the maximum value between acquisition and tax value.',
   },
   notary: {
     id: `${scope}.notary`,
@@ -60,17 +57,17 @@ export default defineMessages({
   notaryInfo: {
     id: `${scope}.notaryInfo`,
     defaultMessage:
-      'The public deed contract ,needs to be made by a recognized entity or person such as a public notary office, a lawyer or solicitor. A popular choice are the “Casa Pronta” (Ready House) notary offices, where the process can be more streamlined and cheaper than normal.' +
-      ' For this reason, the reference in terms of price are the Casa Pronta notary offices, where it normally costs 375,00 €, including both the preparation of the public deed contract and the registry. With Mortgage normally will be 700€',
+      'The public deed contract needs to be made by a recognized entity or person such as a public notary office, a lawyer or a solicitor. A popular choice is the “Casa Pronta” (Ready House) notary offices, where the process can be more streamlined and cheaper than normal.' +
+      'For this reason, the reference in terms of price is the Casa Pronta notary offices, where it normally costs 375,00 €, including both the preparation of the public deed contract and the registry. With mortgage normally will be 700€.',
   },
   mortgageStampDutyFee: {
     id: `${scope}.mortgageStampDutyFee`,
     defaultMessage: 'Mortgage Stamp Duty Fee',
   },
   mortgageStampDutyFeeInfo: {
-    id: `${scope}.mortgageStampDutyFee`,
+    id: `${scope}.mortgageStampDutyFeeInfo`,
     defaultMessage:
-      'The mortgage stamp duty is 0.60% of the final loan amount if the loan if for more than 5 years',
+      'The mortgage stamp duty is 0.60% of the final loan amount if the loan is for more than 5 years.',
   },
   bankCommission: {
     id: `${scope}.bankCommission`,
@@ -79,7 +76,7 @@ export default defineMessages({
   bankCommissionInfo: {
     id: `${scope}.bankCommissionInfo`,
     defaultMessage:
-      'Bank Commissions vary, depending on the lender and loan amount. Details will be provided in the mortgage proposal document',
+      'Bank fees vary, depending on the lender and loan amount. Details will be provided in the mortgage proposal document.',
   },
   totalAcquisition: {
     id: `${scope}.totalAcquisition`,
@@ -88,7 +85,7 @@ export default defineMessages({
   totalAcquisitionInfo: {
     id: `${scope}.totalAcquisitionInfo`,
     defaultMessage:
-      'Total acquisition price considering property price and acquisition costs',
+      'Total acquisition price considering property price and acquisition costs.',
   },
   debt: {
     id: `${scope}.debt`,
@@ -100,7 +97,7 @@ export default defineMessages({
   },
   bopDebt: {
     id: `${scope}.bopDebt`,
-    defaultMessage: 'Beginning of Period Debt',
+    defaultMessage: 'Debt at the beginning of the period.',
   },
   bopDebtInfo: {
     id: `${scope}.bopDebtInfo`,
@@ -112,16 +109,15 @@ export default defineMessages({
   },
   acquisitionDebtInfo: {
     id: `${scope}.acquisitionDebtInfo`,
-    defaultMessage: 'Debt for property acquisition',
+    defaultMessage: 'Debt for property acquisition.',
   },
   capexDebt: {
     id: `${scope}.capexDebt`,
-    defaultMessage: ' Capital Expenditures Debt',
+    defaultMessage: 'Capital Expenditures Debt',
   },
   capexDebtInfo: {
     id: `${scope}.capexDebtInfo`,
-    defaultMessage:
-      ' Debt for Capital Expenditures/renovations on the property ',
+    defaultMessage: 'Debt for works/renovations on the property.',
   },
   amortization: {
     id: `${scope}.amortization`,
@@ -129,7 +125,7 @@ export default defineMessages({
   },
   amortizationInfo: {
     id: `${scope}.amortizationInfo`,
-    defaultMessage: 'Debt Principal Amortization',
+    defaultMessage: 'Debt principal amortization.',
   },
   interests: {
     id: `${scope}.interests`,
@@ -137,7 +133,7 @@ export default defineMessages({
   },
   interestsInfo: {
     id: `${scope}.interestsInfo`,
-    defaultMessage: 'Debt Interests',
+    defaultMessage: 'Debt interests.',
   },
   eopDebt: {
     id: `${scope}.eopDebt`,
@@ -146,7 +142,7 @@ export default defineMessages({
   eopDebtInfo: {
     id: `${scope}.eopDebtInfo`,
     defaultMessage:
-      'Debt on the end of the period, after debt drawdown and amortization',
+      'Debt at the end of the period, after debt and amortization.',
   },
   operating: {
     id: `${scope}.operating`,
@@ -162,7 +158,7 @@ export default defineMessages({
   },
   capexInfo: {
     id: `${scope}.capexInfo`,
-    defaultMessage: 'Investment/renovations on the property',
+    defaultMessage: 'Investment/works on the property.',
   },
   propertyTax: {
     id: `${scope}.propertyTax`,
@@ -178,7 +174,7 @@ export default defineMessages({
   },
   condominiumCostsInfo: {
     id: `${scope}.condominiumCostsInfo`,
-    defaultMessage: 'Estimated Monthly Condominium Costs\n',
+    defaultMessage: 'Estimated monthly condominium costs.',
   },
   lifeInsurance: {
     id: `${scope}.lifeInsurance`,
@@ -186,7 +182,7 @@ export default defineMessages({
   },
   lifeInsuranceInfo: {
     id: `${scope}.lifeInsuranceInfo`,
-    defaultMessage: 'This insurance is mandatory if there is a mortgage',
+    defaultMessage: 'This insurance is mandatory if there is a mortgage.',
   },
   multiRiskInsurance: {
     id: `${scope}.multiRiskInsurance`,
@@ -194,7 +190,7 @@ export default defineMessages({
   },
   multiRiskInsuranceInfo: {
     id: `${scope}.multiRiskInsuranceInfo`,
-    defaultMessage: 'This insurance is mandatory for real estate',
+    defaultMessage: 'This insurance is mandatory for real estate.',
   },
   totalOperatingCosts: {
     id: `${scope}.totalOperatingCosts`,
@@ -202,7 +198,7 @@ export default defineMessages({
   },
   totalOperatingCostsInfo: {
     id: `${scope}.totalOperatingCostsInfo`,
-    defaultMessage: 'Total investment operating costs',
+    defaultMessage: 'Total investment operating costs.',
   },
   exit: {
     id: `${scope}.exit`,
@@ -219,7 +215,7 @@ export default defineMessages({
   marketValueInfo: {
     id: `${scope}.marketValueInfo`,
     defaultMessage:
-      'Property value grow per year. Example: If house price index is 2% and the market value is 100.000€ at the moment of acquisition, one year after market value will be (100.000€ *(1 +2%)) = 102.000€ and in year 3 ((102.000*(1+2%)) = 104.040€',
+      'Property value grows per year. Example: If house price index is 2% and the market value is 100.000€ at the moment of the acquisition, one year after the market value will be 102.000€ and in year 3 104.040€.',
   },
   transactionPrice: {
     id: `${scope}.transactionPrice`,
@@ -227,8 +223,7 @@ export default defineMessages({
   },
   transactionPriceInfo: {
     id: `${scope}.transactionPriceInfo`,
-    defaultMessage:
-      'Selling price based on Revalue exit calculation, property percentile for exit value calculation may be adjusted on the configurations',
+    defaultMessage: 'Selling Price based on Revalue exit calculation.',
   },
   loanEarlyRepaymentFee: {
     id: `${scope}.loanEarlyRepaymentFee`,
@@ -237,7 +232,7 @@ export default defineMessages({
   loanEarlyRepaymentFeeInfo: {
     id: `${scope}.loanEarlyRepaymentFeeInfo`,
     defaultMessage:
-      'An early redemption penalty (also known as an early repayment charge or ERC) is a fee you may be required to make to a lender if you pay off a loan or mortgage before the scheduled term of the credit facility, also sometimes referred to as a redemption penalty.',
+      'An early redemption penalty (also known as an early repayment charge or ERC) is a fee you may be required to make to a lender if you pay off a loan or mortgage before the scheduled term of the credit facility.',
   },
   exitBrokerFee: {
     id: `${scope}.exitBrokerFee`,
@@ -245,7 +240,7 @@ export default defineMessages({
   },
   exitBrokerFeeInfo: {
     id: `${scope}.exitBrokerFeeInfo`,
-    defaultMessage: 'Broker fee to exit transaction',
+    defaultMessage: 'Broker fee to exit transaction.',
   },
   netExit: {
     id: `${scope}.netExit`,
@@ -253,7 +248,7 @@ export default defineMessages({
   },
   netExitInfo: {
     id: `${scope}.netExitInfo`,
-    defaultMessage: 'Selling price after costs before tax',
+    defaultMessage: 'Selling price after costs before tax.',
   },
   profitBeforeTax: {
     id: `${scope}.profitBeforeTax`,
@@ -261,7 +256,7 @@ export default defineMessages({
   },
   profitBeforeTaxInfo: {
     id: `${scope}.profitBeforeTaxInfo`,
-    defaultMessage: 'Profit Before Tax',
+    defaultMessage: 'Profit before capital gains tax.',
   },
   capitalGains: {
     id: `${scope}.capitalGains`,
@@ -279,9 +274,9 @@ export default defineMessages({
   capitalGainsTaxInfo: {
     id: `${scope}.capitalGainsTaxInfo`,
     defaultMessage:
-      'Tax rate: If resident considers tax rate and estimates new irs rate based on investment estimated profit. ' +
-      'If non Resident, the rate is 28%. Capital gain tax based differs if property acquisition was for permanent housing or investment and if the capital gain will be reinvested. ' +
-      'Capital gain  *  Tax rate * Capital gain tax base',
+      'Tax Rate: If Resident considers current tax rate and estimates new IRS Rate based on investment estimated profit. If Non Resident rate is 28%' +
+      'Capital Gain Tax Based: Differ if property acquisition was for permanent housing or investment and if the capital gain will be reinvested.' +
+      'Capital Gain  *  Tax Rate * Capital Gain Tax Base"',
   },
   profit: {
     id: `${scope}.profit`,

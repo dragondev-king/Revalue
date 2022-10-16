@@ -48,7 +48,7 @@ const AnalysisOverview = ({ props }) => {
                   <Grid item>
                     <Tooltip
                       title={
-                        <Typography>
+                        <Typography variant="body1" className="text-white">
                           {props.intl.formatMessage({
                             ...messages.acquisitionPriceInfo,
                           })}
@@ -92,9 +92,13 @@ const AnalysisOverview = ({ props }) => {
                   </Grid>
                   <Grid item>
                     <Tooltip
-                      title={props.intl.formatMessage({
-                        ...messages.requiredInitialCapitalInfo,
-                      })}
+                      title={
+                        <Typography variant="body1" className="text-white">
+                          {props.intl.formatMessage({
+                            ...messages.requiredInitialCapitalInfo,
+                          })}
+                        </Typography>
+                      }
                     >
                       <IconButton className={classes.iconButton}>
                         <InfoIcon />
@@ -133,9 +137,13 @@ const AnalysisOverview = ({ props }) => {
                   </Grid>
                   <Grid item>
                     <Tooltip
-                      title={props.intl.formatMessage({
-                        ...messages.profitAfterTaxInfo,
-                      })}
+                      title={
+                        <Typography variant="body1" className="text-white">
+                          {props.intl.formatMessage({
+                            ...messages.profitAfterTaxInfo,
+                          })}
+                        </Typography>
+                      }
                     >
                       <IconButton className={classes.iconButton}>
                         <InfoIcon />
@@ -181,9 +189,13 @@ const AnalysisOverview = ({ props }) => {
                   </Grid>
                   <Grid item>
                     <Tooltip
-                      title={props.intl.formatMessage({
-                        ...messages.internalRateOfReturnInfo,
-                      })}
+                      title={
+                        <Typography variant="body1" className="text-white">
+                          {props.intl.formatMessage({
+                            ...messages.internalRateOfReturnInfo,
+                          })}
+                        </Typography>
+                      }
                     >
                       <IconButton className={classes.iconButton}>
                         <InfoIcon />
@@ -222,9 +234,13 @@ const AnalysisOverview = ({ props }) => {
                   </Grid>
                   <Grid item>
                     <Tooltip
-                      title={props.intl.formatMessage({
-                        ...messages.multipleOnInvestedCapitalInfo,
-                      })}
+                      title={
+                        <Typography variant="body1" className="text-white">
+                          {props.intl.formatMessage({
+                            ...messages.multipleOnInvestedCapitalInfo,
+                          })}
+                        </Typography>
+                      }
                     >
                       <IconButton className={classes.iconButton}>
                         <InfoIcon />
@@ -263,9 +279,13 @@ const AnalysisOverview = ({ props }) => {
                   </Grid>
                   <Grid item>
                     <Tooltip
-                      title={props.intl.formatMessage({
-                        ...messages.capitalGainsInfo,
-                      })}
+                      title={
+                        <Typography variant="body1" className="text-white">
+                          {props.intl.formatMessage({
+                            ...messages.capitalGainsInfo,
+                          })}
+                        </Typography>
+                      }
                     >
                       <IconButton className={classes.iconButton}>
                         <InfoIcon />
