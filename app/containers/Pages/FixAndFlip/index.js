@@ -177,11 +177,14 @@ const columns = [
     sortable: false,
     unit: '',
     minWidth: 70,
-    renderCell: cellValues => (
-      <Link to={`/analysis/${cellValues.row.id}`} style={{ color: '#7866f4' }}>
-        Report
-      </Link>
-    ),
+    renderCell: cellValues => {
+      const id = cellValues.row.id.replace(/[.,\s]/g, '');
+      return (
+        <Link to={`/analysis/${id}`} style={{ color: '#7866f4' }}>
+          Report
+        </Link>
+      );
+    },
   },
 ];
 
