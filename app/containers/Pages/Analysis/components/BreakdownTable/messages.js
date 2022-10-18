@@ -1,6 +1,6 @@
 import { defineMessages } from 'react-intl';
 
-export const scope = 'app.containers.Anaylsis.table';
+export const scope = 'app.containers.Analysis.table';
 
 export default defineMessages({
   month: {

@@ -155,7 +155,7 @@ export const initialState = {
     minProfit: extractInputValueFromLocalStorage('minProfit', 10000),
     acquisitionType: extractInputValueFromLocalStorage(
       'acquisitionType',
-      'acquisition.type.permanent.housing',
+      'acquisition.type.investment',
     ),
     acquisitionBrokerRate: extractInputValueFromLocalStorage(
       'acquisitionBrokerRate',
@@ -169,7 +169,7 @@ export const initialState = {
       'landRegistryInscription',
       700,
     ),
-    interestRate: extractInputValueFromLocalStorage('interestRate', 2.5),
+    interestRate: extractInputValueFromLocalStorage('interestRate', 4),
     bankCommissionRate: extractInputValueFromLocalStorage(
       'bankCommissionRate',
       1,
@@ -198,7 +198,7 @@ export const initialState = {
       15,
     ),
     lifeInsurance: extractInputValueFromLocalStorage('lifeInsurance', 15),
-    timeToSale: extractInputValueFromLocalStorage('timeToSale', 6),
+    timeToSale: extractInputValueFromLocalStorage('timeToSale', 12),
     exitBrokerRate: extractInputValueFromLocalStorage('exitBrokerRate', 5),
     earlyRepaymentRate: extractInputValueFromLocalStorage(
       'earlyRepaymentRate',
@@ -206,7 +206,7 @@ export const initialState = {
     ),
     capitalGainsTaxRate: extractInputValueFromLocalStorage(
       'capitalGainsTaxRate',
-      50,
+      100,
     ),
     taxResidentInPortugal: extractInputValueFromLocalStorage(
       'taxResidentInPortugal',

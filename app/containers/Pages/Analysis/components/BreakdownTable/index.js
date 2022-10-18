@@ -45,8 +45,8 @@ const BreakdownTable = ({ props }) => {
                                   fontWeight: 'bold',
                                   zIndex: 3,
                                   height: '60px',
-                                  width: '300px',
-                                  minWidth: '300px',
+                                  width: '350px',
+                                  minWidth: '350px',
                                 }}
                               >
                                 {column.label &&
