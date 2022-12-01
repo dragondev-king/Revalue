@@ -95,18 +95,21 @@ const getClient = (component = null) => {
       options.baseURL = process.env.AUTHENTICATOR;
       options.headers = {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
+        'Accept-Language': localStorage.getItem('language'),
       };
       break;
     case 'ACCOUNT_MANAGER':
       options.baseURL = process.env.ACCOUNT_MANAGER;
       options.headers = {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
+        'Accept-Language': localStorage.getItem('language'),
       };
       break;
     case 'PROPERTY_MANAGER':
       options.baseURL = process.env.PROPERTY_MANAGER;
       options.headers = {
         Authorization: `Basic YWRtaW46NWJyV1dXM0ZvYTNS`,
+        'Accept-Language': localStorage.getItem('language'),
       };
       break;
     default:

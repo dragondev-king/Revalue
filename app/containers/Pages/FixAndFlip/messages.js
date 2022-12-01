@@ -7,13 +7,41 @@ export default defineMessages({
     id: `${scope}.fixAndFlipTitle`,
     defaultMessage: 'Fix And Flip',
   },
-  MainInvestmentInformation: {
-    id: `${scope}.mainInvestmentInformation`,
-    defaultMessage: 'Main Investment Information',
-  },
   propertyLocation: {
     id: `${scope}.propertyLocation`,
-    defaultMessage: 'Property Location',
+    defaultMessage: 'propertyLocation',
+  },
+  property: {
+    id: `${scope}.property`,
+    defaultMessage: 'property',
+  },
+  proposal: {
+    id: `${scope}.proposal`,
+    defaultMessage: 'proposal',
+  },
+  financing: {
+    id: `${scope}.financing`,
+    defaultMessage: 'financing',
+  },
+  lease: {
+    id: `${scope}.lease`,
+    defaultMessage: 'lease',
+  },
+  operatingCosts: {
+    id: `${scope}.operatingCosts`,
+    defaultMessage: 'operatingCosts',
+  },
+  tax: {
+    id: `${scope}.tax`,
+    defaultMessage: 'tax',
+  },
+  sale: {
+    id: `${scope}.sale`,
+    defaultMessage: 'sale',
+  },
+  capital: {
+    id: `${scope}.capital`,
+    defaultMessage: 'capital',
   },
   financingRate: {
     id: `${scope}.financingRate`,
@@ -51,21 +79,21 @@ export default defineMessages({
     defaultMessage:
       'Property value grows per year. Example: If house price index is 2% and the market value is 100.000€ at the moment of the acquisition, one year after the market value will be 102.000€ and in year 3 104.040€.',
   },
-  minCapital: {
-    id: `${scope}.minCapital`,
+  minRequiredCapital: {
+    id: `${scope}.minRequiredCapital`,
     defaultMessage: 'Minimum Required Capital',
   },
-  minCapitalInfo: {
-    id: `${scope}.minCapitalInfo`,
+  minRequiredCapitalInfo: {
+    id: `${scope}.minRequiredCapitalInfo`,
     defaultMessage:
       'Minimum required capital for the transaction to be filtered in all the analysis. Example: If minimum capital is 25.000€ and the required capital for an investment is 15.000€, this investment opportunity will not be presented.',
   },
-  maxCapital: {
-    id: `${scope}.maxCapital`,
+  maxRequiredCapital: {
+    id: `${scope}.maxRequiredCapital`,
     defaultMessage: 'Maximum Required Capital',
   },
-  maxCapitalInfo: {
-    id: `${scope}.maxCapitalInfo`,
+  maxRequiredCapitalInfo: {
+    id: `${scope}.maxRequiredCapitalInfo`,
     defaultMessage:
       'Maximum required capital for the transaction to be filtered in all the analysis. Example: If maxumim capital is 50.000€ and the required capital for the investment is 60.000€, this investment opportunity will not be presented.',
   },
@@ -85,10 +113,6 @@ export default defineMessages({
   propertyConditionInfo: {
     id: `${scope}.propertyConditionInfo`,
     defaultMessage: 'Property condition',
-  },
-  propertyInformation: {
-    id: `${scope}.propertyInformation`,
-    defaultMessage: 'Property Information',
   },
   propertyType: {
     id: `${scope}.propertyType`,
@@ -162,6 +186,15 @@ export default defineMessages({
     defaultMessage:
       'Is there a broker fee to be paid by the buyer? Typically this fee is paid by the seller however a broker can request a fee as buy side advisor.',
   },
+  acquisitionBrokerRateVat: {
+    id: `${scope}.acquisitionBrokerRateVat`,
+    defaultMessage: 'Acquisition Broker Rate Vat',
+  },
+  acquisitionBrokerRateVatInfo: {
+    id: `${scope}.acquisitionBrokerRateVatInfo`,
+    defaultMessage:
+      'Is there a broker fee to be paid by the buyer? Typically this fee is paid by the seller however a broker can request a fee as buy side advisor.',
+  },
   acquisitionStampDutyRate: {
     id: `${scope}.acquisitionStampDutyRate`,
     defaultMessage: 'Acquisition Stamp Duty Rate',
@@ -203,21 +236,21 @@ export default defineMessages({
     defaultMessage:
       'Bank fees vary, depending on the lender and loan amount. Details will be provided in the mortgage proposal document.',
   },
-  stampDutyMortgageRate: {
-    id: `${scope}.stampDutyMortgageRate`,
+  mortgageStampDutyRate: {
+    id: `${scope}.mortgageStampDutyRate`,
     defaultMessage: 'Stamp Duty Mortgage Rate',
   },
-  stampDutyMortgageRateInfo: {
-    id: `${scope}.stampDutyMortgageRateInfo`,
+  mortgageStampDutyRateInfo: {
+    id: `${scope}.mortgageStampDutyRateInfo`,
     defaultMessage:
       'The mortgage stamp duty is 0.60% of the final loan amount if the loan is for more than 5 years.',
   },
-  stampDutyInterestRate: {
-    id: `${scope}.stampDutyInterestRate`,
+  interestStampDutyRate: {
+    id: `${scope}.interestStampDutyRate`,
     defaultMessage: 'Stamp Duty Interest Rate',
   },
-  stampDutyInterestRateInfo: {
-    id: `${scope}.stampDutyInterestRateInfo`,
+  interestStampDutyRateInfo: {
+    id: `${scope}.interestStampDutyRateInfo`,
     defaultMessage:
       'The interest stamp duty is 4% of the interest of the period.',
   },
@@ -229,21 +262,108 @@ export default defineMessages({
     id: `${scope}.interestRateInfo`,
     defaultMessage: 'Mortgage interest over period. Euribor + Spread.',
   },
-  capexFinancingRate: {
-    id: `${scope}.capexFinancingRate`,
-    defaultMessage: 'Capital Expenditure Financing Rate',
+  rehab: {
+    id: `${scope}.rehab`,
+    defaultMessage: 'rehab',
   },
-  capexFinancingRateInfo: {
-    id: `${scope}.capexFinancingRateInfo`,
-    defaultMessage:
-      'Percentage of capital expenditure/renovations on the project, that will be financed.',
+  rehabInfo: {
+    id: `${scope}.rehabInfo`,
+    defaultMessage: 'rehabInfo',
   },
-  earlyRepaymentRate: {
-    id: `${scope}.earlyRepaymentRate`,
+  rehabTaxRate: {
+    id: `${scope}.rehabTaxRate`,
+    defaultMessage: 'rehabTaxRate',
+  },
+  rehabTaxRateInfo: {
+    id: `${scope}.rehabTaxRateInfo`,
+    defaultMessage: 'rehabTaxRateInfo',
+  },
+  rehabFinancingRate: {
+    id: `${scope}.rehabFinancingRate`,
+    defaultMessage: 'rehabFinancingRate',
+  },
+  rehabFinancingRateInfo: {
+    id: `${scope}.rehabFinancingRateInfo`,
+    defaultMessage: 'rehabFinancingRateInfo',
+  },
+  rehabVat: {
+    id: `${scope}.rehabVat`,
+    defaultMessage: 'rehabVat',
+  },
+  rehabVatInfo: {
+    id: `${scope}.rehabVatInfo`,
+    defaultMessage: 'rehabVatInfo',
+  },
+  rent: {
+    id: `${scope}.rent`,
+    defaultMessage: 'rent',
+  },
+  rentInfo: {
+    id: `${scope}.rentInfo`,
+    defaultMessage: 'rentInfo',
+  },
+  rentBrokerFee: {
+    id: `${scope}.rentBrokerFee`,
+    defaultMessage: 'rentBrokerFee',
+  },
+  rentBrokerFeeInfo: {
+    id: `${scope}.rentBrokerFeeInfo`,
+    defaultMessage: 'rentBrokerFeeInfo',
+  },
+  rentBrokerFeeVat: {
+    id: `${scope}.rentBrokerFeeVat`,
+    defaultMessage: 'rentBrokerFeeVat',
+  },
+  rentBrokerFeeVatInfo: {
+    id: `${scope}.rentBrokerFeeVatInfo`,
+    defaultMessage: 'rentBrokerFeeVatInfo',
+  },
+  timeToRent: {
+    id: `${scope}.timeToRent`,
+    defaultMessage: 'timeToRent',
+  },
+  timeToRentInfo: {
+    id: `${scope}.timeToRentInfo`,
+    defaultMessage: 'timeToRentInfo',
+  },
+  contractPeriod: {
+    id: `${scope}.contractPeriod`,
+    defaultMessage: 'contractPeriod',
+  },
+  contractPeriodInfo: {
+    id: `${scope}.contractPeriodInfo`,
+    defaultMessage: 'contractPeriodInfo',
+  },
+  rentStampDutyRate: {
+    id: `${scope}.rentStampDutyRate`,
+    defaultMessage: 'rentStampDutyRate',
+  },
+  rentStampDutyRateInfo: {
+    id: `${scope}.rentStampDutyRateInfo`,
+    defaultMessage: 'rentStampDutyRateInfo',
+  },
+  rentTaxRate: {
+    id: `${scope}.rentTaxRate`,
+    defaultMessage: 'rentTaxRate',
+  },
+  rentTaxRateInfo: {
+    id: `${scope}.rentTaxRateInfo`,
+    defaultMessage: 'rentTaxRateInfo',
+  },
+  propertyManagerRate: {
+    id: `${scope}.propertyManagerRate`,
+    defaultMessage: 'propertyManagerRate',
+  },
+  propertyManagerRateInfo: {
+    id: `${scope}.propertyManagerRateInfo`,
+    defaultMessage: 'propertyManagerRateInfo',
+  },
+  loanEarlyRepaymentRate: {
+    id: `${scope}.loanEarlyRepaymentRate`,
     defaultMessage: 'Early Repayment Fee Rate',
   },
-  earlyRepaymentRateInfo: {
-    id: `${scope}.earlyRepaymentRateInfo`,
+  loanEarlyRepaymentRateInfo: {
+    id: `${scope}.loanEarlyRepaymentRateInfo`,
     defaultMessage:
       'An early redemption penalty (also known as an early repayment charge or ERC) is a fee you may be required to make to a lender if you pay off a loan or mortgage before the scheduled term of the credit facility.',
   },
@@ -271,21 +391,21 @@ export default defineMessages({
     id: `${scope}.condominiumCostsInfo`,
     defaultMessage: 'Estimated monthly condominium costs.',
   },
-  propertyTaxRate: {
-    id: `${scope}.propertyTaxRate`,
-    defaultMessage: 'Property Tax Rate',
+  propertyTax: {
+    id: `${scope}.propertyTax`,
+    defaultMessage: 'Property Tax',
   },
-  propertyTaxRateInfo: {
-    id: `${scope}.propertyTaxRateInfo`,
+  propertyTaxInfo: {
+    id: `${scope}.propertyTaxInfo`,
     defaultMessage:
       'This tax value should be multiplied by a tax rate, differ by county, and be paid annually. Property tax is being estimated to be the tax value of the property 50% of the acquisition value.',
   },
-  capexPerSquareMeter: {
-    id: `${scope}.capexPerSquareMeter`,
+  rehabPricePerSquareMeter: {
+    id: `${scope}.rehabPricePerSquareMeter`,
     defaultMessage: 'Capital Expenditure',
   },
-  capexPerSquareMeterInfo: {
-    id: `${scope}.capexPerSquareMeterInfo`,
+  rehabPricePerSquareMeterInfo: {
+    id: `${scope}.rehabPricePerSquareMeterInfo`,
     defaultMessage:
       'This is the estimated work/renovations to be done on the property. This input is per square meter and is calculated according to the gross construction area of the property.',
   },
@@ -304,6 +424,22 @@ export default defineMessages({
   lifeInsuranceInfo: {
     id: `${scope}.lifeInsuranceInfo`,
     defaultMessage: 'This insurance is mandatory if there is a mortgage.',
+  },
+  maintenanceCosts: {
+    id: `${scope}.maintenanceCosts`,
+    defaultMessage: 'maintenanceCosts',
+  },
+  maintenanceCostsInfo: {
+    id: `${scope}.maintenanceCostsInfo`,
+    defaultMessage: 'maintenanceCostsInfo',
+  },
+  otherOperatingCosts: {
+    id: `${scope}.otherOperatingCosts`,
+    defaultMessage: 'otherOperatingCosts',
+  },
+  otherOperatingCostsInfo: {
+    id: `${scope}.otherOperatingCostsInfo`,
+    defaultMessage: 'otherOperatingCostsInfo',
   },
   taxAssumptions: {
     id: `${scope}.taxAssumptions`,
@@ -362,12 +498,20 @@ export default defineMessages({
     id: `${scope}.exitBrokerRateInfo`,
     defaultMessage: 'Broker fee to exit transaction',
   },
-  capitalGainsTaxRate: {
-    id: `${scope}.capitalGainsTaxRate`,
+  exitBrokerRateVat: {
+    id: `${scope}.exitBrokerRateVat`,
+    defaultMessage: 'exitBrokerRateVat',
+  },
+  exitBrokerRateVatInfo: {
+    id: `${scope}.exitBrokerRateVatInfo`,
+    defaultMessage: 'exitBrokerRateVat',
+  },
+  capitalGainsTaxBaseRate: {
+    id: `${scope}.capitalGainsTaxBaseRate`,
     defaultMessage: 'Capital Gains Tax Base Rate',
   },
-  capitalGainsTaxRateInfo: {
-    id: `${scope}.capitalGainsTaxRateInfo`,
+  capitalGainsTaxBaseRateInfo: {
+    id: `${scope}.capitalGainsTaxBaseRateInfo`,
     defaultMessage: 'Taxable Base Rate',
   },
   valuationModelConfiguration: {
@@ -478,5 +622,9 @@ export default defineMessages({
   preferencesFor: {
     id: `${scope}.preferencesFor`,
     defaultMessage: 'Preferences For',
+  },
+  mainInvestmentInformation: {
+    id: `${scope}.mainInvestmentInformation`,
+    defaultMessage: 'mainInvestmentInformation',
   },
 });

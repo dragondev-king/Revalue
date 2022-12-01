@@ -6,13 +6,14 @@ import Button from '@material-ui/core/Button';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import SwipeableViews from 'react-swipeable-views';
-import { autoPlay } from 'react-swipeable-views-utils';
 import { Skeleton } from '@material-ui/lab';
 import ComingSoon from 'images/soon.jpg';
-
-const AutoPlaySwappableViews = autoPlay(SwipeableViews);
+import Map from 'containers/Map';
 
 const tutorialSteps = [
+  {
+    map: true,
+  },
   {
     imgPath: ComingSoon,
   },
@@ -70,26 +71,32 @@ function SwappableTextMobileStepper({ props }) {
     <>
       {!props.isGettingAnalysisById ? (
         <Grid className={classes.root}>
-          <AutoPlaySwappableViews
+          <SwipeableViews
             key="autoPlaySwappableViews"
             axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
             index={activeStep}
             onChangeIndex={handleStepChange}
             enableMouseEvents
           >
-            {tutorialSteps.map((step, index) => (
-              <Grid key={step.label}>
-                {Math.abs(activeStep - index) <= 2 ? (
+            {tutorialSteps.map((step, index) => {
+              if (Math.abs(activeStep - index) <= 2) {
+                if (step.map) {
+                  return (
+                    <Map propertyLocation={props.analysis.location} disabled />
+                  );
+                }
+                return (
                   <img
                     key={step.label}
                     className={classes.img}
                     src={step.imgPath}
                     alt={step.label}
                   />
-                ) : null}
-              </Grid>
-            ))}
-          </AutoPlaySwappableViews>
+                );
+              }
+              return null;
+            })}
+          </SwipeableViews>
           <MobileStepper
             key="mobileStepper"
             steps={maxSteps}

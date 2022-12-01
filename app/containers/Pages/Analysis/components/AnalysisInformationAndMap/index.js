@@ -1,5 +1,4 @@
 import React from 'react';
-import Map from 'containers/Map';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Table from '@material-ui/core/Table';
@@ -10,8 +9,8 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { Skeleton } from '@material-ui/lab';
 import { formatNumber } from 'utils/formatNumber';
-import messages from '../../messages';
-import { useStyles } from '../../styles';
+import messages from 'containers/Pages/Analysis/messages';
+import { useStyles } from 'containers/Pages/Analysis/styles';
 
 const AnalysisInformationAndMap = ({ props }) => {
   const classes = useStyles();
@@ -24,9 +23,7 @@ const AnalysisInformationAndMap = ({ props }) => {
           direction="row"
           className={classes.propertyInformationAndMapContainer}
         >
-          <Grid item xs={6} className="pr-40">
-            <Map propertyLocation={props.analysis.location} disabled />
-          </Grid>
+          <Grid item xs={6} className="pr-40" />
           <Grid item container xs={6}>
             <Grid style={{ width: '100%' }}>
               <Grid className={classes.sectionTableWrapper}>
@@ -94,8 +91,7 @@ const AnalysisInformationAndMap = ({ props }) => {
                           >
                             |{' '}
                             {formatNumber(
-                              props.analysis
-                                .overrideTransactionPricePerSquareMeter,
+                              props.analysis.transactionPricePerSquareMeter,
                             )}
                             {'  '}€ / m²
                           </span>

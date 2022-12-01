@@ -52,7 +52,17 @@ function PaperChartLineComplex(props) {
         </Grid>
         {props.data && props.data !== [] ? (
           <Grid item xs className={classes.gridChartLineComplex}>
-            <ChartLineComplex data={props.data} title={props.title} />
+            <ChartLineComplex
+              data={props.data}
+              current={props.current}
+              title={props.title}
+              max={props.max}
+              min={props.min}
+              actual={props.actual}
+              maxLabel={props.maxLabel}
+              minLabel={props.minLabel}
+              actualLabel={props.actualLabel}
+            />
           </Grid>
         ) : (
           <Grid />

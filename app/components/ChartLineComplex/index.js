@@ -3,24 +3,30 @@ import {
   CartesianGrid,
   Line,
   LineChart,
+  ReferenceLine,
   ResponsiveContainer,
   Tooltip,
   XAxis,
   YAxis,
 } from 'recharts';
 
-function returnLines(values) {
+function returnLines(values, current) {
   const colors = ['#1C77FF', '#5348B4', '#30B6D9', '#F98700'];
   if (values) {
-    return values.map((key, index) => (
-      <Line
-        key={key}
-        dataKey={key}
-        type="monotone"
-        stroke={colors[index]}
-        strokeWidth={2}
-      />
-    ));
+    // eslint-disable-next-line array-callback-return,consistent-return
+    return values.map((key, index) => {
+      if (key === `P${current}`) {
+        return (
+          <Line
+            key={key}
+            dataKey={key}
+            type="monotone"
+            stroke={colors[index]}
+            strokeWidth={2}
+          />
+        );
+      }
+    });
   }
   return <></>;
 }
@@ -57,9 +63,27 @@ function ChartLineComplex(props) {
         data={props.data}
       >
         <XAxis dataKey="name" />
-        <YAxis />
-        <CartesianGrid strokeDasharray="3 3" />
-        {returnLines(values)}
+        <YAxis type="number" domain={[props.min - 2000, props.max + 2000]} />
+        <CartesianGrid />
+        <ReferenceLine
+          y={props.max}
+          label={props.maxLabel}
+          stroke="red"
+          isFront="true"
+        />
+        <ReferenceLine
+          y={props.actual}
+          label={props.actualLabel}
+          stroke="red"
+          isFront="true"
+        />
+        <ReferenceLine
+          y={props.min}
+          label={props.minLabel}
+          stroke="red"
+          isFront="true"
+        />
+        {returnLines(values, props.current)}
         <Tooltip />
       </LineChart>
     </ResponsiveContainer>

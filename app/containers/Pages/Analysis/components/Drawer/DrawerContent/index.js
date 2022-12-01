@@ -33,9 +33,9 @@ import {
   makeSelectNewPropertyAnalysisPageReady,
   makeSelectAnalysisData,
   makeSelectIsGettingPropertyAnalysisById,
-  /* TODO IRS makeSelectIrsCategories,
+  makeSelectIrsCategories,
   makeSelectIrsCategoryRegions,
-  makeSelectIrsDependentsList, */
+  makeSelectIrsDependentsList,
 } from 'containers/Pages/Analysis/selectors';
 import reducer from 'containers/Pages/Analysis/reducer';
 import {
@@ -44,9 +44,6 @@ import {
   setInputError,
   setInputValue,
   setNewPropertyAnalysisPageReadyNull,
-  /* TODO IRS getIrsCategories,
-  getIrsCategoryRegions,
-  getIrsDependentsList, */
 } from 'containers/Pages/Analysis/actions';
 
 const useStyles = makeStyles(theme => ({
@@ -218,12 +215,12 @@ export function DrawerContent(props) {
       .transform(v => (v === '' || Number.isNaN(v) ? null : v))
       .nullable()
       .required('inputRequired'),
-    stampDutyMortgageRate: yup
+    mortgageStampDutyRate: yup
       .number()
       .transform(v => (v === '' || Number.isNaN(v) ? null : v))
       .nullable()
       .required('inputRequired'),
-    stampDutyInterestRate: yup
+    interestStampDutyRate: yup
       .number()
       .transform(v => (v === '' || Number.isNaN(v) ? null : v))
       .nullable()
@@ -233,11 +230,11 @@ export function DrawerContent(props) {
       .transform(v => (v === '' || Number.isNaN(v) ? null : v))
       .nullable()
       .required('inputRequired'),
-    capexFinancingRate: yup
+    rehabFinancingRate: yup
       .number()
       .transform(v => (v === '' || Number.isNaN(v) ? null : v))
       .nullable(),
-    earlyRepaymentRate: yup
+    loanEarlyRepaymentRate: yup
       .number()
       .transform(v => (v === '' || Number.isNaN(v) ? null : v))
       .nullable()
@@ -252,12 +249,7 @@ export function DrawerContent(props) {
       .transform(v => (v === '' || Number.isNaN(v) ? null : v))
       .nullable()
       .required('inputRequired'),
-    propertyTaxRate: yup
-      .number()
-      .transform(v => (v === '' || Number.isNaN(v) ? null : v))
-      .nullable()
-      .required('inputRequired'),
-    capexPerSquareMeter: yup
+    rehabPricePerSquareMeter: yup
       .number()
       .transform(v => (v === '' || Number.isNaN(v) ? null : v))
       .nullable(),
@@ -273,7 +265,7 @@ export function DrawerContent(props) {
       .boolean()
       .nullable()
       .required('inputRequired'),
-    capitalGainsTaxRate: yup
+    capitalGainsTaxBaseRate: yup
       .number()
       .transform(v => (v === '' || Number.isNaN(v) ? null : v))
       .nullable()
@@ -298,21 +290,6 @@ export function DrawerContent(props) {
       .nullable()
       .required('inputRequired'),
     exitBrokerRate: yup
-      .number()
-      .transform(v => (v === '' || Number.isNaN(v) ? null : v))
-      .nullable()
-      .required('inputRequired'),
-    grossAreaToUsefulAreaRate: yup
-      .number()
-      .transform(v => (v === '' || Number.isNaN(v) ? null : v))
-      .nullable()
-      .required('inputRequired'),
-    floorRate: yup
-      .number()
-      .transform(v => (v === '' || Number.isNaN(v) ? null : v))
-      .nullable()
-      .required('inputRequired'),
-    capRate: yup
       .number()
       .transform(v => (v === '' || Number.isNaN(v) ? null : v))
       .nullable()
@@ -350,11 +327,11 @@ export function DrawerContent(props) {
 
     if (name === 'acquisitionType') {
       if (value === 'acquisition.type.permanent.housing') {
-        props.setInputValue('capitalGainsTaxRate', 50);
-        props.setInputError('capitalGainsTaxRate', '');
+        props.setInputValue('capitalGainsTaxBaseRate', 50);
+        props.setInputError('capitalGainsTaxBaseRate', '');
       } else if (value === 'acquisition.type.investment') {
-        props.setInputValue('capitalGainsTaxRate', 100);
-        props.setInputError('capitalGainsTaxRate', '');
+        props.setInputValue('capitalGainsTaxBaseRate', 100);
+        props.setInputError('capitalGainsTaxBaseRate', '');
       }
     }
   }
@@ -388,7 +365,7 @@ export function DrawerContent(props) {
             </Typography>
             <Typography variant="h4" className={classes.investment}>
               {props.intl.formatMessage({
-                ...messages.MainInvestmentInformation,
+                ...messages.mainInvestmentInformation,
               })}
             </Typography>
           </Box>
@@ -397,72 +374,6 @@ export function DrawerContent(props) {
             style={{ cursor: 'pointer' }}
           />
         </div>
-        <Grid item container spacing={2} className="mt-0">
-          <Grid item xs={6}>
-            <CustomInput
-              error={props.errors.financingRate}
-              name="financingRate"
-              type="number"
-              handleChange={handleChange}
-              defaultValue={props.inputs.financingRate}
-              symbol={<span>%</span>}
-              labelText={`${props.intl.formatMessage({
-                ...messages.financingRate,
-              })} *`}
-              tooltipText={props.intl.formatMessage({
-                ...messages.financingRateInfo,
-              })}
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <CustomInput
-              error={props.errors.bidAskRate}
-              name="bidAskRate"
-              type="number"
-              handleChange={handleChange}
-              defaultValue={props.inputs.bidAskRate}
-              symbol={<span>%</span>}
-              labelText={`${props.intl.formatMessage({
-                ...messages.bidAskRate,
-              })} *`}
-              tooltipText={props.intl.formatMessage({
-                ...messages.bidAskRateInfo,
-              })}
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <CustomInput
-              error={props.errors.housePriceIndexRate}
-              name="housePriceIndexRate"
-              type="number"
-              handleChange={handleChange}
-              defaultValue={props.inputs.housePriceIndexRate}
-              symbol={<span>%</span>}
-              labelText={`${props.intl.formatMessage({
-                ...messages.housePriceIndexRate,
-              })} *`}
-              tooltipText={props.intl.formatMessage({
-                ...messages.housePriceIndexRateInfo,
-              })}
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <CustomSelect
-              error={null}
-              defaultValue={props.inputs.ciPercentile}
-              handleChange={handleChange}
-              value={props.inputs.ciPercentile}
-              data={props.ciPercentiles}
-              name="ciPercentile"
-              tooltipText={props.intl.formatMessage({
-                ...messages.percentileInfo,
-              })}
-              labelText={`${props.intl.formatMessage({
-                ...messages.percentile,
-              })} *`}
-            />
-          </Grid>
-        </Grid>
       </Grid>
     );
   }
@@ -475,12 +386,38 @@ export function DrawerContent(props) {
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
               <Typography>
                 {props.intl.formatMessage({
-                  ...messages.propertyInformation,
+                  ...messages.property,
+                })}
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>{renderPropertyStep()}</AccordionDetails>
+          </Accordion>
+        </Grid>
+        <Grid item className="pt-30">
+          <Accordion>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+              <Typography>
+                {props.intl.formatMessage({
+                  ...messages.proposal,
+                })}
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>{renderProposalStep()}</AccordionDetails>
+          </Accordion>
+        </Grid>
+        <Grid item className="pt-30">
+          <Accordion>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+              <Typography>
+                {props.intl.formatMessage({
+                  ...messages.financing,
                 })}
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
-              {renderPropertyInformationAccordion()}
+              <Grid item container spacing={6} className="mb-10">
+                {renderFinancingStep()}
+              </Grid>
             </AccordionDetails>
           </Accordion>
         </Grid>
@@ -489,12 +426,14 @@ export function DrawerContent(props) {
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
               <Typography>
                 {props.intl.formatMessage({
-                  ...messages.acquisitionAssumptions,
+                  ...messages.rehab,
                 })}
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
-              {renderAcquisitionAssumptionsAccordion()}
+              <Grid item container spacing={6} className="mb-10">
+                {renderRehabStep()}
+              </Grid>
             </AccordionDetails>
           </Accordion>
         </Grid>
@@ -503,12 +442,14 @@ export function DrawerContent(props) {
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
               <Typography>
                 {props.intl.formatMessage({
-                  ...messages.financeAssumptions,
+                  ...messages.rent,
                 })}
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
-              {renderFinancingAssumptionsAccordion()}
+              <Grid item container spacing={6} className="mb-10">
+                {renderRentStep()}
+              </Grid>
             </AccordionDetails>
           </Accordion>
         </Grid>
@@ -517,27 +458,14 @@ export function DrawerContent(props) {
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
               <Typography>
                 {props.intl.formatMessage({
-                  ...messages.operatingAssumptions,
+                  ...messages.operatingCosts,
                 })}
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
-              {renderOperatingAssumptionsAccordion()}
-            </AccordionDetails>
-          </Accordion>
-        </Grid>
-        <Grid item className="pt-30">
-          <Accordion>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography>
-                {' '}
-                {props.intl.formatMessage({
-                  ...messages.taxAssumptions,
-                })}
-              </Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              {renderTaxAssumptionsAccordion()}
+              <Grid item container spacing={6} className="mb-10">
+                {renderOperatingCostsStep()}
+              </Grid>
             </AccordionDetails>
           </Accordion>
         </Grid>
@@ -546,12 +474,14 @@ export function DrawerContent(props) {
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
               <Typography>
                 {props.intl.formatMessage({
-                  ...messages.exitAssumptions,
+                  ...messages.tax,
                 })}
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
-              {renderExitAssumptionsAccordion()}
+              <Grid item container spacing={6} className="mb-10">
+                {renderTaxStep()}
+              </Grid>
             </AccordionDetails>
           </Accordion>
         </Grid>
@@ -560,12 +490,14 @@ export function DrawerContent(props) {
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
               <Typography>
                 {props.intl.formatMessage({
-                  ...messages.valuationModelConfiguration,
+                  ...messages.sale,
                 })}
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
-              {renderValuationModelConfigurationAccordion()}
+              <Grid item container spacing={6} className="mb-10">
+                {renderSaleStep()}
+              </Grid>
             </AccordionDetails>
           </Accordion>
         </Grid>
@@ -573,40 +505,10 @@ export function DrawerContent(props) {
     );
   }
 
-  function renderPropertyInformationAccordion() {
+  function renderPropertyStep() {
     return (
-      <Grid item container spacing={2}>
-        <Grid item container spacing={2}>
-          <Grid item xs={6}>
-            <CustomSelect
-              error={props.errors.propertyType}
-              defaultValue={props.inputs.propertyType}
-              handleChange={handleChange}
-              data={props.propertyTypes}
-              name="propertyType"
-              tooltipText={props.intl.formatMessage({
-                ...messages.propertyTypeInfo,
-              })}
-              labelText={`${props.intl.formatMessage({
-                ...messages.propertyType,
-              })} *`}
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <CustomSelect
-              error={props.errors.propertyTypology}
-              defaultValue={props.inputs.propertyTypology}
-              handleChange={handleChange}
-              data={props.propertyTypologies}
-              name="propertyTypology"
-              tooltipText={props.intl.formatMessage({
-                ...messages.propertyTypologyInfo,
-              })}
-              labelText={`${props.intl.formatMessage({
-                ...messages.propertyTypology,
-              })} *`}
-            />
-          </Grid>
+      <Grid item container direction="row">
+        <Grid item container spacing={6} className="mt-20">
           <Grid item xs={6}>
             <CustomSelect
               error={props.errors.propertyCondition}
@@ -627,65 +529,45 @@ export function DrawerContent(props) {
     );
   }
 
-  function renderAcquisitionAssumptionsAccordion() {
-    return (
-      <Grid item container spacing={6}>
-        {renderAcquisitionAssumptions()}
-      </Grid>
-    );
-  }
-
-  function renderFinancingAssumptionsAccordion() {
-    return (
-      <Grid item container spacing={6}>
-        {renderFinanceAssumptions()}
-      </Grid>
-    );
-  }
-
-  function renderOperatingAssumptionsAccordion() {
-    return (
-      <Grid item container spacing={6}>
-        {renderOperatingAssumptions()}
-      </Grid>
-    );
-  }
-
-  function renderTaxAssumptionsAccordion() {
-    return (
-      <Grid item container spacing={6}>
-        {renderTaxAssumptions()}
-      </Grid>
-    );
-  }
-
-  function renderExitAssumptionsAccordion() {
-    return (
-      <Grid item container>
-        {renderExitAssumptions()}
-      </Grid>
-    );
-  }
-
-  function renderAcquisitionAssumptions() {
+  function renderProposalStep() {
     return (
       <Grid container item>
-        <Grid item container spacing={2}>
+        <Grid item container spacing={6} className="mt-20">
           <Grid item xs={6}>
-            <CustomSelect
-              error={null}
-              defaultValue={props.inputs.acquisitionType}
+            <CustomInput
+              error={props.errors.bidAskRate}
+              name="bidAskRate"
+              type="number"
               handleChange={handleChange}
-              data={props.acquisitionTypes}
-              name="acquisitionType"
+              defaultValue={props.inputs.bidAskRate}
+              symbol={<span>%</span>}
               labelText={`${props.intl.formatMessage({
-                ...messages.acquisitionType,
+                ...messages.bidAskRate,
               })} *`}
               tooltipText={props.intl.formatMessage({
-                ...messages.acquisitionTypeInfo,
+                ...messages.bidAskRateInfo,
               })}
             />
           </Grid>
+        </Grid>
+        <Grid item container spacing={6} className="mt-20">
+          <Grid item xs={4}>
+            <CustomSwitch
+              defaultValue={props.inputs.realEstateTransferTax}
+              handleChange={handleChangeSwitch}
+              checked={props.inputs.realEstateTransferTax}
+              color="primary"
+              name="realEstateTransferTax"
+              labelText={`${props.intl.formatMessage({
+                ...messages.realEstateTransferTax,
+              })} *`}
+              tooltipText={props.intl.formatMessage({
+                ...messages.realEstateTransferTaxInfo,
+              })}
+            />
+          </Grid>
+        </Grid>
+        <Grid item container spacing={6} className="mt-20">
           <Grid item xs={6}>
             <CustomInput
               error={props.errors.acquisitionBrokerRate}
@@ -702,6 +584,24 @@ export function DrawerContent(props) {
               })}
             />
           </Grid>
+          <Grid item xs={6}>
+            <CustomInput
+              error={props.errors.acquisitionBrokerRateVat}
+              name="acquisitionBrokerRateVat"
+              type="number"
+              handleChange={handleChange}
+              defaultValue={props.inputs.acquisitionBrokerRateVat}
+              symbol={<span>%</span>}
+              labelText={`${props.intl.formatMessage({
+                ...messages.acquisitionBrokerRateVat,
+              })} *`}
+              tooltipText={props.intl.formatMessage({
+                ...messages.acquisitionBrokerRateVatInfo,
+              })}
+            />
+          </Grid>
+        </Grid>
+        <Grid item container spacing={6} className="mt-20">
           <Grid item xs={6}>
             <CustomInput
               error={props.errors.acquisitionStampDutyRate}
@@ -734,153 +634,425 @@ export function DrawerContent(props) {
               })}
             />
           </Grid>
+        </Grid>
+      </Grid>
+    );
+  }
+
+  function renderFinancingStep() {
+    return (
+      <Grid container item>
+        <Grid item container spacing={6} className="mt-20">
           <Grid item xs={6}>
             <CustomSwitch
-              defaultValue={props.inputs.realEstateTransferTax}
+              defaultValue={props.inputs.financing}
               handleChange={handleChangeSwitch}
-              checked={props.inputs.realEstateTransferTax}
+              checked={props.inputs.financing}
               color="primary"
-              name="realEstateTransferTax"
+              name="financing"
               labelText={`${props.intl.formatMessage({
-                ...messages.realEstateTransferTax,
+                ...messages.financing,
               })} *`}
               tooltipText={props.intl.formatMessage({
-                ...messages.realEstateTransferTax,
+                ...messages.financing,
               })}
             />
           </Grid>
         </Grid>
+        {props.inputs.financing && (
+          <>
+            <Grid item container spacing={6} className="mt-20">
+              <Grid item xs={6}>
+                <CustomInput
+                  error={props.errors.financingRate}
+                  name="financingRate"
+                  type="number"
+                  handleChange={handleChange}
+                  defaultValue={props.inputs.financingRate}
+                  symbol={<span>%</span>}
+                  labelText={`${props.intl.formatMessage({
+                    ...messages.financingRate,
+                  })} *`}
+                  tooltipText={props.intl.formatMessage({
+                    ...messages.financingRateInfo,
+                  })}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <CustomInput
+                  error={props.errors.interestRate}
+                  name="interestRate"
+                  type="number"
+                  handleChange={handleChange}
+                  defaultValue={props.inputs.interestRate}
+                  symbol={<span>%</span>}
+                  labelText={`${props.intl.formatMessage({
+                    ...messages.interestRate,
+                  })} *`}
+                  tooltipText={props.intl.formatMessage({
+                    ...messages.interestRateInfo,
+                  })}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <CustomInput
+                  error={props.errors.amortization}
+                  name="amortization"
+                  type="number"
+                  handleChange={handleChange}
+                  defaultValue={props.inputs.amortization}
+                  symbol={
+                    <span>
+                      {props.intl.formatMessage({ ...messages.year })}
+                    </span>
+                  }
+                  labelText={`${props.intl.formatMessage({
+                    ...messages.amortization,
+                  })} *`}
+                  tooltipText={props.intl.formatMessage({
+                    ...messages.amortizationInfo,
+                  })}
+                />
+              </Grid>
+            </Grid>
+            <Grid item container spacing={6} className="mt-20">
+              <Grid item xs={6}>
+                <CustomInput
+                  error={props.errors.multiRiskInsurance}
+                  name="multiRiskInsurance"
+                  type="number"
+                  handleChange={handleChange}
+                  defaultValue={props.inputs.multiRiskInsurance}
+                  symbol={<span>&#8364;</span>}
+                  labelText={props.intl.formatMessage({
+                    ...messages.multiRiskInsurance,
+                  })}
+                  tooltipText={props.intl.formatMessage({
+                    ...messages.multiRiskInsuranceInfo,
+                  })}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <CustomInput
+                  error={props.errors.lifeInsurance}
+                  name="lifeInsurance"
+                  type="number"
+                  handleChange={handleChange}
+                  defaultValue={props.inputs.lifeInsurance}
+                  symbol={<span>&#8364;</span>}
+                  labelText={props.intl.formatMessage({
+                    ...messages.lifeInsurance,
+                  })}
+                  tooltipText={props.intl.formatMessage({
+                    ...messages.lifeInsuranceInfo,
+                  })}
+                />
+              </Grid>
+            </Grid>
+            <Grid item container spacing={6} className="mt-20">
+              <Grid item xs={6}>
+                <CustomInput
+                  error={props.errors.bankCommissionRate}
+                  name="bankCommissionRate"
+                  type="number"
+                  handleChange={handleChange}
+                  defaultValue={props.inputs.bankCommissionRate}
+                  symbol={<span>%</span>}
+                  labelText={`${props.intl.formatMessage({
+                    ...messages.bankCommissionRate,
+                  })} *`}
+                  tooltipText={props.intl.formatMessage({
+                    ...messages.bankCommissionRateInfo,
+                  })}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <CustomInput
+                  error={props.errors.loanEarlyRepaymentRate}
+                  name="loanEarlyRepaymentRate"
+                  type="number"
+                  handleChange={handleChange}
+                  defaultValue={props.inputs.loanEarlyRepaymentRate}
+                  symbol={<span>%</span>}
+                  labelText={`${props.intl.formatMessage({
+                    ...messages.loanEarlyRepaymentRate,
+                  })} *`}
+                  tooltipText={props.intl.formatMessage({
+                    ...messages.loanEarlyRepaymentRateInfo,
+                  })}
+                />
+              </Grid>
+            </Grid>
+            <Grid item container spacing={6} className="mt-20">
+              <Grid item xs={6}>
+                <CustomInput
+                  error={props.errors.mortgageStampDutyRate}
+                  name="mortgageStampDutyRate"
+                  type="number"
+                  handleChange={handleChange}
+                  defaultValue={props.inputs.mortgageStampDutyRate}
+                  symbol={<span>%</span>}
+                  labelText={`${props.intl.formatMessage({
+                    ...messages.mortgageStampDutyRate,
+                  })} *`}
+                  tooltipText={props.intl.formatMessage({
+                    ...messages.mortgageStampDutyRateInfo,
+                  })}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <CustomInput
+                  error={props.errors.interestStampDutyRate}
+                  name="interestStampDutyRate"
+                  type="number"
+                  handleChange={handleChange}
+                  defaultValue={props.inputs.interestStampDutyRate}
+                  symbol={<span>%</span>}
+                  labelText={`${props.intl.formatMessage({
+                    ...messages.interestStampDutyRate,
+                  })} *`}
+                  tooltipText={props.intl.formatMessage({
+                    ...messages.interestStampDutyRateInfo,
+                  })}
+                />
+              </Grid>
+            </Grid>
+          </>
+        )}
       </Grid>
     );
   }
 
-  function renderFinanceAssumptions() {
+  function renderRehabStep() {
     return (
       <Grid container item>
-        <Grid item container spacing={2}>
+        <Grid item container spacing={6} className="mt-20">
           <Grid item xs={6}>
-            <CustomInput
-              error={props.errors.bankCommissionRate}
-              name="bankCommissionRate"
-              type="number"
-              handleChange={handleChange}
-              defaultValue={props.inputs.bankCommissionRate}
-              symbol={<span>%</span>}
+            <CustomSwitch
+              defaultValue={props.inputs.rehab}
+              handleChange={handleChangeSwitch}
+              checked={props.inputs.rehab}
+              color="primary"
+              name="rehab"
               labelText={`${props.intl.formatMessage({
-                ...messages.bankCommissionRate,
+                ...messages.rehab,
               })} *`}
               tooltipText={props.intl.formatMessage({
-                ...messages.bankCommissionRateInfo,
-              })}
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <CustomInput
-              error={props.errors.stampDutyMortgageRate}
-              name="stampDutyMortgageRate"
-              type="number"
-              handleChange={handleChange}
-              defaultValue={props.inputs.stampDutyMortgageRate}
-              symbol={<span>%</span>}
-              labelText={`${props.intl.formatMessage({
-                ...messages.stampDutyMortgageRate,
-              })} *`}
-              tooltipText={props.intl.formatMessage({
-                ...messages.stampDutyMortgageRateInfo,
-              })}
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <CustomInput
-              error={props.errors.stampDutyInterestRate}
-              name="stampDutyInterestRate"
-              type="number"
-              handleChange={handleChange}
-              defaultValue={props.inputs.stampDutyInterestRate}
-              symbol={<span>%</span>}
-              labelText={`${props.intl.formatMessage({
-                ...messages.stampDutyInterestRate,
-              })} *`}
-              tooltipText={props.intl.formatMessage({
-                ...messages.stampDutyInterestRateInfo,
-              })}
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <CustomInput
-              error={props.errors.interestRate}
-              name="interestRate"
-              type="number"
-              handleChange={handleChange}
-              defaultValue={props.inputs.interestRate}
-              symbol={<span>%</span>}
-              labelText={`${props.intl.formatMessage({
-                ...messages.interestRate,
-              })} *`}
-              tooltipText={props.intl.formatMessage({
-                ...messages.interestRateInfo,
-              })}
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <CustomInput
-              error={props.errors.capexFinancingRate}
-              name="capexFinancingRate"
-              type="number"
-              handleChange={handleChange}
-              defaultValue={props.inputs.capexFinancingRate}
-              symbol={<span>%</span>}
-              labelText={`${props.intl.formatMessage({
-                ...messages.capexFinancingRate,
-              })}`}
-              tooltipText={props.intl.formatMessage({
-                ...messages.capexFinancingRateInfo,
-              })}
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <CustomInput
-              error={props.errors.earlyRepaymentRate}
-              name="earlyRepaymentRate"
-              type="number"
-              handleChange={handleChange}
-              defaultValue={props.inputs.earlyRepaymentRate}
-              symbol={<span>%</span>}
-              labelText={`${props.intl.formatMessage({
-                ...messages.earlyRepaymentRate,
-              })} *`}
-              tooltipText={props.intl.formatMessage({
-                ...messages.earlyRepaymentRateInfo,
-              })}
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <CustomInput
-              error={props.errors.amortization}
-              name="amortization"
-              type="number"
-              handleChange={handleChange}
-              defaultValue={props.inputs.amortization}
-              symbol={
-                <span>{props.intl.formatMessage({ ...messages.year })}</span>
-              }
-              labelText={props.intl.formatMessage({
-                ...messages.amortization,
-              })}
-              tooltipText={props.intl.formatMessage({
-                ...messages.amortizationInfo,
+                ...messages.rehabInfo,
               })}
             />
           </Grid>
         </Grid>
+        {props.inputs.rehab && (
+          <>
+            <Grid item container spacing={6} className="mt-20">
+              <Grid item xs={4}>
+                <CustomInput
+                  error={props.errors.rehabPricePerSquareMeter}
+                  name="rehabPricePerSquareMeter"
+                  type="number"
+                  handleChange={handleChange}
+                  defaultValue={props.inputs.rehabPricePerSquareMeter}
+                  symbol={<span>€ / m²</span>}
+                  labelText={props.intl.formatMessage({
+                    ...messages.rehabPricePerSquareMeter,
+                  })}
+                  tooltipText={props.intl.formatMessage({
+                    ...messages.rehabPricePerSquareMeterInfo,
+                  })}
+                />
+              </Grid>
+              <Grid item xs={4}>
+                <CustomInput
+                  error={props.errors.rehabFinancingRate}
+                  name="rehabFinancingRate"
+                  type="number"
+                  handleChange={handleChange}
+                  defaultValue={props.inputs.rehabFinancingRate}
+                  symbol={<span>%</span>}
+                  labelText={`${props.intl.formatMessage({
+                    ...messages.rehabFinancingRate,
+                  })}`}
+                  tooltipText={props.intl.formatMessage({
+                    ...messages.rehabFinancingRate,
+                  })}
+                />
+              </Grid>
+              <Grid item xs={4}>
+                <CustomInput
+                  error={props.errors.rehabVat}
+                  name="rehabVat"
+                  type="number"
+                  handleChange={handleChange}
+                  defaultValue={props.inputs.rehabVat}
+                  symbol={<span>€ / m²</span>}
+                  labelText={props.intl.formatMessage({
+                    ...messages.rehabVat,
+                  })}
+                  tooltipText={props.intl.formatMessage({
+                    ...messages.rehabVatInfo,
+                  })}
+                />
+              </Grid>
+            </Grid>
+          </>
+        )}
       </Grid>
     );
   }
 
-  function renderOperatingAssumptions() {
+  function renderRentStep() {
+    return (
+      <Grid item container>
+        <Grid item container spacing={6} className="mt-20">
+          <Grid item xs={6}>
+            <CustomSwitch
+              defaultValue={props.inputs.rent}
+              handleChange={handleChangeSwitch}
+              checked={props.inputs.rent}
+              color="primary"
+              name="rent"
+              labelText={`${props.intl.formatMessage({
+                ...messages.rent,
+              })} *`}
+              tooltipText={props.intl.formatMessage({
+                ...messages.rentInfo,
+              })}
+            />
+          </Grid>
+        </Grid>
+        {props.inputs.rent && (
+          <>
+            <Grid item container spacing={6} className="mt-20">
+              <Grid item xs={6}>
+                <CustomInput
+                  error={props.errors.timeToRent}
+                  name="timeToRent"
+                  type="number"
+                  handleChange={handleChange}
+                  defaultValue={props.inputs.timeToRent}
+                  symbol={<span>&#8364;</span>}
+                  labelText={`${props.intl.formatMessage({
+                    ...messages.timeToRent,
+                  })} *`}
+                  tooltipText={props.intl.formatMessage({
+                    ...messages.timeToRentInfo,
+                  })}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <CustomInput
+                  error={props.errors.contractPeriod}
+                  name="contractPeriod"
+                  type="number"
+                  handleChange={handleChange}
+                  defaultValue={props.inputs.contractPeriod}
+                  symbol={<span>&#8364;</span>}
+                  labelText={`${props.intl.formatMessage({
+                    ...messages.contractPeriod,
+                  })} *`}
+                  tooltipText={props.intl.formatMessage({
+                    ...messages.contractPeriodInfo,
+                  })}
+                />
+              </Grid>
+            </Grid>
+            <Grid item container spacing={6} className="mt-20">
+              <Grid item xs={6}>
+                <CustomInput
+                  error={props.errors.propertyManagerRate}
+                  name="propertyManagerRate"
+                  type="number"
+                  handleChange={handleChange}
+                  defaultValue={props.inputs.propertyManagerRate}
+                  symbol={<span>&#8364;</span>}
+                  labelText={props.intl.formatMessage({
+                    ...messages.propertyManagerRate,
+                  })}
+                  tooltipText={props.intl.formatMessage({
+                    ...messages.propertyManagerRateInfo,
+                  })}
+                />
+              </Grid>
+            </Grid>
+            <Grid item container spacing={6} className="mt-20">
+              <Grid item xs={6}>
+                <CustomInput
+                  error={props.errors.rentBrokerFee}
+                  name="rentBrokerFee"
+                  type="number"
+                  handleChange={handleChange}
+                  defaultValue={props.inputs.rentBrokerFee}
+                  symbol={<span>&#8364;</span>}
+                  labelText={`${props.intl.formatMessage({
+                    ...messages.rentBrokerFee,
+                  })} *`}
+                  tooltipText={props.intl.formatMessage({
+                    ...messages.rentBrokerFeeInfo,
+                  })}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <CustomInput
+                  error={props.errors.rentBrokerFeeVat}
+                  name="rentBrokerFeeVat"
+                  type="number"
+                  handleChange={handleChange}
+                  defaultValue={props.inputs.rentBrokerFeeVat}
+                  symbol={<span>&#8364;</span>}
+                  labelText={`${props.intl.formatMessage({
+                    ...messages.rentBrokerFeeVat,
+                  })} *`}
+                  tooltipText={props.intl.formatMessage({
+                    ...messages.rentBrokerFeeVatInfo,
+                  })}
+                />
+              </Grid>
+            </Grid>
+            <Grid item container spacing={6} className="mt-20">
+              <Grid item xs={6}>
+                <CustomInput
+                  error={props.errors.rentStampDutyRate}
+                  name="rentStampDutyRate"
+                  type="number"
+                  handleChange={handleChange}
+                  defaultValue={props.inputs.rentStampDutyRate}
+                  symbol={<span>&#8364;</span>}
+                  labelText={`${props.intl.formatMessage({
+                    ...messages.rentStampDutyRate,
+                  })} *`}
+                  tooltipText={props.intl.formatMessage({
+                    ...messages.rentStampDutyRateInfo,
+                  })}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <CustomInput
+                  error={props.errors.rentTaxRate}
+                  name="rentTaxRate"
+                  type="number"
+                  handleChange={handleChange}
+                  defaultValue={props.inputs.rentTaxRate}
+                  symbol={<span>&#8364;</span>}
+                  labelText={`${props.intl.formatMessage({
+                    ...messages.rentTaxRate,
+                  })} *`}
+                  tooltipText={props.intl.formatMessage({
+                    ...messages.rentTaxRateInfo,
+                  })}
+                />
+              </Grid>
+            </Grid>
+          </>
+        )}
+      </Grid>
+    );
+  }
+
+  function renderOperatingCostsStep() {
     return (
       <Grid container item>
-        <Grid item container spacing={2}>
+        <Grid item container spacing={6} className="mt-20">
           <Grid item xs={6}>
             <CustomInput
               error={props.errors.condominiumCosts}
@@ -898,66 +1070,46 @@ export function DrawerContent(props) {
             />
           </Grid>
           <Grid item xs={6}>
-            <CustomInput
-              error={props.errors.propertyTaxRate}
-              name="propertyTaxRate"
-              type="number"
-              handleChange={handleChange}
-              defaultValue={props.inputs.propertyTaxRate}
-              symbol={<span>%</span>}
+            <CustomSwitch
+              handleChange={handleChangeSwitch}
+              checked={props.inputs.propertyTax}
+              name="propertyTax"
               labelText={`${props.intl.formatMessage({
-                ...messages.propertyTaxRate,
+                ...messages.propertyTax,
               })} *`}
-              tooltipText={props.intl.formatMessage({
-                ...messages.propertyTaxRateInfo,
-              })}
             />
           </Grid>
+        </Grid>
+        <Grid item container spacing={6} className="mt-20">
           <Grid item xs={6}>
             <CustomInput
-              error={props.errors.capexPerSquareMeter}
-              name="capexPerSquareMeter"
+              error={props.errors.maintenanceCosts}
+              name="maintenanceCosts"
               type="number"
               handleChange={handleChange}
-              defaultValue={props.inputs.capexPerSquareMeter}
-              symbol={<span>€ / m²</span>}
-              labelText={props.intl.formatMessage({
-                ...messages.capexPerSquareMeter,
-              })}
-              tooltipText={props.intl.formatMessage({
-                ...messages.capexPerSquareMeter,
-              })}
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <CustomInput
-              error={props.errors.multiRiskInsurance}
-              name="multiRiskInsurance"
-              type="number"
-              handleChange={handleChange}
-              defaultValue={props.inputs.multiRiskInsurance}
+              defaultValue={props.inputs.maintenanceCosts}
               symbol={<span>&#8364;</span>}
               labelText={props.intl.formatMessage({
-                ...messages.multiRiskInsurance,
+                ...messages.maintenanceCosts,
               })}
               tooltipText={props.intl.formatMessage({
-                ...messages.multiRiskInsuranceInfo,
+                ...messages.maintenanceCostsInfo,
               })}
             />
           </Grid>
           <Grid item xs={6}>
             <CustomInput
-              error={props.errors.lifeInsurance}
-              name="lifeInsurance"
+              error={props.errors.otherOperatingCosts}
+              name="otherOperatingCosts"
               type="number"
               handleChange={handleChange}
-              defaultValue={props.inputs.lifeInsurance}
+              defaultValue={props.inputs.otherOperatingCosts}
               symbol={<span>&#8364;</span>}
               labelText={props.intl.formatMessage({
-                ...messages.lifeInsurance,
+                ...messages.otherOperatingCosts,
               })}
               tooltipText={props.intl.formatMessage({
-                ...messages.lifeInsuranceInfo,
+                ...messages.otherOperatingCostsInfo,
               })}
             />
           </Grid>
@@ -966,13 +1118,13 @@ export function DrawerContent(props) {
     );
   }
 
-  function renderTaxAssumptions() {
+  function renderTaxStep() {
     return (
       <Grid container item>
-        <Grid item container spacing={2}>
+        <Grid item container spacing={6} className="mt-20">
           <Grid
             item
-            xs={!props.inputs.taxResidentInPortugal ? 8 : 12}
+            xs={!props.inputs.taxResidentInPortugal ? 4 : 12}
             className="py-0"
           >
             <CustomSwitch
@@ -985,25 +1137,27 @@ export function DrawerContent(props) {
             />
           </Grid>
           {!props.inputs.taxResidentInPortugal && (
-            <Grid item xs={4}>
-              <CustomInput
-                name="irsRate"
-                type="number"
-                readOnly
-                defaultValue={28}
-                symbol={<span>%</span>}
-                labelText={`${props.intl.formatMessage({
-                  ...messages.irsRate,
-                })} *`}
-                tooltipText={props.intl.formatMessage({
-                  ...messages.irsRate,
-                })}
-              />
-            </Grid>
+            <>
+              <Grid item xs={6}>
+                <CustomInput
+                  name="irsRate"
+                  type="number"
+                  readOnly
+                  defaultValue={28}
+                  symbol={<span>%</span>}
+                  labelText={`${props.intl.formatMessage({
+                    ...messages.irsRate,
+                  })} *`}
+                  tooltipText={props.intl.formatMessage({
+                    ...messages.irsRate,
+                  })}
+                />
+              </Grid>
+            </>
           )}
           {props.inputs.taxResidentInPortugal && (
             <>
-              {/* TODO IRS <Grid item xs={6}>
+              <Grid item xs={6}>
                 <CustomSelect
                   disabled={!props.inputs.taxResidentInPortugal}
                   error={props.errors.irsCategory}
@@ -1024,6 +1178,7 @@ export function DrawerContent(props) {
                   disabled={!props.inputs.taxResidentInPortugal}
                   error={props.errors.irsCategoryRegion}
                   defaultValue={props.inputs.irsCategoryRegion}
+                  name="irsCategoryRegion"
                   handleChange={handleChange}
                   data={props.irsCategoryRegions}
                   labelText={props.intl.formatMessage({
@@ -1038,6 +1193,7 @@ export function DrawerContent(props) {
                 <CustomSelect
                   disabled={!props.inputs.taxResidentInPortugal}
                   error={props.errors.irsDependents}
+                  name="irsDependents"
                   defaultValue={props.inputs.irsDependents}
                   handleChange={handleChange}
                   data={props.irsDependentsList}
@@ -1065,52 +1221,68 @@ export function DrawerContent(props) {
                     ...messages.grossSalary,
                   })}
                 />
-              </Grid> */}
-              <Grid item xs={6}>
-                <CustomInput
-                  error={props.errors.capitalGainsTaxRate}
-                  name="capitalGainsTaxRate"
-                  type="number"
-                  value={props.inputs.capitalGainsTaxRate}
-                  handleChange={handleChange}
-                  defaultValue={props.inputs.capitalGainsTaxRate}
-                  symbol={<span>%</span>}
-                  labelText={`${props.intl.formatMessage({
-                    ...messages.capitalGainsTaxRate,
-                  })} *`}
-                  tooltipText={props.intl.formatMessage({
-                    ...messages.capitalGainsTaxRateInfo,
-                  })}
-                />
-              </Grid>
-              <Grid item xs={6}>
-                <CustomInput
-                  disabled={!props.inputs.taxResidentInPortugal}
-                  error={props.errors.currentIrsRate}
-                  name="currentIrsRate"
-                  type="number"
-                  handleChange={handleChange}
-                  defaultValue={props.inputs.currentIrsRate}
-                  symbol={<span>%</span>}
-                  labelText={`${props.intl.formatMessage({
-                    ...messages.currentIrsRate,
-                  })} *`}
-                  tooltipText={props.intl.formatMessage({
-                    ...messages.currentIrsRate,
-                  })}
-                />
               </Grid>
             </>
           )}
+        </Grid>
+        <Grid item container spacing={6} className="mt-20">
+          <Grid item xs={6}>
+            <CustomSelect
+              error={null}
+              defaultValue={props.inputs.acquisitionType}
+              handleChange={handleChange}
+              data={props.acquisitionTypes}
+              name="acquisitionType"
+              labelText={`${props.intl.formatMessage({
+                ...messages.acquisitionType,
+              })} *`}
+              tooltipText={props.intl.formatMessage({
+                ...messages.acquisitionTypeInfo,
+              })}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <CustomInput
+              error={props.errors.capitalGainsTaxBaseRate}
+              name="capitalGainsTaxBaseRate"
+              type="number"
+              value={props.inputs.capitalGainsTaxBaseRate}
+              handleChange={handleChange}
+              defaultValue={props.inputs.capitalGainsTaxBaseRate}
+              symbol={<span>%</span>}
+              labelText={`${props.intl.formatMessage({
+                ...messages.capitalGainsTaxBaseRate,
+              })} *`}
+              tooltipText={props.intl.formatMessage({
+                ...messages.capitalGainsTaxBaseRateInfo,
+              })}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <CustomInput
+              error={props.errors.rehabTaxRate}
+              name="rehabTaxRate"
+              type="number"
+              handleChange={handleChange}
+              defaultValue={props.inputs.rehabTaxRate}
+              symbol={<span>&#8364;</span>}
+              labelText={`${props.intl.formatMessage({
+                ...messages.rehabTaxRate,
+              })} *`}
+              tooltipText={props.intl.formatMessage({
+                ...messages.rehabTaxRateInfo,
+              })}
+            />
+          </Grid>
         </Grid>
       </Grid>
     );
   }
 
-  function renderExitAssumptions() {
+  function renderSaleStep() {
     return (
       <Grid container item>
-        <Grid item container spacing={2}>
+        <Grid item container spacing={6} className="mt-20">
           <Grid item xs={6}>
             <CustomInput
               error={props.errors.timeToSale}
@@ -1128,6 +1300,41 @@ export function DrawerContent(props) {
             />
           </Grid>
           <Grid item xs={6}>
+            <CustomSelect
+              error={null}
+              defaultValue={props.inputs.percentile}
+              handleChange={handleChange}
+              data={props.percentiles}
+              name="percentile"
+              tooltipText={props.intl.formatMessage({
+                ...messages.percentileInfo,
+              })}
+              labelText={`${props.intl.formatMessage({
+                ...messages.percentile,
+              })} *`}
+            />
+          </Grid>
+        </Grid>
+        <Grid item container spacing={6} className="mt-20">
+          <Grid item xs={6}>
+            <CustomInput
+              error={props.errors.housePriceIndexRate}
+              name="housePriceIndexRate"
+              type="number"
+              handleChange={handleChange}
+              defaultValue={props.inputs.housePriceIndexRate}
+              symbol={<span>%</span>}
+              labelText={`${props.intl.formatMessage({
+                ...messages.housePriceIndexRate,
+              })} *`}
+              tooltipText={props.intl.formatMessage({
+                ...messages.housePriceIndexRateInfo,
+              })}
+            />
+          </Grid>
+        </Grid>
+        <Grid item container spacing={6} className="mt-20">
+          <Grid item xs={6}>
             <CustomInput
               error={props.errors.exitBrokerRate}
               name="exitBrokerRate"
@@ -1143,66 +1350,22 @@ export function DrawerContent(props) {
               })}
             />
           </Grid>
-        </Grid>
-      </Grid>
-    );
-  }
-
-  function renderValuationModelConfigurationAccordion() {
-    return (
-      <Grid
-        item
-        container
-        spacing={2}
-        error={props.errors.grossAreaToUsefulAreaRate}
-      >
-        <Grid item xs={6}>
-          <CustomInput
-            error={props.errors.grossAreaToUsefulAreaRate}
-            name="grossAreaToUsefulAreaRate"
-            type="number"
-            handleChange={handleChange}
-            defaultValue={props.inputs.grossAreaToUsefulAreaRate}
-            symbol={<span>%</span>}
-            labelText={`${props.intl.formatMessage({
-              ...messages.grossAreaToUsefulAreaRate,
-            })} *`}
-            tooltipText={props.intl.formatMessage({
-              ...messages.grossAreaToUsefulAreaRateInfo,
-            })}
-          />
-        </Grid>
-        <Grid item xs={6}>
-          <CustomInput
-            error={props.errors.floorRate}
-            name="floorRate"
-            type="number"
-            handleChange={handleChange}
-            defaultValue={props.inputs.floorRate}
-            symbol={<span>%</span>}
-            labelText={`${props.intl.formatMessage({
-              ...messages.floorRate,
-            })} *`}
-            tooltipText={props.intl.formatMessage({
-              ...messages.floorRateInfo,
-            })}
-          />
-        </Grid>
-        <Grid item xs={6}>
-          <CustomInput
-            error={props.errors.capRate}
-            name="capRate"
-            type="number"
-            handleChange={handleChange}
-            defaultValue={props.inputs.capRate}
-            symbol={<span>%</span>}
-            labelText={`${props.intl.formatMessage({
-              ...messages.capRate,
-            })} *`}
-            tooltipText={props.intl.formatMessage({
-              ...messages.capRateInfo,
-            })}
-          />
+          <Grid item xs={6}>
+            <CustomInput
+              error={props.errors.exitBrokerRateVat}
+              name="exitBrokerRateVat"
+              type="number"
+              handleChange={handleChange}
+              defaultValue={props.inputs.exitBrokerRateVat}
+              symbol={<span>%</span>}
+              labelText={`${props.intl.formatMessage({
+                ...messages.exitBrokerRateVat,
+              })} *`}
+              tooltipText={props.intl.formatMessage({
+                ...messages.exitBrokerRateVatInfo,
+              })}
+            />
+          </Grid>
         </Grid>
       </Grid>
     );
@@ -1252,13 +1415,13 @@ const mapStateToProps = createStructuredSelector({
   propertyTypologies: makeSelectPropertyTypologies(),
   propertyConditions: makeSelectPropertyConditions(),
   acquisitionTypes: makeSelectAcquisitionTypes(),
-  ciPercentiles: makeSelectCIPs(),
+  percentiles: makeSelectCIPs(),
   analyzeButtonDisabled: makeSelectAnalyzeButtonDisabled(),
   newPropertyAnalysisPageReady: makeSelectNewPropertyAnalysisPageReady(),
   isGettingPropertyAnalysisById: makeSelectIsGettingPropertyAnalysisById(),
-  /* TODO IRS irsCategories: makeSelectIrsCategories(),
+  irsCategories: makeSelectIrsCategories(),
   irsCategoryRegions: makeSelectIrsCategoryRegions(),
-  irsDependentsList: makeSelectIrsDependentsList(), */
+  irsDependentsList: makeSelectIrsDependentsList(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -1272,9 +1435,6 @@ function mapDispatchToProps(dispatch) {
     setNewPropertyAnalysisPageReadyNull: () =>
       dispatch(setNewPropertyAnalysisPageReadyNull()),
     dispatch,
-    /* TODO IRS getIrsCategories: () => dispatch(getIrsCategories()),
-    getIrsCategoryRegions: () => dispatch(getIrsCategoryRegions()),
-    getIrsDependentsList: () => dispatch(getIrsDependentsList()), */
   };
 }
 

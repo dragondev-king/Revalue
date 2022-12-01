@@ -24,11 +24,15 @@ import {
   getPropertyConditions,
   getAcquisitionTypes,
   getCIPs,
+  getIrsCategories,
+  getIrsCategoryRegions,
+  getIrsDependentsList,
 } from './actions';
 import AnalysisOverview from './components/AnalysisOverview';
 import PropertyInformation from './components/PropertyInformation';
 import AnalysisInformationAndMap from './components/AnalysisInformationAndMap';
 import { useStyles } from './styles';
+import ForecastGraph from './components/ForecastGraph';
 
 export function Analysis(props) {
   const classes = useStyles();
@@ -45,10 +49,9 @@ export function Analysis(props) {
     const path = window.location.pathname;
     const id = path.split('/').pop();
     props.getAnalysisById(id);
-
-    /* TODO IRS props.getIrsCategories();
+    props.getIrsCategories();
     props.getIrsDependentsList();
-    props.getIrsCategoryRegions(); */
+    props.getIrsCategoryRegions();
     props.getPropertyTypes();
     props.getPropertyTypologies();
     props.getPropertyConditions();
@@ -85,7 +88,8 @@ export function Analysis(props) {
       <AnalysisInformationAndMap props={props} />
       <EstimatedProfitTable props={props} />
       {/*  <SalesActivityHistory props={props} />
-      <ForecastGraph props={props} /> */}
+       */}
+      <ForecastGraph props={props} />
       <BreakdownTable props={props} />
       {open && <SettingDrawer open={open} setOpen={setOpen} />}
       <div className={classes.settingIconContainer}>
@@ -94,7 +98,7 @@ export function Analysis(props) {
           className={classes.settingIconWrapper}
           onClick={() => setOpen(true)}
         >
-          <img src={SettingIcon} width={44} height={44} alt="setting" />
+          <img src={SettingIcon} width={60} height={60} alt="setting" />
         </button>
       </div>
     </div>
@@ -114,6 +118,9 @@ function mapDispatchToProps(dispatch) {
     getPropertyConditions: () => dispatch(getPropertyConditions()),
     getAcquisitionTypes: () => dispatch(getAcquisitionTypes()),
     getCIPs: () => dispatch(getCIPs()),
+    getIrsCategories: () => dispatch(getIrsCategories()),
+    getIrsCategoryRegions: () => dispatch(getIrsCategoryRegions()),
+    getIrsDependentsList: () => dispatch(getIrsDependentsList()),
     dispatch,
   };
 }

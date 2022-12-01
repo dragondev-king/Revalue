@@ -54,7 +54,7 @@ const makeSelectIrsDependentsList = () =>
 const makeSelectCIPs = () =>
   createSelector(
     selectAnalysisReducerDomain,
-    substate => substate.ciPercentiles,
+    substate => substate.percentiles,
   );
 
 const makeSelectInputs = () =>

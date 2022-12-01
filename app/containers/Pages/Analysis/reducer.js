@@ -8,8 +8,8 @@ import {
   GET_PROPERTY_TYPOLOGIES_SUCCESS,
   GET_PROPERTY_CONDITIONS,
   GET_PROPERTY_CONDITIONS_SUCCESS,
-  GET_CI_PERCENTILES,
-  GET_CI_PERCENTILES_SUCCESS,
+  GET_PERCENTILES,
+  GET_PERCENTILES_SUCCESS,
   GET_ACQUISITION_TYPES,
   GET_ACQUISITION_TYPES_SUCCESS,
   GET_ANALYSIS_BY_ID_ERROR,
@@ -65,13 +65,13 @@ export const initialState = {
     bankCommissionRate: '',
     bidAskRate: '',
     capRate: '',
-    capexFinancingRate: '',
-    capexPerSquareMeter: '',
-    capitalGainsTaxRate: '',
-    ciPercentile: '',
+    rehabFinancingRate: '',
+    rehabPricePerSquareMeter: '',
+    capitalGainsTaxBaseRate: '',
+    percentile: '',
     condominiumCosts: '',
     currentIrsRate: '',
-    earlyRepaymentRate: '',
+    loanEarlyRepaymentRate: '',
     acquisitionBrokerRate: '',
     exitBrokerRate: '',
     financingRate: '',
@@ -79,27 +79,27 @@ export const initialState = {
     grossAreaToUsefulAreaRate: '',
     housePriceIndexRate: '',
     interestRate: '',
-    /* TODO IRS irsCategory: '',
+    irsCategory: '',
     grossSalary: '',
     irsCategoryRegion: '',
-    irsDependents: '', */
+    irsDependents: '',
     landRegistryInscription: '',
     lifeInsurance: '',
     maxAskingPrice: '',
-    maxCapital: '',
+    maxRequiredCapital: '',
     maxUsefulArea: '',
     minAskingPrice: '',
-    minCapital: '',
+    minRequiredCapital: '',
     minProfit: '',
     minUsefulArea: '',
     multiRiskInsurance: '',
     propertyCondition: '',
     propertyLocation: '',
-    propertyTaxRate: '',
+    propertyTax: true,
     propertyType: '',
     propertyTypology: '',
-    stampDutyInterestRate: '',
-    stampDutyMortgageRate: '',
+    interestStampDutyRate: '',
+    mortgageStampDutyRate: '',
     acquisitionStampDutyRate: '',
     taxResidentInPortugal: '',
   },
@@ -185,12 +185,12 @@ const analysisReducer = (state = initialState, action) =>
         draft.irsDependentsList = action.payload;
         draft.isGettingIrsDependentsList = false;
         break;
-      case GET_CI_PERCENTILES:
-        draft.isGettingCiPercentiles = true;
+      case GET_PERCENTILES:
+        draft.isGettingPercentiles = true;
         break;
-      case GET_CI_PERCENTILES_SUCCESS:
-        draft.ciPercentiles = action.payload;
-        draft.isGettingCiPercentiles = false;
+      case GET_PERCENTILES_SUCCESS:
+        draft.percentiles = action.payload;
+        draft.isGettingPercentiles = false;
         break;
       case SET_INPUT_VALUE:
         draft.inputs[action.payload.input] = action.payload.value;

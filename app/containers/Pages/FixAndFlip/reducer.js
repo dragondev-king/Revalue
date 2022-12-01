@@ -12,8 +12,8 @@ import {
   GET_PROPERTY_CONDITIONS_SUCCESS,
   GET_ACQUISITION_TYPES,
   GET_ACQUISITION_TYPES_SUCCESS,
-  GET_CI_PERCENTILES,
-  GET_CI_PERCENTILES_SUCCESS,
+  GET_PERCENTILES,
+  GET_PERCENTILES_SUCCESS,
   GET_ANALYSIS,
   GET_ANALYSIS_SUCCESS,
   GET_ANALYSIS_ERROR,
@@ -76,10 +76,10 @@ export const initialState = {
     JSON.parse(localStorage.getItem('irsDependentsList')),
   ),
   isGettingIrsDependentsList: false,
-  ciPercentiles: setValueOrEmptyArray(
-    JSON.parse(localStorage.getItem('ciPercentiles')),
+  percentiles: setValueOrEmptyArray(
+    JSON.parse(localStorage.getItem('percentiles')),
   ),
-  isGettingCiPercentiles: false,
+  isGettingPercentiles: false,
   analysis: setValueOrEmptyArray(JSON.parse(localStorage.getItem('analysis'))),
   isGettingAnalysis: false,
   errors: {
@@ -87,42 +87,41 @@ export const initialState = {
     amortization: '',
     bankCommissionRate: '',
     bidAskRate: '',
-    capRate: '',
-    capexFinancingRate: '',
-    capexPerSquareMeter: '',
-    capitalGainsTaxRate: '',
-    ciPercentile: '',
+    rehabFinancingRate: '',
+    rehabPricePerSquareMeter: '',
+    capitalGainsTaxBaseRate: '',
+    percentile: '',
     condominiumCosts: '',
     currentIrsRate: '',
-    earlyRepaymentRate: '',
+    loanEarlyRepaymentRate: '',
     acquisitionBrokerRate: '',
     exitBrokerRate: '',
     financingRate: '',
-    floorRate: '',
-    grossAreaToUsefulAreaRate: '',
     housePriceIndexRate: '',
     interestRate: '',
-    /* TODO IRS  grossSalary: '',
+    grossSalary: '',
     irsCategory: '',
     irsCategoryRegion: '',
-    irsDependents: '', */
+    irsDependents: '',
     landRegistryInscription: '',
     lifeInsurance: '',
     maxAskingPrice: '',
-    maxCapital: '',
+    maxRequiredCapital: '',
     maxUsefulArea: '',
     minAskingPrice: '',
-    minCapital: '',
+    minRequiredCapital: '',
     minProfit: '',
     minUsefulArea: '',
     multiRiskInsurance: '',
+    otherOperatingCosts: '',
+    maintenanceCosts: '',
     propertyCondition: '',
     propertyLocation: '',
-    propertyTaxRate: '',
+    propertyTax: true,
     propertyType: '',
     propertyTypology: '',
-    stampDutyInterestRate: '',
-    stampDutyMortgageRate: '',
+    interestStampDutyRate: '',
+    mortgageStampDutyRate: '',
     acquisitionStampDutyRate: '',
     taxResidentInPortugal: '',
   },
@@ -131,34 +130,30 @@ export const initialState = {
       'propertyLocation',
       'Arroios, Lisboa, Lisboa, Portugal',
     ),
+    propertyCondition: extractInputValueFromLocalStorage(
+      'propertyCondition',
+      'all',
+    ),
     propertyType: extractInputValueFromLocalStorage('propertyType', 'all'),
     propertyTypology: extractInputValueFromLocalStorage(
       'propertyTypology',
-      'all',
-    ),
-    propertyCondition: extractInputValueFromLocalStorage(
-      'propertyCondition',
       'all',
     ),
     minAskingPrice: extractInputValueFromLocalStorage('minAskingPrice', null),
     maxAskingPrice: extractInputValueFromLocalStorage('maxAskingPrice', null),
     minUsefulArea: extractInputValueFromLocalStorage('minUsefulArea', null),
     maxUsefulArea: extractInputValueFromLocalStorage('maxUsefulArea', null),
-    minCapital: extractInputValueFromLocalStorage('minCapital', null),
-    maxCapital: extractInputValueFromLocalStorage('maxCapital', null),
     bidAskRate: extractInputValueFromLocalStorage('bidAskRate', 5),
-    financingRate: extractInputValueFromLocalStorage('financingRate', 80),
-    housePriceIndexRate: extractInputValueFromLocalStorage(
-      'housePriceIndexRate',
-      1,
-    ),
-    minProfit: extractInputValueFromLocalStorage('minProfit', 10000),
-    acquisitionType: extractInputValueFromLocalStorage(
-      'acquisitionType',
-      'acquisition.type.investment',
+    realEstateTransferTax: extractInputValueFromLocalStorage(
+      'realEstateTransferTax',
+      true,
     ),
     acquisitionBrokerRate: extractInputValueFromLocalStorage(
       'acquisitionBrokerRate',
+      0,
+    ),
+    acquisitionBrokerRateVat: extractInputValueFromLocalStorage(
+      'acquisitionBrokerRateVat',
       0,
     ),
     acquisitionStampDutyRate: extractInputValueFromLocalStorage(
@@ -169,71 +164,106 @@ export const initialState = {
       'landRegistryInscription',
       700,
     ),
+    financing: extractInputValueFromLocalStorage('financing', true),
+    financingRate: extractInputValueFromLocalStorage('financingRate', 80),
     interestRate: extractInputValueFromLocalStorage('interestRate', 4),
-    bankCommissionRate: extractInputValueFromLocalStorage(
-      'bankCommissionRate',
-      1,
-    ),
     amortization: extractInputValueFromLocalStorage('amortization', 30),
-    capexFinancingRate: extractInputValueFromLocalStorage(
-      'capexFinancingRate',
-      80,
-    ),
-    capexPerSquareMeter: extractInputValueFromLocalStorage(
-      'capexPerSquareMeter',
-      100,
-    ),
-    stampDutyMortgageRate: extractInputValueFromLocalStorage(
-      'stampDutyMortgageRate',
-      0.6,
-    ),
-    stampDutyInterestRate: extractInputValueFromLocalStorage(
-      'stampDutyInterestRate',
-      4,
-    ),
-    condominiumCosts: extractInputValueFromLocalStorage('condominiumCosts', 30),
-    propertyTaxRate: extractInputValueFromLocalStorage('propertyTaxRate', 0.3),
     multiRiskInsurance: extractInputValueFromLocalStorage(
       'multiRiskInsurance',
       15,
     ),
     lifeInsurance: extractInputValueFromLocalStorage('lifeInsurance', 15),
-    timeToSale: extractInputValueFromLocalStorage('timeToSale', 12),
-    exitBrokerRate: extractInputValueFromLocalStorage('exitBrokerRate', 5),
-    earlyRepaymentRate: extractInputValueFromLocalStorage(
-      'earlyRepaymentRate',
+    bankCommissionRate: extractInputValueFromLocalStorage(
+      'bankCommissionRate',
+      1,
+    ),
+    loanEarlyRepaymentRate: extractInputValueFromLocalStorage(
+      'loanEarlyRepaymentRate',
       0.5,
     ),
-    capitalGainsTaxRate: extractInputValueFromLocalStorage(
-      'capitalGainsTaxRate',
+    mortgageStampDutyRate: extractInputValueFromLocalStorage(
+      'mortgageStampDutyRate',
+      0.6,
+    ),
+    interestStampDutyRate: extractInputValueFromLocalStorage(
+      'interestStampDutyRate',
+      4,
+    ),
+    rehab: extractInputValueFromLocalStorage('rehab', true),
+    rehabPricePerSquareMeter: extractInputValueFromLocalStorage(
+      'rehabPricePerSquareMeter',
       100,
+    ),
+    rehabFinancingRate: extractInputValueFromLocalStorage(
+      'rehabFinancingRate',
+      80,
+    ),
+    rehabVat: extractInputValueFromLocalStorage('rehabVat', null),
+    rent: extractInputValueFromLocalStorage('rent', true),
+    timeToRent: extractInputValueFromLocalStorage('timeToRent', 2),
+    contractPeriod: extractInputValueFromLocalStorage('contractPeriod', 2),
+    propertyManagerRate: extractInputValueFromLocalStorage(
+      'propertyManagerRate',
+      2,
+    ),
+    rentBrokerFee: extractInputValueFromLocalStorage('rentBrokerFee', 2),
+    rentBrokerFeeVat: extractInputValueFromLocalStorage('rentBrokerFeeVat', 2),
+    rentTaxRate: extractInputValueFromLocalStorage('rentTaxRate', 2),
+    rentStampDutyRate: extractInputValueFromLocalStorage(
+      'rentStampDutyRate',
+      2,
+    ),
+    condominiumCosts: extractInputValueFromLocalStorage('condominiumCosts', 30),
+    propertyTax: extractInputValueFromLocalStorage('propertyTax', true),
+    maintenanceCosts: extractInputValueFromLocalStorage('maintenanceCosts', 15),
+    otherOperatingCosts: extractInputValueFromLocalStorage(
+      'otherOperatingCosts',
+      15,
     ),
     taxResidentInPortugal: extractInputValueFromLocalStorage(
       'taxResidentInPortugal',
       true,
     ),
-    realEstateTransferTax: extractInputValueFromLocalStorage(
-      'realEstateTransferTax',
-      true,
-    ),
-    /* TODO IRS irsCategory: extractInputValueFromLocalStorage('irsCategory', null),
+    irsCategory: extractInputValueFromLocalStorage('irsCategory', null),
     irsCategoryRegion: extractInputValueFromLocalStorage(
       'irsCategoryRegion',
       null,
     ),
     irsDependents: extractInputValueFromLocalStorage('irsDependents', null),
-    grossSalary: extractInputValueFromLocalStorage('grossSalary', null), */
+    grossSalary: extractInputValueFromLocalStorage('grossSalary', null),
     currentIrsRate: extractInputValueFromLocalStorage('currentIrsRate', 20),
-    grossAreaToUsefulAreaRate: extractInputValueFromLocalStorage(
-      'grossAreaToUsefulAreaRate',
-      10,
+    acquisitionType: extractInputValueFromLocalStorage(
+      'acquisitionType',
+      'acquisition.type.investment',
     ),
-    floorRate: extractInputValueFromLocalStorage('floorRate', 20),
-    capRate: extractInputValueFromLocalStorage('capRate', 20),
-    ciPercentile: extractInputValueFromLocalStorage(
-      'ciPercentile',
-      'percentile.p95',
+    capitalGainsTaxBaseRate: extractInputValueFromLocalStorage(
+      'capitalGainsTaxBaseRate',
+      100,
     ),
+    rehabTaxRate: extractInputValueFromLocalStorage('rehabTaxRate', 100),
+    timeToSale: extractInputValueFromLocalStorage('timeToSale', 12),
+    percentile: extractInputValueFromLocalStorage(
+      'percentile',
+      'percentile.average',
+    ),
+    housePriceIndexRate: extractInputValueFromLocalStorage(
+      'housePriceIndexRate',
+      5,
+    ),
+    exitBrokerRate: extractInputValueFromLocalStorage('exitBrokerRate', 5),
+    exitBrokerRateVat: extractInputValueFromLocalStorage(
+      'exitBrokerRateVat',
+      5,
+    ),
+    minRequiredCapital: extractInputValueFromLocalStorage(
+      'minRequiredCapital',
+      null,
+    ),
+    maxRequiredCapital: extractInputValueFromLocalStorage(
+      'maxRequiredCapital',
+      null,
+    ),
+    minProfit: extractInputValueFromLocalStorage('minProfit', 10000),
   },
 };
 
@@ -304,16 +334,15 @@ const investmentReducer = (state = initialState, action) =>
         draft.irsDependentsList = action.payload;
         draft.isGettingIrsDependentsList = false;
         break;
-      case GET_CI_PERCENTILES:
-        draft.isGettingCiPercentiles = true;
+      case GET_PERCENTILES:
+        draft.isGettingPercentiles = true;
         break;
-      case GET_CI_PERCENTILES_SUCCESS:
-        draft.ciPercentiles = action.payload;
-        draft.isGettingCiPercentiles = false;
+      case GET_PERCENTILES_SUCCESS:
+        draft.percentiles = action.payload;
+        draft.isGettingPercentiles = false;
         break;
       case SET_INPUT_VALUE:
         draft.inputs[action.payload.input] = action.payload.value;
-        console.log(action.payload);
         localStorage.setItem('inputs', JSON.stringify(draft.inputs));
         break;
       case SET_INPUT_ERROR:

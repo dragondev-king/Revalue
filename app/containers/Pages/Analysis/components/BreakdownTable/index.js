@@ -23,10 +23,7 @@ const BreakdownTable = ({ props }) => {
     <Grid>
       {!props.isGettingAnalysisById ? (
         <Paper className={classes.breakdownTablePaper}>
-          <Scrollbar
-            className="scrollable position-relative"
-            style={{ maxHeight: '800px', minWidth: '400px' }}
-          >
+          <Scrollbar className="scrollable position-relative">
             <TableContainer style={{ overflow: 'unset' }}>
               <Table stickyHeader aria-label="sticky table" size="small">
                 <TableHead>

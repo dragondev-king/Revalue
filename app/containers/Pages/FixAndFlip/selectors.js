@@ -66,7 +66,7 @@ const makeSelectIrsDependentsList = () =>
 const makeSelectCIPs = () =>
   createSelector(
     selectInvestmentDomain,
-    substate => substate.ciPercentiles,
+    substate => substate.percentiles,
   );
 
 const makeSelectInputs = () =>

@@ -32,12 +32,12 @@ export default defineMessages({
     defaultMessage:
       'Is there a broker fee to be paid by the buyer? Typically this fee is paid by the seller however a broker can request a fee as buy side advisor.',
   },
-  realEstateTransferTax: {
-    id: `${scope}.realEstateTransferTax`,
-    defaultMessage: 'Real Estate Transfer Tax',
+  realEstateTransferTaxFee: {
+    id: `${scope}.realEstateTransferTaxFee`,
+    defaultMessage: 'Real Estate Transfer Tax Fee',
   },
-  realEstateTransferTaxInfo: {
-    id: `${scope}.realEstateTransferTaxInfo`,
+  realEstateTransferTaxFeeInfo: {
+    id: `${scope}.realEstateTransferTaxFeeInfo`,
     defaultMessage:
       'Real estate transfer tax (Imposto Municipal Sobre Transmissôes Onerosas de Imóveis – IMT) is paid by the buyer when there is a transfer of ownership of the real estate in Portugal. The percentage of tax charged can range from 1% to 8%, depending on the purchase price, the location of the property and whether it is the first or second home in Portugal.',
   },
@@ -50,12 +50,12 @@ export default defineMessages({
     defaultMessage:
       'Stamp duty for acquisition is 0.8% of the maximum value between acquisition and tax value.',
   },
-  notary: {
-    id: `${scope}.notary`,
-    defaultMessage: 'Notary',
+  landRegistryInscription: {
+    id: `${scope}.landRegistryInscription`,
+    defaultMessage: 'landRegistryInscription',
   },
-  notaryInfo: {
-    id: `${scope}.notaryInfo`,
+  landRegistryInscriptionInfo: {
+    id: `${scope}.landRegistryInscriptionInfo`,
     defaultMessage:
       'The public deed contract needs to be made by a recognized entity or person such as a public notary office, a lawyer or a solicitor. A popular choice is the “Casa Pronta” (Ready House) notary offices, where the process can be more streamlined and cheaper than normal.' +
       'For this reason, the reference in terms of price is the Casa Pronta notary offices, where it normally costs 375,00 €, including both the preparation of the public deed contract and the registry. With mortgage normally will be 700€.',
@@ -69,12 +69,12 @@ export default defineMessages({
     defaultMessage:
       'The mortgage stamp duty is 0.60% of the final loan amount if the loan is for more than 5 years.',
   },
-  bankCommission: {
-    id: `${scope}.bankCommission`,
-    defaultMessage: 'Bank Commission',
+  bankCommissionFee: {
+    id: `${scope}.bankCommissionFee`,
+    defaultMessage: 'Bank Commission Fee',
   },
-  bankCommissionInfo: {
-    id: `${scope}.bankCommissionInfo`,
+  bankCommissionFeeInfo: {
+    id: `${scope}.bankCommissionFeeInfo`,
     defaultMessage:
       'Bank fees vary, depending on the lender and loan amount. Details will be provided in the mortgage proposal document.',
   },
@@ -111,12 +111,12 @@ export default defineMessages({
     id: `${scope}.acquisitionDebtInfo`,
     defaultMessage: 'Debt for property acquisition.',
   },
-  capexDebt: {
-    id: `${scope}.capexDebt`,
+  rehabDebt: {
+    id: `${scope}.rehabDebt`,
     defaultMessage: 'Capital Expenditures Debt',
   },
-  capexDebtInfo: {
-    id: `${scope}.capexDebtInfo`,
+  rehabDebtInfo: {
+    id: `${scope}.rehabDebtInfo`,
     defaultMessage: 'Debt for works/renovations on the property.',
   },
   amortization: {
@@ -127,13 +127,13 @@ export default defineMessages({
     id: `${scope}.amortizationInfo`,
     defaultMessage: 'Debt principal amortization.',
   },
-  interests: {
-    id: `${scope}.interests`,
-    defaultMessage: 'Interests',
+  interest: {
+    id: `${scope}.interest`,
+    defaultMessage: 'Interest',
   },
-  interestsInfo: {
-    id: `${scope}.interestsInfo`,
-    defaultMessage: 'Debt interests.',
+  interestInfo: {
+    id: `${scope}.interestInfo`,
+    defaultMessage: 'Debt interest.',
   },
   eopDebt: {
     id: `${scope}.eopDebt`,
@@ -144,6 +144,22 @@ export default defineMessages({
     defaultMessage:
       'Debt at the end of the period, after debt and amortization.',
   },
+  debtService: {
+    id: `${scope}.debtService`,
+    defaultMessage: 'debtService',
+  },
+  debtServiceInfo: {
+    id: `${scope}.debtServiceInfo`,
+    defaultMessage: 'debtServiceInfo',
+  },
+  rent: {
+    id: `${scope}.rent`,
+    defaultMessage: 'rent',
+  },
+  rentInfo: {
+    id: `${scope}.rentInfo`,
+    defaultMessage: 'rentInfo',
+  },
   operating: {
     id: `${scope}.operating`,
     defaultMessage: 'Operating',
@@ -152,20 +168,52 @@ export default defineMessages({
     id: `${scope}.operatingInfo`,
     defaultMessage: 'Operating',
   },
-  capex: {
-    id: `${scope}.capex`,
+  rentStampDutyFee: {
+    id: `${scope}.rentStampDutyFee`,
+    defaultMessage: 'rentStampDutyFee',
+  },
+  rentStampDutyFeeInfo: {
+    id: `${scope}.rentStampDutyFeeInfo`,
+    defaultMessage: 'rentStampDutyFeeInfo',
+  },
+  rentBrokerFee: {
+    id: `${scope}.rentBrokerFee`,
+    defaultMessage: 'rentBrokerFee',
+  },
+  rentBrokerFeeInfo: {
+    id: `${scope}.rentBrokerFeeInfo`,
+    defaultMessage: 'rentBrokerFeeInfo',
+  },
+  propertyManagerFee: {
+    id: `${scope}.propertyManagerFee`,
+    defaultMessage: 'propertyManagerFee',
+  },
+  propertyManagerFeeInfo: {
+    id: `${scope}.propertyManagerFeeInfo`,
+    defaultMessage: 'propertyManagerFeeInfo',
+  },
+  maintenanceCosts: {
+    id: `${scope}.maintenanceCosts`,
+    defaultMessage: 'maintenanceCosts',
+  },
+  maintenanceCostsInfo: {
+    id: `${scope}.maintenanceCostsInfo`,
+    defaultMessage: 'maintenanceCostsInfo',
+  },
+  rehab: {
+    id: `${scope}.rehab`,
     defaultMessage: 'Capital expenditures',
   },
-  capexInfo: {
-    id: `${scope}.capexInfo`,
+  rehabInfo: {
+    id: `${scope}.rehabInfo`,
     defaultMessage: 'Investment/works on the property.',
   },
-  propertyTax: {
-    id: `${scope}.propertyTax`,
+  propertyTaxFee: {
+    id: `${scope}.propertyTaxFee`,
     defaultMessage: 'Property Tax',
   },
-  propertyTaxInfo: {
-    id: `${scope}.propertyTaxInfo`,
+  propertyTaxFeeInfo: {
+    id: `${scope}.propertyTaxFeeInfo`,
     defaultMessage: 'Property Tax',
   },
   condominiumCosts: {
@@ -192,6 +240,14 @@ export default defineMessages({
     id: `${scope}.multiRiskInsuranceInfo`,
     defaultMessage: 'This insurance is mandatory for real estate.',
   },
+  otherOperatingCosts: {
+    id: `${scope}.otherOperatingCosts`,
+    defaultMessage: 'otherOperatingCosts',
+  },
+  otherOperatingCostsInfo: {
+    id: `${scope}.otherOperatingCostsInfo`,
+    defaultMessage: 'otherOperatingCostsInfo',
+  },
   totalOperatingCosts: {
     id: `${scope}.totalOperatingCosts`,
     defaultMessage: 'Total Operating Costs',
@@ -200,6 +256,14 @@ export default defineMessages({
     id: `${scope}.totalOperatingCostsInfo`,
     defaultMessage: 'Total investment operating costs.',
   },
+  netOperatingIncome: {
+    id: `${scope}.netOperatingIncome`,
+    defaultMessage: 'netOperatingIncome',
+  },
+  netOperatingIncomeInfo: {
+    id: `${scope}.netOperatingIncomeInfo`,
+    defaultMessage: 'netOperatingIncomeInfo',
+  },
   exit: {
     id: `${scope}.exit`,
     defaultMessage: 'Exit',
@@ -207,15 +271,6 @@ export default defineMessages({
   exitInfo: {
     id: `${scope}.exitInfo`,
     defaultMessage: 'Exit',
-  },
-  marketValue: {
-    id: `${scope}.marketValue`,
-    defaultMessage: 'Market Value',
-  },
-  marketValueInfo: {
-    id: `${scope}.marketValueInfo`,
-    defaultMessage:
-      'Property value grows per year. Example: If house price index is 2% and the market value is 100.000€ at the moment of the acquisition, one year after the market value will be 102.000€ and in year 3 104.040€.',
   },
   transactionPrice: {
     id: `${scope}.transactionPrice`,
@@ -257,6 +312,14 @@ export default defineMessages({
   profitBeforeTaxInfo: {
     id: `${scope}.profitBeforeTaxInfo`,
     defaultMessage: 'Profit before capital gains tax.',
+  },
+  rentTax: {
+    id: `${scope}.rentTax`,
+    defaultMessage: 'rentTax',
+  },
+  rentTaxInfo: {
+    id: `${scope}.rentTaxInfo`,
+    defaultMessage: 'rentTaxInfo',
   },
   capitalGains: {
     id: `${scope}.capitalGains`,

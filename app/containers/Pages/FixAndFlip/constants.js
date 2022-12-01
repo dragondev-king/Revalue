@@ -32,9 +32,8 @@ export const GET_IRS_CATEGORY_REGIONS =
 export const GET_IRS_CATEGORY_REGIONS_SUCCESS =
   'app/FixAndFlip/GET_IRS_CATEGORY_REGIONS_SUCCESS';
 
-export const GET_CI_PERCENTILES = 'app/FixAndFlip/GET_CI_PERCENTILES';
-export const GET_CI_PERCENTILES_SUCCESS =
-  'app/FixAndFlip/GET_CI_PERCENTILES_SUCCESS';
+export const GET_PERCENTILES = 'app/FixAndFlip/GET_PERCENTILES';
+export const GET_PERCENTILES_SUCCESS = 'app/FixAndFlip/GET_PERCENTILES_SUCCESS';
 
 export const SET_INPUT_VALUE = 'app/FixAndFlip/SET_INPUT_VALUE';
 export const SET_INPUT_ERROR = 'app/FixAndFlip/SET_INPUT_ERROR';

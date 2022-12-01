@@ -21,8 +21,8 @@ import {
   GET_PROPERTY_CONDITIONS_SUCCESS,
   GET_ACQUISITION_TYPES,
   GET_ACQUISITION_TYPES_SUCCESS,
-  GET_CI_PERCENTILES,
-  GET_CI_PERCENTILES_SUCCESS,
+  GET_PERCENTILES,
+  GET_PERCENTILES_SUCCESS,
   SET_INPUT_ERROR,
   SET_ANALYZE_BUTTON_DISABLED,
   SET_INPUT_VALUE,
@@ -140,14 +140,14 @@ export const getAcquisitionTypes = () => async dispatch => {
 
 export const getCIPs = () => async dispatch => {
   dispatch({
-    type: GET_CI_PERCENTILES,
+    type: GET_PERCENTILES,
   });
   const propertyManagerApiClient = new ApiClient('PROPERTY_MANAGER');
   await propertyManagerApiClient
   .get(PERCENTILES_PATH)
   .then(response => {
     dispatch({
-      type: GET_CI_PERCENTILES_SUCCESS,
+      type: GET_PERCENTILES_SUCCESS,
       payload: response.data,
     });
   })

@@ -4,7 +4,14 @@ import { initialState } from './reducer';
 /**
  * Direct selector to the languageToggle state domain
  */
-const selectLanguage = state => state.language || initialState;
+const selectLanguage = state => {
+  if (state.language) {
+    localStorage.setItem('language', state.language.locale);
+    return state.language;
+  }
+  localStorage.setItem('language', initialState.locale);
+  return initialState;
+};
 
 /**
  * Select the language locale
