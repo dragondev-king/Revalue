@@ -5,7 +5,7 @@ import Settings from 'containers/Pages/Settings';
 import Account from 'containers/Pages/Account';
 import Register from 'containers/Pages/Register';
 import Simple from 'containers/Layouts/Simple';
-import FixAndFlip from 'containers/Pages/FixAndFlip';
+import FixAndFlip from 'containers/Pages/FixAndFlipNew';
 import Analysis from 'containers/Pages/Analysis';
 
 export const pages = [
