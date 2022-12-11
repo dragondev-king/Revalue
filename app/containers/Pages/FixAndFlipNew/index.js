@@ -1,7 +1,7 @@
 /* eslint-disable react/no-array-index-key */
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo, useCallback, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-// import * as yup from 'yup';
+import * as yup from 'yup';
 import { Helmet } from 'react-helmet';
 import { injectIntl } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
@@ -185,199 +185,70 @@ export function FixAndFlip(props) {
     props.getCIPs();
   }, []);
 
-  // const validationSchema = yup.object().shape({
-  //   propertyLocation: yup
-  //     .string()
-  //     .nullable()
-  //     .required('inputRequired'),
-  //   financingRate: yup
-  //     .number()
-  //     .transform(v => (v === '' || Number.isNaN(v) ? null : v))
-  //     .nullable()
-  //     .required('inputRequired'),
-  //   bidAskRate: yup
-  //     .number()
-  //     .transform(v => (v === '' || Number.isNaN(v) ? null : v))
-  //     .nullable()
-  //     .required('inputRequired'),
-  //   minProfit: yup
-  //     .number()
-  //     .transform(v => (v === '' || Number.isNaN(v) ? null : v))
-  //     .nullable(),
-  //   minRequiredCapital: yup
-  //     .number()
-  //     .transform(v => (v === '' || Number.isNaN(v) ? null : v))
-  //     .nullable(),
-  //   maxRequiredCapital: yup
-  //     .number()
-  //     .transform(v => (v === '' || Number.isNaN(v) ? null : v))
-  //     .nullable(),
-  //   minAskingPrice: yup
-  //     .number()
-  //     .transform(v => (v === '' || Number.isNaN(v) ? null : v))
-  //     .nullable(),
-  //   maxAskingPrice: yup
-  //     .number()
-  //     .transform(v => (v === '' || Number.isNaN(v) ? null : v))
-  //     .nullable(),
-  //   minUsefulArea: yup
-  //     .number()
-  //     .transform(v => (v === '' || Number.isNaN(v) ? null : v))
-  //     .nullable(),
-  //   maxUsefulArea: yup
-  //     .number()
-  //     .transform(v => (v === '' || Number.isNaN(v) ? null : v))
-  //     .nullable(),
-  //   acquisitionBrokerRate: yup
-  //     .number()
-  //     .transform(v => (v === '' || Number.isNaN(v) ? null : v))
-  //     .nullable()
-  //     .required('inputRequired'),
-  //   acquisitionStampDutyRate: yup
-  //     .number()
-  //     .transform(v => (v === '' || Number.isNaN(v) ? null : v))
-  //     .nullable()
-  //     .required('inputRequired'),
-  //   landRegistryInscription: yup
-  //     .number()
-  //     .transform(v => (v === '' || Number.isNaN(v) ? null : v))
-  //     .nullable()
-  //     .required('inputRequired'),
-  //   bankCommissionRate: yup
-  //     .number()
-  //     .transform(v => (v === '' || Number.isNaN(v) ? null : v))
-  //     .nullable()
-  //     .required('inputRequired'),
-  //   mortgageStampDutyRate: yup
-  //     .number()
-  //     .transform(v => (v === '' || Number.isNaN(v) ? null : v))
-  //     .nullable()
-  //     .required('inputRequired'),
-  //   interestStampDutyRate: yup
-  //     .number()
-  //     .transform(v => (v === '' || Number.isNaN(v) ? null : v))
-  //     .nullable()
-  //     .required('inputRequired'),
-  //   interestRate: yup
-  //     .number()
-  //     .transform(v => (v === '' || Number.isNaN(v) ? null : v))
-  //     .nullable()
-  //     .required('inputRequired'),
-  //   rehabFinancingRate: yup
-  //     .number()
-  //     .transform(v => (v === '' || Number.isNaN(v) ? null : v))
-  //     .nullable(),
-  //   loanEarlyRepaymentRate: yup
-  //     .number()
-  //     .transform(v => (v === '' || Number.isNaN(v) ? null : v))
-  //     .nullable()
-  //     .required('inputRequired'),
-  //   amortization: yup
-  //     .number()
-  //     .transform(v => (v === '' || Number.isNaN(v) ? null : v))
-  //     .nullable()
-  //     .required('inputRequired'),
-  //   condominiumCosts: yup
-  //     .number()
-  //     .transform(v => (v === '' || Number.isNaN(v) ? null : v))
-  //     .nullable()
-  //     .required('inputRequired'),
-  //   rehabPricePerSquareMeter: yup
-  //     .number()
-  //     .transform(v => (v === '' || Number.isNaN(v) ? null : v))
-  //     .nullable(),
-  //   multiRiskInsurance: yup
-  //     .number()
-  //     .transform(v => (v === '' || Number.isNaN(v) ? null : v))
-  //     .nullable(),
-  //   lifeInsurance: yup
-  //     .number()
-  //     .transform(v => (v === '' || Number.isNaN(v) ? null : v))
-  //     .nullable(),
-  //   taxResidentInPortugal: yup
-  //     .boolean()
-  //     .nullable()
-  //     .required('inputRequired'),
-  //   capitalGainsTaxBaseRate: yup
-  //     .number()
-  //     .transform(v => (v === '' || Number.isNaN(v) ? null : v))
-  //     .nullable()
-  //     .required('inputRequired'),
-  //   currentIrsRate: yup
-  //     .number()
-  //     .transform(v => (v === '' || Number.isNaN(v) ? null : v))
-  //     .nullable()
-  //     // eslint-disable-next-line consistent-return
-  //     .when(['taxResidentInPortugal'], taxResidentInPortugal => {
-  //       if (taxResidentInPortugal) {
-  //         return yup
-  //           .number()
-  //           .transform(v => (v === '' || Number.isNaN(v) ? null : v))
-  //           .nullable()
-  //           .required('inputRequired');
-  //       }
-  //     }),
-  //   timeToSale: yup
-  //     .number()
-  //     .transform(v => (v === '' || Number.isNaN(v) ? null : v))
-  //     .nullable()
-  //     .required('inputRequired'),
-  //   exitBrokerRate: yup
-  //     .number()
-  //     .transform(v => (v === '' || Number.isNaN(v) ? null : v))
-  //     .nullable()
-  //     .required('inputRequired'),
-  // });
+  const validationSchema = yup.object().shape({
+    currentIrsRate: yup
+      .number()
+      .transform(v => (v === '' || Number.isNaN(v) ? null : v))
+      .nullable()
+      // eslint-disable-next-line consistent-return
+      .when(['taxResidentInPortugal'], taxResidentInPortugal => {
+        if (taxResidentInPortugal) {
+          return yup
+            .number()
+            .transform(v => (v === '' || Number.isNaN(v) ? null : v))
+            .nullable()
+            .required('inputRequired');
+        }
+      }),
+  });
 
-  // const onSubmit = () => {
-  //   validationSchema
-  //     .validate(props.inputs, {
-  //       abortEarly: false,
-  //     })
-  //     .then(() => {
-  //       props.getAnalysis(props.inputs);
-  //       props.setAnalyzeButtonDisabled(true);
-  //     })
-  //     .catch(error => {
-  //       if (error.inner && error.inner.length > 0) {
-  //         error.inner.forEach(item => {
-  //           props.setInputError(
-  //             item.path,
-  //             props.intl.formatMessage({
-  //               ...messages[item.message],
-  //             }),
-  //           );
-  //         });
-  //       }
-  //     });
-  // };
+  const handleAnalyze = useCallback(() => {
+    validationSchema
+      .validate(props.inputs, {
+        abortEarly: false,
+      })
+      .then(() => {
+        props.getAnalysis(props.inputs);
+        props.setAnalyzeButtonDisabled(true);
+      })
+      .catch(error => {
+        if (error.inner && error.inner.length > 0) {
+          error.inner.forEach(item => {
+            props.setInputError(
+              item.path,
+              props.intl.formatMessage({
+                ...messages[item.message],
+              }),
+            );
+          });
+        }
+      });
+  }, [props]);
 
-  // function handleChange(event) {
-  //   const { name, value } = event.target;
-  //   props.setInputValue(name, value);
-  //   props.setInputError(name, '');
-  //   props.setAnalyzeButtonDisabled(false);
+  const handleChange = useCallback(event => {
+    const { name, value } = event.target;
+    props.setInputValue(name, value);
+    props.setInputError(name, '');
 
-  //   if (name === 'acquisitionType') {
-  //     if (value === 'acquisition.type.permanent.housing') {
-  //       props.setInputValue('capitalGainsTaxBaseRate', 50);
-  //       props.setInputError('capitalGainsTaxBaseRate', '');
-  //     } else if (value === 'acquisition.type.investment') {
-  //       props.setInputValue('capitalGainsTaxBaseRate', 100);
-  //       props.setInputError('capitalGainsTaxBaseRate', '');
-  //     }
-  //   }
-  // }
+    if (name === 'acquisitionType') {
+      if (value === 'acquisition.type.permanent.housing') {
+        props.setInputValue('capitalGainsTaxBaseRate', 50);
+        props.setInputError('capitalGainsTaxBaseRate', '');
+      } else if (value === 'acquisition.type.investment') {
+        props.setInputValue('capitalGainsTaxBaseRate', 100);
+        props.setInputError('capitalGainsTaxBaseRate', '');
+      }
+    }
+  }, []);
 
-  // function handleChangeSwitch(event) {
-  //   const { name, checked } = event.target;
-  //   if (checked) {
-  //     props.setInputValue(name, true);
-  //   } else {
-  //     props.setInputValue(name, false);
-  //   }
-  //   props.setAnalyzeButtonDisabled(false);
-  // }
+  const handleChangeSwitch = useCallback(event => {
+    const { name, checked } = event.target;
+    if (checked) {
+      props.setInputValue(name, true);
+    } else {
+      props.setInputValue(name, false);
+    }
+  }, []);
 
   function renderStepContent(step) {
     switch (step) {
@@ -387,6 +258,8 @@ export function FixAndFlip(props) {
             {...props}
             classes={classes}
             onNextClick={() => setActiveStep(activeStep + 1)}
+            handleChange={handleChange}
+            handleChangeSwitch={handleChangeSwitch}
           />
         );
       case 1:
@@ -396,6 +269,8 @@ export function FixAndFlip(props) {
             classes={classes}
             onBackClick={() => setActiveStep(activeStep - 1)}
             onNextClick={() => setActiveStep(activeStep + 1)}
+            handleChange={handleChange}
+            handleChangeSwitch={handleChangeSwitch}
           />
         );
       case 2:
@@ -405,6 +280,8 @@ export function FixAndFlip(props) {
             classes={classes}
             onBackClick={() => setActiveStep(activeStep - 1)}
             onNextClick={() => setActiveStep(activeStep + 1)}
+            handleChange={handleChange}
+            handleChangeSwitch={handleChangeSwitch}
           />
         );
       case 3:
@@ -414,6 +291,8 @@ export function FixAndFlip(props) {
             classes={classes}
             onBackClick={() => setActiveStep(activeStep - 1)}
             onNextClick={() => setActiveStep(activeStep + 1)}
+            handleChange={handleChange}
+            handleChangeSwitch={handleChangeSwitch}
           />
         );
       case 4:
@@ -423,6 +302,8 @@ export function FixAndFlip(props) {
             classes={classes}
             onBackClick={() => setActiveStep(activeStep - 1)}
             onNextClick={() => setActiveStep(activeStep + 1)}
+            handleChange={handleChange}
+            handleChangeSwitch={handleChangeSwitch}
           />
         );
       case 5:
@@ -432,6 +313,8 @@ export function FixAndFlip(props) {
             classes={classes}
             onBackClick={() => setActiveStep(activeStep - 1)}
             onNextClick={() => setActiveStep(activeStep + 1)}
+            handleChange={handleChange}
+            handleChangeSwitch={handleChangeSwitch}
           />
         );
       case 6:
@@ -441,6 +324,8 @@ export function FixAndFlip(props) {
             classes={classes}
             onBackClick={() => setActiveStep(activeStep - 1)}
             onNextClick={() => setActiveStep(activeStep + 1)}
+            handleChange={handleChange}
+            handleChangeSwitch={handleChangeSwitch}
           />
         );
       case 7:
@@ -450,6 +335,8 @@ export function FixAndFlip(props) {
             classes={classes}
             onBackClick={() => setActiveStep(activeStep - 1)}
             onNextClick={() => setActiveStep(activeStep + 1)}
+            handleChange={handleChange}
+            handleChangeSwitch={handleChangeSwitch}
           />
         );
       case 8:
@@ -457,7 +344,10 @@ export function FixAndFlip(props) {
           <Capital
             {...props}
             classes={classes}
+            handleChange={handleChange}
+            handleChangeSwitch={handleChangeSwitch}
             onBackClick={() => setActiveStep(activeStep - 1)}
+            onSubmit={handleAnalyze}
           />
         );
       default:
@@ -473,8 +363,10 @@ export function FixAndFlip(props) {
         <Stepper orientation="vertical" activeStep={activeStep}>
           {steps.map((step, idx) => (
             <Step key={idx}>
-              <StepLabel>{step.label}</StepLabel>
-              <p>{step.detail}</p>
+              <StepLabel>
+                <h6>{step.label}</h6>
+                <p>{step.detail}</p>
+              </StepLabel>
             </Step>
           ))}
         </Stepper>
