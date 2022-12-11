@@ -105,6 +105,9 @@ const Capital = props => {
         <BackNextButtons
           onBackClick={props.onBackClick}
           onSubmit={handleSubmit}
+          isGettingAnalysis={props.isGettingAnalysis}
+          classes={props.classes}
+          analyzeButtonDisabled={props.analyzeButtonDisabled}
         />
       </div>
     </>

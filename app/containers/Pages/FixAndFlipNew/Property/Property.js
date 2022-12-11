@@ -64,11 +64,11 @@ const Property = props => {
 
   return (
     <>
-      <Grid item container direction="row">
-        <Grid item container direction="column" style={{ minHeight: '400px' }}>
-          <Grid item container xs={4} className="pr-40">
+      <Grid item container direction="column">
+        <div className={props.classes.locationMapContainer}>
+          <div className={props.classes.locationContainer}>
             <Grid container direction="column" justifyContent="flex-start">
-              <Grid item container spacing={6}>
+              <Grid item container spacing={3}>
                 <Grid item xs={12} className="mb-10">
                   <FormControl
                     variant="standard"
@@ -118,13 +118,11 @@ const Property = props => {
                 </Grid>
               </Grid>
             </Grid>
-          </Grid>
-          <Grid item xs={8}>
-            <Map propertyLocation={props.inputs.propertyLocation} />
-          </Grid>
-        </Grid>
-        <Grid item container spacing={6} className="mt-20">
-          <Grid item container spacing={6}>
+          </div>
+          <Map propertyLocation={props.inputs.propertyLocation} />
+        </div>
+        <Grid item container spacing={3} className="mt-20">
+          <Grid item container spacing={3}>
             <Grid item xs={6}>
               <CustomSelect
                 error={props.errors.propertyCondition}
@@ -174,7 +172,7 @@ const Property = props => {
               />
             </Grid>
           </Grid>
-          <Grid item container spacing={6}>
+          <Grid item container spacing={3}>
             <Grid item xs={6}>
               <CustomInput
                 error={props.errors.minAskingPrice}
@@ -207,7 +205,7 @@ const Property = props => {
                 })}
               />
             </Grid>
-            <Grid item container spacing={6}>
+            <Grid item container spacing={3}>
               <Grid item xs={6}>
                 <CustomInput
                   error={props.errors.minUsefulArea}

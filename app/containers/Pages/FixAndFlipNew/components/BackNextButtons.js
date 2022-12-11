@@ -1,7 +1,15 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
-export const BackNextButtons = ({ onBackClick, onNextClick, onSubmit }) => (
+export const BackNextButtons = ({
+  onBackClick,
+  onNextClick,
+  onSubmit,
+  isGettingAnalysis,
+  classes,
+  analyzeButtonDisabled,
+}) => (
   <>
     {onBackClick ? <Button onClick={onBackClick}>Back</Button> : null}
     {onNextClick ? (
@@ -11,12 +19,16 @@ export const BackNextButtons = ({ onBackClick, onNextClick, onSubmit }) => (
     ) : null}
     {onSubmit ? (
       <Button
+        disabled={analyzeButtonDisabled}
         type="submit"
         color="primary"
         variant="contained"
         onClick={onSubmit}
       >
-        Analyze
+        {isGettingAnalysis && (
+          <CircularProgress size={20} className={classes.loading} />
+        )}
+        {!isGettingAnalysis && 'Analyze'}
       </Button>
     ) : null}
   </>

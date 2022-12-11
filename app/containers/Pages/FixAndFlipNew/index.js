@@ -229,6 +229,7 @@ export function FixAndFlip(props) {
     const { name, value } = event.target;
     props.setInputValue(name, value);
     props.setInputError(name, '');
+    props.setAnalyzeButtonDisabled(false);
 
     if (name === 'acquisitionType') {
       if (value === 'acquisition.type.permanent.housing') {
@@ -248,6 +249,7 @@ export function FixAndFlip(props) {
     } else {
       props.setInputValue(name, false);
     }
+    props.setAnalyzeButtonDisabled(false);
   }, []);
 
   function renderStepContent(step) {
@@ -360,7 +362,11 @@ export function FixAndFlip(props) {
   function renderStepper() {
     return (
       <Grid item xs={4}>
-        <Stepper orientation="vertical" activeStep={activeStep}>
+        <Stepper
+          orientation="vertical"
+          activeStep={activeStep}
+          className={classes.stepperContainer}
+        >
           {steps.map((step, idx) => (
             <Step key={idx}>
               <StepLabel>

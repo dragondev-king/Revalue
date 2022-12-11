@@ -29,6 +29,17 @@ export default makeStyles(() => ({
     fontWeight: '700',
     fontSize: '16px',
   },
+  stepperContainer: {
+    height: '100%',
+  },
+  locationMapContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    minHeight: '350px',
+  },
+  locationContainer: {
+    width: '60%',
+  },
   contentContainer: {
     backgroundColor: '#fff',
     padding: '16px',
@@ -57,6 +68,7 @@ export default makeStyles(() => ({
     border: 0,
   },
   loading: {
+    color: 'white',
     marginTop: '2px',
     marginBottom: '2px',
     marginLeft: '20px',
