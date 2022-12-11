@@ -252,6 +252,12 @@ export function FixAndFlip(props) {
     props.setAnalyzeButtonDisabled(false);
   }, []);
 
+  const handleSliderChange = useCallback((name, value) => {
+    props.setInputValue(name, value);
+    props.setInputError(name, '');
+    props.setAnalyzeButtonDisabled(false);
+  }, []);
+
   function renderStepContent(step) {
     switch (step) {
       case 0:
@@ -273,6 +279,7 @@ export function FixAndFlip(props) {
             onNextClick={() => setActiveStep(activeStep + 1)}
             handleChange={handleChange}
             handleChangeSwitch={handleChangeSwitch}
+            handleSliderChange={handleSliderChange}
           />
         );
       case 2:
@@ -284,6 +291,7 @@ export function FixAndFlip(props) {
             onNextClick={() => setActiveStep(activeStep + 1)}
             handleChange={handleChange}
             handleChangeSwitch={handleChangeSwitch}
+            handleSliderChange={handleSliderChange}
           />
         );
       case 3:
@@ -295,6 +303,7 @@ export function FixAndFlip(props) {
             onNextClick={() => setActiveStep(activeStep + 1)}
             handleChange={handleChange}
             handleChangeSwitch={handleChangeSwitch}
+            handleSliderChange={handleSliderChange}
           />
         );
       case 4:
@@ -317,6 +326,7 @@ export function FixAndFlip(props) {
             onNextClick={() => setActiveStep(activeStep + 1)}
             handleChange={handleChange}
             handleChangeSwitch={handleChangeSwitch}
+            handleSliderChange={handleSliderChange}
           />
         );
       case 6:
@@ -328,6 +338,7 @@ export function FixAndFlip(props) {
             onNextClick={() => setActiveStep(activeStep + 1)}
             handleChange={handleChange}
             handleChangeSwitch={handleChangeSwitch}
+            handleSliderChange={handleSliderChange}
           />
         );
       case 7:

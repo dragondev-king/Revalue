@@ -5,6 +5,7 @@ import * as yup from 'yup';
 
 import CustomInput from 'components/CustomInput';
 import CustomSwitch from 'components/CustomSwitch';
+import CustomSlider from 'components/CustomSlider';
 import { BackNextButtons } from '../components/BackNextButtons';
 import messages from '../messages';
 
@@ -58,20 +59,21 @@ export const Proposal = props => {
     <>
       <Grid container item>
         <Grid item container spacing={6} className="mt-20">
-          <Grid item xs={6}>
-            <CustomInput
+          <Grid item xs={8}>
+            <CustomSlider
               error={props.errors.bidAskRate}
-              name="bidAskRate"
-              type="number"
-              handleChange={props.handleChange}
-              defaultValue={props.inputs.bidAskRate}
-              symbol={<span>%</span>}
               labelText={`${props.intl.formatMessage({
                 ...messages.bidAskRate,
               })} *`}
+              value={props.inputs.bidAskRate}
               tooltipText={props.intl.formatMessage({
                 ...messages.bidAskRateInfo,
               })}
+              defaultValue={props.inputs.bidAskRate}
+              name="bidAskRate"
+              handleChange={props.handleSliderChange}
+              disabled={false}
+              valueLabelFormat="%"
             />
           </Grid>
         </Grid>
