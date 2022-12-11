@@ -4,12 +4,12 @@ import Grid from '@material-ui/core/Grid';
 
 import CustomInput from 'components/CustomInput';
 import CustomSwitch from 'components/CustomSwitch';
+import { BackNextButtons } from '../components/BackNextButtons';
 
 import messages from '../messages';
 
-const OperatingCosts = props => {
-  console.log('Operating Costs');
-  return (
+const OperatingCosts = props => (
+  <>
     <Grid container item>
       <Grid item container spacing={6} className="mt-20">
         <Grid item xs={6}>
@@ -74,7 +74,13 @@ const OperatingCosts = props => {
         </Grid>
       </Grid>
     </Grid>
-  );
-};
+    <div className={props.classes.buttonContainer}>
+      <BackNextButtons
+        onBackClick={props.onBackClick}
+        onNextClick={props.onNextClick}
+      />
+    </div>
+  </>
+);
 
 export default OperatingCosts;

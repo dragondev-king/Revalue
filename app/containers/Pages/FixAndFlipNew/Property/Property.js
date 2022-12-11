@@ -15,195 +15,192 @@ import { BackNextButtons } from '../components/BackNextButtons';
 
 import messages from '../messages';
 
-const Property = props => {
-  console.log('property');
-  return (
-    <div className={props.classes.contentContainer}>
-      <Grid item container direction="row">
-        <Grid item container direction="column" style={{ minHeight: '400px' }}>
-          <Grid item container xs={4} className="pr-40">
-            <Grid container direction="column" justifyContent="flex-start">
-              <Grid item container spacing={6}>
-                <Grid item xs={12} className="mb-10">
-                  <FormControl
-                    variant="standard"
-                    className="w-100"
+const Property = props => (
+  <>
+    <Grid item container direction="row">
+      <Grid item container direction="column" style={{ minHeight: '400px' }}>
+        <Grid item container xs={4} className="pr-40">
+          <Grid container direction="column" justifyContent="flex-start">
+            <Grid item container spacing={6}>
+              <Grid item xs={12} className="mb-10">
+                <FormControl
+                  variant="standard"
+                  className="w-100"
+                  error={!!props.errors.propertyLocation}
+                >
+                  <AutoComplete
+                    value={props.inputs.propertyLocation}
+                    onChange={(event, newValue) => {
+                      props.setPropertyLocation(newValue);
+                      props.setInputError('propertyLocation', '');
+                      props.setAnalyzeButtonDisabled(false);
+                    }}
                     error={!!props.errors.propertyLocation}
-                  >
-                    <AutoComplete
-                      value={props.inputs.propertyLocation}
-                      onChange={(event, newValue) => {
-                        props.setPropertyLocation(newValue);
-                        props.setInputError('propertyLocation', '');
-                        props.setAnalyzeButtonDisabled(false);
-                      }}
-                      error={!!props.errors.propertyLocation}
-                      name="propertyLocation"
-                      defaultValue={props.inputs.propertyLocation}
-                      options={props.propertyLocations}
-                      label={props.intl.formatMessage({
-                        ...messages.propertyLocation,
-                      })}
-                      popupIcon={
-                        <SearchIcon className={props.classes.searchIcon} />
-                      }
-                      renderOption={(option, value) => {
-                        const matches = match(option, value.inputValue);
-                        const parts = parse(option, matches);
-                        return (
-                          <div>
-                            {parts.map((part, index) => (
-                              <span
-                                key={index}
-                                style={{
-                                  fontWeight: part.highlight ? 700 : 400,
-                                }}
-                              >
-                                {part.text}
-                              </span>
-                            ))}
-                          </div>
-                        );
-                      }}
-                    />
-                    <FormHelperText>
-                      {props.errors.propertyLocation}
-                    </FormHelperText>
-                  </FormControl>
-                </Grid>
+                    name="propertyLocation"
+                    defaultValue={props.inputs.propertyLocation}
+                    options={props.propertyLocations}
+                    label={props.intl.formatMessage({
+                      ...messages.propertyLocation,
+                    })}
+                    popupIcon={
+                      <SearchIcon className={props.classes.searchIcon} />
+                    }
+                    renderOption={(option, value) => {
+                      const matches = match(option, value.inputValue);
+                      const parts = parse(option, matches);
+                      return (
+                        <div>
+                          {parts.map((part, index) => (
+                            <span
+                              key={index}
+                              style={{
+                                fontWeight: part.highlight ? 700 : 400,
+                              }}
+                            >
+                              {part.text}
+                            </span>
+                          ))}
+                        </div>
+                      );
+                    }}
+                  />
+                  <FormHelperText>
+                    {props.errors.propertyLocation}
+                  </FormHelperText>
+                </FormControl>
               </Grid>
             </Grid>
-          </Grid>
-          <Grid item xs={8}>
-            <Map propertyLocation={props.inputs.propertyLocation} />
           </Grid>
         </Grid>
-        <Grid item container spacing={6} className="mt-20">
-          <Grid item container spacing={6}>
-            <Grid item xs={6}>
-              <CustomSelect
-                error={props.errors.propertyCondition}
-                defaultValue={props.inputs.propertyCondition}
-                handleChange={props.handleChange}
-                data={props.propertyConditions}
-                name="propertyCondition"
-                tooltipText={props.intl.formatMessage({
-                  ...messages.propertyConditionInfo,
-                })}
-                labelText={`${props.intl.formatMessage({
-                  ...messages.propertyCondition,
-                })} *`}
-              />
-            </Grid>
-            <Grid item xs={6}>
-              <CustomSelect
-                error={props.errors.propertyType}
-                defaultValue={props.inputs.propertyType}
-                handleChange={props.handleChange}
-                data={props.propertyTypes}
-                name="propertyType"
-                tooltipText={props.intl.formatMessage({
-                  ...messages.propertyTypeInfo,
-                })}
-                labelText={`${props.intl.formatMessage({
-                  ...messages.propertyType,
-                })} *`}
-              />
-            </Grid>
-            <Grid item xs={6}>
-              <CustomSelect
-                error={props.errors.propertyTypology}
-                defaultValue={props.inputs.propertyTypology}
-                handleChange={props.handleChange}
-                data={props.propertyTypologies}
-                name="propertyTypology"
-                tooltipText={props.intl.formatMessage({
-                  ...messages.propertyTypologyInfo,
-                })}
-                labelText={`${props.intl.formatMessage({
-                  ...messages.propertyTypology,
-                })} *`}
-              />
-            </Grid>
+        <Grid item xs={8}>
+          <Map propertyLocation={props.inputs.propertyLocation} />
+        </Grid>
+      </Grid>
+      <Grid item container spacing={6} className="mt-20">
+        <Grid item container spacing={6}>
+          <Grid item xs={6}>
+            <CustomSelect
+              error={props.errors.propertyCondition}
+              defaultValue={props.inputs.propertyCondition}
+              handleChange={props.handleChange}
+              data={props.propertyConditions}
+              name="propertyCondition"
+              tooltipText={props.intl.formatMessage({
+                ...messages.propertyConditionInfo,
+              })}
+              labelText={`${props.intl.formatMessage({
+                ...messages.propertyCondition,
+              })} *`}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <CustomSelect
+              error={props.errors.propertyType}
+              defaultValue={props.inputs.propertyType}
+              handleChange={props.handleChange}
+              data={props.propertyTypes}
+              name="propertyType"
+              tooltipText={props.intl.formatMessage({
+                ...messages.propertyTypeInfo,
+              })}
+              labelText={`${props.intl.formatMessage({
+                ...messages.propertyType,
+              })} *`}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <CustomSelect
+              error={props.errors.propertyTypology}
+              defaultValue={props.inputs.propertyTypology}
+              handleChange={props.handleChange}
+              data={props.propertyTypologies}
+              name="propertyTypology"
+              tooltipText={props.intl.formatMessage({
+                ...messages.propertyTypologyInfo,
+              })}
+              labelText={`${props.intl.formatMessage({
+                ...messages.propertyTypology,
+              })} *`}
+            />
+          </Grid>
+        </Grid>
+        <Grid item container spacing={6}>
+          <Grid item xs={6}>
+            <CustomInput
+              error={props.errors.minAskingPrice}
+              name="minAskingPrice"
+              type="number"
+              handleChange={props.handleChange}
+              defaultValue={props.inputs.minAskingPrice}
+              symbol={<span>&#8364;</span>}
+              labelText={props.intl.formatMessage({
+                ...messages.minAskingPrice,
+              })}
+              tooltipText={props.intl.formatMessage({
+                ...messages.minAskingPrice,
+              })}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <CustomInput
+              error={props.errors.maxAskingPrice}
+              name="maxAskingPrice"
+              type="number"
+              handleChange={props.handleChange}
+              defaultValue={props.inputs.maxAskingPrice}
+              symbol={<span>&#8364;</span>}
+              labelText={props.intl.formatMessage({
+                ...messages.maxAskingPrice,
+              })}
+              tooltipText={props.intl.formatMessage({
+                ...messages.maxAskingPrice,
+              })}
+            />
           </Grid>
           <Grid item container spacing={6}>
             <Grid item xs={6}>
               <CustomInput
-                error={props.errors.minAskingPrice}
-                name="minAskingPrice"
+                error={props.errors.minUsefulArea}
+                name="minUsefulArea"
                 type="number"
                 handleChange={props.handleChange}
-                defaultValue={props.inputs.minAskingPrice}
-                symbol={<span>&#8364;</span>}
+                defaultValue={props.inputs.minUsefulArea}
+                symbol={<span>m²</span>}
                 labelText={props.intl.formatMessage({
-                  ...messages.minAskingPrice,
+                  ...messages.minUsefulArea,
                 })}
                 tooltipText={props.intl.formatMessage({
-                  ...messages.minAskingPrice,
+                  ...messages.minUsefulArea,
                 })}
               />
             </Grid>
             <Grid item xs={6}>
               <CustomInput
-                error={props.errors.maxAskingPrice}
-                name="maxAskingPrice"
+                error={props.errors.maxUsefulArea}
+                name="maxUsefulArea"
                 type="number"
                 handleChange={props.handleChange}
-                defaultValue={props.inputs.maxAskingPrice}
-                symbol={<span>&#8364;</span>}
+                defaultValue={props.inputs.maxUsefulArea}
+                symbol={<span>m²</span>}
                 labelText={props.intl.formatMessage({
-                  ...messages.maxAskingPrice,
+                  ...messages.maxUsefulArea,
                 })}
                 tooltipText={props.intl.formatMessage({
-                  ...messages.maxAskingPrice,
+                  ...messages.maxUsefulArea,
                 })}
               />
-            </Grid>
-            <Grid item container spacing={6}>
-              <Grid item xs={6}>
-                <CustomInput
-                  error={props.errors.minUsefulArea}
-                  name="minUsefulArea"
-                  type="number"
-                  handleChange={props.handleChange}
-                  defaultValue={props.inputs.minUsefulArea}
-                  symbol={<span>m²</span>}
-                  labelText={props.intl.formatMessage({
-                    ...messages.minUsefulArea,
-                  })}
-                  tooltipText={props.intl.formatMessage({
-                    ...messages.minUsefulArea,
-                  })}
-                />
-              </Grid>
-              <Grid item xs={6}>
-                <CustomInput
-                  error={props.errors.maxUsefulArea}
-                  name="maxUsefulArea"
-                  type="number"
-                  handleChange={props.handleChange}
-                  defaultValue={props.inputs.maxUsefulArea}
-                  symbol={<span>m²</span>}
-                  labelText={props.intl.formatMessage({
-                    ...messages.maxUsefulArea,
-                  })}
-                  tooltipText={props.intl.formatMessage({
-                    ...messages.maxUsefulArea,
-                  })}
-                />
-              </Grid>
             </Grid>
           </Grid>
         </Grid>
       </Grid>
-      <div className={props.classes.buttonContainer}>
-        <BackNextButtons
-          onBackClick={props.onBackClick}
-          onNextClick={props.onNextClick}
-        />
-      </div>
+    </Grid>
+    <div className={props.classes.buttonContainer}>
+      <BackNextButtons
+        onBackClick={props.onBackClick}
+        onNextClick={props.onNextClick}
+      />
     </div>
-  );
-};
+  </>
+);
 
 export default Property;

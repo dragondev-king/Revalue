@@ -5,12 +5,12 @@ import Grid from '@material-ui/core/Grid';
 import CustomInput from 'components/CustomInput';
 import CustomSwitch from 'components/CustomSwitch';
 import CustomSelect from 'components/CustomSelect';
+import { BackNextButtons } from '../components/BackNextButtons';
 
 import messages from '../messages';
 
-const Tax = props => {
-  console.log('Tax');
-  return (
+const Tax = props => (
+  <>
     <Grid container item>
       <Grid item container spacing={6} className="mt-20">
         <Grid
@@ -167,7 +167,13 @@ const Tax = props => {
         </Grid>
       </Grid>
     </Grid>
-  );
-};
+    <div className={props.classes.buttonContainer}>
+      <BackNextButtons
+        onBackClick={props.onBackClick}
+        onNextClick={props.onNextClick}
+      />
+    </div>
+  </>
+);
 
 export default Tax;

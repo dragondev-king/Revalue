@@ -470,7 +470,7 @@ export function FixAndFlip(props) {
   function renderStepper() {
     return (
       <Grid item xs={4}>
-        <Stepper orientation="vertical" activeStep={1}>
+        <Stepper orientation="vertical" activeStep={activeStep}>
           {steps.map((step, idx) => (
             <Step key={idx}>
               <StepLabel>{step.label}</StepLabel>
@@ -570,7 +570,9 @@ export function FixAndFlip(props) {
       <Grid container spacing={4}>
         {renderStepper()}
         <Grid item xs={8}>
-          {renderStepContent(activeStep)}
+          <div className={classes.contentContainer}>
+            {renderStepContent(activeStep)}
+          </div>
         </Grid>
         {/* {renderTable()} */}
       </Grid>

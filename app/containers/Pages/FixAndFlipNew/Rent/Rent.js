@@ -4,12 +4,11 @@ import Grid from '@material-ui/core/Grid';
 
 import CustomInput from 'components/CustomInput';
 import CustomSwitch from 'components/CustomSwitch';
-
+import { BackNextButtons } from '../components/BackNextButtons';
 import messages from '../messages';
 
-const Rent = props => {
-  console.log('kkkkkk');
-  return (
+const Rent = props => (
+  <>
     <Grid item container>
       <Grid item container spacing={6} className="mt-20">
         <Grid item xs={6}>
@@ -153,7 +152,13 @@ const Rent = props => {
         </>
       )}
     </Grid>
-  );
-};
+    <div className={props.classes.buttonContainer}>
+      <BackNextButtons
+        onBackClick={props.onBackClick}
+        onNextClick={props.onNextClick}
+      />
+    </div>
+  </>
+);
 
 export default Rent;

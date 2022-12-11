@@ -33,6 +33,9 @@ export default makeStyles(() => ({
     backgroundColor: '#fff',
     padding: '16px',
     height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between !important',
   },
   buttonContainer: {
     display: 'flex',

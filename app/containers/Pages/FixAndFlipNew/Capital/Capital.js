@@ -3,12 +3,12 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 
 import CustomInput from 'components/CustomInput';
+import { BackNextButtons } from '../components/BackNextButtons';
 
 import messages from '../messages';
 
-const Capital = props => {
-  console.log('Capital');
-  return (
+const Capital = props => (
+  <>
     <Grid container item>
       <Grid item container spacing={6} className="mt-20">
         <Grid item xs={6}>
@@ -63,7 +63,13 @@ const Capital = props => {
         </Grid>
       </Grid>
     </Grid>
-  );
-};
+    <div className={props.classes.buttonContainer}>
+      <BackNextButtons
+        onBackClick={props.onBackClick}
+        onNextClick={props.onNextClick}
+      />
+    </div>
+  </>
+);
 
 export default Capital;
