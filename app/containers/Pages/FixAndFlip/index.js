@@ -1,5 +1,5 @@
 /* eslint-disable react/no-array-index-key */
-import React, { memo, useCallback, useEffect, useState } from 'react';
+import React, { memo, useCallback, useEffect } from 'react';
 import { connect } from 'react-redux';
 import * as yup from 'yup';
 import { Helmet } from 'react-helmet';
@@ -40,6 +40,7 @@ import {
   makeSelectAnalyzeButtonDisabled,
   makeSelectIrsCategoryRegions,
   makeSelectIrsDependentsList,
+  makeSelectActiveStep,
 } from './selectors';
 import reducer from './reducer';
 import {
@@ -57,6 +58,7 @@ import {
   getIrsCategories,
   getIrsCategoryRegions,
   getIrsDependentsList,
+  setActiveStep,
 } from './actions';
 import useStyles from './styles';
 
@@ -167,10 +169,7 @@ const columns = [
 ];
 
 export function FixAndFlip(props) {
-  const [activeStep, setActiveStep] = useState(0);
-
   useInjectReducer({ key: 'investment', reducer });
-
   useEffect(() => {
     props.getPropertyLocations();
     props.getPropertyTypes();
@@ -263,7 +262,7 @@ export function FixAndFlip(props) {
           <Property
             {...props}
             classes={classes}
-            onNextClick={() => setActiveStep(activeStep + 1)}
+            onNextClick={() => props.setActiveStep(props.activeStep + 1)}
             handleChange={handleChange}
             handleChangeSwitch={handleChangeSwitch}
           />
@@ -273,8 +272,8 @@ export function FixAndFlip(props) {
           <Proposal
             {...props}
             classes={classes}
-            onBackClick={() => setActiveStep(activeStep - 1)}
-            onNextClick={() => setActiveStep(activeStep + 1)}
+            onBackClick={() => props.setActiveStep(props.activeStep - 1)}
+            onNextClick={() => props.setActiveStep(props.activeStep + 1)}
             handleChange={handleChange}
             handleChangeSwitch={handleChangeSwitch}
             handleSliderChange={handleSliderChange}
@@ -285,8 +284,8 @@ export function FixAndFlip(props) {
           <Financing
             {...props}
             classes={classes}
-            onBackClick={() => setActiveStep(activeStep - 1)}
-            onNextClick={() => setActiveStep(activeStep + 1)}
+            onBackClick={() => props.setActiveStep(props.activeStep - 1)}
+            onNextClick={() => props.setActiveStep(props.activeStep + 1)}
             handleChange={handleChange}
             handleChangeSwitch={handleChangeSwitch}
             handleSliderChange={handleSliderChange}
@@ -297,8 +296,8 @@ export function FixAndFlip(props) {
           <Rehab
             {...props}
             classes={classes}
-            onBackClick={() => setActiveStep(activeStep - 1)}
-            onNextClick={() => setActiveStep(activeStep + 1)}
+            onBackClick={() => props.setActiveStep(props.activeStep - 1)}
+            onNextClick={() => props.setActiveStep(props.activeStep + 1)}
             handleChange={handleChange}
             handleChangeSwitch={handleChangeSwitch}
             handleSliderChange={handleSliderChange}
@@ -309,8 +308,8 @@ export function FixAndFlip(props) {
           <Rent
             {...props}
             classes={classes}
-            onBackClick={() => setActiveStep(activeStep - 1)}
-            onNextClick={() => setActiveStep(activeStep + 1)}
+            onBackClick={() => props.setActiveStep(props.activeStep - 1)}
+            onNextClick={() => props.setActiveStep(props.activeStep + 1)}
             handleChange={handleChange}
             handleChangeSwitch={handleChangeSwitch}
           />
@@ -320,8 +319,8 @@ export function FixAndFlip(props) {
           <OperatingCosts
             {...props}
             classes={classes}
-            onBackClick={() => setActiveStep(activeStep - 1)}
-            onNextClick={() => setActiveStep(activeStep + 1)}
+            onBackClick={() => props.setActiveStep(props.activeStep - 1)}
+            onNextClick={() => props.setActiveStep(props.activeStep + 1)}
             handleChange={handleChange}
             handleChangeSwitch={handleChangeSwitch}
             handleSliderChange={handleSliderChange}
@@ -332,8 +331,8 @@ export function FixAndFlip(props) {
           <Tax
             {...props}
             classes={classes}
-            onBackClick={() => setActiveStep(activeStep - 1)}
-            onNextClick={() => setActiveStep(activeStep + 1)}
+            onBackClick={() => props.setActiveStep(props.activeStep - 1)}
+            onNextClick={() => props.setActiveStep(props.activeStep + 1)}
             handleChange={handleChange}
             handleChangeSwitch={handleChangeSwitch}
             handleSliderChange={handleSliderChange}
@@ -344,8 +343,8 @@ export function FixAndFlip(props) {
           <Sale
             {...props}
             classes={classes}
-            onBackClick={() => setActiveStep(activeStep - 1)}
-            onNextClick={() => setActiveStep(activeStep + 1)}
+            onBackClick={() => props.setActiveStep(props.activeStep - 1)}
+            onNextClick={() => props.setActiveStep(props.activeStep + 1)}
             handleChange={handleChange}
             handleChangeSwitch={handleChangeSwitch}
           />
@@ -357,7 +356,7 @@ export function FixAndFlip(props) {
             classes={classes}
             handleChange={handleChange}
             handleChangeSwitch={handleChangeSwitch}
-            onBackClick={() => setActiveStep(activeStep - 1)}
+            onBackClick={() => props.setActiveStep(props.activeStep - 1)}
             onSubmit={handleAnalyze}
           />
         );
@@ -373,7 +372,7 @@ export function FixAndFlip(props) {
       <Grid item xs={4}>
         <Stepper
           orientation="vertical"
-          activeStep={activeStep}
+          activeStep={props.activeStep}
           className={classes.stepperContainer}
         >
           {steps.map((step, idx) => (
@@ -455,7 +454,7 @@ export function FixAndFlip(props) {
         {renderStepper()}
         <Grid item xs={8}>
           <div className={classes.contentContainer}>
-            {renderStepContent(activeStep)}
+            {renderStepContent(props.activeStep)}
           </div>
         </Grid>
         {renderTable()}
@@ -479,6 +478,7 @@ const mapStateToProps = createStructuredSelector({
   percentiles: makeSelectCIPs(),
   isGettingAnalysis: makeSelectIsGettingAnalysis(),
   analyzeButtonDisabled: makeSelectAnalyzeButtonDisabled(),
+  activeStep: makeSelectActiveStep(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -499,6 +499,7 @@ function mapDispatchToProps(dispatch) {
     setInputError: (input, error) => dispatch(setInputError(input, error)),
     setAnalyzeButtonDisabled: value =>
       dispatch(setAnalyzeButtonDisabled(value)),
+    setActiveStep: activeStep => dispatch(setActiveStep(activeStep)),
     dispatch,
   };
 }

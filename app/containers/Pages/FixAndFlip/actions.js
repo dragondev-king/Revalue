@@ -35,7 +35,8 @@ import {
   GET_IRS_CATEGORIES,
   GET_IRS_CATEGORY_REGIONS_SUCCESS,
   GET_IRS_DEPENDENTS_LIST,
-  GET_IRS_DEPENDENTS_LIST_SUCCESS
+  GET_IRS_DEPENDENTS_LIST_SUCCESS,
+  SET_ACTIVE_STEP,
 } from "./constants";
 
 export const getPropertyLocations = () => async dispatch => {
@@ -258,3 +259,8 @@ export const setPropertyLocation = propertyLocation => dispatch => {
     payload: propertyLocation,
   });
 };
+
+export const setActiveStep = (activeStep) => ({
+  type: SET_ACTIVE_STEP,
+  payload: activeStep
+});

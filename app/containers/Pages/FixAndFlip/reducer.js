@@ -26,6 +26,7 @@ import {
   GET_IRS_CATEGORY_REGIONS,
   GET_IRS_CATEGORY_REGIONS_SUCCESS,
   GET_IRS_DEPENDENTS_LIST_SUCCESS,
+  SET_ACTIVE_STEP,
 } from './constants';
 
 export function setValueOrEmptyArray(value) {
@@ -265,6 +266,7 @@ export const initialState = {
     ),
     minProfit: extractInputValueFromLocalStorage('minProfit', 10000),
   },
+  activeStep: JSON.parse(localStorage.getItem('activeStep')) || 0,
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -379,6 +381,10 @@ const investmentReducer = (state = initialState, action) =>
         break;
       case SET_ANALYZE_BUTTON_DISABLED:
         draft.analyzeButtonDisabled = action.payload;
+        break;
+      case SET_ACTIVE_STEP:
+        draft.activeStep = action.payload;
+        localStorage.setItem('activeStep', JSON.stringify(draft.activeStep));
         break;
     }
   });

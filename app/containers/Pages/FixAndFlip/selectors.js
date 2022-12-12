@@ -99,6 +99,12 @@ const makeSelectAnalyzeButtonDisabled = () =>
     substate => substate.analyzeButtonDisabled,
   );
 
+const makeSelectActiveStep = () =>
+  createSelector(
+    selectInvestmentDomain,
+    substate => substate.activeStep,
+  );
+
 export {
   makeSelectInvestment,
   makeSelectPropertyLocations,
@@ -116,4 +122,5 @@ export {
   makeSelectAnalysis,
   makeSelectIsGettingAnalysis,
   makeSelectAnalyzeButtonDisabled,
+  makeSelectActiveStep,
 };

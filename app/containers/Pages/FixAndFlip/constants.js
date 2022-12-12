@@ -44,3 +44,5 @@ export const SET_ANALYZE_BUTTON_DISABLED =
 export const GET_ANALYSIS = 'app/FixAndFlip/GET_ANALYSIS';
 export const GET_ANALYSIS_SUCCESS = 'app/FixAndFlip/GET_ANALYSIS_SUCCESS';
 export const GET_ANALYSIS_ERROR = 'app/FixAndFlip/GET_ANALYSIS_ERROR';
+
+export const SET_ACTIVE_STEP = 'app/FixAndFlip/SET_ACTIVE_STEP';
