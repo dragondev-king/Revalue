@@ -1,6 +1,24 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export default makeStyles(() => ({
+  pageTitleContainer: {
+    left: '90px',
+    marginBottom: '24px',
+  },
+  pageTitle: {
+    fontFamily: 'Roboto',
+    fontWeight: '500',
+    fontSize: '20px',
+    lineHeight: '23px',
+  },
+  stepPageDescription: {
+    fontFamily: 'Roboto',
+    fontWeight: '400',
+    fontSize: '16px',
+    lineHeight: '19px',
+    padding: '9px 0',
+    color: '#888888',
+  },
   title: {
     fontWeight: 'Bold',
     marginTop: '24px',

@@ -65,6 +65,10 @@ const Property = props => {
   return (
     <>
       <Grid item container direction="column">
+        <span className={props.classes.stepPageDescription}>
+          Choose your favorite investment location so we can help you analyse
+          your next Real Estate Investment!
+        </span>
         <div className={props.classes.locationMapContainer}>
           <div className={props.classes.locationContainer}>
             <Grid container direction="column" justifyContent="flex-start">

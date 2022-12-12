@@ -450,6 +450,11 @@ export function FixAndFlip(props) {
         </title>
         <meta name="description" content="Description of Analysis" />
       </Helmet>
+      <div className={classes.pageTitleContainer}>
+        <span className={classes.pageTitle}>
+          Your next investment in few steps
+        </span>
+      </div>
       <Grid container spacing={4}>
         {renderStepper()}
         <Grid item xs={8}>

@@ -48,6 +48,10 @@ const Sale = props => {
   return (
     <>
       <Grid container item>
+        <span className={props.classes.stepPageDescription}>
+          In order to analyse the sale of your investment we will compare your
+          investment with the most recent similar transactions
+        </span>
         <Grid item container spacing={6} className="mt-20">
           <Grid item xs={6}>
             <CustomInput

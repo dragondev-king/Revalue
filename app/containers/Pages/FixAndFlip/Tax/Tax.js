@@ -49,6 +49,9 @@ const Tax = props => {
   return (
     <>
       <Grid container item>
+        <span className={props.classes.stepPageDescription}>
+          Personal level Tax for your investment profile
+        </span>
         <Grid item container spacing={6} className="mt-20">
           <Grid
             item

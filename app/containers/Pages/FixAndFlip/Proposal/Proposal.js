@@ -58,6 +58,9 @@ export const Proposal = props => {
   return (
     <>
       <Grid container item>
+        <span className={props.classes.stepPageDescription}>
+          Define your discount to the vendor asking price.
+        </span>
         <Grid item container spacing={6} className="mt-20">
           <Grid item xs={8}>
             <CustomSlider

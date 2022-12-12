@@ -82,6 +82,10 @@ const Financing = props => {
   return (
     <>
       <Grid container item>
+        <span className={props.classes.stepPageDescription}>
+          Typically banks do not finance more than 80% of the acquisition value
+          for investment properties
+        </span>
         <Grid item container spacing={6} className="mt-20">
           <Grid item xs={6}>
             <CustomSwitch
