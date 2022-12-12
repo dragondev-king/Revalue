@@ -183,7 +183,7 @@ const Tax = props => {
               name="capitalGainsTaxBaseRate"
               handleChange={props.handleSliderChange}
               disabled={false}
-              valueLabelFormat="%"
+              unit="%"
             />
           </Grid>
           <Grid item xs={6}>

@@ -116,7 +116,7 @@ const Financing = props => {
                   name="financingRate"
                   handleChange={props.handleSliderChange}
                   disabled={false}
-                  valueLabelFormat="%"
+                  unit="%"
                 />
               </Grid>
               <Grid item xs={6}>
@@ -133,7 +133,7 @@ const Financing = props => {
                   name="interestRate"
                   handleChange={props.handleSliderChange}
                   disabled={false}
-                  valueLabelFormat="%"
+                  unit="%"
                 />
               </Grid>
               <Grid item xs={6}>
@@ -150,7 +150,7 @@ const Financing = props => {
                   name="amortization"
                   handleChange={props.handleSliderChange}
                   disabled={false}
-                  valueLabelFormat="%"
+                  unit="%"
                 />
               </Grid>
             </Grid>

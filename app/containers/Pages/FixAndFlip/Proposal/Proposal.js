@@ -73,7 +73,7 @@ export const Proposal = props => {
               name="bidAskRate"
               handleChange={props.handleSliderChange}
               disabled={false}
-              valueLabelFormat="%"
+              unit="%"
             />
           </Grid>
         </Grid>

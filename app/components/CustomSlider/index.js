@@ -35,7 +35,7 @@ const CustomSlider = ({
   min,
   max,
   step,
-  valueLabelFormat,
+  unit,
 }) => {
   const styles = useStyles();
   const handleSliderChange = useCallback((event, val) => {
@@ -70,9 +70,8 @@ const CustomSlider = ({
           onChange={handleSliderChange}
           defaultValue={defaultValue}
           name={name}
-          valueLabelFormat={valueLabelFormat}
         />
-        <p className={styles.sliderValueLabel}>{`${value}%`}</p>
+        <p className={styles.sliderValueLabel}>{`${value}${unit}`}</p>
       </div>
       <FormHelperText>{error}</FormHelperText>
     </FormControl>
