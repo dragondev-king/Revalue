@@ -10,10 +10,8 @@ import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Grid from '@material-ui/core/Grid';
-// import Typography from '@material-ui/core/Typography';
-// import Button from '@material-ui/core/Button';
-// import CircularProgress from '@material-ui/core/CircularProgress';
-// import { DataGrid } from '@material-ui/data-grid';
+import Typography from '@material-ui/core/Typography';
+import { DataGrid } from '@material-ui/data-grid';
 
 import { useInjectReducer } from 'utils/injectReducer';
 import Property from './Property';
@@ -101,72 +99,72 @@ const steps = [
   },
 ];
 
-// const columns = [
-//   {
-//     field: 'propertyLocation',
-//     label: 'location',
-//     sortable: false,
-//     unit: '',
-//     flex: 1,
-//   },
-//   {
-//     field: 'propertyAskingPrice',
-//     label: 'askingPrice',
-//     sortable: false,
-//     unit: '€',
-//     flex: 1,
-//   },
-//   {
-//     field: 'requiredInitialCapital',
-//     label: 'requiredInitialCapital',
-//     sortable: false,
-//     unit: '€',
-//     flex: 1,
-//   },
-//   {
-//     field: 'transactionPrice',
-//     label: 'transactionPrice',
-//     sortable: false,
-//     unit: '€',
-//     flex: 1,
-//   },
-//   {
-//     field: 'internalRateOfReturn',
-//     label: 'internalRateOfReturn',
-//     sortable: false,
-//     unit: '%',
-//     minWidth: 200,
-//   },
-//   {
-//     field: 'profitAfterTax',
-//     label: 'profitAfterTax',
-//     sortable: false,
-//     unit: '€',
-//     minWidth: 150,
-//   },
-//   {
-//     field: 'report',
-//     label: 'report',
-//     sortable: false,
-//     unit: '',
-//     minWidth: 70,
-//     renderCell: cellValues => {
-//       const path = 'analysis/';
-//       const id = cellValues.row.id.replace(/[.,\s]/g, '');
-//       return (
-//         // eslint-disable-next-line jsx-a11y/anchor-is-valid,jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
-//         <a
-//           style={{ color: '#0085FF', fontWeight: 'bolder', cursor: 'pointer' }}
-//           onClick={() =>
-//             window.open(path + id, '_blank', 'noopener,noreferrer')
-//           }
-//         >
-//           Report
-//         </a>
-//       );
-//     },
-//   },
-// ];
+const columns = [
+  {
+    field: 'propertyLocation',
+    label: 'location',
+    sortable: false,
+    unit: '',
+    flex: 1,
+  },
+  {
+    field: 'propertyAskingPrice',
+    label: 'askingPrice',
+    sortable: false,
+    unit: '€',
+    flex: 1,
+  },
+  {
+    field: 'requiredInitialCapital',
+    label: 'requiredInitialCapital',
+    sortable: false,
+    unit: '€',
+    flex: 1,
+  },
+  {
+    field: 'transactionPrice',
+    label: 'transactionPrice',
+    sortable: false,
+    unit: '€',
+    flex: 1,
+  },
+  {
+    field: 'internalRateOfReturn',
+    label: 'internalRateOfReturn',
+    sortable: false,
+    unit: '%',
+    minWidth: 200,
+  },
+  {
+    field: 'profitAfterTax',
+    label: 'profitAfterTax',
+    sortable: false,
+    unit: '€',
+    minWidth: 150,
+  },
+  {
+    field: 'report',
+    label: 'report',
+    sortable: false,
+    unit: '',
+    minWidth: 70,
+    renderCell: cellValues => {
+      const path = 'analysis/';
+      const id = cellValues.row.id.replace(/[.,\s]/g, '');
+      return (
+        // eslint-disable-next-line jsx-a11y/anchor-is-valid,jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
+        <a
+          style={{ color: '#0085FF', fontWeight: 'bolder', cursor: 'pointer' }}
+          onClick={() =>
+            window.open(path + id, '_blank', 'noopener,noreferrer')
+          }
+        >
+          Report
+        </a>
+      );
+    },
+  },
+];
 
 export function FixAndFlip(props) {
   const [activeStep, setActiveStep] = useState(0);
@@ -391,80 +389,57 @@ export function FixAndFlip(props) {
     );
   }
 
-  // function translateColumnLabel(list) {
-  //   list.forEach(item => {
-  //     const unit = item.unit ? ` (${item.unit})` : '';
-  //     // eslint-disable-next-line no-param-reassign
-  //     item.headerName =
-  //       props.intl.formatMessage({
-  //         ...messages[item.label],
-  //       }) + unit;
-  //   });
-  //   return list;
-  // }
+  function translateColumnLabel(list) {
+    list.forEach(item => {
+      const unit = item.unit ? ` (${item.unit})` : '';
+      // eslint-disable-next-line no-param-reassign
+      item.headerName =
+        props.intl.formatMessage({
+          ...messages[item.label],
+        }) + unit;
+    });
+    return list;
+  }
 
-  // function renderTable() {
-  //   return (
-  //     <Grid container direction="column" className={classes.tableContainer}>
-  //       <Grid item>
-  //         <Typography variant="h6" className={classes.tableHeading}>
-  //           {props.intl.formatMessage({
-  //             ...messages.investments,
-  //           })}
-  //         </Typography>
-  //       </Grid>
-  //       <Grid item className="w-100">
-  //         <DataGrid
-  //           classes={{
-  //             root: classes.gridRoot,
-  //           }}
-  //           rows={props.analysis}
-  //           columns={translateColumnLabel(columns)}
-  //           disableColumnFilter
-  //           disableColumnMenu
-  //           disableSelectionOnClick
-  //           sortingMode="server"
-  //           width="auto"
-  //           autoHeight
-  //           hideFooterPagination
-  //           // checkboxSelection
-  //           // pageSize={5}
-  //           // rowsPerPageOptions={[5]}
-  //           // hideFooter
-  //           // density="compact"
-  //           // autoPageSize
-  //           // onCellClick={}
-  //           // onRowClick={event => {
-  //           //   props.history.push(`/analysis/${event.id}`);
-  //           // }}
-  //         />
-  //       </Grid>
-  //     </Grid>
-  //   );
-  // }
-
-  // function renderButton() {
-  //   return (
-  //     <Button
-  //       type="submit"
-  //       onClick={onSubmit}
-  //       className={
-  //         !props.analyzeButtonDisabled
-  //           ? classes.customizeButton
-  //           : classes.customizeDisabledButton
-  //       }
-  //       disabled={props.analyzeButtonDisabled}
-  //     >
-  //       {props.isGettingAnalysis && (
-  //         <CircularProgress size={20} className={classes.loading} />
-  //       )}
-  //       {!props.isGettingAnalysis &&
-  //         props.intl.formatMessage({
-  //           ...messages.analyze,
-  //         })}
-  //     </Button>
-  //   );
-  // }
+  function renderTable() {
+    return (
+      <Grid container direction="column" className={classes.tableContainer}>
+        <Grid item>
+          <Typography variant="h6" className={classes.tableHeading}>
+            {props.intl.formatMessage({
+              ...messages.investments,
+            })}
+          </Typography>
+        </Grid>
+        <Grid item className="w-100">
+          <DataGrid
+            classes={{
+              root: classes.gridRoot,
+            }}
+            rows={props.analysis}
+            columns={translateColumnLabel(columns)}
+            disableColumnFilter
+            disableColumnMenu
+            disableSelectionOnClick
+            sortingMode="server"
+            width="auto"
+            autoHeight
+            hideFooterPagination
+            // checkboxSelection
+            // pageSize={5}
+            // rowsPerPageOptions={[5]}
+            // hideFooter
+            // density="compact"
+            // autoPageSize
+            // onCellClick={}
+            // onRowClick={event => {
+            //   props.history.push(`/analysis/${event.id}`);
+            // }}
+          />
+        </Grid>
+      </Grid>
+    );
+  }
 
   return (
     <>
@@ -483,7 +458,7 @@ export function FixAndFlip(props) {
             {renderStepContent(activeStep)}
           </div>
         </Grid>
-        {/* {renderTable()} */}
+        {renderTable()}
       </Grid>
     </>
   );
