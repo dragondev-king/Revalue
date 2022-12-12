@@ -66,6 +66,13 @@ export default makeStyles(() => ({
     flexDirection: 'column',
     justifyContent: 'space-between !important',
   },
+  showDetailContainer: {
+    display: 'flex',
+  },
+  divider: {
+    width: '100%',
+    paddingTop: '20px',
+  },
   buttonContainer: {
     display: 'flex',
     justifyContent: 'flex-end',

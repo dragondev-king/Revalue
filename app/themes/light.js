@@ -32,5 +32,18 @@ export const lightTheme = createTheme({
     MuiIconButton: {
       root: { color: 'black' },
     },
+    MuiAccordion: {
+      root: {
+        boxShadow: 'none',
+      },
+    },
+    MuiAccordionSummary: {
+      root: {
+        display: 'inline-flex',
+        width: '250px',
+        padding: '0 0 0 16px',
+        position: 'relative',
+      },
+    },
   },
 });
