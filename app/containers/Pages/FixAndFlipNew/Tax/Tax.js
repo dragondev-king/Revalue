@@ -6,6 +6,7 @@ import * as yup from 'yup';
 import CustomInput from 'components/CustomInput';
 import CustomSwitch from 'components/CustomSwitch';
 import CustomSelect from 'components/CustomSelect';
+import CustomSlider from 'components/CustomSlider';
 import { BackNextButtons } from '../components/BackNextButtons';
 
 import messages from '../messages';
@@ -169,20 +170,20 @@ const Tax = props => {
             />
           </Grid>
           <Grid item xs={6}>
-            <CustomInput
+            <CustomSlider
               error={props.errors.capitalGainsTaxBaseRate}
-              name="capitalGainsTaxBaseRate"
-              type="number"
-              value={props.inputs.capitalGainsTaxBaseRate}
-              handleChange={props.handleChange}
-              defaultValue={props.inputs.capitalGainsTaxBaseRate}
-              symbol={<span>%</span>}
               labelText={`${props.intl.formatMessage({
                 ...messages.capitalGainsTaxBaseRate,
               })} *`}
+              value={props.inputs.capitalGainsTaxBaseRate}
               tooltipText={props.intl.formatMessage({
                 ...messages.capitalGainsTaxBaseRateInfo,
               })}
+              defaultValue={props.inputs.capitalGainsTaxBaseRate}
+              name="capitalGainsTaxBaseRate"
+              handleChange={props.handleSliderChange}
+              disabled={false}
+              valueLabelFormat="%"
             />
           </Grid>
           <Grid item xs={6}>

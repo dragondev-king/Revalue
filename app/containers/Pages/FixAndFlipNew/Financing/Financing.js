@@ -5,6 +5,7 @@ import * as yup from 'yup';
 
 import CustomInput from 'components/CustomInput';
 import CustomSwitch from 'components/CustomSwitch';
+import CustomSlider from 'components/CustomSlider';
 import { BackNextButtons } from '../components/BackNextButtons';
 
 import messages from '../messages';
@@ -102,55 +103,54 @@ const Financing = props => {
           <>
             <Grid item container spacing={6} className="mt-20">
               <Grid item xs={6}>
-                <CustomInput
+                <CustomSlider
                   error={props.errors.financingRate}
-                  name="financingRate"
-                  type="number"
-                  handleChange={props.handleChange}
-                  defaultValue={props.inputs.financingRate}
-                  symbol={<span>%</span>}
                   labelText={`${props.intl.formatMessage({
                     ...messages.financingRate,
                   })} *`}
+                  value={props.inputs.financingRate}
                   tooltipText={props.intl.formatMessage({
                     ...messages.financingRateInfo,
                   })}
+                  defaultValue={props.inputs.financingRate}
+                  name="financingRate"
+                  handleChange={props.handleSliderChange}
+                  disabled={false}
+                  valueLabelFormat="%"
                 />
               </Grid>
               <Grid item xs={6}>
-                <CustomInput
+                <CustomSlider
                   error={props.errors.interestRate}
-                  name="interestRate"
-                  type="number"
-                  handleChange={props.handleChange}
-                  defaultValue={props.inputs.interestRate}
-                  symbol={<span>%</span>}
                   labelText={`${props.intl.formatMessage({
                     ...messages.interestRate,
                   })} *`}
+                  value={props.inputs.interestRate}
                   tooltipText={props.intl.formatMessage({
                     ...messages.interestRateInfo,
                   })}
+                  defaultValue={props.inputs.interestRate}
+                  name="interestRate"
+                  handleChange={props.handleSliderChange}
+                  disabled={false}
+                  valueLabelFormat="%"
                 />
               </Grid>
               <Grid item xs={6}>
-                <CustomInput
+                <CustomSlider
                   error={props.errors.amortization}
-                  name="amortization"
-                  type="number"
-                  handleChange={props.handleChange}
-                  defaultValue={props.inputs.amortization}
-                  symbol={
-                    <span>
-                      {props.intl.formatMessage({ ...messages.year })}
-                    </span>
-                  }
                   labelText={`${props.intl.formatMessage({
                     ...messages.amortization,
                   })} *`}
+                  value={props.inputs.amortization}
                   tooltipText={props.intl.formatMessage({
                     ...messages.amortizationInfo,
                   })}
+                  defaultValue={props.inputs.amortization}
+                  name="amortization"
+                  handleChange={props.handleSliderChange}
+                  disabled={false}
+                  valueLabelFormat="%"
                 />
               </Grid>
             </Grid>

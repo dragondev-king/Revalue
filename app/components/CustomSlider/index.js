@@ -9,67 +9,17 @@ import { Typography } from '@material-ui/core';
 import { InfoIcon } from '../SvgIconComponents';
 
 const useStyles = makeStyles({
-  sliderLabel: {
-    color: '#31342B',
-    fontSize: '16px',
-    top: '-16px',
-  },
-  slider: {
-    border: '1px solid #0083FC', // #7C7C7C
-    borderRadius: '4px',
-    color: '#7C7C7C',
-    paddingRight: '5px',
-    background: '#FFFFFF',
-  },
-  disabledSlider: {
-    border: '1px solid #7C7C7C',
-    borderRadius: '4px',
-    color: '#7C7C7C',
-    paddingRight: '5px',
-    background: '#FFFFFF',
-  },
-  sliderAdornment: {
-    background: '#C3E3FF',
-    height: '2.1em',
-    maxHeight: '2.1em',
-    borderRadius: '3px 0 0 3px',
-    padding: '0 10px',
-    '& p': {
-      color: '#31342B',
-      fontSize: '16px',
-    },
-  },
-  disabledAdornment: {
-    background: '#F1F1F1',
-    height: '2.1em',
-    maxHeight: '2.1em',
-    borderRadius: '3px 0 0 3px',
-    padding: '0 10px',
-    '& p': {
-      color: '#31342B',
-      fontSize: '16px',
-    },
-  },
-  label: {
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
-    whiteSpace: 'nowrap',
-    right: '22px !important',
-    bottom: '0px',
-  },
-  labelShrunk: {
-    right: 'unset',
-  },
   sliderContainer: {
     display: 'flex',
     alignItems: 'center',
     gap: '10px',
   },
   sliderValueLabel: {
-    width: '40px',
+    width: '45px',
     border: '1px solid grey',
     borderRadius: '4px',
     padding: '4px 1px',
+    textAlign: 'center',
   },
 });
 
@@ -94,13 +44,7 @@ const CustomSlider = ({
 
   return (
     <FormControl variant="standard" className="w-100" error={!!error}>
-      <label
-        className={styles.inputLabel}
-        classes={{
-          root: styles.label,
-          shrink: styles.labelShrunk,
-        }}
-      >
+      <label>
         {labelText}
         <Tooltip
           title={
@@ -123,7 +67,6 @@ const CustomSlider = ({
           step={step}
           min={min}
           max={max}
-          className={disabled ? styles.disabledSlider : styles.slider}
           onChange={handleSliderChange}
           defaultValue={defaultValue}
           name={name}
