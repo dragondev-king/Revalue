@@ -37,6 +37,7 @@ import {
   GET_IRS_DEPENDENTS_LIST,
   GET_IRS_DEPENDENTS_LIST_SUCCESS,
   SET_ACTIVE_STEP,
+  SET_ADVANCE_OPTIONS_STATUS,
 } from "./constants";
 
 export const getPropertyLocations = () => async dispatch => {
@@ -264,3 +265,11 @@ export const setActiveStep = (activeStep) => ({
   type: SET_ACTIVE_STEP,
   payload: activeStep
 });
+
+export const setAdvanceOptionsStatus = (name, status) => ({
+  type: SET_ADVANCE_OPTIONS_STATUS,
+  payload: {
+    name,
+    status
+  }
+})

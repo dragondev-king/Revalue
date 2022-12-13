@@ -157,7 +157,7 @@ const Tax = props => {
             </>
           )}
         </Grid>
-        <HideAdvanceOptions classes={props.classes}>
+        <HideAdvanceOptions {...props} stepName="tax">
           <Grid item container spacing={6}>
             <Grid item xs={6}>
               <CustomSelect

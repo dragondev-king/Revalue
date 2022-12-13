@@ -27,6 +27,7 @@ import {
   GET_IRS_CATEGORY_REGIONS_SUCCESS,
   GET_IRS_DEPENDENTS_LIST_SUCCESS,
   SET_ACTIVE_STEP,
+  SET_ADVANCE_OPTIONS_STATUS,
 } from './constants';
 
 export function setValueOrEmptyArray(value) {
@@ -43,6 +44,17 @@ export function extractInputValueFromLocalStorage(value, defaultValue) {
     ? JSON.parse(localStorage.getItem('inputs'))[value]
     : defaultValue;
 }
+
+export function extractAdvanceOptionsStatus(name, defaultValue) {
+  const advanceOptionsStatus = JSON.parse(
+    localStorage.getItem('advanceOptionsStatus'),
+  );
+  if (advanceOptionsStatus) {
+    return advanceOptionsStatus[name] || defaultValue;
+  }
+  return defaultValue;
+}
+
 export const initialState = {
   analyzeButtonDisabled: false,
   propertyLocations: setValueOrEmptyArray(
@@ -267,6 +279,17 @@ export const initialState = {
     minProfit: extractInputValueFromLocalStorage('minProfit', 10000),
   },
   activeStep: JSON.parse(localStorage.getItem('activeStep')) || 0,
+  advanceOptionsStatus: {
+    property: extractAdvanceOptionsStatus('property', false),
+    proposal: extractAdvanceOptionsStatus('proposal', false),
+    financing: extractAdvanceOptionsStatus('financing', false),
+    rehab: extractAdvanceOptionsStatus('rehab', false),
+    rent: extractAdvanceOptionsStatus('rent', false),
+    operatingCosts: extractAdvanceOptionsStatus('operatingCosts', false),
+    tax: extractAdvanceOptionsStatus('tax', false),
+    sale: extractAdvanceOptionsStatus('sale', false),
+    capital: extractAdvanceOptionsStatus('capital', false),
+  },
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -385,6 +408,13 @@ const investmentReducer = (state = initialState, action) =>
       case SET_ACTIVE_STEP:
         draft.activeStep = action.payload;
         localStorage.setItem('activeStep', JSON.stringify(draft.activeStep));
+        break;
+      case SET_ADVANCE_OPTIONS_STATUS:
+        draft.advanceOptionsStatus[action.payload.name] = action.payload.status;
+        localStorage.setItem(
+          'advanceOptionsStatus',
+          JSON.stringify(draft.advanceOptionsStatus),
+        );
         break;
     }
   });

@@ -81,7 +81,7 @@ export const Proposal = props => {
             />
           </Grid>
         </Grid>
-        <HideAdvanceOptions classes={props.classes}>
+        <HideAdvanceOptions {...props} stepName="proposal">
           <Grid item container spacing={6}>
             <Grid item container spacing={3}>
               <Grid item xs={4}>

@@ -161,7 +161,7 @@ const Financing = props => {
                 />
               </Grid>
             </Grid>
-            <HideAdvanceOptions classes={props.classes}>
+            <HideAdvanceOptions {...props} stepName="financing">
               <Grid item container>
                 <Grid item container spacing={3}>
                   <Grid item xs={12}>

@@ -126,7 +126,7 @@ const Property = props => {
           </div>
           <Map propertyLocation={props.inputs.propertyLocation} />
         </div>
-        <HideAdvanceOptions classes={props.classes}>
+        <HideAdvanceOptions {...props} stepName="property">
           <Grid item container spacing={3} className="mt-20">
             <Grid item container spacing={3}>
               <Grid item xs={6}>

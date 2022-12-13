@@ -105,6 +105,12 @@ const makeSelectActiveStep = () =>
     substate => substate.activeStep,
   );
 
+const makeSelectAdvanceOptionsStatus = () =>
+  createSelector(
+    selectInvestmentDomain,
+    substate => substate.advanceOptionsStatus,
+  );
+
 export {
   makeSelectInvestment,
   makeSelectPropertyLocations,
@@ -123,4 +129,5 @@ export {
   makeSelectIsGettingAnalysis,
   makeSelectAnalyzeButtonDisabled,
   makeSelectActiveStep,
+  makeSelectAdvanceOptionsStatus,
 };

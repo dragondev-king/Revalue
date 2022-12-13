@@ -86,7 +86,7 @@ const Sale = props => {
             />
           </Grid>
         </Grid>
-        <HideAdvanceOptions classes={props.classes}>
+        <HideAdvanceOptions {...props} stepName="sale">
           <Grid container item>
             <Grid item container spacing={6} className="mt-20">
               <Grid item xs={6}>

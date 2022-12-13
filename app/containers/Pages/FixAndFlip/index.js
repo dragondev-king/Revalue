@@ -41,6 +41,7 @@ import {
   makeSelectIrsCategoryRegions,
   makeSelectIrsDependentsList,
   makeSelectActiveStep,
+  makeSelectAdvanceOptionsStatus,
 } from './selectors';
 import reducer from './reducer';
 import {
@@ -59,6 +60,7 @@ import {
   getIrsCategoryRegions,
   getIrsDependentsList,
   setActiveStep,
+  setAdvanceOptionsStatus,
 } from './actions';
 import useStyles from './styles';
 
@@ -484,6 +486,7 @@ const mapStateToProps = createStructuredSelector({
   isGettingAnalysis: makeSelectIsGettingAnalysis(),
   analyzeButtonDisabled: makeSelectAnalyzeButtonDisabled(),
   activeStep: makeSelectActiveStep(),
+  advanceOptionsStatus: makeSelectAdvanceOptionsStatus(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -505,6 +508,8 @@ function mapDispatchToProps(dispatch) {
     setAnalyzeButtonDisabled: value =>
       dispatch(setAnalyzeButtonDisabled(value)),
     setActiveStep: activeStep => dispatch(setActiveStep(activeStep)),
+    setAdvanceOptionsStatus: (name, status) =>
+      dispatch(setAdvanceOptionsStatus(name, status)),
     dispatch,
   };
 }

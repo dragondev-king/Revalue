@@ -93,7 +93,7 @@ const Rent = props => {
                 />
               </Grid>
             </Grid>
-            <HideAdvanceOptions classes={props.classes}>
+            <HideAdvanceOptions {...props} stepName="rent">
               <Grid item container>
                 <Grid item container spacing={1}>
                   <Grid item xs={12}>

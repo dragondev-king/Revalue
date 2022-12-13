@@ -46,3 +46,6 @@ export const GET_ANALYSIS_SUCCESS = 'app/FixAndFlip/GET_ANALYSIS_SUCCESS';
 export const GET_ANALYSIS_ERROR = 'app/FixAndFlip/GET_ANALYSIS_ERROR';
 
 export const SET_ACTIVE_STEP = 'app/FixAndFlip/SET_ACTIVE_STEP';
+
+export const SET_ADVANCE_OPTIONS_STATUS =
+  'app/FixAndFlip/SET_ADVANCE_OPTIONS_STATUS';

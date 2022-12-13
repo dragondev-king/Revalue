@@ -75,7 +75,7 @@ const OperatingCosts = props => {
             />
           </Grid>
         </Grid>
-        <HideAdvanceOptions classes={props.classes}>
+        <HideAdvanceOptions {...props} stepName="operatingCosts">
           <Grid item container spacing={6}>
             <Grid item container spacing={3}>
               <Grid item xs={6}>
