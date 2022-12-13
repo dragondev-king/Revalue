@@ -3,15 +3,9 @@ import React, { useCallback } from 'react';
 import Grid from '@material-ui/core/Grid';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
-import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-} from '@material-ui/core';
 import parse from 'autosuggest-highlight/parse';
 import match from 'autosuggest-highlight/match';
 import SearchIcon from '@material-ui/icons/Search';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import * as yup from 'yup';
 
 import AutoComplete from 'components/AutoComplete';
@@ -19,6 +13,7 @@ import Map from 'containers/Map';
 import CustomSelect from 'components/CustomSelect';
 import CustomInput from 'components/CustomInput';
 import { BackNextButtons } from '../components/BackNextButtons';
+import { HideAdvanceOptions } from '../components/HideAdvanceOptions';
 
 import messages from '../messages';
 
@@ -131,138 +126,128 @@ const Property = props => {
           </div>
           <Map propertyLocation={props.inputs.propertyLocation} />
         </div>
-        <Accordion>
-          <div className={props.classes.showDetailContainer}>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-              Show Advance Options
-            </AccordionSummary>
-            <div className={props.classes.divider}>
-              <hr />
-            </div>
-          </div>
-          <AccordionDetails>
-            <Grid item container spacing={3} className="mt-20">
-              <Grid item container spacing={3}>
-                <Grid item xs={6}>
-                  <CustomSelect
-                    error={props.errors.propertyCondition}
-                    defaultValue={props.inputs.propertyCondition}
-                    value={props.inputs.propertyCondition}
-                    handleChange={props.handleChange}
-                    data={props.propertyConditions}
-                    name="propertyCondition"
-                    tooltipText={props.intl.formatMessage({
-                      ...messages.propertyConditionInfo,
-                    })}
-                    labelText={`${props.intl.formatMessage({
-                      ...messages.propertyCondition,
-                    })} *`}
-                  />
-                </Grid>
-                <Grid item xs={6}>
-                  <CustomSelect
-                    error={props.errors.propertyType}
-                    value={props.inputs.propertyType}
-                    defaultValue={props.inputs.propertyType}
-                    handleChange={props.handleChange}
-                    data={props.propertyTypes}
-                    name="propertyType"
-                    tooltipText={props.intl.formatMessage({
-                      ...messages.propertyTypeInfo,
-                    })}
-                    labelText={`${props.intl.formatMessage({
-                      ...messages.propertyType,
-                    })} *`}
-                  />
-                </Grid>
-                <Grid item xs={6}>
-                  <CustomSelect
-                    error={props.errors.propertyTypology}
-                    value={props.inputs.propertyTypology}
-                    defaultValue={props.inputs.propertyTypology}
-                    handleChange={props.handleChange}
-                    data={props.propertyTypologies}
-                    name="propertyTypology"
-                    tooltipText={props.intl.formatMessage({
-                      ...messages.propertyTypologyInfo,
-                    })}
-                    labelText={`${props.intl.formatMessage({
-                      ...messages.propertyTypology,
-                    })} *`}
-                  />
-                </Grid>
+        <HideAdvanceOptions classes={props.classes}>
+          <Grid item container spacing={3} className="mt-20">
+            <Grid item container spacing={3}>
+              <Grid item xs={6}>
+                <CustomSelect
+                  error={props.errors.propertyCondition}
+                  defaultValue={props.inputs.propertyCondition}
+                  value={props.inputs.propertyCondition}
+                  handleChange={props.handleChange}
+                  data={props.propertyConditions}
+                  name="propertyCondition"
+                  tooltipText={props.intl.formatMessage({
+                    ...messages.propertyConditionInfo,
+                  })}
+                  labelText={`${props.intl.formatMessage({
+                    ...messages.propertyCondition,
+                  })} *`}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <CustomSelect
+                  error={props.errors.propertyType}
+                  value={props.inputs.propertyType}
+                  defaultValue={props.inputs.propertyType}
+                  handleChange={props.handleChange}
+                  data={props.propertyTypes}
+                  name="propertyType"
+                  tooltipText={props.intl.formatMessage({
+                    ...messages.propertyTypeInfo,
+                  })}
+                  labelText={`${props.intl.formatMessage({
+                    ...messages.propertyType,
+                  })} *`}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <CustomSelect
+                  error={props.errors.propertyTypology}
+                  value={props.inputs.propertyTypology}
+                  defaultValue={props.inputs.propertyTypology}
+                  handleChange={props.handleChange}
+                  data={props.propertyTypologies}
+                  name="propertyTypology"
+                  tooltipText={props.intl.formatMessage({
+                    ...messages.propertyTypologyInfo,
+                  })}
+                  labelText={`${props.intl.formatMessage({
+                    ...messages.propertyTypology,
+                  })} *`}
+                />
+              </Grid>
+            </Grid>
+            <Grid item container spacing={3}>
+              <Grid item xs={6}>
+                <CustomInput
+                  error={props.errors.minAskingPrice}
+                  name="minAskingPrice"
+                  type="number"
+                  handleChange={props.handleChange}
+                  defaultValue={props.inputs.minAskingPrice}
+                  symbol={<span>&#8364;</span>}
+                  labelText={props.intl.formatMessage({
+                    ...messages.minAskingPrice,
+                  })}
+                  tooltipText={props.intl.formatMessage({
+                    ...messages.minAskingPrice,
+                  })}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <CustomInput
+                  error={props.errors.maxAskingPrice}
+                  name="maxAskingPrice"
+                  type="number"
+                  handleChange={props.handleChange}
+                  defaultValue={props.inputs.maxAskingPrice}
+                  symbol={<span>&#8364;</span>}
+                  labelText={props.intl.formatMessage({
+                    ...messages.maxAskingPrice,
+                  })}
+                  tooltipText={props.intl.formatMessage({
+                    ...messages.maxAskingPrice,
+                  })}
+                />
               </Grid>
               <Grid item container spacing={3}>
                 <Grid item xs={6}>
                   <CustomInput
-                    error={props.errors.minAskingPrice}
-                    name="minAskingPrice"
+                    error={props.errors.minUsefulArea}
+                    name="minUsefulArea"
                     type="number"
                     handleChange={props.handleChange}
-                    defaultValue={props.inputs.minAskingPrice}
-                    symbol={<span>&#8364;</span>}
+                    defaultValue={props.inputs.minUsefulArea}
+                    symbol={<span>m²</span>}
                     labelText={props.intl.formatMessage({
-                      ...messages.minAskingPrice,
+                      ...messages.minUsefulArea,
                     })}
                     tooltipText={props.intl.formatMessage({
-                      ...messages.minAskingPrice,
+                      ...messages.minUsefulArea,
                     })}
                   />
                 </Grid>
                 <Grid item xs={6}>
                   <CustomInput
-                    error={props.errors.maxAskingPrice}
-                    name="maxAskingPrice"
+                    error={props.errors.maxUsefulArea}
+                    name="maxUsefulArea"
                     type="number"
                     handleChange={props.handleChange}
-                    defaultValue={props.inputs.maxAskingPrice}
-                    symbol={<span>&#8364;</span>}
+                    defaultValue={props.inputs.maxUsefulArea}
+                    symbol={<span>m²</span>}
                     labelText={props.intl.formatMessage({
-                      ...messages.maxAskingPrice,
+                      ...messages.maxUsefulArea,
                     })}
                     tooltipText={props.intl.formatMessage({
-                      ...messages.maxAskingPrice,
+                      ...messages.maxUsefulArea,
                     })}
                   />
-                </Grid>
-                <Grid item container spacing={3}>
-                  <Grid item xs={6}>
-                    <CustomInput
-                      error={props.errors.minUsefulArea}
-                      name="minUsefulArea"
-                      type="number"
-                      handleChange={props.handleChange}
-                      defaultValue={props.inputs.minUsefulArea}
-                      symbol={<span>m²</span>}
-                      labelText={props.intl.formatMessage({
-                        ...messages.minUsefulArea,
-                      })}
-                      tooltipText={props.intl.formatMessage({
-                        ...messages.minUsefulArea,
-                      })}
-                    />
-                  </Grid>
-                  <Grid item xs={6}>
-                    <CustomInput
-                      error={props.errors.maxUsefulArea}
-                      name="maxUsefulArea"
-                      type="number"
-                      handleChange={props.handleChange}
-                      defaultValue={props.inputs.maxUsefulArea}
-                      symbol={<span>m²</span>}
-                      labelText={props.intl.formatMessage({
-                        ...messages.maxUsefulArea,
-                      })}
-                      tooltipText={props.intl.formatMessage({
-                        ...messages.maxUsefulArea,
-                      })}
-                    />
-                  </Grid>
                 </Grid>
               </Grid>
             </Grid>
-          </AccordionDetails>
-        </Accordion>
+          </Grid>
+        </HideAdvanceOptions>
       </Grid>
       <div className={props.classes.buttonContainer}>
         <BackNextButtons

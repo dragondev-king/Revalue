@@ -71,7 +71,7 @@ export default makeStyles(() => ({
   },
   divider: {
     width: '100%',
-    paddingTop: '20px',
+    margin: 'auto',
   },
   buttonContainer: {
     display: 'flex',
