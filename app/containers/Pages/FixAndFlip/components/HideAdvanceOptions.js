@@ -1,12 +1,14 @@
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useMemo, useCallback } from 'react';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 
 export const HideAdvanceOptions = props => {
-  const [isOpened, setIsOpened] = useState(false);
-  const summaryLabel = useMemo(() => (isOpened ? 'Hide' : 'Show'), [isOpened]);
+  const summaryLabel = useMemo(
+    () => (props.advanceOptionsStatus[props.stepName] ? 'Hide' : 'Show'),
+    [props, props.advanceOptionsStatus],
+  );
 
   const handleAccordionClick = useCallback(() => {
     props.setAdvanceOptionsStatus(
@@ -16,14 +18,11 @@ export const HideAdvanceOptions = props => {
   }, [props, props.advanceOptionsStatus, props.stepName]);
 
   return (
-    <Accordion
-      onClick={handleAccordionClick}
-      expanded={props.advanceOptionsStatus[props.stepName]}
-    >
+    <Accordion expanded={props.advanceOptionsStatus[props.stepName]}>
       <div className={props.classes.showDetailContainer}>
         <AccordionSummary
           expandIcon={<ExpandMore />}
-          onClick={() => setIsOpened(!isOpened)}
+          onClick={handleAccordionClick}
         >
           {`${summaryLabel} Advance Options`}
         </AccordionSummary>
