@@ -47,8 +47,9 @@ const Rehab = props => {
     <>
       <Grid container item>
         <span className={props.classes.stepPageDescription}>
-          Property Rehabilitation cost can be later adjusted on each Investment
-          Report
+          {props.intl.formatMessage({
+            ...messages.rehabDescription,
+          })}
         </span>
         <Grid item container spacing={6} className="mt-20">
           <Grid item xs={6}>

@@ -60,10 +60,12 @@ export const Proposal = props => {
     <>
       <Grid container item>
         <span className={props.classes.stepPageDescription}>
-          Define your discount to the vendor asking price.
+          {props.intl.formatMessage({
+            ...messages.proposalDescription,
+          })}
         </span>
         <Grid item container spacing={6} className="mt-20">
-          <Grid item xs={8}>
+          <Grid item xs={6}>
             <CustomSlider
               error={props.errors.bidAskRate}
               labelText={`${props.intl.formatMessage({

@@ -45,7 +45,9 @@ const OperatingCosts = props => {
     <>
       <Grid container item>
         <span className={props.classes.stepPageDescription}>
-          Budget your investment holding expenses
+          {props.intl.formatMessage({
+            ...messages.operatingCostsDescription,
+          })}
         </span>
         <Grid item container spacing={6} className="mt-20">
           <Grid item xs={6}>

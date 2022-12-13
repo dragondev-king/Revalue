@@ -67,8 +67,9 @@ const Property = props => {
     <>
       <Grid item container direction="column">
         <span className={props.classes.stepPageDescription}>
-          Choose your favorite investment location so we can help you analyse
-          your next Real Estate Investment!
+          {props.intl.formatMessage({
+            ...messages.locationDescription,
+          })}
         </span>
         <div className={props.classes.locationMapContainer}>
           <div className={props.classes.locationContainer}>

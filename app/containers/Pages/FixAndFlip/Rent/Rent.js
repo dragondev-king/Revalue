@@ -37,8 +37,9 @@ const Rent = props => {
     <>
       <Grid item container>
         <span className={props.classes.stepPageDescription}>
-          It is conservative to assume that after the contract ends you will
-          need to find another tenant to leaseyour property
+          {props.intl.formatMessage({
+            ...messages.rentDescription,
+          })}
         </span>
         <Grid item container spacing={6} className="mt-20">
           <Grid item xs={6}>

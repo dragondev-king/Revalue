@@ -84,9 +84,9 @@ const Financing = props => {
     <>
       <Grid container item>
         <span className={props.classes.stepPageDescription}>
-          {
-            'Typically banks do not finance more than 80% of the acquisition value for investment properties'
-          }
+          {props.intl.formatMessage({
+            ...messages.financingDescription,
+          })}
         </span>
         <Grid item container spacing={6} className="mt-20">
           <Grid item xs={6}>
@@ -237,7 +237,7 @@ const Financing = props => {
                     />
                   </Grid>
                 </Grid>
-                <Grid item container spacing={3}>
+                <Grid item container spacing={3} className="mt-10">
                   <Grid item xs={6}>
                     <CustomInput
                       error={props.errors.mortgageStampDutyRate}

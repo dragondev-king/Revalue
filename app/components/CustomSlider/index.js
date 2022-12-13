@@ -10,9 +10,15 @@ import { InfoIcon } from '../SvgIconComponents';
 
 const useStyles = makeStyles({
   sliderContainer: {
+    width: '100%',
+    padding: '0',
+    marginTop: '-20px',
+  },
+  sliderWrapper: {
     display: 'flex',
     alignItems: 'center',
     gap: '10px',
+    height: '12px',
   },
   sliderValueLabel: {
     width: '75px',
@@ -43,7 +49,11 @@ const CustomSlider = ({
   }, []);
 
   return (
-    <FormControl variant="standard" className="w-100" error={!!error}>
+    <FormControl
+      variant="standard"
+      className={styles.sliderContainer}
+      error={!!error}
+    >
       <label>
         {labelText}
         <Tooltip
@@ -58,7 +68,7 @@ const CustomSlider = ({
           </IconButton>
         </Tooltip>
       </label>
-      <div className={styles.sliderContainer}>
+      <div className={styles.sliderWrapper}>
         <Slider
           id={name}
           color="primary"

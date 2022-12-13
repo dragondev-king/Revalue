@@ -3,6 +3,10 @@ import { defineMessages } from 'react-intl';
 export const scope = 'app.containers.FixAndFlip';
 
 export default defineMessages({
+  pageTitle: {
+    id: `${scope}.pageTitle`,
+    defaultMessage: 'Your next investment in few steps',
+  },
   fixAndFlipTitle: {
     id: `${scope}.fixAndFlipTitle`,
     defaultMessage: 'Fix And Flip',
@@ -626,5 +630,126 @@ export default defineMessages({
   mainInvestmentInformation: {
     id: `${scope}.mainInvestmentInformation`,
     defaultMessage: 'mainInvestmentInformation',
+  },
+  locationLabel: {
+    id: `${scope}.locationLabel`,
+    defaultMessage: 'Location',
+  },
+  locationDetail: {
+    id: `${scope}.locationDetail`,
+    defaultMessage: 'Where do you want to invest',
+  },
+  locationDescription: {
+    id: `${scope}.locationDescription`,
+    defaultMessage:
+      'Choose your favorite investment location so we can help you analyse your next Real Estate Investment!',
+  },
+  proposalLabel: {
+    id: `${scope}.proposalLabel`,
+    defaultMessage: 'Proposal',
+  },
+  proposalDetail: {
+    id: `${scope}.proposalDetail`,
+    defaultMessage: 'How much are you going to offer?',
+  },
+  proposalDescription: {
+    id: `${scope}.proposalDescription`,
+    defaultMessage: 'Define your discount to the vendor asking price.',
+  },
+  financingLabel: {
+    id: `${scope}.financingLabel`,
+    defaultMessage: 'Financing',
+  },
+  financingDetail: {
+    id: `${scope}.financingDetail`,
+    defaultMessage: 'Do you want to finance your investment?',
+  },
+  financingDescription: {
+    id: `${scope}.financingDescription`,
+    defaultMessage:
+      'Typically banks do not finance more than 80% of the acquisition value for investment properties',
+  },
+  rehabLabel: {
+    id: `${scope}.rehabLabel`,
+    defaultMessage: 'Property Rehabilitation',
+  },
+  rehabDetail: {
+    id: `${scope}.rehabDetail`,
+    defaultMessage: 'Are you going to Rehabilitate the property?',
+  },
+  rehabDescription: {
+    id: `${scope}.rehabDescription`,
+    defaultMessage:
+      'Property Rehabilitation cost can be later adjusted on each Investment Report',
+  },
+  rentLabel: {
+    id: `${scope}.rentLabel`,
+    defaultMessage: 'Lease',
+  },
+  rentDetail: {
+    id: `${scope}.rentDetail`,
+    defaultMessage: 'Do you want to lease the property?',
+  },
+  rentDescription: {
+    id: `${scope}.rentDescription`,
+    defaultMessage:
+      'It is conservative to assume that after the contract ends you will need to find another tenant to leaseyour property',
+  },
+  operatingCostsLabel: {
+    id: `${scope}.operatingCostsLabel`,
+    defaultMessage: 'Operational Costs',
+  },
+  operatingCostsDetail: {
+    id: `${scope}.operatingCostsDetail`,
+    defaultMessage: 'What expenses should be budget?',
+  },
+  operatingCostsDescription: {
+    id: `${scope}.operatingCostsDescription`,
+    defaultMessage: 'Budget your investment holding expenses',
+  },
+  taxLabel: {
+    id: `${scope}.taxLabel`,
+    defaultMessage: 'Tax',
+  },
+  taxDetail: {
+    id: `${scope}.taxDetail`,
+    defaultMessage: 'What is your tax rate?',
+  },
+  taxDescription: {
+    id: `${scope}.taxDescription`,
+    defaultMessage: 'Personal level Tax for your investment profile',
+  },
+  saleLabel: {
+    id: `${scope}.saleLabel`,
+    defaultMessage: 'Sale Analysis',
+  },
+  saleDetail: {
+    id: `${scope}.saleDetail`,
+    defaultMessage: 'What should be your business plan period benchmark?',
+  },
+  saleDescription: {
+    id: `${scope}.saleDescription`,
+    defaultMessage:
+      'In order to analyse the sale of your investment we will compare your investment with the most recent similar transactions',
+  },
+  capitalLabel: {
+    id: `${scope}.capitalLabel`,
+    defaultMessage: 'Capital Requirements',
+  },
+  capitalDetail: {
+    id: `${scope}.capitalDetail`,
+    defaultMessage: 'What is your minimum Profit requirement?',
+  },
+  capitalDescription: {
+    id: `${scope}.capitalDescription`,
+    defaultMessage: 'Help us filter the best investment properties for you',
+  },
+  showAdvanceOption: {
+    id: `${scope}.showAdvanceOption`,
+    defaultMessage: 'Show Advance Options',
+  },
+  hideAdvanceOption: {
+    id: `${scope}.hideAdvanceOption`,
+    defaultMessage: 'Hide Advance Options',
   },
 });

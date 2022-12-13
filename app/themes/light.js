@@ -37,6 +37,7 @@ export const lightTheme = createTheme({
         boxShadow: 'none',
         position: 'initial',
         width: '100%',
+        margin: '0 !important',
       },
     },
     MuiAccordionSummary: {
@@ -45,6 +46,12 @@ export const lightTheme = createTheme({
         width: '250px',
         padding: '0 0 0 16px',
         position: 'relative',
+        minHeight: '64px',
+      },
+      content: {
+        margin: '20px 0',
+        display: 'flex',
+        flexGrow: '1',
       },
     },
   },

@@ -66,40 +66,40 @@ import useStyles from './styles';
 
 const steps = [
   {
-    label: 'Location',
-    detail: 'Where do you want to Invest?',
+    label: 'locationLabel',
+    detail: 'locationDetail',
   },
   {
-    label: 'Proposal',
-    detail: 'Where do you want to Invest?',
+    label: 'proposalLabel',
+    detail: 'proposalDetail',
   },
   {
-    label: 'Financing',
-    detail: 'Where do you want to Invest?',
+    label: 'financingLabel',
+    detail: 'financingDetail',
   },
   {
-    label: 'Property Rehabilitation',
-    detail: 'Where do you want to Invest?',
+    label: 'rehabLabel',
+    detail: 'rehabDetail',
   },
   {
-    label: 'Lease',
-    detail: 'Where do you want to Invest?',
+    label: 'rentLabel',
+    detail: 'rentDetail',
   },
   {
-    label: 'Operational Costs',
-    detail: 'Where do you want to Invest?',
+    label: 'operatingCostsLabel',
+    detail: 'operatingCostsDetail',
   },
   {
-    label: 'Tax',
-    detail: 'Where do you want to Invest?',
+    label: 'taxLabel',
+    detail: 'taxDetail',
   },
   {
-    label: 'Sale Analysis',
-    detail: 'Where do you want to Invest?',
+    label: 'saleLabel',
+    detail: 'saleDetail',
   },
   {
-    label: 'Capital Requirements',
-    detail: 'Where do you want to Invest?',
+    label: 'capitalLabel',
+    detail: 'capitalDetail',
   },
 ];
 
@@ -380,8 +380,16 @@ export function FixAndFlip(props) {
           {steps.map((step, idx) => (
             <Step key={idx}>
               <StepLabel>
-                <h6>{step.label}</h6>
-                <p>{step.detail}</p>
+                <h6>
+                  {props.intl.formatMessage({
+                    ...messages[step.label],
+                  })}
+                </h6>
+                <p>
+                  {props.intl.formatMessage({
+                    ...messages[step.detail],
+                  })}
+                </p>
               </StepLabel>
             </Step>
           ))}
@@ -454,7 +462,9 @@ export function FixAndFlip(props) {
       </Helmet>
       <div className={classes.pageTitleContainer}>
         <span className={classes.pageTitle}>
-          Your next investment in few steps
+          {props.intl.formatMessage({
+            ...messages.pageTitle,
+          })}
         </span>
       </div>
       <Grid container spacing={4}>

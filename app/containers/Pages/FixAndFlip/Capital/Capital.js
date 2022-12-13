@@ -49,7 +49,9 @@ const Capital = props => {
     <>
       <Grid container item>
         <span className={props.classes.stepPageDescription}>
-          Help us filter the best investment properties for you
+          {props.intl.formatMessage({
+            ...messages.capitalDescription,
+          })}
         </span>
         <Grid item container spacing={6} className="mt-20">
           <Grid item xs={6}>
