@@ -6,6 +6,7 @@ import * as yup from 'yup';
 import CustomInput from 'components/CustomInput';
 import CustomSelect from 'components/CustomSelect';
 import { BackNextButtons } from '../components/BackNextButtons';
+import { HideAdvanceOptions } from '../components/HideAdvanceOptions';
 
 import messages from '../messages';
 
@@ -85,58 +86,62 @@ const Sale = props => {
             />
           </Grid>
         </Grid>
-        <Grid item container spacing={6} className="mt-20">
-          <Grid item xs={6}>
-            <CustomInput
-              error={props.errors.housePriceIndexRate}
-              name="housePriceIndexRate"
-              type="number"
-              handleChange={props.handleChange}
-              defaultValue={props.inputs.housePriceIndexRate}
-              symbol={<span>%</span>}
-              labelText={`${props.intl.formatMessage({
-                ...messages.housePriceIndexRate,
-              })} *`}
-              tooltipText={props.intl.formatMessage({
-                ...messages.housePriceIndexRateInfo,
-              })}
-            />
+        <HideAdvanceOptions classes={props.classes}>
+          <Grid container item>
+            <Grid item container spacing={6} className="mt-20">
+              <Grid item xs={6}>
+                <CustomInput
+                  error={props.errors.housePriceIndexRate}
+                  name="housePriceIndexRate"
+                  type="number"
+                  handleChange={props.handleChange}
+                  defaultValue={props.inputs.housePriceIndexRate}
+                  symbol={<span>%</span>}
+                  labelText={`${props.intl.formatMessage({
+                    ...messages.housePriceIndexRate,
+                  })} *`}
+                  tooltipText={props.intl.formatMessage({
+                    ...messages.housePriceIndexRateInfo,
+                  })}
+                />
+              </Grid>
+            </Grid>
+            <Grid item container spacing={6} className="mt-20">
+              <Grid item xs={6}>
+                <CustomInput
+                  error={props.errors.exitBrokerRate}
+                  name="exitBrokerRate"
+                  type="number"
+                  handleChange={props.handleChange}
+                  defaultValue={props.inputs.exitBrokerRate}
+                  symbol={<span>%</span>}
+                  labelText={`${props.intl.formatMessage({
+                    ...messages.exitBrokerRate,
+                  })} *`}
+                  tooltipText={props.intl.formatMessage({
+                    ...messages.exitBrokerRateInfo,
+                  })}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <CustomInput
+                  error={props.errors.exitBrokerRateVat}
+                  name="exitBrokerRateVat"
+                  type="number"
+                  handleChange={props.handleChange}
+                  defaultValue={props.inputs.exitBrokerRateVat}
+                  symbol={<span>%</span>}
+                  labelText={`${props.intl.formatMessage({
+                    ...messages.exitBrokerRateVat,
+                  })} *`}
+                  tooltipText={props.intl.formatMessage({
+                    ...messages.exitBrokerRateVatInfo,
+                  })}
+                />
+              </Grid>
+            </Grid>
           </Grid>
-        </Grid>
-        <Grid item container spacing={6} className="mt-20">
-          <Grid item xs={6}>
-            <CustomInput
-              error={props.errors.exitBrokerRate}
-              name="exitBrokerRate"
-              type="number"
-              handleChange={props.handleChange}
-              defaultValue={props.inputs.exitBrokerRate}
-              symbol={<span>%</span>}
-              labelText={`${props.intl.formatMessage({
-                ...messages.exitBrokerRate,
-              })} *`}
-              tooltipText={props.intl.formatMessage({
-                ...messages.exitBrokerRateInfo,
-              })}
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <CustomInput
-              error={props.errors.exitBrokerRateVat}
-              name="exitBrokerRateVat"
-              type="number"
-              handleChange={props.handleChange}
-              defaultValue={props.inputs.exitBrokerRateVat}
-              symbol={<span>%</span>}
-              labelText={`${props.intl.formatMessage({
-                ...messages.exitBrokerRateVat,
-              })} *`}
-              tooltipText={props.intl.formatMessage({
-                ...messages.exitBrokerRateVatInfo,
-              })}
-            />
-          </Grid>
-        </Grid>
+        </HideAdvanceOptions>
       </Grid>
       <div className={props.classes.buttonContainer}>
         <BackNextButtons

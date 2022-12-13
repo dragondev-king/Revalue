@@ -7,6 +7,7 @@ import CustomInput from 'components/CustomInput';
 import CustomSwitch from 'components/CustomSwitch';
 import CustomSlider from 'components/CustomSlider';
 import { BackNextButtons } from '../components/BackNextButtons';
+import { HideAdvanceOptions } from '../components/HideAdvanceOptions';
 
 import messages from '../messages';
 
@@ -83,8 +84,9 @@ const Financing = props => {
     <>
       <Grid container item>
         <span className={props.classes.stepPageDescription}>
-          Typically banks do not finance more than 80% of the acquisition value
-          for investment properties
+          {
+            'Typically banks do not finance more than 80% of the acquisition value for investment properties'
+          }
         </span>
         <Grid item container spacing={6} className="mt-20">
           <Grid item xs={6}>
@@ -154,112 +156,123 @@ const Financing = props => {
                   name="amortization"
                   handleChange={props.handleSliderChange}
                   disabled={false}
-                  unit="%"
+                  unit=" Years"
+                  max={40}
                 />
               </Grid>
             </Grid>
-            <Grid item container spacing={6} className="mt-20">
-              <Grid item xs={6}>
-                <CustomInput
-                  error={props.errors.multiRiskInsurance}
-                  name="multiRiskInsurance"
-                  type="number"
-                  handleChange={props.handleChange}
-                  defaultValue={props.inputs.multiRiskInsurance}
-                  symbol={<span>&#8364;</span>}
-                  labelText={props.intl.formatMessage({
-                    ...messages.multiRiskInsurance,
-                  })}
-                  tooltipText={props.intl.formatMessage({
-                    ...messages.multiRiskInsuranceInfo,
-                  })}
-                />
+            <HideAdvanceOptions classes={props.classes}>
+              <Grid item container>
+                <Grid item container spacing={3}>
+                  <Grid item xs={12}>
+                    <p>Estimate insurance costs</p>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <CustomInput
+                      error={props.errors.multiRiskInsurance}
+                      name="multiRiskInsurance"
+                      type="number"
+                      handleChange={props.handleChange}
+                      defaultValue={props.inputs.multiRiskInsurance}
+                      symbol={<span>&#8364;</span>}
+                      labelText={props.intl.formatMessage({
+                        ...messages.multiRiskInsurance,
+                      })}
+                      tooltipText={props.intl.formatMessage({
+                        ...messages.multiRiskInsuranceInfo,
+                      })}
+                    />
+                  </Grid>
+                  <Grid item xs={6}>
+                    <CustomInput
+                      error={props.errors.lifeInsurance}
+                      name="lifeInsurance"
+                      type="number"
+                      handleChange={props.handleChange}
+                      defaultValue={props.inputs.lifeInsurance}
+                      symbol={<span>&#8364;</span>}
+                      labelText={props.intl.formatMessage({
+                        ...messages.lifeInsurance,
+                      })}
+                      tooltipText={props.intl.formatMessage({
+                        ...messages.lifeInsuranceInfo,
+                      })}
+                    />
+                  </Grid>
+                </Grid>
+                <Grid item container spacing={3}>
+                  <Grid item xs={12}>
+                    <p>Estimate your financing costs</p>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <CustomInput
+                      error={props.errors.bankCommissionRate}
+                      name="bankCommissionRate"
+                      type="number"
+                      handleChange={props.handleChange}
+                      defaultValue={props.inputs.bankCommissionRate}
+                      symbol={<span>%</span>}
+                      labelText={`${props.intl.formatMessage({
+                        ...messages.bankCommissionRate,
+                      })} *`}
+                      tooltipText={props.intl.formatMessage({
+                        ...messages.bankCommissionRateInfo,
+                      })}
+                    />
+                  </Grid>
+                  <Grid item xs={6}>
+                    <CustomInput
+                      error={props.errors.loanEarlyRepaymentRate}
+                      name="loanEarlyRepaymentRate"
+                      type="number"
+                      handleChange={props.handleChange}
+                      defaultValue={props.inputs.loanEarlyRepaymentRate}
+                      symbol={<span>%</span>}
+                      labelText={`${props.intl.formatMessage({
+                        ...messages.loanEarlyRepaymentRate,
+                      })} *`}
+                      tooltipText={props.intl.formatMessage({
+                        ...messages.loanEarlyRepaymentRateInfo,
+                      })}
+                    />
+                  </Grid>
+                </Grid>
+                <Grid item container spacing={3}>
+                  <Grid item xs={6}>
+                    <CustomInput
+                      error={props.errors.mortgageStampDutyRate}
+                      name="mortgageStampDutyRate"
+                      type="number"
+                      handleChange={props.handleChange}
+                      defaultValue={props.inputs.mortgageStampDutyRate}
+                      symbol={<span>%</span>}
+                      labelText={`${props.intl.formatMessage({
+                        ...messages.mortgageStampDutyRate,
+                      })} *`}
+                      tooltipText={props.intl.formatMessage({
+                        ...messages.mortgageStampDutyRateInfo,
+                      })}
+                    />
+                  </Grid>
+                  <Grid item xs={6}>
+                    <CustomInput
+                      error={props.errors.interestStampDutyRate}
+                      name="interestStampDutyRate"
+                      type="number"
+                      handleChange={props.handleChange}
+                      defaultValue={props.inputs.interestStampDutyRate}
+                      symbol={<span>%</span>}
+                      labelText={`${props.intl.formatMessage({
+                        ...messages.interestStampDutyRate,
+                      })} *`}
+                      tooltipText={props.intl.formatMessage({
+                        ...messages.interestStampDutyRateInfo,
+                      })}
+                    />
+                  </Grid>
+                </Grid>
               </Grid>
-              <Grid item xs={6}>
-                <CustomInput
-                  error={props.errors.lifeInsurance}
-                  name="lifeInsurance"
-                  type="number"
-                  handleChange={props.handleChange}
-                  defaultValue={props.inputs.lifeInsurance}
-                  symbol={<span>&#8364;</span>}
-                  labelText={props.intl.formatMessage({
-                    ...messages.lifeInsurance,
-                  })}
-                  tooltipText={props.intl.formatMessage({
-                    ...messages.lifeInsuranceInfo,
-                  })}
-                />
-              </Grid>
-            </Grid>
-            <Grid item container spacing={6} className="mt-20">
-              <Grid item xs={6}>
-                <CustomInput
-                  error={props.errors.bankCommissionRate}
-                  name="bankCommissionRate"
-                  type="number"
-                  handleChange={props.handleChange}
-                  defaultValue={props.inputs.bankCommissionRate}
-                  symbol={<span>%</span>}
-                  labelText={`${props.intl.formatMessage({
-                    ...messages.bankCommissionRate,
-                  })} *`}
-                  tooltipText={props.intl.formatMessage({
-                    ...messages.bankCommissionRateInfo,
-                  })}
-                />
-              </Grid>
-              <Grid item xs={6}>
-                <CustomInput
-                  error={props.errors.loanEarlyRepaymentRate}
-                  name="loanEarlyRepaymentRate"
-                  type="number"
-                  handleChange={props.handleChange}
-                  defaultValue={props.inputs.loanEarlyRepaymentRate}
-                  symbol={<span>%</span>}
-                  labelText={`${props.intl.formatMessage({
-                    ...messages.loanEarlyRepaymentRate,
-                  })} *`}
-                  tooltipText={props.intl.formatMessage({
-                    ...messages.loanEarlyRepaymentRateInfo,
-                  })}
-                />
-              </Grid>
-            </Grid>
-            <Grid item container spacing={6} className="mt-20">
-              <Grid item xs={6}>
-                <CustomInput
-                  error={props.errors.mortgageStampDutyRate}
-                  name="mortgageStampDutyRate"
-                  type="number"
-                  handleChange={props.handleChange}
-                  defaultValue={props.inputs.mortgageStampDutyRate}
-                  symbol={<span>%</span>}
-                  labelText={`${props.intl.formatMessage({
-                    ...messages.mortgageStampDutyRate,
-                  })} *`}
-                  tooltipText={props.intl.formatMessage({
-                    ...messages.mortgageStampDutyRateInfo,
-                  })}
-                />
-              </Grid>
-              <Grid item xs={6}>
-                <CustomInput
-                  error={props.errors.interestStampDutyRate}
-                  name="interestStampDutyRate"
-                  type="number"
-                  handleChange={props.handleChange}
-                  defaultValue={props.inputs.interestStampDutyRate}
-                  symbol={<span>%</span>}
-                  labelText={`${props.intl.formatMessage({
-                    ...messages.interestStampDutyRate,
-                  })} *`}
-                  tooltipText={props.intl.formatMessage({
-                    ...messages.interestStampDutyRateInfo,
-                  })}
-                />
-              </Grid>
-            </Grid>
+            </HideAdvanceOptions>
           </>
         )}
       </Grid>

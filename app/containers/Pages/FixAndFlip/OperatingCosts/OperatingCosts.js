@@ -6,6 +6,7 @@ import * as yup from 'yup';
 import CustomInput from 'components/CustomInput';
 import CustomSwitch from 'components/CustomSwitch';
 import { BackNextButtons } from '../components/BackNextButtons';
+import { HideAdvanceOptions } from '../components/HideAdvanceOptions';
 
 import messages from '../messages';
 
@@ -74,40 +75,44 @@ const OperatingCosts = props => {
             />
           </Grid>
         </Grid>
-        <Grid item container spacing={6} className="mt-20">
-          <Grid item xs={6}>
-            <CustomInput
-              error={props.errors.maintenanceCosts}
-              name="maintenanceCosts"
-              type="number"
-              handleChange={props.handleChange}
-              defaultValue={props.inputs.maintenanceCosts}
-              symbol={<span>&#8364;</span>}
-              labelText={props.intl.formatMessage({
-                ...messages.maintenanceCosts,
-              })}
-              tooltipText={props.intl.formatMessage({
-                ...messages.maintenanceCostsInfo,
-              })}
-            />
+        <HideAdvanceOptions classes={props.classes}>
+          <Grid item container spacing={6}>
+            <Grid item container spacing={3}>
+              <Grid item xs={6}>
+                <CustomInput
+                  error={props.errors.maintenanceCosts}
+                  name="maintenanceCosts"
+                  type="number"
+                  handleChange={props.handleChange}
+                  defaultValue={props.inputs.maintenanceCosts}
+                  symbol={<span>&#8364;</span>}
+                  labelText={props.intl.formatMessage({
+                    ...messages.maintenanceCosts,
+                  })}
+                  tooltipText={props.intl.formatMessage({
+                    ...messages.maintenanceCostsInfo,
+                  })}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <CustomInput
+                  error={props.errors.otherOperatingCosts}
+                  name="otherOperatingCosts"
+                  type="number"
+                  handleChange={props.handleChange}
+                  defaultValue={props.inputs.otherOperatingCosts}
+                  symbol={<span>&#8364;</span>}
+                  labelText={props.intl.formatMessage({
+                    ...messages.otherOperatingCosts,
+                  })}
+                  tooltipText={props.intl.formatMessage({
+                    ...messages.otherOperatingCostsInfo,
+                  })}
+                />
+              </Grid>
+            </Grid>
           </Grid>
-          <Grid item xs={6}>
-            <CustomInput
-              error={props.errors.otherOperatingCosts}
-              name="otherOperatingCosts"
-              type="number"
-              handleChange={props.handleChange}
-              defaultValue={props.inputs.otherOperatingCosts}
-              symbol={<span>&#8364;</span>}
-              labelText={props.intl.formatMessage({
-                ...messages.otherOperatingCosts,
-              })}
-              tooltipText={props.intl.formatMessage({
-                ...messages.otherOperatingCostsInfo,
-              })}
-            />
-          </Grid>
-        </Grid>
+        </HideAdvanceOptions>
       </Grid>
       <div className={props.classes.buttonContainer}>
         <BackNextButtons

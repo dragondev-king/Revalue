@@ -7,6 +7,7 @@ import CustomInput from 'components/CustomInput';
 import CustomSwitch from 'components/CustomSwitch';
 import CustomSlider from 'components/CustomSlider';
 import { BackNextButtons } from '../components/BackNextButtons';
+import { HideAdvanceOptions } from '../components/HideAdvanceOptions';
 import messages from '../messages';
 
 export const Proposal = props => {
@@ -80,91 +81,95 @@ export const Proposal = props => {
             />
           </Grid>
         </Grid>
-        <Grid item container spacing={6} className="mt-20">
-          <Grid item xs={4}>
-            <CustomSwitch
-              defaultValue={props.inputs.realEstateTransferTax}
-              handleChange={props.handleChangeSwitch}
-              checked={props.inputs.realEstateTransferTax}
-              color="primary"
-              name="realEstateTransferTax"
-              labelText={`${props.intl.formatMessage({
-                ...messages.realEstateTransferTax,
-              })} *`}
-              tooltipText={props.intl.formatMessage({
-                ...messages.realEstateTransferTaxInfo,
-              })}
-            />
+        <HideAdvanceOptions classes={props.classes}>
+          <Grid item container spacing={6}>
+            <Grid item container spacing={3}>
+              <Grid item xs={4}>
+                <CustomSwitch
+                  defaultValue={props.inputs.realEstateTransferTax}
+                  handleChange={props.handleChangeSwitch}
+                  checked={props.inputs.realEstateTransferTax}
+                  color="primary"
+                  name="realEstateTransferTax"
+                  labelText={`${props.intl.formatMessage({
+                    ...messages.realEstateTransferTax,
+                  })} *`}
+                  tooltipText={props.intl.formatMessage({
+                    ...messages.realEstateTransferTaxInfo,
+                  })}
+                />
+              </Grid>
+            </Grid>
+            <Grid item container spacing={3}>
+              <Grid item xs={6}>
+                <CustomInput
+                  error={props.errors.acquisitionBrokerRate}
+                  name="acquisitionBrokerRate"
+                  type="number"
+                  handleChange={props.handleChange}
+                  defaultValue={props.inputs.acquisitionBrokerRate}
+                  symbol={<span>%</span>}
+                  labelText={`${props.intl.formatMessage({
+                    ...messages.acquisitionBrokerRate,
+                  })} *`}
+                  tooltipText={props.intl.formatMessage({
+                    ...messages.acquisitionBrokerRateInfo,
+                  })}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <CustomInput
+                  error={props.errors.acquisitionBrokerRateVat}
+                  name="acquisitionBrokerRateVat"
+                  type="number"
+                  handleChange={props.handleChange}
+                  defaultValue={props.inputs.acquisitionBrokerRateVat}
+                  symbol={<span>%</span>}
+                  labelText={`${props.intl.formatMessage({
+                    ...messages.acquisitionBrokerRateVat,
+                  })} *`}
+                  tooltipText={props.intl.formatMessage({
+                    ...messages.acquisitionBrokerRateVatInfo,
+                  })}
+                />
+              </Grid>
+            </Grid>
+            <Grid item container spacing={3}>
+              <Grid item xs={6}>
+                <CustomInput
+                  error={props.errors.acquisitionStampDutyRate}
+                  name="acquisitionStampDutyRate"
+                  type="number"
+                  handleChange={props.handleChange}
+                  defaultValue={props.inputs.acquisitionStampDutyRate}
+                  symbol={<span>%</span>}
+                  labelText={`${props.intl.formatMessage({
+                    ...messages.acquisitionStampDutyRate,
+                  })} *`}
+                  tooltipText={props.intl.formatMessage({
+                    ...messages.acquisitionStampDutyRateInfo,
+                  })}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <CustomInput
+                  error={props.errors.landRegistryInscription}
+                  name="landRegistryInscription"
+                  type="number"
+                  handleChange={props.handleChange}
+                  defaultValue={props.inputs.landRegistryInscription}
+                  symbol={<span>&#8364;</span>}
+                  labelText={`${props.intl.formatMessage({
+                    ...messages.landRegistryInscription,
+                  })} *`}
+                  tooltipText={props.intl.formatMessage({
+                    ...messages.landRegistryInscriptionInfo,
+                  })}
+                />
+              </Grid>
+            </Grid>
           </Grid>
-        </Grid>
-        <Grid item container spacing={6} className="mt-20">
-          <Grid item xs={6}>
-            <CustomInput
-              error={props.errors.acquisitionBrokerRate}
-              name="acquisitionBrokerRate"
-              type="number"
-              handleChange={props.handleChange}
-              defaultValue={props.inputs.acquisitionBrokerRate}
-              symbol={<span>%</span>}
-              labelText={`${props.intl.formatMessage({
-                ...messages.acquisitionBrokerRate,
-              })} *`}
-              tooltipText={props.intl.formatMessage({
-                ...messages.acquisitionBrokerRateInfo,
-              })}
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <CustomInput
-              error={props.errors.acquisitionBrokerRateVat}
-              name="acquisitionBrokerRateVat"
-              type="number"
-              handleChange={props.handleChange}
-              defaultValue={props.inputs.acquisitionBrokerRateVat}
-              symbol={<span>%</span>}
-              labelText={`${props.intl.formatMessage({
-                ...messages.acquisitionBrokerRateVat,
-              })} *`}
-              tooltipText={props.intl.formatMessage({
-                ...messages.acquisitionBrokerRateVatInfo,
-              })}
-            />
-          </Grid>
-        </Grid>
-        <Grid item container spacing={6} className="mt-20">
-          <Grid item xs={6}>
-            <CustomInput
-              error={props.errors.acquisitionStampDutyRate}
-              name="acquisitionStampDutyRate"
-              type="number"
-              handleChange={props.handleChange}
-              defaultValue={props.inputs.acquisitionStampDutyRate}
-              symbol={<span>%</span>}
-              labelText={`${props.intl.formatMessage({
-                ...messages.acquisitionStampDutyRate,
-              })} *`}
-              tooltipText={props.intl.formatMessage({
-                ...messages.acquisitionStampDutyRateInfo,
-              })}
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <CustomInput
-              error={props.errors.landRegistryInscription}
-              name="landRegistryInscription"
-              type="number"
-              handleChange={props.handleChange}
-              defaultValue={props.inputs.landRegistryInscription}
-              symbol={<span>&#8364;</span>}
-              labelText={`${props.intl.formatMessage({
-                ...messages.landRegistryInscription,
-              })} *`}
-              tooltipText={props.intl.formatMessage({
-                ...messages.landRegistryInscriptionInfo,
-              })}
-            />
-          </Grid>
-        </Grid>
+        </HideAdvanceOptions>
       </Grid>
       <div className={props.classes.buttonContainer}>
         <BackNextButtons

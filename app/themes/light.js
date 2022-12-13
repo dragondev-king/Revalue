@@ -35,6 +35,8 @@ export const lightTheme = createTheme({
     MuiAccordion: {
       root: {
         boxShadow: 'none',
+        position: 'initial',
+        width: '100%',
       },
     },
     MuiAccordionSummary: {

@@ -21,7 +21,7 @@ export default defineMessages({
   },
   financing: {
     id: `${scope}.financing`,
-    defaultMessage: 'financing',
+    defaultMessage: 'Are you going to finance property acquisition?',
   },
   lease: {
     id: `${scope}.lease`,

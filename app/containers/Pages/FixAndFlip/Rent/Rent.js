@@ -6,6 +6,7 @@ import * as yup from 'yup';
 import CustomInput from 'components/CustomInput';
 import CustomSwitch from 'components/CustomSwitch';
 import { BackNextButtons } from '../components/BackNextButtons';
+import { HideAdvanceOptions } from '../components/HideAdvanceOptions';
 import messages from '../messages';
 
 const Rent = props => {
@@ -92,92 +93,84 @@ const Rent = props => {
                 />
               </Grid>
             </Grid>
-            <Grid item container spacing={6} className="mt-20">
-              <Grid item xs={6}>
-                <CustomInput
-                  error={props.errors.propertyManagerRate}
-                  name="propertyManagerRate"
-                  type="number"
-                  handleChange={props.handleChange}
-                  defaultValue={props.inputs.propertyManagerRate}
-                  symbol={<span>&#8364;</span>}
-                  labelText={props.intl.formatMessage({
-                    ...messages.propertyManagerRate,
-                  })}
-                  tooltipText={props.intl.formatMessage({
-                    ...messages.propertyManagerRateInfo,
-                  })}
-                />
+            <HideAdvanceOptions classes={props.classes}>
+              <Grid item container>
+                <Grid item container spacing={1}>
+                  <Grid item xs={12}>
+                    <p>Are you going to use a Broker to lease the Proerty?</p>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <CustomInput
+                      error={props.errors.rentBrokerFee}
+                      name="rentBrokerFee"
+                      type="number"
+                      handleChange={props.handleChange}
+                      defaultValue={props.inputs.rentBrokerFee}
+                      symbol={<span>&#8364;</span>}
+                      labelText={`${props.intl.formatMessage({
+                        ...messages.rentBrokerFee,
+                      })} *`}
+                      tooltipText={props.intl.formatMessage({
+                        ...messages.rentBrokerFeeInfo,
+                      })}
+                    />
+                  </Grid>
+                  <Grid item xs={6}>
+                    <CustomInput
+                      error={props.errors.rentBrokerFeeVat}
+                      name="rentBrokerFeeVat"
+                      type="number"
+                      handleChange={props.handleChange}
+                      defaultValue={props.inputs.rentBrokerFeeVat}
+                      symbol={<span>&#8364;</span>}
+                      labelText={`${props.intl.formatMessage({
+                        ...messages.rentBrokerFeeVat,
+                      })} *`}
+                      tooltipText={props.intl.formatMessage({
+                        ...messages.rentBrokerFeeVatInfo,
+                      })}
+                    />
+                  </Grid>
+                </Grid>
+                <Grid item container spacing={1}>
+                  <Grid item xs={12}>
+                    <p>Taxes associated with properly leasing</p>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <CustomInput
+                      error={props.errors.rentStampDutyRate}
+                      name="rentStampDutyRate"
+                      type="number"
+                      handleChange={props.handleChange}
+                      defaultValue={props.inputs.rentStampDutyRate}
+                      symbol={<span>&#8364;</span>}
+                      labelText={`${props.intl.formatMessage({
+                        ...messages.rentStampDutyRate,
+                      })} *`}
+                      tooltipText={props.intl.formatMessage({
+                        ...messages.rentStampDutyRateInfo,
+                      })}
+                    />
+                  </Grid>
+                  <Grid item xs={6}>
+                    <CustomInput
+                      error={props.errors.rentTaxRate}
+                      name="rentTaxRate"
+                      type="number"
+                      handleChange={props.handleChange}
+                      defaultValue={props.inputs.rentTaxRate}
+                      symbol={<span>&#8364;</span>}
+                      labelText={`${props.intl.formatMessage({
+                        ...messages.rentTaxRate,
+                      })} *`}
+                      tooltipText={props.intl.formatMessage({
+                        ...messages.rentTaxRateInfo,
+                      })}
+                    />
+                  </Grid>
+                </Grid>
               </Grid>
-            </Grid>
-            <Grid item container spacing={6} className="mt-20">
-              <Grid item xs={6}>
-                <CustomInput
-                  error={props.errors.rentBrokerFee}
-                  name="rentBrokerFee"
-                  type="number"
-                  handleChange={props.handleChange}
-                  defaultValue={props.inputs.rentBrokerFee}
-                  symbol={<span>&#8364;</span>}
-                  labelText={`${props.intl.formatMessage({
-                    ...messages.rentBrokerFee,
-                  })} *`}
-                  tooltipText={props.intl.formatMessage({
-                    ...messages.rentBrokerFeeInfo,
-                  })}
-                />
-              </Grid>
-              <Grid item xs={6}>
-                <CustomInput
-                  error={props.errors.rentBrokerFeeVat}
-                  name="rentBrokerFeeVat"
-                  type="number"
-                  handleChange={props.handleChange}
-                  defaultValue={props.inputs.rentBrokerFeeVat}
-                  symbol={<span>&#8364;</span>}
-                  labelText={`${props.intl.formatMessage({
-                    ...messages.rentBrokerFeeVat,
-                  })} *`}
-                  tooltipText={props.intl.formatMessage({
-                    ...messages.rentBrokerFeeVatInfo,
-                  })}
-                />
-              </Grid>
-            </Grid>
-            <Grid item container spacing={6} className="mt-20">
-              <Grid item xs={6}>
-                <CustomInput
-                  error={props.errors.rentStampDutyRate}
-                  name="rentStampDutyRate"
-                  type="number"
-                  handleChange={props.handleChange}
-                  defaultValue={props.inputs.rentStampDutyRate}
-                  symbol={<span>&#8364;</span>}
-                  labelText={`${props.intl.formatMessage({
-                    ...messages.rentStampDutyRate,
-                  })} *`}
-                  tooltipText={props.intl.formatMessage({
-                    ...messages.rentStampDutyRateInfo,
-                  })}
-                />
-              </Grid>
-              <Grid item xs={6}>
-                <CustomInput
-                  error={props.errors.rentTaxRate}
-                  name="rentTaxRate"
-                  type="number"
-                  handleChange={props.handleChange}
-                  defaultValue={props.inputs.rentTaxRate}
-                  symbol={<span>&#8364;</span>}
-                  labelText={`${props.intl.formatMessage({
-                    ...messages.rentTaxRate,
-                  })} *`}
-                  tooltipText={props.intl.formatMessage({
-                    ...messages.rentTaxRateInfo,
-                  })}
-                />
-              </Grid>
-            </Grid>
+            </HideAdvanceOptions>
           </>
         )}
       </Grid>

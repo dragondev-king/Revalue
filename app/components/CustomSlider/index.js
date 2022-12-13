@@ -15,7 +15,7 @@ const useStyles = makeStyles({
     gap: '10px',
   },
   sliderValueLabel: {
-    width: '45px',
+    width: '75px',
     border: '1px solid grey',
     borderRadius: '4px',
     padding: '4px 1px',

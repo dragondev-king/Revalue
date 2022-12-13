@@ -8,6 +8,7 @@ import CustomSwitch from 'components/CustomSwitch';
 import CustomSelect from 'components/CustomSelect';
 import CustomSlider from 'components/CustomSlider';
 import { BackNextButtons } from '../components/BackNextButtons';
+import { HideAdvanceOptions } from '../components/HideAdvanceOptions';
 
 import messages from '../messages';
 
@@ -156,56 +157,58 @@ const Tax = props => {
             </>
           )}
         </Grid>
-        <Grid item container spacing={6} className="mt-20">
-          <Grid item xs={6}>
-            <CustomSelect
-              error={null}
-              defaultValue={props.inputs.acquisitionType}
-              handleChange={props.handleChange}
-              data={props.acquisitionTypes}
-              name="acquisitionType"
-              labelText={`${props.intl.formatMessage({
-                ...messages.acquisitionType,
-              })} *`}
-              tooltipText={props.intl.formatMessage({
-                ...messages.acquisitionTypeInfo,
-              })}
-            />
+        <HideAdvanceOptions classes={props.classes}>
+          <Grid item container spacing={6}>
+            <Grid item xs={6}>
+              <CustomSelect
+                error={null}
+                defaultValue={props.inputs.acquisitionType}
+                handleChange={props.handleChange}
+                data={props.acquisitionTypes}
+                name="acquisitionType"
+                labelText={`${props.intl.formatMessage({
+                  ...messages.acquisitionType,
+                })} *`}
+                tooltipText={props.intl.formatMessage({
+                  ...messages.acquisitionTypeInfo,
+                })}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <CustomSlider
+                error={props.errors.capitalGainsTaxBaseRate}
+                labelText={`${props.intl.formatMessage({
+                  ...messages.capitalGainsTaxBaseRate,
+                })} *`}
+                value={props.inputs.capitalGainsTaxBaseRate}
+                tooltipText={props.intl.formatMessage({
+                  ...messages.capitalGainsTaxBaseRateInfo,
+                })}
+                defaultValue={props.inputs.capitalGainsTaxBaseRate}
+                name="capitalGainsTaxBaseRate"
+                handleChange={props.handleSliderChange}
+                disabled={false}
+                unit="%"
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <CustomInput
+                error={props.errors.rehabTaxRate}
+                name="rehabTaxRate"
+                type="number"
+                handleChange={props.handleChange}
+                defaultValue={props.inputs.rehabTaxRate}
+                symbol={<span>&#8364;</span>}
+                labelText={`${props.intl.formatMessage({
+                  ...messages.rehabTaxRate,
+                })} *`}
+                tooltipText={props.intl.formatMessage({
+                  ...messages.rehabTaxRateInfo,
+                })}
+              />
+            </Grid>
           </Grid>
-          <Grid item xs={6}>
-            <CustomSlider
-              error={props.errors.capitalGainsTaxBaseRate}
-              labelText={`${props.intl.formatMessage({
-                ...messages.capitalGainsTaxBaseRate,
-              })} *`}
-              value={props.inputs.capitalGainsTaxBaseRate}
-              tooltipText={props.intl.formatMessage({
-                ...messages.capitalGainsTaxBaseRateInfo,
-              })}
-              defaultValue={props.inputs.capitalGainsTaxBaseRate}
-              name="capitalGainsTaxBaseRate"
-              handleChange={props.handleSliderChange}
-              disabled={false}
-              unit="%"
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <CustomInput
-              error={props.errors.rehabTaxRate}
-              name="rehabTaxRate"
-              type="number"
-              handleChange={props.handleChange}
-              defaultValue={props.inputs.rehabTaxRate}
-              symbol={<span>&#8364;</span>}
-              labelText={`${props.intl.formatMessage({
-                ...messages.rehabTaxRate,
-              })} *`}
-              tooltipText={props.intl.formatMessage({
-                ...messages.rehabTaxRateInfo,
-              })}
-            />
-          </Grid>
-        </Grid>
+        </HideAdvanceOptions>
       </Grid>
       <div className={props.classes.buttonContainer}>
         <BackNextButtons

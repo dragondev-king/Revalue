@@ -32,8 +32,7 @@ const useStyles = makeStyles({
   label: {
     overflow: 'hidden',
     textOverflow: 'ellipsis',
-    whiteSpace: 'nowrap',
-    right: '22px !important',
+    right: '25px !important',
     bottom: '0px',
   },
   labelShrunk: {
