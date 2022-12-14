@@ -96,7 +96,7 @@ const Rent = props => {
             </Grid>
             <HideAdvanceOptions {...props} stepName="rent">
               <Grid item container>
-                <Grid item container spacing={1}>
+                <Grid item container spacing={6}>
                   <Grid item xs={12}>
                     <p>Are you going to use a Broker to lease the Proerty?</p>
                   </Grid>
@@ -133,7 +133,7 @@ const Rent = props => {
                     />
                   </Grid>
                 </Grid>
-                <Grid item container spacing={1}>
+                <Grid item container spacing={6}>
                   <Grid item xs={12}>
                     <p>Taxes associated with properly leasing</p>
                   </Grid>

@@ -380,12 +380,12 @@ export function FixAndFlip(props) {
           {steps.map((step, idx) => (
             <Step key={idx}>
               <StepLabel>
-                <h6>
+                <p className={classes.stepperLabel}>
                   {props.intl.formatMessage({
                     ...messages[step.label],
                   })}
-                </h6>
-                <p>
+                </p>
+                <p className={classes.stepperDetail}>
                   {props.intl.formatMessage({
                     ...messages[step.detail],
                   })}
@@ -467,15 +467,17 @@ export function FixAndFlip(props) {
           })}
         </span>
       </div>
-      <Grid container spacing={4}>
-        {renderStepper()}
-        <Grid item xs={8}>
-          <div className={classes.contentContainer}>
-            {renderStepContent(props.activeStep)}
-          </div>
+      <div className="mt-10">
+        <Grid container spacing={4}>
+          {renderStepper()}
+          <Grid item xs={8}>
+            <div className={classes.contentContainer}>
+              {renderStepContent(props.activeStep)}
+            </div>
+          </Grid>
         </Grid>
         {renderTable()}
-      </Grid>
+      </div>
     </>
   );
 }

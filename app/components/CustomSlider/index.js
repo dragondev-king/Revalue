@@ -6,9 +6,26 @@ import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import { Typography } from '@material-ui/core';
+import InputLabel from '@material-ui/core/InputLabel';
+
 import { InfoIcon } from '../SvgIconComponents';
 
 const useStyles = makeStyles({
+  inputLabel: {
+    color: '#31342B',
+    fontSize: '16px',
+    top: '-25px',
+  },
+  label: {
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
+    right: '22px !important',
+    bottom: '0px',
+  },
+  labelShrunk: {
+    right: 'unset',
+  },
   sliderContainer: {
     width: '100%',
     padding: '0',
@@ -54,7 +71,14 @@ const CustomSlider = ({
       className={styles.sliderContainer}
       error={!!error}
     >
-      <label>
+      <InputLabel
+        shrink
+        className={styles.inputLabel}
+        classes={{
+          root: styles.label,
+          shrink: styles.labelShrunk,
+        }}
+      >
         {labelText}
         <Tooltip
           title={
@@ -67,7 +91,7 @@ const CustomSlider = ({
             <InfoIcon />
           </IconButton>
         </Tooltip>
-      </label>
+      </InputLabel>
       <div className={styles.sliderWrapper}>
         <Slider
           id={name}

@@ -79,7 +79,7 @@ const OperatingCosts = props => {
         </Grid>
         <HideAdvanceOptions {...props} stepName="operatingCosts">
           <Grid item container spacing={6}>
-            <Grid item container spacing={3}>
+            <Grid item container spacing={6}>
               <Grid item xs={6}>
                 <CustomInput
                   error={props.errors.maintenanceCosts}

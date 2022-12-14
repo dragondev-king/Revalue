@@ -163,7 +163,7 @@ const Financing = props => {
             </Grid>
             <HideAdvanceOptions {...props} stepName="financing">
               <Grid item container>
-                <Grid item container spacing={3}>
+                <Grid item container spacing={6}>
                   <Grid item xs={12}>
                     <p>Estimate insurance costs</p>
                   </Grid>
@@ -200,7 +200,7 @@ const Financing = props => {
                     />
                   </Grid>
                 </Grid>
-                <Grid item container spacing={3}>
+                <Grid item container spacing={6}>
                   <Grid item xs={12}>
                     <p>Estimate your financing costs</p>
                   </Grid>
@@ -237,7 +237,7 @@ const Financing = props => {
                     />
                   </Grid>
                 </Grid>
-                <Grid item container spacing={3} className="mt-10">
+                <Grid item container spacing={6} className="mt-10">
                   <Grid item xs={6}>
                     <CustomInput
                       error={props.errors.mortgageStampDutyRate}

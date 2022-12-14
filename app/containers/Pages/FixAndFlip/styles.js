@@ -49,6 +49,23 @@ export default makeStyles(() => ({
   },
   stepperContainer: {
     height: '100%',
+    borderRadius: '8px',
+  },
+  stepperLabel: {
+    fontFamily: 'Roboto',
+    fontStyle: 'normal',
+    fontWeight: '500',
+    fontSize: '16px',
+    lineHeight: '19px',
+    color: '#333333',
+  },
+  stepperDetail: {
+    fontFamily: 'Roboto',
+    fontStyle: 'normal',
+    fontWeight: '400',
+    fontSize: '14px',
+    lineHeight: '16px',
+    color: '#888888',
   },
   locationMapContainer: {
     display: 'flex',
@@ -60,14 +77,16 @@ export default makeStyles(() => ({
   },
   contentContainer: {
     backgroundColor: '#fff',
-    padding: '16px',
+    padding: '32px',
     height: '100%',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between !important',
+    borderRadius: '8px',
   },
   showDetailContainer: {
     display: 'flex',
+    marginBottom: '15px',
   },
   divider: {
     width: '100%',
@@ -82,6 +101,8 @@ export default makeStyles(() => ({
     background: '#FFFFFF',
     padding: '30px 25px',
     width: '100%',
+    borderRadius: '8px',
+    marginTop: '20px',
   },
   tableHeading: {
     color: '#31342B !important',

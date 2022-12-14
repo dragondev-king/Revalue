@@ -85,8 +85,8 @@ export const Proposal = props => {
         </Grid>
         <HideAdvanceOptions {...props} stepName="proposal">
           <Grid item container spacing={6}>
-            <Grid item container spacing={3}>
-              <Grid item xs={4}>
+            <Grid item container spacing={6}>
+              <Grid item xs={6}>
                 <CustomSwitch
                   defaultValue={props.inputs.realEstateTransferTax}
                   handleChange={props.handleChangeSwitch}
@@ -102,7 +102,7 @@ export const Proposal = props => {
                 />
               </Grid>
             </Grid>
-            <Grid item container spacing={3}>
+            <Grid item container spacing={6}>
               <Grid item xs={6}>
                 <CustomInput
                   error={props.errors.acquisitionBrokerRate}
@@ -136,7 +136,7 @@ export const Proposal = props => {
                 />
               </Grid>
             </Grid>
-            <Grid item container spacing={3}>
+            <Grid item container spacing={6}>
               <Grid item xs={6}>
                 <CustomInput
                   error={props.errors.acquisitionStampDutyRate}

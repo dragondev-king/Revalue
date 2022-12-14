@@ -38,8 +38,10 @@ const useStyles = makeStyles({
   labelShrunk: {
     right: 'unset',
   },
-  switch: {
-    marginTop: '15px',
+  switchContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    marginTop: '8px',
   },
 });
 
@@ -80,14 +82,18 @@ const CustomSwitch = ({
           </IconButton>
         </Tooltip>
       </InputLabel>
-      <Switch
-        className={styles.switch}
-        defaultValue={defaultValue}
-        onChange={handleChange}
-        checked={checked}
-        color="primary"
-        name={name}
-      />
+      <div className={styles.switchContainer}>
+        <span>No</span>
+        <Switch
+          className={styles.switch}
+          defaultValue={defaultValue}
+          onChange={handleChange}
+          checked={checked}
+          color="primary"
+          name={name}
+        />
+        <span>Yes</span>
+      </div>
       <FormHelperText>{error}</FormHelperText>
     </FormControl>
   );

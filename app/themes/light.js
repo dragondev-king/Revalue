@@ -44,7 +44,7 @@ export const lightTheme = createTheme({
       root: {
         display: 'inline-flex',
         width: '250px',
-        padding: '0 0 0 16px',
+        padding: '0',
         position: 'relative',
         minHeight: '64px',
       },
@@ -52,6 +52,17 @@ export const lightTheme = createTheme({
         margin: '20px 0',
         display: 'flex',
         flexGrow: '1',
+      },
+    },
+    MuiAccordionDetails: {
+      root: {
+        padding: '0',
+      },
+    },
+    MuiStepLabel: {
+      labelContainer: {
+        height: '56px',
+        marginLeft: '10px',
       },
     },
   },

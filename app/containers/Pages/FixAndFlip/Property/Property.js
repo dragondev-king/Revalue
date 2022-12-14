@@ -74,7 +74,7 @@ const Property = props => {
         <div className={props.classes.locationMapContainer}>
           <div className={props.classes.locationContainer}>
             <Grid container direction="column" justifyContent="flex-start">
-              <Grid item container spacing={3}>
+              <Grid item container spacing={6}>
                 <Grid item xs={12} className="mb-10">
                   <FormControl
                     variant="standard"
@@ -128,8 +128,8 @@ const Property = props => {
           <Map propertyLocation={props.inputs.propertyLocation} />
         </div>
         <HideAdvanceOptions {...props} stepName="property">
-          <Grid item container spacing={3} className="mt-20">
-            <Grid item container spacing={3}>
+          <Grid item container spacing={6} className="mt-20">
+            <Grid item container spacing={6}>
               <Grid item xs={6}>
                 <CustomSelect
                   error={props.errors.propertyCondition}
@@ -179,7 +179,7 @@ const Property = props => {
                 />
               </Grid>
             </Grid>
-            <Grid item container spacing={3}>
+            <Grid item container spacing={6}>
               <Grid item xs={6}>
                 <CustomInput
                   error={props.errors.minAskingPrice}
@@ -212,7 +212,7 @@ const Property = props => {
                   })}
                 />
               </Grid>
-              <Grid item container spacing={3}>
+              <Grid item container spacing={6}>
                 <Grid item xs={6}>
                   <CustomInput
                     error={props.errors.minUsefulArea}
