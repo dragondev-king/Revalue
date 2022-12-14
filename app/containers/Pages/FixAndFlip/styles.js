@@ -99,8 +99,6 @@ export default makeStyles(() => ({
   },
   tableContainer: {
     background: '#FFFFFF',
-    padding: '30px 25px',
-    width: '100%',
     borderRadius: '8px',
     marginTop: '20px',
   },
@@ -133,5 +131,17 @@ export default makeStyles(() => ({
   },
   orText: {
     fontSize: '20px',
+  },
+  searchHeaderContainer: {
+    display: 'flex',
+    justifyContent: 'space-between',
+  },
+  searchHeaderMSG: {
+    fontFamily: 'Roboto',
+    fontStyle: 'normal',
+    fontWeight: '500',
+    fontSize: '24px',
+    lineHeight: '28px',
+    color: '#000000',
   },
 }));

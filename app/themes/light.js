@@ -65,5 +65,10 @@ export const lightTheme = createTheme({
         marginLeft: '10px',
       },
     },
+    MuiPaper: {
+      outlined: {
+        borderRadius: '8px',
+      },
+    },
   },
 });

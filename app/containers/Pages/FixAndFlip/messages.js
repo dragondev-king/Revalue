@@ -752,4 +752,9 @@ export default defineMessages({
     id: `${scope}.hideAdvanceOption`,
     defaultMessage: 'Hide Advance Options',
   },
+  searchResultMSG: {
+    id: `${scope}.searchResultMSG`,
+    defaultMessage:
+      'We have searched these results based on your search inputs',
+  },
 });

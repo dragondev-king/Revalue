@@ -1,5 +1,5 @@
 /* eslint-disable react/no-array-index-key */
-import React, { memo, useCallback, useEffect } from 'react';
+import React, { memo, useCallback, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import * as yup from 'yup';
 import { Helmet } from 'react-helmet';
@@ -10,8 +10,6 @@ import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import { DataGrid } from '@material-ui/data-grid';
 
 import { useInjectReducer } from 'utils/injectReducer';
 import Property from './Property';
@@ -23,6 +21,8 @@ import OperatingCosts from './OperatingCosts';
 import Tax from './Tax';
 import Sale from './Sale';
 import Capital from './Capital';
+import { ItemInfo } from './components/ItemInfo';
+import { Sorter } from './components/Sorter';
 
 import messages from './messages';
 import {
@@ -63,6 +63,7 @@ import {
   setAdvanceOptionsStatus,
 } from './actions';
 import useStyles from './styles';
+import { mockResult } from './mockData';
 
 const steps = [
   {
@@ -103,75 +104,17 @@ const steps = [
   },
 ];
 
-const columns = [
-  {
-    field: 'propertyLocation',
-    label: 'location',
-    sortable: false,
-    unit: '',
-    flex: 1,
-  },
-  {
-    field: 'propertyAskingPrice',
-    label: 'askingPrice',
-    sortable: false,
-    unit: '€',
-    flex: 1,
-  },
-  {
-    field: 'requiredInitialCapital',
-    label: 'requiredInitialCapital',
-    sortable: false,
-    unit: '€',
-    flex: 1,
-  },
-  {
-    field: 'transactionPrice',
-    label: 'transactionPrice',
-    sortable: false,
-    unit: '€',
-    flex: 1,
-  },
-  {
-    field: 'internalRateOfReturn',
-    label: 'internalRateOfReturn',
-    sortable: false,
-    unit: '%',
-    minWidth: 200,
-  },
-  {
-    field: 'profitAfterTax',
-    label: 'profitAfterTax',
-    sortable: false,
-    unit: '€',
-    minWidth: 150,
-  },
-  {
-    field: 'report',
-    label: 'report',
-    sortable: false,
-    unit: '',
-    minWidth: 70,
-    renderCell: cellValues => {
-      const path = 'analysis/';
-      const id = cellValues.row.id.replace(/[.,\s]/g, '');
-      return (
-        // eslint-disable-next-line jsx-a11y/anchor-is-valid,jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
-        <a
-          style={{ color: '#0085FF', fontWeight: 'bolder', cursor: 'pointer' }}
-          onClick={() =>
-            window.open(path + id, '_blank', 'noopener,noreferrer')
-          }
-        >
-          Report
-        </a>
-      );
-    },
-  },
+const filterValues = [
+  'Highest profit after tax',
+  'Filter Condition 1',
+  'Filter Condition 2',
+  'Filter Condition 3',
 ];
 
 export function FixAndFlip(props) {
   useInjectReducer({ key: 'investment', reducer });
+  const [results, setResults] = useState(mockResult);
+
   useEffect(() => {
     props.getPropertyLocations();
     props.getPropertyTypes();
@@ -209,6 +152,7 @@ export function FixAndFlip(props) {
       .then(() => {
         props.getAnalysis(props.inputs);
         props.setAnalyzeButtonDisabled(true);
+        setResults(mockResult);
       })
       .catch(error => {
         if (error.inner && error.inner.length > 0) {
@@ -222,7 +166,7 @@ export function FixAndFlip(props) {
           });
         }
       });
-  }, [props]);
+  }, [props, mockResult]);
 
   const handleChange = useCallback(event => {
     const { name, value } = event.target;
@@ -398,54 +342,24 @@ export function FixAndFlip(props) {
     );
   }
 
-  function translateColumnLabel(list) {
-    list.forEach(item => {
-      const unit = item.unit ? ` (${item.unit})` : '';
-      // eslint-disable-next-line no-param-reassign
-      item.headerName =
-        props.intl.formatMessage({
-          ...messages[item.label],
-        }) + unit;
-    });
-    return list;
-  }
-
   function renderTable() {
     return (
-      <Grid container direction="column" className={classes.tableContainer}>
-        <Grid item>
-          <Typography variant="h6" className={classes.tableHeading}>
-            {props.intl.formatMessage({
-              ...messages.investments,
-            })}
-          </Typography>
+      <Grid container className={classes.tableContainer} spacing={6}>
+        <Grid item xs={12}>
+          <div className={classes.searchHeaderContainer}>
+            <span className={classes.searchHeaderMSG}>
+              {props.intl.formatMessage({
+                ...messages.searchResultMSG,
+              })}
+            </span>
+            <Sorter values={filterValues} />
+          </div>
         </Grid>
-        <Grid item className="w-100">
-          <DataGrid
-            classes={{
-              root: classes.gridRoot,
-            }}
-            rows={props.analysis}
-            columns={translateColumnLabel(columns)}
-            disableColumnFilter
-            disableColumnMenu
-            disableSelectionOnClick
-            sortingMode="server"
-            width="auto"
-            autoHeight
-            hideFooterPagination
-            // checkboxSelection
-            // pageSize={5}
-            // rowsPerPageOptions={[5]}
-            // hideFooter
-            // density="compact"
-            // autoPageSize
-            // onCellClick={}
-            // onRowClick={event => {
-            //   props.history.push(`/analysis/${event.id}`);
-            // }}
-          />
-        </Grid>
+        {results.map((item, idx) => (
+          <Grid item xs={12} md={6} lg={6} key={idx}>
+            <ItemInfo item={item} />
+          </Grid>
+        ))}
       </Grid>
     );
   }
@@ -476,7 +390,7 @@ export function FixAndFlip(props) {
             </div>
           </Grid>
         </Grid>
-        {renderTable()}
+        <div className="p-30">{renderTable()}</div>
       </div>
     </>
   );
