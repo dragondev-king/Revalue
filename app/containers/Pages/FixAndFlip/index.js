@@ -357,7 +357,7 @@ export function FixAndFlip(props) {
         </Grid>
         {results.map((item, idx) => (
           <Grid item xs={12} md={6} lg={6} key={idx}>
-            <ItemInfo item={item} />
+            <ItemInfo item={item} {...props} />
           </Grid>
         ))}
       </Grid>
@@ -390,7 +390,7 @@ export function FixAndFlip(props) {
             </div>
           </Grid>
         </Grid>
-        <div className="p-30">{renderTable()}</div>
+        <div className="p-24">{renderTable()}</div>
       </div>
     </>
   );

@@ -757,4 +757,20 @@ export default defineMessages({
     defaultMessage:
       'We have searched these results based on your search inputs',
   },
+  acquistionPrice: {
+    id: `${scope}.acquistionPrice`,
+    defaultMessage: 'Acquistion Price',
+  },
+  requiredCapital: {
+    id: `${scope}.requiredCapital`,
+    defaultMessage: 'Required Capital',
+  },
+  monthlyRent: {
+    id: `${scope}.monthlyRent`,
+    defaultMessage: 'Monthly Rent',
+  },
+  multipleOnInvestedCapital: {
+    id: `${scope}.multipleOnInvestedCapital`,
+    defaultMessage: 'Multiple On Invested Capital',
+  },
 });

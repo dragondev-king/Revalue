@@ -18,7 +18,6 @@ export const mockResult = [
     propertyAskingPrice: 210000,
     propertyArea: 60,
     propertyRooms: 2,
-    monthlyRent: 700,
     requiredInitialCapital: 24899.88,
     transactionPrice: 246600,
     internalRateOfReturn: 155.56,

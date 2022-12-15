@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import PinDrop from '@material-ui/icons/PinDrop';
 import { makeStyles } from '@material-ui/core/styles';
 
+import messages from '../messages';
 import image from '../../../../images/comingsoon.png';
 
 const useStyles = makeStyles({
@@ -45,8 +46,10 @@ const useStyles = makeStyles({
     paddingBottom: '12px',
   },
 });
-export const ItemInfo = ({ item }) => {
+
+export const ItemInfo = props => {
   const styles = useStyles();
+  const { item } = props;
 
   const NameValueViewer = ({
     name,
@@ -77,11 +80,11 @@ export const ItemInfo = ({ item }) => {
         <Grid item lg={7} md={12} xs={12} className={styles.content}>
           <div className={styles.location}>
             <PinDrop />
-            {item.propertyLocation}
+            {item.propertyName}
           </div>
           <div className={styles.infoContainer}>
             <NameValueViewer
-              name="Parish Arroios"
+              name={item.propertyLocation}
               nameColor="#616683"
               fontSize="16px"
               fontWeight="500"
@@ -89,28 +92,47 @@ export const ItemInfo = ({ item }) => {
               valueSymbol=""
             />
             <NameValueViewer
-              name="Asking Price"
+              name={props.intl.formatMessage({
+                ...messages.askingPrice,
+              })}
               value={item.propertyAskingPrice}
             />
             <NameValueViewer
-              name="Acquistion Price"
+              name={props.intl.formatMessage({
+                ...messages.acquistionPrice,
+              })}
               value={item.transactionPrice}
             />
             <NameValueViewer
-              name="Required Capital"
+              name={props.intl.formatMessage({
+                ...messages.requiredCapital,
+              })}
               value={item.requiredInitialCapital}
             />
-            <NameValueViewer name="Monthly Rent" value={item.monthlyRent} />
+            {item.monthlyRent && (
+              <NameValueViewer
+                name={props.intl.formatMessage({
+                  ...messages.monthlyRent,
+                })}
+                value={item.monthlyRent}
+              />
+            )}
             <NameValueViewer
-              name="Multiple On Invested Capital"
+              name={props.intl.formatMessage({
+                ...messages.multipleOnInvestedCapital,
+              })}
               value={item.propertyRooms}
             />
             <NameValueViewer
-              name="Internal Rate Of Return"
+              name={props.intl.formatMessage({
+                ...messages.internalRateOfReturn,
+              })}
               value={item.internalRateOfReturn}
             />
             <NameValueViewer
-              name="Profit After Tax"
+              name={props.intl.formatMessage({
+                ...messages.profitAfterTax,
+              })}
               value={item.profitAfterTax}
               fontSize="18px"
               fontWeight="500"
