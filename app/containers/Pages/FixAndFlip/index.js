@@ -352,7 +352,7 @@ export function FixAndFlip(props) {
                 ...messages.searchResultMSG,
               })}
             </span>
-            <Sorter values={filterValues} />
+            <Sorter values={filterValues} intl={props.intl} />
           </div>
         </Grid>
         {results.map((item, idx) => (

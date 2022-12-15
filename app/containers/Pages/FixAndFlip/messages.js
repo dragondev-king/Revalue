@@ -773,4 +773,8 @@ export default defineMessages({
     id: `${scope}.multipleOnInvestedCapital`,
     defaultMessage: 'Multiple On Invested Capital',
   },
+  sortBy: {
+    id: `${scope}.sortBy`,
+    defaultMessage: 'Sort by:',
+  },
 });

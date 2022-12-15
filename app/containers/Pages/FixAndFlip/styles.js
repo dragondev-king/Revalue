@@ -144,4 +144,7 @@ export default makeStyles(() => ({
     lineHeight: '28px',
     color: '#000000',
   },
+  capitalGainsTaxBaseRate: {
+    marginTop: '30px',
+  },
 }));

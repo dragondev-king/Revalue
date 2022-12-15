@@ -36,6 +36,7 @@ const useStyles = makeStyles({
     alignItems: 'center',
     gap: '10px',
     height: '12px',
+    marginTop: '15px',
   },
   sliderValueLabel: {
     width: '75px',

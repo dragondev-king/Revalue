@@ -176,7 +176,7 @@ const Tax = props => {
                 })}
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={6} className={props.classes.capitalGainsTaxBaseRate}>
               <CustomSlider
                 error={props.errors.capitalGainsTaxBaseRate}
                 labelText={`${props.intl.formatMessage({
